@@ -1,0 +1,382 @@
+include c.snip
+
+snippet cout
+  std::cout << ${0:TARGET} << std::endl;
+
+snippet cout2
+  std::cout << ${0:TARGET} << '\n';
+
+snippet cin
+  std::cin >> ${0:TARGET};
+
+snippet flush
+  std::cout << std::flush;
+
+snippet precision
+  std::fixed << std::setprecision(${1}) << ${0:TARGET}
+
+snippet numeric_limits
+  std::numeric_limits<${1:int}>::${0:TARGET}();
+
+snippet unique_ptr
+  std::unique_ptr<${1}> ${2}(new $1 ${0:TARGET})
+
+snippet shared_ptr
+  std::shared_ptr<${1}> ${2}(new $1 ${0:TARGET})
+
+snippet foreach_iterator
+  for (std::${1:vector}<${2}>::iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
+    ${0:TARGET}
+  }
+
+snippet array
+  std::array<${1:int}> ${0:TARGET};
+
+snippet vector
+  std::vector<${1:int}> ${0:TARGET};
+
+snippet bitset
+  std::bitset<${1:8}> ${0:TARGET};
+
+snippet list
+  std::list<${1:int}> ${0:TARGET};
+
+snippet forward_list
+  std::forward_list<${1:int}> ${0:TARGET};
+
+snippet deque
+  std::deque<${1:int}> ${0:TARGET};
+
+snippet stack
+  std::stack<${1:int}> ${0:TARGET};
+
+snippet queue
+  std::queue<${1:int}> ${0:TARGET};
+
+snippet priority_queue
+  std::priority_queue<${1:int}> ${0:TARGET};
+
+snippet priority_queue2
+  std::priority_queue<${1:int}, std::vector<$1>, std::function<bool (const $1& x, const $1& y)> > ${2}(
+      [](const $1& x, const $1& y) {
+        return ${0:TARGET};
+      });
+
+snippet map
+  std::map<${1:int}, ${2:int}> ${0:TARGET};
+
+snippet unordered_map
+  std::unordered_map<${1:int}, ${2:int}> ${0:TARGET};
+
+snippet multimap
+  std::multimap<${1:int}, ${2:int}> ${0:TARGET};
+
+snippet unordered_multimap
+  std::unordered_multimap<${1:int}, ${2:int}> ${0:TARGET};
+
+snippet set
+  std::set<${1:int}> ${0:TARGET};
+
+snippet unordered_set
+  std::unordered_set<${1:int}> ${0:TARGET};
+
+snippet multiset
+  std::multiset<${1:int}> ${0:TARGET};
+
+snippet unordered_multiset
+  std::unordered_multiset<${1:int}> ${0:TARGET};
+
+snippet enable_if
+  typename std::enable_if<${0:TARGET}, std::nullptr_t>::type = nullptr
+
+snippet foreach_const_iterator
+  for (std::${1:vector}<${2}>::const_iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
+    ${0:TARGET}
+  }
+
+snippet foreach_typeof
+abbr foreach_typeof (GNU only)
+  for (typeof(${1}.begin()) ${2:itr} = $1.begin(); $2 != $1.end(); ++$2) {
+    ${0:TARGET}
+  }
+
+snippet forref
+abbr for (const auto& e : container)
+  for (const auto& ${1} : ${2}) {
+    ${0:TARGET}
+  }
+
+snippet struct_function_object
+abbr Functional object
+  struct ${1}
+  {
+    ${2} operator()(${3})
+    {
+      ${0:TARGET}
+    }
+  };
+
+snippet class_functional_object
+abbr Functional object
+  class ${1}
+  {
+  public:
+    ${2} operator()(${3})
+    {
+      ${0:TARGET}
+    }
+  };
+
+snippet sort
+  std::sort(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
+        ${0:TARGET}
+      });
+
+snippet min_element
+  std::min_element(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
+        ${0:TARGET}
+      })
+
+snippet max_element
+  std::max_element(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
+        ${0:TARGET}
+      })
+
+snippet minmax_element
+  std::minmax_element(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
+        ${0:TARGET}
+      })
+
+snippet find_if
+  std::find_if(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:TARGET}
+      });
+
+snippet remove_if
+  std::remove_if(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:TARGET}
+      });
+
+snippet accumulate
+  std::accumulate(
+      ${1}.begin(),
+      $1.end(),
+      ${2:0},
+      [](${3:int} ${4:acc}, const decltype($1)::value_type& e) {
+        ${0:TARGET}
+      })
+
+snippet transform
+  std::transform(
+      ${1}.begin(),
+      $1.end(),
+      $1.begin(),
+      ${0:TARGET})
+
+snippet next_permutation
+  do {
+    ${0:TARGET}
+  } while (std::next_permutation(${1}.begin(), $1.end()));
+
+snippet include
+  #include <${0:TARGET}>
+
+snippet include_math
+  #ifdef _MSC_VER
+  #  define _USE_MATH_DEFINES
+  #endif
+  #include <cmath>
+
+snippet def_enum
+  #if __cplusplus < 201103L
+  struct ${1:name}
+  {
+    enum
+    {
+      ${2:Enum}
+    };
+  };
+  #else
+  enum struct {1:name}
+  {
+    $2
+  }
+  #nedif
+
+snippet def_INF
+  static const ${1:int} INF = 0x3f3f3f3f;
+
+snippet def_EPS
+  static const double EPS = 1.0e-${1:9};
+
+snippet def_M_PI
+  #ifndef M_PI
+  static const double M_PI = std::acos(0.0) * 2.0;
+  #endif
+
+snippet def_M_PI2
+  #ifndef M_PI
+  static const double M_PI = std::atan(1.0) * 4.0;
+  #endif
+
+snippet def_M_PI3
+  #ifndef M_PI
+  static const double M_PI = 3.14159265358979323846;
+  #endif
+
+snippet def_DUMP
+  #define DUMP(x)  (std::cout << #x " = " << x << std::endl)
+
+snippet impl_to_string
+  #if __cplusplus < 201103L || defined(__CYGWIN__)
+  #  include <sstream>
+  namespace std {
+  template<typename T>
+  static std::string
+  to_string(const T& x)
+  {
+    static std::ostringstream oss;
+    oss.str("");
+    oss.clear(std::ostringstream::goodbit);
+    oss << x;
+    return oss.str();
+  }
+  }  // namespace std
+  #endif
+
+snippet impl_stoi
+  #if __cplusplus < 201103L || defined(__CYGWIN__)
+  #  include <sstream>
+  namespace std
+  {
+  static int
+  stoi(const string& str)
+  {
+    int x;
+    stringstream ss;
+    ss << str;
+    ss >> x;
+    ss.str("");
+    ss.clear(std::stringstream::goodbit);
+    return x;
+  }
+  }  // namespace std
+  #endif
+
+snippet impl_gcd
+  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
+  static inline IntType
+  gcd(IntType a, IntType b)
+  {
+  #ifdef __GNUC__
+    return std::__gcd(a, b);
+  #else
+    IntType r;
+    while ((r = a % b) != 0) {
+      a = b;
+      b = r;
+    }
+    return a;
+  #endif
+  }
+
+snippet impl_lcm
+  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
+  static inline IntType
+  lcm(IntType a, IntType b)
+  {
+    return a / gcd(a, b) * b;
+  }
+
+snippet powmod
+  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
+  static IntType
+  powmod(IntType a, int p, IntType mod)
+  {
+    IntType ans = 1;
+    IntType mul = a;
+    for (; p > 0; p >>= 1, mul = (mul * mul) % mod) {
+      if ((p & 1) == 1) {
+        ans = (ans * mul) % mod;
+      }
+    }
+    return ans;
+  }
+
+snippet impl_popcnt
+  #ifdef __GNUC__
+  #  define popcnd(n)  __builtin_popcount(n)
+  #else
+  static unsigned int
+  popcnt(unsigned int n)
+  {
+    unsigned int cnt = 0;
+    while (n != 0) {
+      cnt += (n & 0x01);
+      n >>= 1;
+    }
+  }
+  #endif
+
+snippet impl_split
+  static std::vector<std::string>
+  split(const std::string& str, char delim)
+  {
+    std::vector<std::string> tokens;
+    std::string::size_type spos = 0, epos;
+    while ((epos = str.find_first_of(delim, spos)) != std::string::npos) {
+      tokens.push_back(std::string(str, spos, epos - spos));
+      spos = epos + 1;
+    }
+    tokens.push_back(std::string(str, spos, str.size() - spos));
+    return tokens;
+  }
+
+  static std::vector<std::string>
+  split(const std::string& str, const std::string &delim)
+  {
+    std::vector<std::string> tokens;
+    std::string::size_type spos = 0, epos, delimlen = delim.size();
+    while ((epos = str.find(delim, spos)) != std::string::npos) {
+      tokens.push_back(std::string(str, spos, epos - spos));
+      spos = epos + delimlen;
+    }
+    tokens.push_back(std::string(str, spos, str.size() - spos));
+    return tokens;
+  }
+
+snippet impl_LENGTH
+abbr #define LENGTH
+  template<typename ${1:Type}, std::size_t ${2:SIZE}>
+  static std::size_t
+  LENGTH(const $1 (&)[$2])
+  {
+    return $2;
+  }
+
+  #if __cplusplus >= 201103L
+  template<typename $1, std::size_t $2>
+  static typename std::array<$1, $2>::size_type
+  LENGTH(const std::array<$1, $2>& ${3:array})
+  {
+    return $3.size();
+  }
+  #endif
