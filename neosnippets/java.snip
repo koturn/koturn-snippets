@@ -1,0 +1,13 @@
+snippet sysout
+abbr System.out.println(...)
+	System.out.println(${0:TARGET});
+
+snippet syserr
+abbr System.err.println(...)
+	System.err.println(${0:TARGET});
+
+snippet BufferedReader
+	BufferedReader ${1:br} = new BufferedReader(new InputStreamReader(${2:System.in}));
+
+snippet Scanner
+	Scanner ${1:sc} = new Scanner(${2:System.in});
