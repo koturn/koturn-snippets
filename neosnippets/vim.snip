@@ -1,0 +1,70 @@
+snippet get
+abbr get()
+  let ${1:varname} = get(${2:g:}, '$1', ${4:DEFAULT_VALUE})
+
+snippet substitute
+abbr substitute()
+  substitute(${1}, '${2}', '${3}', '${4:g}')
+
+snippet sid
+abbr SID
+  function! s:get_sid() abort
+    return matchstr(expand('<sfile>'), '^function <SNR>\zs\d\+\ze_get_sid$')
+  endfunction
+  let s:sid = s:get_sid()
+  delfunction s:get_sid
+
+snippet sid_prefix
+abbr <SNR>xxx_
+  function! s:get_sid_prefix() abort
+    return matchstr(expand('<sfile>'), '^function \zs<SNR>\d\+_\zeget_sid_prefix$')
+  endfunction
+  let s:sid_prefix = s:get_sid_prefix()
+  delfunction s:get_sid_prefix
+
+snippet command_complete
+  function! `substitute(matchstr(expand('%:p:r'), 'autoload\/\zs.\+$'), '\/', '#', 'g')`#${1:#:funcname}(arglead, cmdline, cursorpos) abort
+    let candidates = ${0:TARGET}
+    return filter(candidates, 'v:val =~? "^' . a:arglead '"')
+  endfunction
+
+snippet nargs
+  let nargs = split(split(a:cmdline, '[^\\]\zs|')[-1], '\s\+')
+
+snippet NeoBundle
+  NeoBundle '${1:#:'username/repositoryname'}', {
+        \ ${0:TARGET}
+        \}
+
+snippet neobundle_tap
+  if neobundle#tap('${1:#:'repositoryname'}')
+    ${0:TARGET}
+    call neobundle#untap()
+  endif
+
+snippet neobundle_config
+  call neobundle#config({
+        \ ${0:TARGET}
+        \})
+
+snippet neobundle_tap_hooks_on_source
+  function! neobundle#tapped.hooks.on_post_source(bundle) abort
+    ${0:TARGET}
+  endfunction
+
+snippet neobundle_tap_hooks_on_post_source
+  function! neobundle#tapped.hooks.on_post_source(bundle) abort
+    ${0:TARGET}
+  endfunction
+
+snippet dein_add
+  call dein#add('${1:#:username/repositoryname}', {
+        \ ${0:TARGET}
+        \})
+
+snippet dein_hooks_on_source
+  function! s:${1}() abort
+    ${0:TARGET}
+  endfunction
+  execute 'autocmd ${2:MyAutoCmd} User dein#source#' . g:dein#name
+        \ 'call s:$1() | delfunction s:$1'
