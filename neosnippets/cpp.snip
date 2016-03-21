@@ -30,61 +30,61 @@ snippet foreach_iterator
   }
 
 snippet array
-  std::array<${1:int}> ${0:TARGET};
+  std::array<${1:int}> ${0:TARGET}
 
 snippet vector
-  std::vector<${1:int}> ${0:TARGET};
+  std::vector<${1:int}> ${0:TARGET}
 
 snippet bitset
-  std::bitset<${1:8}> ${0:TARGET};
+  std::bitset<${1:8}> ${0:TARGET}
 
 snippet list
-  std::list<${1:int}> ${0:TARGET};
+  std::list<${1:int}> ${0:TARGET}
 
 snippet forward_list
-  std::forward_list<${1:int}> ${0:TARGET};
+  std::forward_list<${1:int}> ${0:TARGET}
 
 snippet deque
-  std::deque<${1:int}> ${0:TARGET};
+  std::deque<${1:int}> ${0:TARGET}
 
 snippet stack
-  std::stack<${1:int}> ${0:TARGET};
+  std::stack<${1:int}> ${0:TARGET}
 
 snippet queue
-  std::queue<${1:int}> ${0:TARGET};
+  std::queue<${1:int}> ${0:TARGET}
 
 snippet priority_queue
-  std::priority_queue<${1:int}> ${0:TARGET};
+  std::priority_queue<${1:int}> ${0:TARGET}
 
 snippet priority_queue2
   std::priority_queue<${1:int}, std::vector<$1>, std::function<bool (const $1& x, const $1& y)> > ${2}(
       [](const $1& x, const $1& y) {
         return ${0:TARGET};
-      });
+      })
 
 snippet map
-  std::map<${1:int}, ${2:int}> ${0:TARGET};
+  std::map<${1:int}, ${2:int}> ${0:TARGET}
 
 snippet unordered_map
-  std::unordered_map<${1:int}, ${2:int}> ${0:TARGET};
+  std::unordered_map<${1:int}, ${2:int}> ${0:TARGET}
 
 snippet multimap
-  std::multimap<${1:int}, ${2:int}> ${0:TARGET};
+  std::multimap<${1:int}, ${2:int}> ${0:TARGET}
 
 snippet unordered_multimap
-  std::unordered_multimap<${1:int}, ${2:int}> ${0:TARGET};
+  std::unordered_multimap<${1:int}, ${2:int}> ${0:TARGET}
 
 snippet set
-  std::set<${1:int}> ${0:TARGET};
+  std::set<${1:int}> ${0:TARGET}
 
 snippet unordered_set
-  std::unordered_set<${1:int}> ${0:TARGET};
+  std::unordered_set<${1:int}> ${0:TARGET}
 
 snippet multiset
-  std::multiset<${1:int}> ${0:TARGET};
+  std::multiset<${1:int}> ${0:TARGET}
 
 snippet unordered_multiset
-  std::unordered_multiset<${1:int}> ${0:TARGET};
+  std::unordered_multiset<${1:int}> ${0:TARGET}
 
 snippet enable_if
   typename std::enable_if<${0:TARGET}, std::nullptr_t>::type = nullptr
@@ -134,6 +134,18 @@ snippet sort
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         ${0:TARGET}
       });
+
+snippet max
+  std::max(${1}.begin(), $1.end())
+
+snippet min
+  std::min(${1}.begin(), $1.end())
+
+snippet minmax
+  std::minmax(${1}.begin(), $1.end())
+
+snippet find
+  std::find(${1}.begin(), $1.end(), ${0:TARGET})
 
 snippet min_element
   std::min_element(
