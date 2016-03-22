@@ -15,6 +15,9 @@ snippet flush
 snippet precision
   std::fixed << std::setprecision(${1}) << ${0:TARGET}
 
+snippet itrrange
+  ${1}.begin(), $1.end()
+
 snippet numeric_limits
   std::numeric_limits<${1:int}>::${0:TARGET}();
 
@@ -232,6 +235,17 @@ snippet def_enum
     $2
   }
   #nedif
+
+snippet def_debug_macros
+  #ifdef _MSC_VER
+  #  ifndef _DEBUG
+  #    define _DEBUG
+  #  endif
+  #  define _CRTDBG_MAP_ALLOC
+  #else
+  #  define _FORTIFY_SOURCE 2
+  #  define _GLIBCXX_DEBUG
+  #endif
 
 snippet def_INF
   static const ${1:int} INF = 0x3f3f3f3f;
