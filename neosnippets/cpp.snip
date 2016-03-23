@@ -406,3 +406,42 @@ abbr #define LENGTH
     return $3.size();
   }
   #endif
+
+
+snippet impl_modfact
+  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
+  static IntType
+  modfact(IntType n, IntType mod)
+  {
+    IntType p = 1;
+    for (; n > 0; n--) {
+      p = (p * n) % mod;
+    }
+    return p;
+  }
+
+snippet impl_extgcd
+  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
+  static IntType
+  extgcd(IntType a, IntType b, IntType& x, IntType& y)
+  {
+    IntType v = x = 0;
+    IntType u = y = 1;
+    while (a != 0) {
+      IntType q = b / a;
+      std::swap(x -= q * u, u);
+      std::swap(y -= q * v, v);
+      std::swap(b -= q * a, a);
+    }
+    return b;
+  }
+
+snippet impl_modinv
+  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
+  static IntType
+  modinv(IntType a, IntType mod)
+  {
+    IntType x, y;
+    extgcd(a, mod, x, y);
+    return (mod + x % mod) % mod;
+  }
