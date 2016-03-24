@@ -445,3 +445,23 @@ snippet impl_modinv
     extgcd(a, mod, x, y);
     return (mod + x % mod) % mod;
   }
+
+snippet if_cpp11
+  #if __cplusplus >= 201103L
+  ${0:TARGET}
+  #endif
+
+snippet if_cpp14
+  #if __cplusplus >= 201402L
+  ${0:TARGET}
+  #endif
+
+snippet if_gcc
+  #ifdef __GNUC__
+  ${0:TARGET}
+  #endif
+
+snippet if_msvc
+  #ifdef _MSC_VER
+  ${0:TARGET}
+  #endif
