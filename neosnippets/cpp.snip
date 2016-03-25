@@ -248,10 +248,10 @@ snippet def_debug_macros
   #endif
 
 snippet def_INF
-  static const ${1:int} INF = 0x3f3f3f3f;
+  static constexpr ${1:int} INF = 0x3f3f3f3f;
 
 snippet def_EPS
-  static const double EPS = 1.0e-${1:9};
+  static constexpr double EPS = 1.0e-${1:9};
 
 snippet def_M_PI
   #ifndef M_PI
@@ -265,7 +265,7 @@ snippet def_M_PI2
 
 snippet def_M_PI3
   #ifndef M_PI
-  static const double M_PI = 3.14159265358979323846;
+  static constexpr double M_PI = 3.14159265358979323846;
   #endif
 
 snippet def_DUMP
