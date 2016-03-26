@@ -138,10 +138,10 @@ snippet sort
         ${0:TARGET}
       });
 
-snippet max
+snippet maxitr
   std::max(${1}.begin(), $1.end())
 
-snippet min
+snippet minitr
   std::min(${1}.begin(), $1.end())
 
 snippet minmax
@@ -210,6 +210,21 @@ snippet next_permutation
   do {
     ${0:TARGET}
   } while (std::next_permutation(${1}.begin(), $1.end()));
+
+snippet time_measurement
+  std::chrono::system_clock::time_point ${1:start} = std::chrono::system_clock::now();
+  ${0:TARGET}
+  double ${2:elapsed} = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - $1).count();
+
+snippet if_max
+  if (${1:#:maxValue} < ${2:#:value}) {
+    $1 = $2;
+  }
+
+snippet if_min
+  if (${1:#:minValue} > ${2:#:value}) {
+    $1 = $2;
+  }
 
 snippet include
   #include <${0:TARGET}>
@@ -313,7 +328,7 @@ snippet impl_gcd
   gcd(IntType a, IntType b)
   {
   #ifdef __GNUC__
-    return std::__gcd(a, b);
+    return std::__gcd(a, b);  // <algorithm>
   #else
     IntType r;
     while ((r = a % b) != 0) {
@@ -337,8 +352,7 @@ snippet powmod
   static IntType
   powmod(IntType a, int p, IntType mod)
   {
-    IntType ans = 1;
-    IntType mul = a;
+    IntType ans = 1, mul = a;
     for (; p > 0; p >>= 1, mul = (mul * mul) % mod) {
       if ((p & 1) == 1) {
         ans = (ans * mul) % mod;
