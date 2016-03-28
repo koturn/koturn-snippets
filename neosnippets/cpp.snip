@@ -235,6 +235,38 @@ snippet include_math
   #endif
   #include <cmath>
 
+snippet LOOP
+alias loop
+  LOOP (${2:#:n}) {
+    ${0:TARGET}
+  }
+
+snippet REP
+alias rep
+  REP (${1:i}, ${2:#:n}) {
+    ${0:TARGET}
+  }
+
+snippet FOR
+  FOR (${1:i}, ${2:#:from}, ${3:#:to}) {
+    ${0:TARGET}
+  }
+
+snippet def_LOOP
+  #define LOOP(n)  for (decltype(n) __loop_tmp_var__ = 0; i < n; i++)
+
+snippet def_REP
+  #define REP(i, n)  for (decltype(n) i = 0; i < n; i++)
+
+snippet def_FOR
+  #define FOR(i, from, to)  for (decltype(from) i = from; i < to; i++)
+
+snippet def_CLEAR
+  #define CLEAR(array)  std::memset((array), 0, sizeof(array))
+
+snippet def_FILL
+  #define FILL(array, val)  std::fill_n(array, LENGTH(array), val)
+
 snippet def_enum
   #if __cplusplus < 201103L
   struct ${1:name}
