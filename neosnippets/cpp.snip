@@ -216,14 +216,22 @@ snippet time_measurement
   ${0:TARGET}
   double ${2:elapsed} = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - $1).count();
 
-snippet if_max
-  if (${1:#:maxValue} < ${2:#:value}) {
+snippet update_min
+  ${1:#:minValue} = std::min($1, ${2:#:newValue})
+
+snippet update_max
+  ${1:#:maxValue} = std::max($1, ${2:#:newValue})
+
+snippet update_min_if
+  if (${1:#:minValue} > ${2:#:newValue}) {
     $1 = $2;
+    ${0:TARGET}
   }
 
-snippet if_min
-  if (${1:#:minValue} > ${2:#:value}) {
+snippet update_max_if
+  if (${1:#:maxValue} < ${2:#:newValue}) {
     $1 = $2;
+    ${0:TARGET}
   }
 
 snippet include
