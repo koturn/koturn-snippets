@@ -33,7 +33,7 @@ snippet foreach_iterator
   }
 
 snippet array
-  std::array<${1:int}> ${0:TARGET}
+  std::array<${1:int}, ${2:#:N}> ${0:TARGET}
 
 snippet vector
   std::vector<${1:int}> ${0:TARGET}
@@ -62,7 +62,7 @@ snippet priority_queue
 snippet priority_queue2
   std::priority_queue<${1:int}, std::vector<$1>, std::function<bool (const $1& x, const $1& y)> > ${2}(
       [](const $1& x, const $1& y) {
-        return ${0:TARGET};
+        ${0:#:return x > y;}
       })
 
 snippet map
@@ -135,7 +135,7 @@ snippet sort
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:TARGET}
+        ${0:#:return x < y;}
       });
 
 snippet maxitr
@@ -144,7 +144,7 @@ snippet maxitr
 snippet minitr
   std::min(${1}.begin(), $1.end())
 
-snippet minmax
+snippet minmaxitr
   std::minmax(${1}.begin(), $1.end())
 
 snippet find
@@ -155,7 +155,7 @@ snippet min_element
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:TARGET}
+        ${0:#:return x < y;}
       })
 
 snippet max_element
@@ -163,7 +163,7 @@ snippet max_element
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:TARGET}
+        ${0:#:return x < y;}
       })
 
 snippet minmax_element
@@ -171,7 +171,7 @@ snippet minmax_element
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:TARGET}
+        ${0:#:return x < y;}
       })
 
 snippet find_if
@@ -179,15 +179,15 @@ snippet find_if
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& e) {
-        ${0:TARGET}
-      });
+        ${0:#:return e > 0;}
+      })
 
 snippet remove_if
   std::remove_if(
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& e) {
-        ${0:TARGET}
+        ${0:#:return e > 0;}
       });
 
 snippet accumulate
@@ -196,7 +196,7 @@ snippet accumulate
       $1.end(),
       ${2:0},
       [](${3:int} ${4:acc}, const decltype($1)::value_type& e) {
-        ${0:TARGET}
+        ${0:return acc + e;}
       })
 
 snippet transform
