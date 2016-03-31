@@ -18,6 +18,28 @@ snippet precision
 snippet itrrange
   ${1}.begin(), $1.end()
 
+snippet constructor
+alias ctor
+  ${1:#:ClassName}() noexcept ${0:TARGET}
+
+snippet copy_constructor
+alias copy_ctor
+  ${1:#:ClassName}(const $1& ${2:that}) ${0:TARGET}
+
+snippet move_constructor
+alias move_ctor
+  ${1:#:ClassName}($1&& ${2:that}) noexcept ${0:TARGET}
+
+snippet destructor
+alias dtor
+  ~something() noexcept ${0:TARGET}
+
+snippet op_assign
+  ${1:#:ClassName}& operator=(const $1&) ${0:TARGET};
+
+snippet op_move_assign
+  ${1:#:ClassName}& operator=($1&&) noexcept ${0:TARGET};
+
 snippet numeric_limits
   std::numeric_limits<${1:int}>::${0:TARGET}();
 
