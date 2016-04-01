@@ -158,15 +158,6 @@ snippet sort
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         ${0:#:return x < y;}
-      });
-
-snippet maxitr
-  std::max(${1}.begin(), $1.end())
-
-snippet minitr
-  std::min(${1}.begin(), $1.end())
-
-snippet minmaxitr
   std::minmax(${1}.begin(), $1.end())
 
 snippet find
