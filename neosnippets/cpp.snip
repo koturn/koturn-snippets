@@ -15,6 +15,12 @@ snippet flush
 snippet precision
   std::fixed << std::setprecision(${1}) << ${0:TARGET}
 
+snippet setfill
+  std::setw(${1:#:n}) << std::setfill(${2:'0'}) << ${0:TARGET}
+
+snippet toppop
+  ${1:#:Type} ${2:#:e} = ${3:#:queue}.top(); $3.pop();
+
 snippet itrrange
   ${1}.begin(), $1.end()
 
