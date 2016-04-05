@@ -53,7 +53,7 @@ snippet op_move_assign
   ${1:#:ClassName}& operator=($1&&) noexcept ${0:TARGET};
 
 snippet numeric_limits
-  std::numeric_limits<${1:int}>::${0:TARGET}();
+  std::numeric_limits<${1:int}>::${0:TARGET}()
 
 snippet unique_ptr
   std::unique_ptr<${1}> ${2}(new $1 ${0:TARGET})
@@ -170,10 +170,13 @@ snippet sort
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         ${0:#:return x < y;}
-  std::minmax(${1}.begin(), $1.end())
+      })
 
 snippet find
   std::find(${1}.begin(), $1.end(), ${0:TARGET})
+
+snippet partial_sum
+  std::partial_sum(${1}.begin(), $1.end(), ${1}.begin());
 
 snippet min_element
   std::min_element(
@@ -213,7 +216,7 @@ snippet remove_if
       $1.end(),
       [](const decltype($1)::value_type& e) {
         ${0:#:return e > 0;}
-      });
+      })
 
 snippet accumulate
   std::accumulate(
@@ -412,7 +415,7 @@ snippet impl_lcm
     return a / gcd(a, b) * b;
   }
 
-snippet powmod
+snippet impl_powmod
   template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
   static IntType
   powmod(IntType a, int p, IntType mod)
