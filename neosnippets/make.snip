@@ -1,0 +1,129 @@
+snippet ifeq
+options head
+  ifeq ${1:#:cond}
+    ${0:TARGET}
+  else
+  endif
+
+snippet ifneq
+options head
+  ifneq ${1:#:cond}
+    ${0:TARGET}
+  else
+  endif
+
+snippet define
+  define
+    ${0:TARGET}
+  endef
+
+snippet addprefix
+  $(addprefix ${1:#:prefix},${2:#:words...})
+
+snippet addsuffix
+  $(addsuffix ${1:#:suffix},${2:#:words...})
+
+snippet filter
+  $(filter ${1:#:pattern},${2:#:words...})
+
+snippet filter-out
+  $(filter-out ${1:#:pattern},${2:#:words...})
+
+snippet subst
+  $(subst ${1:#:prev-word},${2:#:after-word},${3:#:string})
+
+snippet patsubst
+  $(patsubst ${1:#:prev-pattern},${2:#:after-pattern},${3:#:string})
+
+snippet word
+  $(word ${1:#:N},${2:#:words...})
+
+snippet wordlist
+  $(wordlist ${1:#:start-index},${2:#:end-index},${3:#:words...})
+
+snippet firstword
+  $(firstword ${1:#:words...})
+
+snippet lastword
+  $(lastword ${1:#:words...})
+
+snippet words
+  $(words ${3:#:words...})
+
+snippet findstring
+  ${findstring ${1:#:substr},${2:#:text}}
+
+snippet sort
+  $(sort ${1:#:words...})
+
+snippet strip
+  $(sort ${1:#:string})
+
+snippet abspath
+  $(abspath ${1:#:paths...})
+
+snippet realpath
+  $(realpath ${1:#:paths...})
+
+snippet basename
+  $(basename ${1:#:filenames...})
+
+snippet dir
+  $(dir ${1:#:filepaths...})
+
+snippet notdir
+  $(notdir ${1:#:filepaths...})
+
+snippet join
+  $(join ${1:#:words1...},${2:#:words2...})
+
+snippet suffix
+  $(suffix ${1:#:paths})
+
+snippet wildcard
+  $(suffix ${1:#:pattern})
+
+snippet if
+  $(if ${1:#:cond},${2:#:true-value},${3:false-value})
+
+snippet and
+  $(and ${1:#:cond1},${2:#:cond2}${3:#:,cond3,cond4...})
+
+snippet or
+  $(or ${1:#:cond1},${2:#:cond2}${3:#:,cond3,cond4...})
+
+snippet warning
+  $(warning ${1:#:text})
+
+snippet error
+  $(error ${1:#:text})
+
+snippet info
+  $(info ${1:#:text})
+
+snippet call
+  $(call ${1:#:var},${2:#:param1,param2,...})
+
+snippet eval
+  $(eval ${1:#:text})
+
+snippet flavor
+  $(flavor ${1:#:var})
+
+snippet foreach
+  $(foreach ${1:#:each-var},${2:#:words},${3:#:predicate})
+
+snippet origin
+  $(origin ${1:#:var})
+
+snippet shell
+  $(shell ${1:#:cmd})
+
+snippet value
+  $(value ${1:#:var})
+
+snippet file
+  $(file ${1:#:op > or >>} ${2:#:filename},${3:#:text})
+
+snippet guile
+  $(guile ${1:#:scheme-s-expr})
