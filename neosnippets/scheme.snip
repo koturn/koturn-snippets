@@ -1,0 +1,75 @@
+snippet main
+options head
+  (define (main ${1:args})
+    "Main function"
+    ${0:TARGET})
+
+snippet main-lambda
+options head
+  (define main
+    "Main function"
+    (lambda (${1:args})
+      ${0:TARGET}))
+
+snippet define-variable
+abbr define global variable
+  (define ${1:#:name} ${2:#:value})
+
+snippet let
+  (let (${1:#:bind-lists (foo 1) (bar 2)})
+    ${0:TARGET})
+
+snippet let*
+  (let* (${1:#:bind-lists (foo 1) (bar foo)})
+    ${0:TARGET})
+
+snippet letrec-lambda
+  (letrec ((${1:#:name} (lambda (${2:#:args...})
+                  ${3:#:BODY})))
+    ${0:TARGET})
+
+snippet define-function
+alias define defun
+  (define (${1:#:name} ${2:#:args...})
+    "${3:#:docstring}"
+    (${0:TARGET}))
+
+snippet define-function-with-lambda
+abbr (define NAME (lambda (ARGS...)))
+  (define ${1}
+    "${3:#:docstring}"
+    (lambda (${2})
+      (${0:TARGET})))
+
+snippet lambda
+  (lambda (${1:#:args...})
+    (${0:TARGET}))
+
+snippet define-syntax
+alias syntax
+  (define-syntax ${1:#:name}
+    (syntax-rules ()
+      ((_ ${2:#:pattern-1})
+        (${3:body}))
+      ${0:TARGET}))
+
+snippet define-macro
+abbr (Gauche)
+  (define-macro (${1:#:m-name} ${2:#:args...})
+    (${0:TARGET}))
+
+snippet if
+  (if ${1}
+    ${2:#t}
+    ${3:#f})
+
+snippet map
+  (map
+    ${1:(lambda (x) ())}
+    ${0:TARGET})
+
+snippet for-each
+alias foreach
+  (for-each
+    ${1:(lambda (x) ())}
+    ${0:TARGET})
