@@ -1,0 +1,56 @@
+snippet setq
+  (setq ${1:#:name} ${2:#:value})
+
+snippet let
+  (let (${1:#:bind-list (foo 1) (bar 2)})
+    ${0:TARGET})
+
+snippet let*
+  (let* (${1:#:bind-list (foo 1) (bar foo)})
+    ${0:TARGET})
+
+snippet defun
+alias define-function define
+  (defun ${1:#:name} (${2:#:arg-list})
+    "${3:#:docstring}"
+    (${0:TARGET}))
+
+snippet lambda
+  (lambda (${1:#:args...})
+    (${0:TARGET}))
+
+snippet defmacro
+  (defmacro ${1:#:macro-name} (${2:#:args})
+    `(${0:TARGET}))
+
+snippet loop-for-from-to
+abbr (Common Lisp)
+  (loop for ${1:i} from ${2:0} to ${3} by ${4:1}
+        ${0:TARGET})
+
+snippet loop-for-in
+  (loop for ${1:e} in ${2} do
+        ${0:TARGET})
+
+snippet dotimes
+  (dotimes (${1:i} ${2} ${3:#:nil})
+    (${4}))
+
+snippet if
+  (if ${1}
+    ${2:t}
+    ${3:#:nil})
+
+snippet cond
+  (cond
+    (${1:t}
+      ${2})
+    (${3:t}
+      ${4:t}))
+
+snippet case
+  (case ${1}
+    (${2}
+      ${3})
+    (${3:otherwise}
+      ${4:nil}))
