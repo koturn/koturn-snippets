@@ -1,5 +1,7 @@
 include c.snip
 
+delete p
+
 snippet cout
   std::cout << ${0:TARGET} << std::endl;
 
@@ -123,8 +125,14 @@ snippet multiset
 snippet unordered_multiset
   std::unordered_multiset<${1:int}> ${0:TARGET}
 
+snippet vector2d
+  std::vector<std::vector<${1:int}> > ${4:varname}(${2:#:height}, std::vector<$1>(${3:#:width}))
+
 snippet enable_if
   typename std::enable_if<${0:TARGET}, std::nullptr_t>::type = nullptr
+
+snippet remove_reference
+  std::remove_reference<${0:TARGET}>::type
 
 snippet foreach_const_iterator
   for (std::${1:vector}<${2}>::const_iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
@@ -270,6 +278,9 @@ snippet include_math
   #  define _USE_MATH_DEFINES
   #endif
   #include <cmath>
+
+snippet constant
+  static constexpr ${1:int} ${2:#:varname} = ${3:#:value}
 
 snippet LOOP
 alias loop
