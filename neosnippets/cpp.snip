@@ -562,3 +562,11 @@ snippet if_msvc
   #ifdef _MSC_VER
   ${0:TARGET}
   #endif
+
+snippet connect
+abbr Qt
+  connect(${1:#:sender}, SIGNAL({2:#:signal}), ${3:#:reciever}, SLOT(${4:#:slot}))
+
+snippet connect_lambda
+abbr Qt
+  connect(${1:#:sender}, ${2:#:SenderClass}::${3:#:signal}, [${4:#:capture}]${5:(${6:#:args\})}{ ${0:TARGET} })
