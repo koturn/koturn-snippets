@@ -1,6 +1,7 @@
 include c.snip
 
 delete p
+delete try
 
 snippet cout
   std::cout << ${0:TARGET} << std::endl;
@@ -153,6 +154,13 @@ snippet forref
 snippet forref_c
   for (const auto& ${1:#:eachvar} : ${2:#:container}) {
     ${0:TARGET}
+  }
+
+snippet try
+  try {
+    ${0:TARGET}
+  } catch (${1:const std::exception&} ${2:e}) {
+    ${3:std::cerr << $2.what() << std::endl;}
   }
 
 snippet struct_function_object
