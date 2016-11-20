@@ -167,7 +167,8 @@ snippet struct_function_object
 abbr Functional object
   struct ${1}
   {
-    ${2} operator()(${3})
+    ${2}
+    operator()(${3}) const
     {
       ${0:TARGET}
     }
@@ -327,20 +328,32 @@ snippet def_FILL
   #define FILL(array, val)  std::fill_n(array, LENGTH(array), val)
 
 snippet def_enum
-  #if __cplusplus < 201103L
-  struct ${1:name}
+  #if __cplusplus >= 201103L
+  enum class ${1:className}
   {
-    enum
-    {
-      ${2:Enum}
-    };
-  };
+    ${2:enumValues}
+  };  // enum class $1
   #else
-  enum struct {1:name}
+  class $1
   {
-    $2
-  }
-  #nedif
+  public:
+    enum $1Enum
+    {
+      $2
+    };
+    $1($1Enum value) :
+      value(value)
+    {}
+    operator $1Enum() const throw()
+    {
+      return value;
+    }
+  private:
+    $1Enum value;
+  };  // class $1
+  #endif  // __cplusplus >= 201103L
+
+
 
 snippet def_debug_macros
   #ifdef _MSC_VER
