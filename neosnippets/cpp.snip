@@ -126,8 +126,14 @@ snippet multiset
 snippet unordered_multiset
   std::unordered_multiset<${1:int}> ${0:TARGET}
 
+snippet pair
+  std::pair<${1:int}, ${2:int}> ${0:TARGET}
+
 snippet vector2d
   std::vector<std::vector<${1:int}> > ${4:varname}(${2:#:height}, std::vector<$1>(${3:#:width}))
+
+snippet random
+  std::${1:mt19937} ${2:rnd}((std::random_device())())
 
 snippet enable_if
   typename std::enable_if<${0:TARGET}, std::nullptr_t>::type = nullptr
