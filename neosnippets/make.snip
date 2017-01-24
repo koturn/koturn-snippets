@@ -12,6 +12,13 @@ options head
   else
   endif
 
+snippet ifneq2
+options head
+  ifneq ${1:#:cond}
+    ${2:TARGET}
+    ${3:else \\n ${4:TARGET\}}
+  endif
+
 snippet define
   define
     ${0:TARGET}
@@ -127,3 +134,7 @@ snippet file
 
 snippet guile
   $(guile ${1:#:scheme-s-expr})
+
+snippet libs
+  ${1:#:LIBNAME}_INCS := ${2}
+  ${1:#:LIBNAME}_LDLIBS := ${2}
