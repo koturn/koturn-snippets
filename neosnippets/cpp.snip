@@ -9,6 +9,9 @@ snippet cout
 snippet cout2
   std::cout << ${0:TARGET} << '\n';
 
+snippet cout_all
+  std::copy(${1}.begin(), $1.end(), std::ostream_iterator<const decltype($1)::value_type&>(std::cout));
+
 snippet put
   std::cout.put(${0:TARGET})
 
@@ -26,6 +29,19 @@ snippet precision
 
 snippet setfill
   std::setw(${1:#:n}) << std::setfill(${2:'0'}) << ${0:TARGET}
+
+snippet fstream
+  std::${1:fstream} ${2:fs}(${3:#:filename}${4:, std::ios::binary});
+  if (!$2.is_open()) {
+    ${5:std\:\:cerr << "Failed to open\: " << $3 << std\:\:endl;}
+  }
+  ${0:TARGET}
+
+snippet read_all
+  std::string ${1:text}((std::istreambuf_iterator<char>(${2:#:stream})), std::istreambuf_iterator<char>())
+
+snippet sleep
+  std::this_thread::sleep_for(std::chrono::${1:milliseconds(${2:1000\})});
 
 snippet toppop
   ${1:#:Type} ${2:#:e} = ${3:#:queue}.top(); $3.pop();
@@ -358,8 +374,6 @@ snippet def_enum
     $1Enum value;
   };  // class $1
   #endif  // __cplusplus >= 201103L
-
-
 
 snippet def_debug_macros
   #ifdef _MSC_VER
