@@ -201,11 +201,43 @@ abbr Functional object
   class ${1}
   {
   public:
-    ${2} operator()(${3})
+    ${2} operator()(${3}) const
     {
       ${0:TARGET}
     }
   };
+
+snippet for_each
+  std::for_each(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:TARGET}
+      })
+
+snippet all_of
+  std::all_of(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e > 0;}
+      })
+
+snippet none_of
+  std::none_of(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e > 0;}
+      })
+
+snippet any_of
+  std::any_of(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e > 0;}
+      })
 
 snippet sort
   std::sort(
@@ -215,11 +247,8 @@ snippet sort
         ${0:#:return x < y;}
       })
 
-snippet find
-  std::find(${1}.begin(), $1.end(), ${0:TARGET})
-
 snippet partial_sum
-  std::partial_sum(${1}.begin(), $1.end(), ${1}.begin());
+  std::partial_sum(${1}.begin(), $1.end(), ${2}.begin());
 
 snippet min_element
   std::min_element(
@@ -245,6 +274,38 @@ snippet minmax_element
         ${0:#:return x < y;}
       })
 
+snippet iota
+  std::iota(
+      ${1}.begin(),
+      $1.end(),
+      ${2:0})
+
+snippet fill
+  std::fill(
+    ${1}.begin(),
+    $1.end(),
+    ${2:#:0})
+
+snippet fill_n
+  std::fill_n(
+    ${1}.begin(),
+    ${2:#:size},
+    ${3:#:0})
+
+snippet count
+  std::count(${1}.begin(), $1.end(), ${2:#:value})
+
+snippet count_if
+  std::count_if(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e > 0;}
+      })
+
+snippet find
+  std::find(${1}.begin(), $1.end(), ${2:#:value})
+
 snippet find_if
   std::find_if(
       ${1}.begin(),
@@ -253,6 +314,9 @@ snippet find_if
         ${0:#:return e > 0;}
       })
 
+snippet remove
+  std::remove(${1}.begin(), $1.end(), ${2:#:value})
+
 snippet remove_if
   std::remove_if(
       ${1}.begin(),
@@ -260,6 +324,47 @@ snippet remove_if
       [](const decltype($1)::value_type& e) {
         ${0:#:return e > 0;}
       })
+
+snippet copy
+  std::copy(
+      ${1}.begin(),
+      $1.end(),
+      ${2}.begin())
+
+snippet copy_backward
+  std::copy_backward(
+      ${1}.begin(),
+      $1.end(),
+      ${2}.begin())
+
+snippet copy_n
+  std::copy_n(
+      ${1}.begin(),
+      ${2:#:size},
+      ${2}.begin())
+
+snippet copy_if
+  std::copy_if(
+      ${1}.begin(),
+      $1.end(),
+      ${2}.begin(),
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e > 0;}
+      })
+
+snippet replace
+  std::replace(${1}.begin(), $1.end(), ${2:#:before}, ${3:#:after})
+
+snippet replace_if
+  std::replace_if(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e > 0;}
+      }, ${2:#:after})
+
+snippet sum
+  std::accumulate(${1}.begin(), $1.end(), ${2:0})
 
 snippet accumulate
   std::accumulate(
@@ -270,12 +375,25 @@ snippet accumulate
         ${0:return acc + e;}
       })
 
+snippet inner_product
+  std::inner_product(
+    ${1}.begin(),
+    $1.end(),
+    ${2}.begin(),
+    ${3:0})
+
 snippet transform
   std::transform(
       ${1}.begin(),
       $1.end(),
       $1.begin(),
       ${0:TARGET})
+
+snippet tolower_string
+  std::transform(${1}.begin(), $1.end(), $1.begin(), static_cast<int (*)(int)>(std::tolower));
+
+snippet touppr_string
+  std::transform(${1}.begin(), $1.end(), $1.begin(), static_cast<int (*)(int)>(std::toupper));
 
 snippet next_permutation
   do {
