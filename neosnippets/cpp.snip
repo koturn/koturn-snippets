@@ -85,6 +85,10 @@ snippet foreach_iterator
     ${0:TARGET}
   }
 
+snippet complex
+abbr std::complex<T> <complex>
+  std::complex<${1:double}> ${0:TARGET}
+
 snippet array
 abbr std::array<T, N> <array>
   std::array<${1:int}, ${2:#:N}> ${0:TARGET}
@@ -92,6 +96,10 @@ abbr std::array<T, N> <array>
 snippet vector
 abbr std::vector<T> <vector>
   std::vector<${1:int}> ${0:TARGET}
+
+snippet valarray
+abbr std::valarray<T> <valarray>
+  std::valarray<${1:int}> ${0:TARGET}
 
 snippet bitset
 abbr std::bitset<N> <bitset>
@@ -164,9 +172,21 @@ snippet pair
 abbr std::pair<T1, T2> <utility>
   std::pair<${1:int}, ${2:int}> ${0:TARGET}
 
+snippet initializer_list
+abbr std::initializer_list<T> <initializer_list>
+  std::initializer_list<${1:int}> ${0:TARGET}
+
+snippet array2d
+abbr std::array<std::array<T, W>, H> <array>
+  std::array<std::array<${1:int}, ${3:#:W}>, ${2:#:H}> ${0:TARGET}
+
 snippet vector2d
 abbr std::vector<std::vector<T> > <vector>
-  std::vector<std::vector<${1:int}> > ${4:varname}(${2:#:height}, std::vector<$1>(${3:#:width}))
+  std::vector<std::vector<${1:int}> > ${2:#:varname}(${3:#:height}, std::vector<$1>(${4:#:width}))
+
+snippet valarray2d
+abbr std::vector<std::valarray<T> > <valarray>
+  std::vector<std::valarray<${1:int}> > ${2:#:varname}(${3:#:height}, std::valarray<$1>(${4:#:width}))
 
 snippet random
   std::${1:mt19937} ${2:rnd}((std::random_device())())
