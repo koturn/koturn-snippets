@@ -18,6 +18,9 @@ snippet put
 snippet cerr
   std::cerr << ${0:TARGET} << std::endl;
 
+snippet clog
+  std::clog << ${0:TARGET} << std::endl;
+
 snippet cin
   std::cin >> ${0:TARGET};
 
@@ -197,6 +200,13 @@ snippet enable_if
 snippet remove_reference
   std::remove_reference<${0:TARGET}>::type
 
+snippet fn
+  ${1:#:rettype}
+  ${2:#:fucname}()${3: noexcept}
+  {
+    ${0:TARGET}
+  }
+
 snippet foreach_const_iterator
   for (std::${1:vector}<${2}>::const_iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
     ${0:TARGET}
@@ -293,6 +303,19 @@ abbr std::sort <algorithm>
         ${0:#:return x < y;}
       })
 
+snippet stable_sort
+abbr std::stable_sort <algorithm>
+  std::stable_sort(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
+        ${0:#:return x < y;}
+      })
+
+snippet shuffle
+abbr std::shuffle <algorithm> <random>
+  std::shuffle(${1}.begin(), $1.end(), ${2:std\:\:mt19937()})
+
 snippet partial_sum
 abbr std::partial_sum <numeric>
   std::partial_sum(${1}.begin(), $1.end(), ${2}.begin());
@@ -326,24 +349,38 @@ abbr std::minmax_element <algorithm>
 
 snippet iota
 abbr std::iota <numeric>
-  std::iota(
+  std::iota(${1}.begin(), $1.end(), ${2:0})
+
+snippet generate
+abbr std::generate <algorithm>
+  std::generate(
       ${1}.begin(),
       $1.end(),
-      ${2:0})
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e;}
+      })
+
+snippet generate_n
+  std::generate(
+      ${1:#:begin},
+      ${2:#:size},
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e;}
+      })
 
 snippet fill
 abbr std::fill <algorithm>
   std::fill(
-    ${1}.begin(),
-    $1.end(),
-    ${2:#:0})
+      ${1}.begin(),
+      $1.end(),
+      ${2:#:0})
 
 snippet fill_n
 abbr std::fill_n <algorithm>
   std::fill_n(
-    ${1}.begin(),
-    ${2:#:size},
-    ${3:#:0})
+      ${1:#:begin},
+      ${2:#:size},
+      ${3:#:0})
 
 snippet count
 abbr std::count <algorithm>
@@ -386,24 +423,15 @@ abbr std::remove_if <algorithm>
 
 snippet copy
 abbr std::copy <algorithm>
-  std::copy(
-      ${1}.begin(),
-      $1.end(),
-      ${2}.begin())
+  std::copy(${1}.begin(), $1.end(), ${2}.begin())
 
 snippet copy_backward
 abbr std::copy_backword <algorithm>
-  std::copy_backward(
-      ${1}.begin(),
-      $1.end(),
-      ${2}.begin())
+  std::copy_backward(${1}.begin(), $1.end(), ${2}.begin())
 
 snippet copy_n
 abbr std::copy_n <algorithm>
-  std::copy_n(
-      ${1}.begin(),
-      ${2:#:size},
-      ${2}.begin())
+  std::copy_n(${1}.begin(), ${2:#:size}, ${3}.begin())
 
 snippet copy_if
 abbr std::copy_if <algorithm>
@@ -444,10 +472,10 @@ abbr std::acumulate <numeric>
 snippet inner_product
 abbr std::inner_product <numeric>
   std::inner_product(
-    ${1}.begin(),
-    $1.end(),
-    ${2}.begin(),
-    ${3:0})
+      ${1}.begin(),
+      $1.end(),
+      ${2}.begin(),
+      ${3:0})
 
 snippet transform
 abbr std::transform <algorithm>
@@ -460,7 +488,7 @@ abbr std::transform <algorithm>
 snippet tolower_string
   std::transform(${1}.begin(), $1.end(), $1.begin(), static_cast<int (*)(int)>(std::tolower));
 
-snippet touppr_string
+snippet toupper_string
   std::transform(${1}.begin(), $1.end(), $1.begin(), static_cast<int (*)(int)>(std::toupper));
 
 snippet next_permutation
@@ -470,8 +498,12 @@ snippet next_permutation
 
 snippet time_measurement
   std::chrono::system_clock::time_point ${1:start} = std::chrono::system_clock::now();
-  ${0:TARGET}
+  ${0:TARGET};
   double ${2:elapsed} = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - $1).count();
+
+snippet duration_cast
+abbr std::chrono::duration_cast<T>() <chrono>
+  std::chrono::duration_cast<std::chrono::${1:milliseconds}>(${2})
 
 snippet update_min
   ${1:#:minValue} = std::min($1, ${2:#:newValue})
