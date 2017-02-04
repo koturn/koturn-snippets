@@ -50,3 +50,27 @@ abbr #define restrict
   #    define __restrict__
   #  endif
   #endif
+
+snippet memset
+abbr memset(ptr, value, n) <string.h>
+  memset(${1:#:ptr}, ${2:#:value}, ${3:#:n})
+
+snippet memcpy
+abbr memcpy(to, from, n) <string.h>
+  memcpy(${1:#:to}, ${2:#:from}, ${3:#:n})
+
+snippet memmove
+abbr memmove(to, from, n) <string.h>
+  memmove(${1:#:to}, ${2:#:from}, ${3:#:n})
+
+snippet malloc
+abbr (T *) malloc(n * sizeof(T)) <string.h>
+  (${1:unsigned char} *) malloc(${2:#:n} * sizeof($1))
+
+snippet calloc
+abbr (T *) calloc(n, sizeof(T)) <string.h>
+  (${1:unsigned char} *) calloc(${2:#:n}, sizeof($1))
+
+snippet realloc
+abbr (T *) realloc(n, sizeof(T)) <string.h>
+  (${1:unsigned char} *) realloc(${2:#:n}, sizeof($1))
