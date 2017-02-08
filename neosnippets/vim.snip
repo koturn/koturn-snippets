@@ -1,10 +1,52 @@
-snippet get
-abbr get()
-  let ${1:varname} = get(${2:g:}, '$1', ${4:DEFAULT_VALUE})
+snippet let_get
+  let $1:$2 = get(${1:g}:, '${2:#:name}', ${3:#:default})
 
-snippet substitute
-abbr substitute()
-  substitute(${1}, '${2}', '${3}', '${4:g}')
+snippet let_default_arg
+  let ${1:#:name} = a:000 > ${2:#:idx} ? a:${3:#:idx + 1} : ${4:#:default}
+
+snippet lambda
+  {${1:#:args...} -> ${2:#:expr}}
+
+snippet filter_str
+abbr filter({expr}, '{pred}')
+  filter(${1:#:expr}, '${2:#:pred}')
+
+snippet filter_lambda
+abbr filter({expr}, {idx, val -> pred})
+  filter(${1:#:expr}, {idx, val -> ${2:#:pred}})
+
+snippet map_str
+abbr map({expr}, '{pred}')
+  map(${1:#:expr}, '${2:#:pred}')
+
+snippet map_lambda
+abbr map({expr}, {idx, val -> pred})
+  map(${1:#:expr}, {idx, val -> ${2:#:pred}})
+
+snippet sort_lambda
+abbr sort({list}, {x, y -> pred}, {dict})
+  sort(${1:list}, {x, y -> ${2:#:pred}}${3:, ${4:\#:dict\}})
+
+snippet fn
+  function! s:${1:#:name}(${2:#:args...}) abort " {{{
+    ${0:TARGET}
+  endfunction " }}}
+
+snippet fn_autoload
+  function! `substitute(matchstr(expand('%:p:r'), 'autoload\/\zs.\+$'), '\/', '#', 'g')`#${1:#:name}(${2:#:args...}) abort " {{{
+    ${0:TARGET}
+  endfunction " }}}
+
+snippet fn_cmd_cmpl
+  function! `substitute(matchstr(expand('%:p:r'), 'autoload\/\zs.\+$'), '\/', '#', 'g')`#${1:#:name}(arglead, cmdline, cursorpos) abort " {{{
+    let candidates = ${0:TARGET}
+    return filter(candidates, 'v:val =~? "^' . a:arglead '"')
+  endfunction " }}}
+
+snippet for_dict
+  for [${1:key}, ${2:val}] in items(${3:#:duct})
+    ${0:TARGET}
+  endfor
 
 snippet sid
 abbr SID
@@ -68,3 +110,1403 @@ snippet dein_hooks_on_source
   endfunction
   execute 'autocmd ${2:MyAutoCmd} User dein#source#' . g:dein#name
         \ 'call s:$1() | delfunction s:$1'
+
+snippet abs
+abbr abs({expr})
+  abs(${1:#:expr})
+
+snippet acos
+abbr acos({expr})
+  acos(${1:#:expr})
+
+snippet add
+abbr add({list}, {expr})
+  add(${1:#:list}, ${2:#:expr})
+
+snippet and
+abbr and({expr}, {expr})
+  and(${1:#:expr}, ${2:#:expr})
+
+snippet append
+abbr append({lnum}, {expr})
+  append(${1:#:lnum}, ${2:#:expr})
+
+snippet argc
+abbr argc()
+  argc()
+
+snippet argidx
+abbr argidx()
+  argidx()
+
+snippet arglistid
+abbr arglistid([{winnr} [, {tabnr}]])
+  arglistid(${1:${2:\#:winnr\}${3:, ${4:\\#:tabnr\\}\}})
+
+snippet argv
+abbr argv([{nr}])
+  argv(${1:${2:\#:nr\}})
+
+snippet assert_equal
+abbr assert_equal({expected}, {actual} [, {msg}])
+  assert_equal(${1:#:expected}, ${2:#:actual}${3:, ${4:\#:msg\}})
+
+snippet assert_exception
+abbr assert_exception({error} [, {msg}])
+  assert_exception(${1:#:error}${2:, ${3:\#:msg\}})
+
+snippet assert_fails
+abbr assert_fails({cmd} [, {error}])
+  assert_fails(${1:#:cmd}${2:, ${3:\#:error\}})
+
+snippet assert_false
+abbr assert_false({actual} [, {msg}])
+  assert_false(${1:#:actual}${2:, ${3:\#:msg\}})
+
+snippet assert_inrange
+abbr assert_inrange({lower}, {upper}, {actual} [, {msg}])
+  assert_inrange(${1:#:lower}, ${2:#:upper}, ${3:#:actual}${4:, ${5:\#:msg\}})
+
+snippet assert_match
+abbr assert_match({pattern}, {actual} [, {msg}])
+  assert_match(${1:#:pattern}, ${2:#:actual}${3:, ${4:\#:msg\}})
+
+snippet assert_notequal
+abbr assert_notequal({expected}, {actual} [, {msg}])
+  assert_notequal(${1:#:expected}, ${2:#:actual}${3:, ${4:\#:msg\}})
+
+snippet assert_notmatch
+abbr assert_notmatch({pattern}, {actual} [, {msg}])
+  assert_notmatch(${1:#:pattern}, ${2:#:actual}${3:, ${4:\#:msg\}})
+
+snippet assert_true
+abbr assert_true({actual} [, {msg}])
+  assert_true(${1:#:actual}${2:, ${3:#:msg}})
+
+snippet asin
+abbr asin({expr})
+  asin(${1:#:expr})
+
+snippet atan
+abbr atan({expr})
+  atan(${1:#:expr})
+
+snippet atan2
+abbr atan2({expr1}, {expr2})
+  atan2(${1:#:expr1}, ${2:#:expr2})
+
+snippet browse
+abbr browse({save}, {title}, {initdir}, {default})
+  browse(${1:#:save}, ${2:#:title}, ${3:#:initdir}, ${4:#:default})
+
+snippet browsedir
+abbr browsedir({title}, {initdir})
+  browsedir(${1:#:title}, ${2:#:initdir})
+
+snippet bufexists
+abbr bufexists({expr})
+  bufexists(${1:#:expr})
+
+snippet buflisted
+abbr buflisted({expr})
+  buflisted(${1:#:expr})
+
+snippet bufloaded
+abbr bufloaded({expr})
+  bufloaded(${1:#:expr})
+
+snippet bufname
+abbr bufname({expr})
+  bufname(${1:#:expr})
+
+snippet bufnr
+abbr bufnr({expr} [, {create}])
+  bufnr(${1:#:expr}${2:, ${3:\#:create\}})
+
+snippet bufwinid
+abbr bufwinid({expr})
+  bufwinid(${1:#:expr})
+
+snippet bufwinnr
+abbr bufwinnr({expr})
+  bufwinnr(${1:#:expr})
+
+snippet byte2line
+abbr byte2line({byte})
+  byte2line(${1:#:byte})
+
+snippet byteidx
+abbr byteidx({expr}, {nr})
+  byteidx(${1:#:expr}, ${2:#:nr})
+
+snippet byteidxcomp
+abbr byteidxcomp({expr}, {nr})
+  byteidxcomp(${1:#:expr}, ${2:#:nr})
+
+snippet call
+abbr call({func}, {arglist} [, {dict}])
+  call(${1:#:func}, ${2:#:arglist}${3:, ${4:\#:dict\}})
+
+snippet ceil
+abbr ceil({expr})
+  ceil(${1:#:expr})
+
+snippet changenr
+abbr changenr()
+  changenr()
+
+snippet char2nr
+abbr char2nr({expr} [, {utf8}])
+  char2nr(${1:#:expr}${2:, ${3:\#:utf8\}})
+
+snippet cindent
+abbr cindent({lnum})
+  cindent(${1:#:lnum})
+
+snippet clearmatches
+abbr clearmatches()
+  clearmatches()
+
+snippet col
+abbr col({expr})
+  col(${1:#:expr})
+
+snippet complete
+abbr complete({startcol}, {matches})
+  complete(${1:#:startcol}, ${2:#:matches})
+
+snippet complete_add
+abbr complete_add({expr})
+  complete_add(${1:#:expr})
+
+snippet complete_check
+abbr complete_check()
+  complete_check()
+
+snippet confirm
+abbr confirm({msg} [, {choices} [, {default} [, {type}]]])
+  confirm(${1:#:msg}${2:, ${3:\#:choices\}${4:, ${5:\\#:default\\}${6:, ${7:\\\#:type\\\}\\}\}})
+
+snippet ch_canread
+abbr ch_canread({handle})
+  ch_canread(${1:#:handle})
+
+snippet ch_close
+abbr ch_close({handle})
+  ch_close(${1:#:handle})
+
+snippet ch_close_in
+abbr ch_close_in({handle})
+  ch_close_in(${1:#:handle})
+
+snippet ch_evalexpr
+abbr ch_evalexpr({handle}, {expr} [, {options}])
+  ch_evalexpr(${1:#:handle}, ${2:#:expr}${3:, ${4:\#:options\}})
+
+snippet ch_evalraw
+abbr ch_evalraw({handle}, {string} [, {options}])
+  ch_evalraw(${1:#:handle}, ${2:#:string}${3:, ${4:\#:options\}})
+
+snippet ch_getbufnr
+abbr ch_getbufnr({handle}, {what})
+  ch_getbufnr(${1:#:handle}, ${2:#:what})
+
+snippet ch_getjob
+abbr ch_getjob({channel})
+  ch_getjob(${1:#:channel})
+
+snippet ch_info
+abbr ch_info({handle})
+  ch_info(${1:#:handle})
+
+snippet ch_log
+abbr ch_log({msg} [, {handle}])
+  ch_log(${1:#:msg}${2:, ${3:\#:handle\}})
+
+snippet ch_logfile
+abbr ch_logfile({fname} [, {mode}])
+  ch_logfile(${1:#:fname}${2:, ${3:\#:mode\}})
+
+snippet ch_open
+abbr ch_open({address} [, {options}])
+  ch_open(${1:#:address}${2:, ${3:\#:options\}})
+
+snippet ch_read
+abbr ch_read({handle} [, {options}])
+  ch_read(${1:#:handle}${2:, ${3:\#:options\}})
+
+snippet ch_readraw
+abbr ch_readraw({handle} [, {options}])
+  ch_readraw(${1:#:handle}${2:, ${3:\#:options\}})
+
+snippet ch_sendexpr
+abbr ch_sendexpr({handle}, {expr} [, {options}])
+  ch_sendexpr(${1:#:handle}, ${2:#:expr}${3:, ${4:\#:options\}})
+
+snippet ch_sendraw
+abbr ch_sendraw({handle}, {string} [, {options}])
+  ch_sendraw(${1:#:handle}, ${2:#:string}${3:, ${4:\#:options\}})
+
+snippet ch_setoptions
+abbr ch_setoptions({handle}, {options})
+  ch_setoptions(${1:#:handle}, ${2:#:options})
+
+snippet ch_status
+abbr ch_status({handle} [, {options}])
+  ch_status(${1:#:handle}${2:, ${3:\#:options\}})
+
+snippet copy
+abbr copy({expr})
+  copy(${1:#:expr})
+
+snippet cos
+abbr cos({expr})
+  cos(${1:#:expr})
+
+snippet cosh
+abbr cosh({expr})
+  cosh(${1:#:expr})
+
+snippet count
+abbr count({comp}, {expr} [, {ic} [, {start}]])
+  count(${1:#:comp}, ${2:#:expr}${3:, ${4:\#:ic\}${5:, ${6:\\#:start\\}\}})
+
+snippet cscope_connection
+abbr cscope_connection([{num} , {dbpath} [, {prepend}]])
+  cscope_connection(${1:${2:\#:num\}, ${3:\#:dbpath\}${4:, ${5:\\#:prepend\\}\}})
+
+snippet cursor1
+abbr cursor({lnum}, {col} [, {off}])
+  cursor(${1:#:lnum}, ${2:#:col}${3:, ${4:\#:off\}})
+
+snippet cursor2
+abbr cursor({list})
+  cursor(${1:#:list})
+
+snippet deepcopy
+abbr deepcopy({expr} [, {noref}])
+  deepcopy(${1:#:expr}${2:, ${3:\#:noref\}})
+
+snippet delete
+abbr delete({fname} [, {flags}])
+  delete(${1:#:fname}${2:, ${3:\#:flags\}})
+
+snippet did_filetype
+abbr did_filetype()
+  did_filetype()
+
+snippet diff_filler
+abbr diff_filler({lnum})
+  diff_filler(${1:#:lnum})
+
+snippet diff_hlID
+abbr diff_hlID({lnum}, {col})
+  diff_hlID(${1:#:lnum}, ${2:#:col})
+
+snippet empty
+abbr empty({expr})
+  empty(${1:#:expr})
+
+snippet escape
+abbr escape({string}, {chars})
+  escape(${1:#:string}, ${2:#:chars})
+
+snippet eval
+abbr eval({string})
+  eval(${1:#:string})
+
+snippet eventhandler
+abbr eventhandler()
+  eventhandler()
+
+snippet executable
+abbr executable({expr})
+  executable(${1:#:expr})
+
+snippet execute
+abbr execute({command} [, {silent}])
+  execute(${1:#:command}${2:, ${3:\#:silent\}})
+
+snippet exepath
+abbr exepath({expr})
+  exepath(${1:#:expr})
+
+snippet exists
+abbr exists({expr})
+  exists(${1:#:expr})
+
+snippet exp
+abbr exp({expr})
+  exp(${1:#:expr})
+
+snippet expand
+abbr expand({expr} [, {nosuf} [, {list}]])
+  expand(${1:#:expr}${2:, ${3:\#:nosuf\}${4:, ${5:\\#:list\\}\}})
+
+snippet extend
+abbr extend({expr1}, {expr2} [, {expr3}])
+  extend(${1:#:expr1}, ${2:#:expr2}${3:, ${4:\#:expr3\}})
+
+snippet feedkeys
+abbr feedkeys({string} [, {mode}])
+  feedkeys(${1:#:string}${2:, ${3:\#:mode\}})
+
+snippet filereadable
+abbr filereadable({file})
+  filereadable(${1:#:file})
+
+snippet filewritable
+abbr filewritable({file})
+  filewritable(${1:#:file})
+
+snippet filter
+abbr filter({expr1}, {expr2})
+  filter(${1:#:expr1}, ${2:#:expr2})
+
+snippet finddir
+abbr finddir({name} [, {path} [, {count}]])
+  finddir(${1:#:name}${2:, ${3:\#:path\}${4:, ${5:\\#:count\\}\}})
+
+snippet findfile
+abbr findfile({name} [, {path} [, {count}]])
+  findfile(${1:#:name}${2:, ${3:\#:path\}${4:, ${5:\\#:count\\}\}})
+
+snippet float2nr
+abbr float2nr({expr})
+  float2nr(${1:#:expr})
+
+snippet floor
+abbr floor({expr})
+  floor(${1:#:expr})
+
+snippet fmod
+abbr fmod({expr1}, {expr2})
+  fmod(${1:#:expr1}, ${2:#:expr2})
+
+snippet fnameescape
+abbr fnameescape({string})
+  fnameescape(${1:#:string})
+
+snippet fnamemodify
+abbr fnamemodify({fname}, {mods})
+  fnamemodify(${1:#:fname}, ${2:#:mods})
+
+snippet foldclosed
+abbr foldclosed({lnum})
+  foldclosed(${1:#:lnum})
+
+snippet foldclosedend
+abbr foldclosedend({lnum})
+  foldclosedend(${1:#:lnum})
+
+snippet foldlevel
+abbr foldlevel({lnum})
+  foldlevel(${1:#:lnum})
+
+snippet foldtext
+abbr foldtext()
+  foldtext()
+
+snippet foldtextresult
+abbr foldtextresult({lnum})
+  foldtextresult(${1:#:lnum})
+
+snippet foreground
+abbr foreground()
+  foreground()
+
+snippet funcref
+abbr funcref({name} [, {arglist}] [, {dict}])
+  funcref(${1:#:name}${2:, ${3:\#:arglist\}${4:, ${5:\\#:dict\\}\}})
+
+snippet function
+abbr function({name} [, {arglist}] [, {dict}])
+  function(${1:#:name}${2:, ${3:\#:arglist\}${4:, ${5:\\#:dict\\}\}})
+
+snippet garbagecollect
+abbr garbagecollect([{atexit}])
+  garbagecollect(${1:${2:\#:atexit\}})
+
+snippet get1
+abbr get({list}, {idx} [, {default}])
+  get(${1:#:list}, ${2:#:idx}${3:, ${4:\#:default\}})
+
+snippet get2
+abbr get({dict}, {key} [, {default}])
+  get(${1:#:dict}, ${2:#:idx}${3:, ${4:\#:default\}})
+
+snippet get3
+abbr get({func}, {what})
+  get(${1:#:func}, ${2:#:what})
+
+snippet getbufinfo1
+abbr getbufinfo([{expr}])
+  getbufinfo(${1:${2:\#:expr\}})
+
+snippet getbufinfo2
+abbr getbufinfo([{dict}])
+  getbufinfo(${1:${2:\#:dict\}})
+
+snippet getbufline
+abbr getbufline({expr}, {lnum} [, {end}])
+  getbufline(${1:#:expr}, ${2:#:lnum}${3:, ${4:\#:end\}})
+
+snippet getbufvar
+abbr getbufvar({expr}, {varname} [, {def}])
+  getbufvar(${1:#:expr}, ${2:#:varname}${3:, ${4:\#:def\}})
+
+snippet getchar
+abbr getchar([expr])
+  getchar(${1:${2:\#:expr\}})
+
+snippet getcharmod
+abbr getcharmod()
+  getcharmod()
+
+snippet getcharsearch
+abbr getcharsearch()
+  getcharsearch()
+
+snippet getcmdline
+abbr getcmdline()
+  getcmdline()
+
+snippet getcmdpos
+abbr getcmdpos()
+  getcmdpos()
+
+snippet getcmdtype
+abbr getcmdtype()
+  getcmdtype()
+
+snippet getcmdwintype
+abbr getcmdwintype()
+  getcmdwintype()
+
+snippet getcompletion
+abbr getcompletion({pat}, {type} [, {filtered}])
+  getcompletion(${1:#:pat}, ${2:#:type}${3:, ${4:\#:filtered\}})
+
+snippet getcurpos
+abbr getcurpos()
+  getcurpos()
+
+snippet getcwd
+abbr getcwd([{winnr} [, {tabnr}]])
+  getcwd(${1:${2:\#:winnr\}${3:, ${4:\\#:tabnr\\}\}})
+
+snippet getfsize
+abbr getfsize({fname})
+  getfsize(${1:#:fname})
+
+snippet getfontname
+abbr getfontname([{name}])
+  getfontname(${1:${2:\#:name\}})
+
+snippet getfperm
+abbr getfperm({fname})
+  getfperm(${1:#:fname})
+
+snippet getftime
+abbr getftime({fname})
+  getftime(${1:#:fname})
+
+snippet getftype
+abbr getftype({fname})
+  getftype(${1:#:fname})
+
+snippet getline
+abbr getline({lnum} [, {end}])
+  getline(${1:#:lnum}${2:, ${3:\#:end\}})
+
+snippet getloclist
+abbr getloclist({nr} [, {what}])
+  getloclist(${1:#:nr}${2:, ${3:\#:what\}})
+
+snippet getmatches
+abbr getmatches()
+  getmatches()
+
+snippet getpid
+abbr getpid()
+  getpid()
+
+snippet getpos
+abbr getpos({expr})
+  getpos(${1:#:expr})
+
+snippet getqflist
+abbr getqflist([{what}])
+  getqflist(${1:${2:\#:what\}})
+
+snippet getreg
+abbr getreg([{regname} [, 1 [, {list}]]])
+  getreg(${1:${2:\#:regname\}${3:, 1${4:, ${5:\\\#:list\\\}\\}\}})
+
+snippet getregtype
+abbr getregtype([{regname}])
+  getregtype(${1:${2:\#:regname\}})
+
+snippet gettabinfo
+abbr gettabinfo([{arg}])
+  gettabinfo(${1:${2:\#:arg\}})
+
+snippet gettabvar
+abbr gettabvar({tabnr}, {varname} [, {def}])
+  gettabvar(${1:#:tabnr}, ${2:#:varname}${3:, ${4:\#:def\}})
+
+snippet gettabwinvar
+abbr gettabwinvar({tabnr}, {winnr}, {varname} [, {def}])
+  gettabwinvar(${1:#:tabnr}, ${2:#:winnr}, ${3:#:varname}${4:, ${5:\#:def\}})
+
+snippet getwinposx
+abbr getwinposx()
+  getwinposx()
+
+snippet getwinposy
+abbr getwinposy()
+  getwinposy()
+
+snippet getwininfo
+abbr getwininfo([{winid}])
+  getwininfo(${1:${2:\#:winid\}})
+
+snippet getwinvar
+abbr getwinvar({winnr}, {varname} [, {def}])
+  getwinvar(${1:#:winnr}, ${2:#:varname}${3:, ${4:\#:def\}})
+
+snippet glob
+abbr glob({expr} [, {nosuf} [, {list} [, {alllinks}]]])
+  glob(${1:#:expr}${2:, ${3:\#:nosuf\}${4:, ${5:\\#:list\\}${6:, ${7:\\\#:alllinks\\\}\\}\}})
+
+snippet glob2regpat
+abbr glob2regpat({expr})
+  glob2regpat(${1:#:expr})
+
+snippet globpath
+abbr globpath({path}, {expr} [, {nosuf} [, {list} [, {alllinks}]]])
+  globpath(${1:#:path}, ${2:#:expr}${3:, ${4:\#:nosuf\}${5:, ${6:\\#:list\\}${7:, ${8:\\\#:alllinks\\\}\\}\}})
+
+snippet has
+abbr has({feature})
+  has(${1:#:feature})
+
+snippet has_key
+abbr has_key({dict}, {key})
+  has_key(${1:#:dict}, ${2:#:key})
+
+snippet haslocaldir
+abbr haslocaldir([{winnr} [, {tabnr}]])
+  haslocaldir(${1:${2:\#:winnr\}${3:, ${4:\\#:tabnr\\}\}})
+
+snippet hasmapto
+abbr hasmapto({what} [, {mode} [, {abbr}]])
+  hasmapto(${1:#:what}${2:, ${3:\#:mode\}${4:, ${5:\\#:abbr\\}\}})
+
+snippet histadd
+abbr histadd({history}, {item})
+  histadd(${1:#:history}, ${2:#:item})
+
+snippet histdel
+abbr histdel({history} [, {item}])
+  histdel(${1:#:history}${2:, ${3:\#:item\}})
+
+snippet histget
+abbr histget({history} [, {index}])
+  histget(${1:#:history}${2:, ${3:\#:index\}})
+
+snippet histnr
+abbr histnr({history})
+  histnr(${1:#:history})
+
+snippet hlexists
+abbr hlexists({name})
+  hlexists(${1:#:name})
+
+snippet hlID
+abbr hlID({name})
+  hlID(${1:#:name})
+
+snippet hostname
+abbr hostname()
+  hostname()
+
+snippet iconv
+abbr iconv({expr}, {from}, {to})
+  iconv(${1:#:expr}, ${2:#:from}, ${3:#:to})
+
+snippet indent
+abbr indent({lnum})
+  indent(${1:#:lnum})
+
+snippet index
+abbr index({list}, {expr} [, {start} [, {ic}]])
+  index(${1:#:list}, ${2:#:expr}${3:, ${4:\#:start\}${5: ${6:\\#:ic\\}\}})
+
+snippet input
+abbr input({prompt} [, {text} [, {completion}]])
+  input(${1:#:prompt}${2:, ${3:\#:text\}${4:, ${5:\\#:completion\\}\}})
+
+snippet inputdialog
+abbr inputdialog({prompt} [, {text} [, {cancelreturn}]])
+  inputdialog(${1:#:prompt}${2:, ${3:\#:\text}${4:, ${5:\\#:cancelreturn\\}\}})
+
+snippet inputlist
+abbr inputlist({textlist})
+  inputlist(${1:#:textlist})
+
+snippet inputrestore
+abbr inputrestore()
+  inputrestore()
+
+snippet inputsave
+abbr inputsave()
+  inputsave()
+
+snippet inputsecret
+abbr inputsecret({prompt} [, {text}])
+  inputsecret(${1:#:prompt}${2:, ${3:\#:text\}})
+
+snippet insert
+abbr insert({list}, {item} [, {idx}])
+  insert(${1:#:list}, ${2:#:item}${3:, ${4:\#:idx\}})
+
+snippet invert
+abbr invert({expr})
+  invert(${1:#:expr})
+
+snippet isdirectory
+abbr isdirectory({directory})
+  isdirectory(${1:#:directory})
+
+snippet islocked
+abbr islocked({expr})
+  islocked(${1:#:expr})
+
+snippet isnan
+abbr isnan({expr})
+  isnan(${1:#:expr})
+
+snippet items
+abbr items({dict})
+  items(${1:#:dict})
+
+snippet job_getchannel
+abbr job_getchannel({job})
+  job_getchannel(${1:#:job})
+
+snippet job_info
+abbr job_info({job})
+  job_info(${1:#:job})
+
+snippet job_setoptions
+abbr job_setoptions({job}, {options})
+  job_setoptions(${1:#:job}, ${2:#:options})
+
+snippet job_start
+abbr job_start({command} [, {options}])
+  job_start(${1:#:command}${2:, ${3:\#:options\}})
+
+snippet job_status
+abbr job_status({job})
+  job_status(${1:#:job})
+
+snippet job_stop
+abbr job_stop({job} [, {how}])
+  job_stop(${1:#:job}${2:, ${3:\#:how\}})
+
+snippet join
+abbr join({list} [, {sep}])
+  join(${1:#:list}${2:, ${3:\#:sep\}})
+
+snippet js_decode
+abbr js_decode({string})
+  js_decode(${1:#:string})
+
+snippet js_encode
+abbr js_encode({expr})
+  js_encode(${1:#:expr})
+
+snippet json_decode
+abbr json_decode({string})
+  json_decode(${1:#:string})
+
+snippet json_encode
+abbr json_encode({expr})
+  json_encode(${1:#:expr})
+
+snippet keys
+abbr keys({dict})
+  keys(${1:#:dict})
+
+snippet len
+abbr len({expr})
+  len(${1:#:expr})
+
+snippet libcall
+abbr libcall({libname}, {funcname}, {argument})
+  libcall(${1:#:libname}, ${2:#:funcname}, ${3:#:argument})
+
+snippet libcallnr
+abbr libcallnr({libname}, {funcname}, {argument})
+  libcallnr(${1:#:libname}, ${2:#:funcname}, ${3:#:argument})
+
+snippet line
+abbr line({expr})
+  line(${1:#:expr})
+
+snippet line2byte
+abbr line2byte({lnum})
+  line2byte(${1:#:lnum})
+
+snippet lispindent
+abbr lispindent({lnum})
+  lispindent(${1:#:lnum})
+
+snippet localtime
+abbr localtime()
+  localtime()
+
+snippet log
+abbr log({expr})
+  log(${1:#:expr})
+
+snippet log10
+abbr log10({expr})
+  log10(${1:#:expr})
+
+snippet luaeval
+abbr luaeval({expr} [, {expr}])
+  luaeval(${1:#:expr}${2:, ${3:\#:expr\}})
+
+snippet map
+abbr map({expr1}, {expr2})
+  map(${1:#:expr1}, ${2:#:expr2})
+
+snippet maparg
+abbr maparg({name} [, {mode} [, {abbr} [, {dict}]]])
+  maparg(${1:#:name}${2:, ${3:\#:mode\}${4:, ${5:\\#:abbr\\}${6:, ${7:\\\#:dict\\\}\\}\}})
+
+snippet mapcheck
+abbr mapcheck({name} [, {mode} [, {abbr}]])
+  mapcheck(${1:#:name}${2:, ${3:\#:mode\}${4:, ${5:\\#:abbr\\}\}})
+
+snippet match
+abbr match({expr}, {pat} [, {start} [, {count}]])
+  match(${1:#:expr}, ${2:#:pat}${3:, ${4:\#:start\}${5:, ${6:\\#:count\\}\}})
+
+snippet matchadd
+abbr matchadd({group}, {pattern} [, {priority} [, {id} [, {dict}]]])
+  matchadd(${1:#:group}, ${2:#:pattern}${3:, ${4:\#:priority\}${5:, ${6:\\#:id\\}${7:, ${8:\\\#:dict\\\}\\}\}})
+
+snippet matchaddpos
+abbr matchaddpos({group}, {pos} [, {priority} [, {id} [, {dict}]]])
+  matchaddpos(${1:#:group}, ${2:#:pos}${3:, ${4:\#:priority\}${4:, ${5:\\#:id\\}${6:, ${7:\\\#:dict\\\}\\}\}})
+
+snippet matcharg
+abbr matcharg({nr})
+  matcharg(${1:#:nr})
+
+snippet matchdelete
+abbr matchdelete({id})
+  matchdelete(${1:#:id})
+
+snippet matchend
+abbr matchend({expr}, {pat} [, {start} [, {count}]])
+  matchend(${1:#:expr}, ${2:#:pat}${3:, ${4:\#:start\}${5:, ${6:\\#:count\\}\}})
+
+snippet matchlist
+abbr matchlist({expr}, {pat} [, {start} [, {count}]])
+  matchlist(${1:#:expr}, ${2:#:pat}${3:, ${4:\#:start\}${5:, ${6:\\#:count\\}\}})
+
+snippet matchstr
+abbr matchstr({expr}, {pat} [, {start} [, {count}]])
+  matchstr(${1:#:expr}, ${2:#:pat}${3:, ${4:\#:start\}${5:, ${6:\\#:count\\}\}})
+
+snippet matchstrpos
+abbr matchstrpos({expr}, {pat} [, {start} [, {count}]])
+  matchstrpos(${1:#:expr}, ${2:#:pat}${3:, ${4:\#:start\}${5:, ${6:\\#:count\\}\}})
+
+snippet max
+abbr max({expr})
+  max(${1:#:expr})
+
+snippet min
+abbr min({expr})
+  min(${1:#:expr})
+
+snippet mkdir
+abbr mkdir({name} [, {path} [, {prot}]])
+  mkdir(${1:#:name}${2:, ${3:\#:path\}${4:, ${5:\\#:prot\\}\}})
+
+snippet mode
+abbr mode([expr])
+  mode(${1:${2:\#:expr\}})
+
+snippet mzeval
+abbr mzeval({expr})
+  mzeval(${1:#:expr})
+
+snippet nextnonblank
+abbr nextnonblank({lnum})
+  nextnonblank(${1:#:lnum})
+
+snippet nr2char
+abbr nr2char({expr} [, {utf8}])
+  nr2char(${1:#:expr}${2:, ${3:\#:utf8\}})
+
+snippet or
+abbr or({expr}, {expr})
+  or(${1:#:expr}, ${2:#:expr})
+
+snippet pathshorten
+abbr pathshorten({expr})
+  pathshorten(${1:#:expr})
+
+snippet perleval
+abbr perleval({expr})
+  perleval(${1:#:expr})
+
+snippet pow
+abbr pow({x}, {y})
+  pow(${1:#:x}, ${2:#:y})
+
+snippet prevnonblank
+abbr prevnonblank({lnum})
+  prevnonblank(${1:#:lnum})
+
+snippet printf
+abbr printf({fmt}, {expr1} ...)
+  printf(${1:#:fmt}, ${2:#:exprs...})
+
+snippet pumvisible
+abbr pumvisible()
+  pumvisible()
+
+snippet py3eval
+abbr py3eval({expr})
+  py3eval(${1:#:expr})
+
+snippet pyeval
+abbr pyeval({expr})
+  pyeval(${1:#:expr})
+
+snippet pyxeval
+abbr pyxeval({expr})
+  pyxeval(${1:#:expr})
+
+snippet range
+abbr range({expr} [, {max} [, {stride}]])
+  range(${1:#:expr}${2:, ${3:\#:max\}${4:, ${5:\\#:stride\\}\}})
+
+snippet readfile
+abbr readfile({fname} [, {binary} [, {max}]])
+  readfile(${1:#:fname}${2:, ${3:\#:binary\}${4:, ${5:\\#:max\\}\}})
+
+snippet reltime
+abbr reltime([{start} [, {end}]])
+  reltime(${1: ${2:\#:start\}${3:, ${4:\\#:end\\}\}})
+
+snippet reltimefloat
+abbr reltimefloat({time})
+  reltimefloat(${1:#:time})
+
+snippet reltimestr
+abbr reltimestr({time})
+  reltimestr(${1:#:time})
+
+snippet remote_expr
+abbr remote_expr({server}, {string} [, {idvar}])
+  remote_expr(${1:#:server}, ${2:#:string}${3:, ${4:\#:idvar\}})
+
+snippet remote_foreground
+abbr remote_foreground({server})
+  remote_foreground(${1:#:server})
+
+snippet remote_peek
+abbr remote_peek({serverid} [, {retvar}])
+  remote_peek(${1:#:serverid}${2:, ${3:\#:retvar\}})
+
+snippet remote_read
+abbr remote_read({serverid})
+  remote_read(${1:#:serverid})
+
+snippet remote_send
+abbr remote_send({server}, {string} [, {idvar}])
+  remote_send(${1:#:server}, ${2:#:string}${3:, ${4:\#:idvar\}})
+
+snippet remove1
+abbr remove({list}, {idx} [, {end}])
+  remove(${1:#:list}, ${2:#:idx}${3:, ${4:\#:end\}})
+
+snippet remove2
+abbr remove({dict}, {key})
+  remove(${1:#:dict}, ${2:#:key})
+
+snippet rename
+abbr rename({from}, {to})
+  rename(${1:#:from}, ${2:#:to})
+
+snippet repeat
+abbr repeat({expr}, {count})
+  repeat(${1:#:expr}, ${2:#:count})
+
+snippet resolve
+abbr resolve({filename})
+  resolve(${1:#:filename})
+
+snippet reverse
+abbr reverse({list})
+  reverse(${1:#:list})
+
+snippet round
+abbr round({expr})
+  round(${1:#:expr})
+
+snippet screenattr
+abbr screenattr({row}, {col})
+  screenattr(${1:#:row}, ${2:#:col})
+
+snippet screenchar
+abbr screenchar({row}, {col})
+  screenchar(${1:#:row}, ${2:#:col})
+
+snippet screencol
+abbr screencol()
+  screencol()
+
+snippet screenrow
+abbr screenrow()
+  screenrow()
+
+snippet search
+abbr search({pattern} [, {flags} [, {stopline} [, {timeout}]]])
+  search(${1:#:pattern}${2:, ${3:\#:flags\}${4:, ${5:\\#:stopline\\}${6:, ${7:\\\#:timeout\\\}\\}\}})
+
+snippet searchdecl
+abbr searchdecl({name} [, {global} [, {thisblock}]])
+  searchdecl(${1:#:name}${2:, ${3:\#:global\}${4:, ${5:\\#:thisblock\\}\}})
+
+snippet abbrsearchpair
+abbr abbrsearchpair({start}, {middle}, {end} [, {flags} [, {skip} [, {stopline} [, {timeout}]]]])
+  abbrsearchpair(${1:#:start}, ${2:#:middle}, ${3:#:end}${4:, ${5:\#:flags\}${6:, ${7:\\#:skip\\}${8:, ${9:\\\#:stopline\\\}${10:, ${11:\\\\#:timeout\\\\}\\\}\\}\}})
+
+snippet searchpairpos
+abbr searchpairpos({start}, {middle}, {end} [, {flags} [, {skip} [, {stopline} [, {timeout}]]]])
+  searchpairpos(${1:#:start}, ${2:#:middle}, ${3:#:end}${4:, ${5:\#:flags\}${6:, ${7:\\#:skip\\}${8:, ${9:\\\#:stopline\\\}${10:, ${11:\\\\#:timeout\\\\}\\\}\\}\}})
+
+snippet searchpos
+abbr searchpos({pattern} [, {flags} [, {stopline} [, {timeout}]]])
+  searchpos(${1:#:pattern}${2:, ${3:\#:flags\}${4:, ${5:\\#:stopline\\}${6:, ${7:\\\#:timeout\\\}\\}\}})
+
+snippet server2client
+abbr server2client({clientid}, {string})
+  server2client(${1:#:clientid}, ${2:#:string})
+
+snippet serverlist
+abbr serverlist()
+  serverlist()
+
+snippet setbufvar
+abbr setbufvar({expr}, {varname}, {val})
+  setbufvar(${1:#:expr}, ${2:#:varname}, ${3:#:val})
+
+snippet setcharsearch
+abbr setcharsearch({dict})
+  setcharsearch(${1:#:dict})
+
+snippet setcmdpos
+abbr setcmdpos({pos})
+  setcmdpos(${1:#:pos})
+
+snippet setfperm
+abbr setfperm({fname}, {mode})
+  setfperm(${1:#:fname}, ${2:#:mode})
+
+snippet setline
+abbr setline({lnum}, {text})
+  setline(${1:#:lnum}, ${2:#:text})
+
+snippet setloclist
+abbr setloclist({nr}, {list} [, {action} [, {what}]])
+  setloclist(${1:#:nr}, ${2:#:list}${3:, ${4:\#:action\}${5:, ${6:\\#:what\\}\}})
+
+snippet setmatches
+abbr setmatches({list})
+  setmatches(${1:#:list})
+
+snippet setpos
+abbr setpos({expr}, {list})
+  setpos(${1:#:expr}, ${2:#:list})
+
+snippet setqflist
+abbr setqflist({list} [, {action} [, {what}]])
+  setqflist(${1:#:list}${2:, ${3:\#:action\}${4:, ${5:\\#:what\\}\}})
+
+snippet setreg
+abbr setreg({regname}, {value} [, {options}])
+  setreg(${1:#:regname}, ${2:#:value}${3:, ${4:\#:options\}})
+
+snippet settabvar
+abbr settabvar({tabnr}, {varname}, {val})
+  settabvar(${1:#:tabnr}, ${2:#:varname}, ${3:#:val})
+
+snippet settabwinvar
+abbr settabwinvar({tabnr}, {winnr}, {varname}, {val})
+  settabwinvar(${1:#:tabnr}, ${2:#:winnr}, ${3:#:varname}, ${4:#:val})
+
+snippet setwinvar
+abbr setwinvar({nr}, {varname}, {val})
+  setwinvar(${1:#:nr}, ${2:#:varname}, ${3:#:val})
+
+snippet sha256
+abbr sha256({string})
+  sha256(${1:#:string})
+
+snippet shellescape
+abbr shellescape({string} [, {special}])
+  shellescape(${1:#:string}${2:, ${3:\#:special\}})
+
+snippet shiftwidth
+abbr shiftwidth()
+  shiftwidth()
+
+snippet simplify
+abbr simplify({filename})
+  simplify(${1:#:filename})
+
+snippet sin
+abbr sin({expr})
+  sin(${1:#:expr})
+
+snippet sinh
+abbr sinh({expr})
+  sinh(${1:#:expr})
+
+snippet sort
+abbr sort({list} [, {func} [, {dict}]])
+  sort(${1:#:list}${2:, ${3:\#:func\}${4:, ${5:\\#:dict\\}\}})
+
+snippet soundfold
+abbr soundfold({word})
+  soundfold(${1:#:word})
+
+snippet spellbadword
+abbr spellbadword([{sentence}])
+  spellbadword(${1:${2:\#:sentence\}})
+
+snippet spellsuggest
+abbr spellsuggest({word} [, {max} [, {capital}]])
+  spellsuggest(${1:#:word}${2:, ${3:\#:max\}${4:, ${5:\\#:capital\\}\}})
+
+snippet split
+abbr split({expr} [, {pattern} [, {keepempty}]])
+  split(${1:#:expr}${2:, ${3:\#:pattern\}${4:, ${5:\\#:keepempty\\}\}})
+
+snippet sqrt
+abbr sqrt({expr})
+  sqrt(${1:#:expr})
+
+snippet str2float
+abbr str2float({expr})
+  str2float(${1:#:expr})
+
+snippet str2nr
+abbr str2nr({expr} [, {base}])
+  str2nr(${1:#:expr}${2:, ${3:\#:base\}})
+
+snippet strchars
+abbr strchars({expr} [, {skipcc}])
+  strchars(${1:#:expr}${2:, ${3:\#:skipcc\}})
+
+snippet strcharpart
+abbr strcharpart({src}, {start} [, {len}])
+  strcharpart(${1:#:src}, ${2:#:start}${3:, ${4:\#:len\}})
+
+snippet strdisplaywidth
+abbr strdisplaywidth({expr} [, {col}])
+  strdisplaywidth(${1:#:expr}${2:, ${3:\#:col\}})
+
+snippet strftime
+abbr strftime({format} [, {time}])
+  strftime(${1:#:format}${2:, ${3:\#:time\}})
+
+snippet strgetchar
+abbr strgetchar({str}, {index})
+  strgetchar(${1:#:str}, ${2:#:index})
+
+snippet stridx
+abbr stridx({haystack}, {needle} [, {start}])
+  stridx(${1:#:haystack}, ${2:#:needle}${3:, ${4:\#:start\}})
+
+snippet string
+abbr string({expr})
+  string(${1:#:expr})
+
+snippet strlen
+abbr strlen({expr})
+  strlen(${1:#:expr})
+
+snippet strpart
+abbr strpart({src}, {start} [, {len}])
+  strpart(${1:#:src}, ${2:#:start}${2:, ${3:\#:len\}})
+
+snippet strridx
+abbr strridx({haystack}, {needle} [, {start}])
+  strridx(${1:#:haystack}, ${2:#:needle}${3:, ${4:\#:start\}})
+
+snippet strtrans
+abbr strtrans({expr})
+  strtrans(${1:#:expr})
+
+snippet strwidth
+abbr strwidth({expr})
+  strwidth(${1:#:expr})
+
+snippet submatch
+abbr submatch({nr} [, {list}])
+  submatch(${1:#:nr}${2:, ${3:\#:list\}})
+
+snippet substitute
+abbr substitute({expr}, {pat}, {sub}, {flags})
+  substitute(${1:#:expr}, ${2:#:pat}, ${3:#:sub}, ${4:'g'})
+
+snippet synID
+abbr synID({lnum}, {col}, {trans})
+  synID(${1:#:lnum}, ${2:#:col}, ${3:#:trans})
+
+snippet synIDattr
+abbr synIDattr({synID}, {what} [, {mode}])
+  synIDattr(${1:#:synID}, ${2:#:what}${3:, ${4:\#:mode\}})
+
+snippet synIDtrans
+abbr synIDtrans({synID})
+  synIDtrans(${1:#:synID})
+
+snippet synconcealed
+abbr synconcealed({lnum}, {col})
+  synconcealed(${1:#:lnum}, ${2:#:col})
+
+snippet synstack
+abbr synstack({lnum}, {col})
+  synstack(${1:#:lnum}, ${2:#:col})
+
+snippet system
+abbr system({expr} [, {input}])
+  system(${1:#:expr}${2:, ${3:\#:input\}})
+
+snippet systemlist
+abbr systemlist({expr} [, {input}])
+  systemlist(${1:#:expr}${2:, ${3:\#:input\}})
+
+snippet tabpagebuflist
+abbr tabpagebuflist([{arg}])
+  tabpagebuflist(${1:${2:\#:arg\}})
+
+snippet tabpagenr
+abbr tabpagenr({arg})
+  tabpagenr(${1:#:arg})
+
+snippet tabpagewinnr
+abbr tabpagewinnr({tabarg} [, {arg}])
+  tabpagewinnr(${1:#:tabarg}${2:, ${3:\#:arg\}})
+
+snippet tagfiles
+abbr tagfiles()
+  tagfiles()
+
+snippet taglist
+abbr taglist({expr})
+  taglist(${1:#:expr})
+
+snippet tan
+abbr tan({expr})
+  tan(${1:#:expr})
+
+snippet tanh
+abbr tanh({expr})
+  tanh(${1:#:expr})
+
+snippet tempname
+abbr tempname()
+  tempname()
+
+snippet test_alloc_fail
+abbr test_alloc_fail({id}, {countdown}, {repeat})
+  test_alloc_fail(${1:#:id}, ${2:#:countdown}, ${3:#:repeat})
+
+snippet test_autochdir
+abbr test_autochdir()
+  test_autochdir()
+
+snippet test_disable_char_avail
+abbr test_disable_char_avail({expr})
+  test_disable_char_avail({expr})
+
+snippet test_garbagecollect_now
+abbr test_garbagecollect_now()
+  test_garbagecollect_now()
+
+snippet test_null_channel
+abbr test_null_channel()
+  test_null_channel()
+
+snippet test_null_dict
+abbr test_null_dict()
+  test_null_dict()
+
+snippet test_null_job
+abbr test_null_job()
+  test_null_job()
+
+snippet test_null_list
+abbr test_null_list()
+  test_null_list()
+
+snippet test_null_partial
+abbr test_null_partial()
+  test_null_partial()
+
+snippet test_null_string
+abbr test_null_string()
+  test_null_string()
+
+snippet test_settime
+abbr test_settime({expr})
+  test_settime(${1:#:expr})
+
+snippet timer_info
+abbr timer_info([{id}])
+  timer_info(${1:${2:\#:id\}})
+
+snippet timer_pause
+abbr timer_pause({timer}, {paused})
+  timer_pause(${1:#:timer}, ${2:#:paused})
+
+snippet timer_start
+abbr timer_start({time}, {callback} [, {options}])
+  timer_start(${1:#:time}, ${2:#:callback}${3:, ${4:\#:options\}})
+
+snippet timer_stop
+abbr timer_stop({timer})
+  timer_stop(${1:#:timer})
+
+snippet timer_stopall
+abbr timer_stopall()
+  timer_stopall()
+
+snippet tolower
+abbr tolower({expr})
+  tolower(${1:#:expr})
+
+snippet toupper
+abbr toupper({expr})
+  toupper(${1:#:expr})
+
+snippet tr
+abbr tr({src}, {fromstr}, {tostr})
+  tr(${1:#:src}, ${2:#:fromstr}, ${3:#:tostr})
+
+snippet trunc
+abbr trunc({expr})
+  trunc(${1:#:expr})
+
+snippet type
+abbr type({expr})
+  type(${1:#:expr})
+
+snippet undofile
+abbr undofile({name})
+  undofile(${1:#:name})
+
+snippet undotree
+abbr undotree()
+  undotree()
+
+snippet uniq
+abbr uniq({list} [, {func} [, {dict}]])
+  uniq(${1:#:list}${2:, ${3:\#:func\}${4:, ${5:\\#:dict\\}\}})
+
+snippet values
+abbr values({dict})
+  values(${1:#:dict})
+
+snippet virtcol
+abbr virtcol({expr})
+  virtcol(${1:#:expr})
+
+snippet visualmode
+abbr visualmode
+  visualmode(${1:#:expr})
+
+snippet wildmenumode
+abbr wildmenumode()
+  wildmenumode()
+
+snippet win_findbuf
+abbr win_findbuf({bufnr})
+  win_findbuf(${1:#:bufnr})
+
+snippet win_getid
+abbr win_getid([{win} [, {tab}]])
+  win_getid(${1:${2:\#:win\}${3:, ${4:\\#:tab\\}\}})
+
+snippet win_gotoid
+abbr win_gotoid({expr})
+  win_gotoid(${1:#:expr})
+
+snippet win_id2tabwin
+abbr win_id2tabwin({expr})
+  win_id2tabwin(${1:#:expr})
+
+snippet win_id2win
+abbr win_id2win({expr})
+  win_id2win(${1:#:expr})
+
+snippet winbufnr
+abbr winbufnr({nr})
+  winbufnr(${1:#:nr})
+
+snippet wincol
+abbr wincol()
+  wincol()
+
+snippet winheight
+abbr winheight({nr})
+  winheight(${1:#:nr})
+
+snippet winline
+abbr winline()
+  winline()
+
+snippet winnr
+abbr winnr([{arg}])
+  winnr(${1:${2:\#:arg\}})
+
+snippet winrestcmd
+abbr winrestcmd()
+  winrestcmd()
+
+snippet winrestview
+abbr winrestview
+  winrestview(${1:#:dict})
+
+snippet winsaveview
+abbr winsaveview()
+  winsaveview()
+
+snippet winwidth
+abbr winwidth({nr})
+  winwidth(${1:#:nr})
+
+snippet wordcount
+abbr wordcount()
+  wordcount()
+
+snippet writefile
+abbr writefile({list}, {fname} [, {flags}])
+  writefile(${1:#:list}, ${2:#:fname}${3:, ${4:#:flags\}})
+
+snippet xor
+abbr xor({expr}, {expr})
+  xor(${1:#:expr}, ${2:#:expr})
