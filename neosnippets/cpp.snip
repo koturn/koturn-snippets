@@ -211,6 +211,16 @@ snippet enable_if
 snippet remove_reference
   std::remove_reference<${0:TARGET}>::type
 
+snippet thread
+  std::thread ${1:#:name}([${2:&}]{
+    ${0:TARGET}
+  });
+
+snippet async
+  std::async ${1:#:name}(std::launch::async, [${2:&}]{
+    ${0:TARGET}
+  });
+
 snippet fn
   ${1:#:rettype}
   ${2:#:fucname}()${3: noexcept}
