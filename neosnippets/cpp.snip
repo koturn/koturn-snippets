@@ -441,6 +441,20 @@ abbr std::remove_if <algorithm>
         ${0:#:return e > 0;}
       })
 
+snippet remove_erase
+  ${1}.erase(std::remove($1.begin(), $1.end(), ${2:#:value}), $1.end());
+
+snippet remove_erase_if
+alias filter select
+  ${1}.erase(
+      std::remove_if(
+        $1.begin(),
+        $1.end(),
+        [](const decltype($1)::value_type& e) {
+          ${0:#:return e > 0;}
+        }),
+      $1.end())
+
 snippet copy
 abbr std::copy <algorithm>
   std::copy(${1}.begin(), $1.end(), ${2}.begin())
@@ -477,33 +491,43 @@ abbr std::replace_if <algorithm>
       }, ${2:#:after})
 
 snippet sum
-  std::accumulate(${1}.begin(), $1.end(), ${2:0})
+alias foldl
+  std::accumulate(${1}.begin(), $1.end(), ${2:decltype($1)::value_type()})
+
+snippet foldr
+  std::accumulate(
+      ${1}.rbegin(),
+      $1.rend(),
+      ${2:decltype($1)::value_type()},
+      [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& e) {
+        return e + acc;
+      })
 
 snippet accumulate
+alias reduce
 abbr std::acumulate <numeric>
   std::accumulate(
       ${1}.begin(),
       $1.end(),
-      ${2:0},
-      [](${3:int} ${4:acc}, const decltype($1)::value_type& e) {
+      ${2:decltype($1)::value_type()},
+      [](const decltype($1)::value_type& ${4:acc}, const decltype($1)::value_type& e) {
         ${0:return acc + e;}
       })
 
 snippet inner_product
 abbr std::inner_product <numeric>
-  std::inner_product(
-      ${1}.begin(),
-      $1.end(),
-      ${2}.begin(),
-      ${3:0})
+  std::inner_product(${1}.begin(), $1.end(), ${2}.begin(), ${3:decltype($1)::value_type()})
 
 snippet transform
+alias map_set select
 abbr std::transform <algorithm>
   std::transform(
       ${1}.begin(),
       $1.end(),
       ${2}.begin(),
-      ${0:TARGET})
+      [](const decltype($1)::value_type& e) {
+        ${0:#:return e * 2;}
+      })
 
 snippet tolower_string
   std::transform(${1}.begin(), $1.end(), $1.begin(), static_cast<int (*)(int)>(std::tolower));
@@ -725,7 +749,7 @@ snippet impl_powmod
 
 snippet impl_popcnt
   #ifdef __GNUC__
-  #  define popcnd(n)  __builtin_popcount(n)
+  #  define popcnt(n)  __builtin_popcount(n)
   #else
   static unsigned int
   popcnt(unsigned int n)
