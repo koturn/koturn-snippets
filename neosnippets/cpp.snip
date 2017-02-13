@@ -33,6 +33,9 @@ snippet clog
 snippet cin
   std::cin >> ${0:TARGET};
 
+snippet endl
+  std::cout << std::endl;
+
 snippet flush
   std::cout << std::flush;
 
@@ -98,6 +101,10 @@ snippet foreach_iterator
   for (std::${1:vector}<${2}>::iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
     ${0:TARGET}
   }
+
+snippet string
+abbr std::string <string>
+  std::string ${0:TARGET}
 
 snippet complex
 abbr std::complex<T> <complex>
@@ -224,6 +231,13 @@ snippet async
 snippet fn
   ${1:#:rettype}
   ${2:#:fucname}()${3: noexcept}
+  {
+    ${0:TARGET}
+  }
+
+snippet fn_auto
+  auto
+  ${2:#:fucname}()${3: noexcept} -> ${1:#:rettype}
   {
     ${0:TARGET}
   }
