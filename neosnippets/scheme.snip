@@ -7,13 +7,36 @@ options head
 snippet main-lambda
 options head
   (define main
-    "Main function"
     (lambda (${1:args})
+    "Main function"
       ${0:TARGET}))
 
 snippet define-variable
 abbr define global variable
   (define ${1:#:name} ${2:#:value})
+
+snippet define
+alias defun
+  (define (${1:#:name} ${2:#:args...})
+    "${3:#:docstring}"
+    ${0:TARGET})
+
+snippet define-vaargs
+  (define (${1:#:name} ${2:#:args...} . ${3:rest})
+    "${4:#:docstring}"
+    ${0:TARGET})
+
+snippet define-with-lambda
+  (define ${1:#:name}
+    (lambda (${2:#:args...})
+      "${3:#:docstring}"
+      ${0:TARGET}))
+
+snippet call/cc
+alias call-with-current-continuation
+  (call/cc
+    (lambda(${1:cc})
+      ${0:TARGET}))
 
 snippet let
   (let (${1:#:bind-lists (foo 1) (bar 2)})
@@ -24,22 +47,20 @@ snippet let*
     ${0:TARGET})
 
 snippet letrec-lambda
-  (letrec ((${1:#:name} (lambda (${2:#:args...})
-                  ${3:#:BODY})))
+  (letrec
+    ((${1:#:name}
+      (lambda (${2:#:args...})
+        ${3:#:body})))
     ${0:TARGET})
 
-snippet define-function
-alias define defun
-  (define (${1:#:name} ${2:#:args...})
-    "${3:#:docstring}"
-    (${0:TARGET}))
+snippet set!
+  (set! ${1:#:name} ${2:#:value})
 
-snippet define-function-with-lambda
-abbr (define NAME (lambda (ARGS...)))
-  (define ${1}
-    "${3:#:docstring}"
-    (lambda (${2})
-      (${0:TARGET})))
+snippet set-car!
+  (set-car! ${1:#:cell} ${2:#:value})
+
+snippet set-cdr!
+  (set-cdr! ${1:#:cell} ${2:#:list})
 
 snippet lambda
   (lambda (${1:#:args...})
@@ -47,29 +68,323 @@ snippet lambda
 
 snippet define-syntax
 alias syntax
-  (define-syntax ${1:#:name}
+  (define-syntax ${1:#:syntax-name}
+    (syntax-rules ()
+      ((_ ${2:#:pattern-1})
+        (${3:body}))
+      ${0:TARGET}))
+
+snippet let-syntax
+  (let-syntax
+    ((${1:#:syntax-name}
+      (syntax-rules ()
+        ((_ ${2:#:pattern-1})
+          ${3:body}))))
+    ${0:TARGET})
+
+snippet letrec-syntax
+  (letrec-syntax ${1:#:syntax-name}
     (syntax-rules ()
       ((_ ${2:#:pattern-1})
         (${3:body}))
       ${0:TARGET}))
 
 snippet define-macro
-abbr (Gauche)
+abbr (define-macro (name args...) body) ; Gauche
   (define-macro (${1:#:m-name} ${2:#:args...})
-    (${0:TARGET}))
+    ${0:TARGET})
 
 snippet if
-  (if ${1}
+  (if ${1:#:cond}
     ${2:#t}
     ${3:#f})
 
+snippet when-with-if
+  (if ${1:#:cond}
+    (begin
+      ${2:TARGET}))
+
+snippet unless-with-if
+  (if (not ${1:#:cond})
+    (begin
+      ${0:TARGET}))
+
+snippet do
+  (do (${1:#:bind-lists (i 0 (+ i 1) (j 0 (+ j 1)))})
+    (${2:#:pred (< i 10)} ${3:#:ret})
+    ${4:TARGET})
+
+snippet do-n
+  (do ((${1:i} ${2:#:from} (+ $1 ${4:#:step})))
+    ((= $1 ${3:#:to}))
+    ${0:TARGET})
+
+snippet letrec-n
+  (letrec
+    ((${1:loop}
+       (lambda (${2:i})
+         (if (< i ${4:#:to})
+           (begin
+             ${0:TARGET}
+             ($1 (+ i ${5:#:step})))))))
+    ($1 ${3:#:from}))
+
 snippet map
   (map
-    ${1:(lambda (x) ())}
+    ${1:#:pred}
+    ${0:TARGET})
+
+snippet map-with-lambda
+  (map
+    (lambda (x)
+      ${1:#:pred-body})
     ${0:TARGET})
 
 snippet for-each
 alias foreach
   (for-each
-    ${1:(lambda (x) ())}
+    (lambda (x)
+      ${2:#:pred-body})
     ${0:TARGET})
+
+snippet begin
+alias progn
+  (begin ${0:TARGET})
+
+snippet cond
+  (cond
+    (${1:#:cond1} ${2:#:begin-list1})
+    (${3:#:cond2} ${4:#:begin-list2})
+    ${5:(else ${6:\#:begin-list\})})
+
+snippet write
+  (write ${1:#:object} ${2:#:port})
+
+snippet write-char
+  (write-char ${1:#:char} ${2:#:port})
+
+snippet display
+  (display ${1:#:obect} ${2:#:port})
+
+snippet display-format
+alias printf
+  (display (format "${1:format-string}\n" ${2:#:format-args...}) ${3:#:port})
+
+snippet newline
+  (newline ${1:#:port})
+
+snippet call-with-input-file
+  (call-with-input-file
+    ${1:#:filename}
+    (lambda (${2:port})
+      ${0:TARGET}
+      (close-input-port $2)))
+
+snippet with-input-from-file
+  (with-input-from-file
+    ${1:#:filename}
+    (lambda ()
+      ${0:TARGET}))
+
+snippet call-with-output-file
+  (call-with-output-file
+    ${1:#:filename}
+    (lambda (${2:port})
+      ${0:TARGET}
+      (close-output-port $2)))
+
+snippet with-output-to-file
+  (with-output-to-file
+    ${1:#:filename}
+    (lambda ()
+      ${0:TARGET}))
+
+snippet #t
+alias t true
+  #t
+
+snippet #f
+alias nil false
+  #f
+
+snippet car
+  (car ${1:#:list})
+
+snippet cdr
+  (cdr ${1:#:list})
+
+snippet cons
+  (cons ${1:#:elm} ${2:#:list})
+
+snippet quote
+  (quote ${1})
+
+snippet eq?
+  (eq? ${1:#:x} ${2:#:y})
+
+snippet eqv?
+  (eqv? ${1:#:x} ${2:#:y})
+
+snippet equal?
+  (equal? ${1:#:x} ${2:#:y})
+
+snippet pair?
+  (pair? ${1:#:x})
+
+snippet list?
+alias listp
+  (list? ${1:#:x})
+
+snippet null?
+  (null? ${1:#:x})
+
+snippet symbol?
+alias symbolp
+  (symbol? ${1:#:x})
+
+snippet char?
+  (char? ${1:#:x})
+
+snippet string?
+alias stringp
+  (string? ${1:#:x})
+
+snippet number?
+alias numberp
+  (number? ${1:#:x})
+
+snippet complex?
+alias complexp
+  (complex? ${1:#:x})
+
+snippet real?
+alias realp
+  (real? ${1:#:x})
+
+snippet rational?
+alias rationalp
+  (rational? ${1:#:x})
+
+snippet integer?
+alias integerp
+  (integer? ${1:#:x})
+
+snippet exact?
+  (exact? ${1:#:x})
+
+snippet inexact?
+  (inexact? ${1:#:x})
+
+snippet odd?
+alias oddp
+  (odd? ${1:#:n})
+
+snippet even?
+alias evenp
+  (even? ${1:#:n})
+
+snippet positive?
+  (positive? ${1:#:x})
+
+snippet negative?
+  (negative? ${1:#:x})
+
+snippet zero?
+alias zerop
+  (zero? ${1:#:x})
+
+snippet string->symbol
+  (string->symbol ${1:#:string})
+
+snippet symbol->string
+  (symbol->string ${1:#:symbol})
+
+snippet and
+  (and ${1:#:cond1} ${1:#:cond2})
+
+snippet or
+  (or ${1:#:cond1} ${1:#:cond2})
+
+snippet char=?
+  (char=? ${1:#:char1} ${2:#:char2})
+
+snippet char->integer
+  (char->integer ${1:#:char})
+
+snippet integer->char
+  (integer->char ${1:#:integer})
+
+snippet char<?
+  (char<? ${1:#:char1} ${2:#:char2})
+
+snippet char<=?
+  (char<=? ${1:#:char1} ${2:#:char2})
+
+snippet char>
+  (char> ${1:#:char1} ${2:#:char2})
+
+snippet char>=
+  (char>= ${1:#:char1} ${2:#:char2})
+
+snippet char-ci=?
+  (char-ci=? ${1:#:char1} ${2:#:char2})
+
+snippet char-ci<?
+  (char-ci<? ${1:#:char1} ${2:#:char2})
+
+snippet char-ci<=?
+  (char-ci<=? ${1:#:char1} ${2:#:char2})
+
+snippet char-ci>?
+  (char-ci>? ${1:#:char1} ${2:#:char2})
+
+snippet char-ci>=?
+  (char-ci>=? ${1:#:char1} ${2:#:char2})
+
+snippet char-alphabetic?
+  (char-alphabetic? ${1:#:char})
+
+snippet char-numeric?
+  (char-numeric? ${1:#:char})
+
+snippet char-whitespace?
+  (char-whitespace? ${1:#:char})
+
+snippet char-upper-case?
+  (char-upper-case? ${1:#:char})
+
+snippet char-lower-case?
+  (char-lower-case? ${1:#:char})
+
+snippet char-upcase
+  (char-upcase ${1:#:char})
+
+snippet char-downcase
+  (char-downcase ${1:#:char})
+
+snippet make-string
+  (make-string ${1:#:n} ${2:#:char})
+
+snippet string-length
+  (string-length ${1:#:string})
+
+snippet string=?
+  (string=? ${1:#:string1} ${2:#:string2})
+
+snippet string-ref
+  (string=? ${1:#:string} ${2:#:index})
+
+snippet string-set!
+  (string-set! ${1:#:string} ${2:#:index}, ${3:#:char})
+
+snippet substring
+  (substring ${1:#:string} ${2:#:from} ${3:#:to})
+
+snippet string-append
+  (string-append ${1:#:strings...})
+
+snippet string->list
+  (string->list ${1:#:string})
+
+snippet string-copy
+  (string-copy ${1:#:string})
