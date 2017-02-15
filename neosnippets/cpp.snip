@@ -297,7 +297,7 @@ abbr std::for_each <algorithm>
   std::for_each(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
+      [](const decltype($1)::value_type& ${2:e}) {
         ${0:TARGET}
       })
 
@@ -306,8 +306,8 @@ abbr std::all_of <algorithm>
   std::all_of(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${2:e}) {
+        return ${0:TARGET};
       })
 
 snippet none_of
@@ -315,8 +315,8 @@ abbr std::none_of <algorithm>
   std::none_of(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${2:e}) {
+        return ${0:TARGET};
       })
 
 snippet any_of
@@ -324,8 +324,8 @@ abbr std::any_of <algorithm>
   std::any_of(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${2:e}) {
+        return ${0:TARGET};
       })
 
 snippet sort
@@ -391,7 +391,7 @@ abbr std::generate <algorithm>
       ${1}.begin(),
       $1.end(),
       []{
-        ${0:#:return e;}
+        return ${0:TARGET};
       })
 
 snippet generate_n
@@ -399,22 +399,16 @@ snippet generate_n
       ${1:#:begin},
       ${2:#:size},
       []{
-        ${0:#:return e;}
+        return ${0:TARGET};
       })
 
 snippet fill
 abbr std::fill <algorithm>
-  std::fill(
-      ${1}.begin(),
-      $1.end(),
-      ${2:#:0})
+  std::fill(${1}.begin(), $1.end(), ${2:#:0})
 
 snippet fill_n
 abbr std::fill_n <algorithm>
-  std::fill_n(
-      ${1:#:begin},
-      ${2:#:size},
-      ${3:#:0})
+  std::fill_n(${1:#:begin}, ${2:#:size}, ${3:#:0})
 
 snippet count
 abbr std::count <algorithm>
@@ -425,8 +419,8 @@ abbr std::count_if <algorithm>
   std::count_if(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${2:e}) {
+        return ${0:TARGET};
       })
 
 snippet find
@@ -438,8 +432,8 @@ abbr std::find_if <algorithm>
   std::find_if(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${2:e}) {
+        return ${0:TARGET};
       })
 
 snippet remove
@@ -451,8 +445,8 @@ abbr std::remove_if <algorithm>
   std::remove_if(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${2:e}) {
+        return ${0:TARGET};
       })
 
 snippet remove_erase
@@ -464,8 +458,8 @@ alias filter select
       std::remove_if(
         $1.begin(),
         $1.end(),
-        [](const decltype($1)::value_type& e) {
-          ${0:#:return e > 0;}
+        [](const decltype($1)::value_type& ${2:e}) {
+          return ${0:TARGET};
         }),
       $1.end())
 
@@ -487,8 +481,8 @@ abbr std::copy_if <algorithm>
       ${1}.begin(),
       $1.end(),
       ${2}.begin(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${3:e}) {
+        return ${0:TARGET};
       })
 
 snippet replace
@@ -500,8 +494,8 @@ abbr std::replace_if <algorithm>
   std::replace_if(
       ${1}.begin(),
       $1.end(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e > 0;}
+      [](const decltype($1)::value_type& ${3:e}) {
+        return ${0:TARGET};
       }, ${2:#:after})
 
 snippet sum
@@ -513,8 +507,8 @@ snippet foldr
       ${1}.rbegin(),
       $1.rend(),
       ${2:decltype($1)::value_type()},
-      [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& e) {
-        return e + acc;
+      [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& ${4:e}) {
+        return $4 + acc;
       })
 
 snippet accumulate
@@ -524,8 +518,8 @@ abbr std::acumulate <numeric>
       ${1}.begin(),
       $1.end(),
       ${2:decltype($1)::value_type()},
-      [](const decltype($1)::value_type& ${4:acc}, const decltype($1)::value_type& e) {
-        ${0:return acc + e;}
+      [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& ${4:e}) {
+        return ${5:acc + $4};
       })
 
 snippet inner_product
@@ -539,8 +533,8 @@ abbr std::transform <algorithm>
       ${1}.begin(),
       $1.end(),
       ${2}.begin(),
-      [](const decltype($1)::value_type& e) {
-        ${0:#:return e * 2;}
+      [](const decltype($1)::value_type& ${3:e}) {
+        return ${0:TARGET};
       })
 
 snippet tolower_string
