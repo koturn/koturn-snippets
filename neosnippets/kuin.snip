@@ -1,0 +1,358 @@
+snippet main
+  func main()
+    ${0:TARGET}
+  end func
+
+snippet fn
+alias def
+  func ${1:#:name}(${2:#:args...})${3:\: ${4:\#:type\}}
+    ${0:TARGET}
+  end func
+
+snippet var
+  var ${1:#:name}: ${2:#:type}${3: \:\: ${4:\#:initValue\}}
+
+snippet varStr
+  var ${1:#:name}: []char :: "${2:#:str}"
+
+snippet varArrayN
+  var ${1:#:name}: []${2:#:type} :: #[${3:#:n}]$2
+
+snippet list
+abbr list<T>
+  var ${1:#:name}: list<${2:#:type}> :: #list<$2>
+
+snippet stack
+abbr stack<T>
+  var ${1:#:name}: stack<${2:#:type}> :: #stack<$2>
+
+snippet queue
+abbr queue<T>
+  var ${1:#:name}: queue<${2:#:type}> :: #queue<$2>
+
+snippet dict
+abbr dict<K, V>
+  var ${1:#:name}: dict<${2:#:keyType}, ${3:#:valueType}> :: #dict<$2, $3>
+
+snippet func
+abbr func<(T...): R>
+  var ${1:#:name}: func<(${2:#:argTypes...})${3:\: ${4:\#:retType\}}> :: ${5:#:function}
+
+snippet const
+  const ${1:#:name}: ${2:#:type} :: ${3:#:initValue}
+
+snippet alias
+  alias ${1:#:afterTypeName}: ${2:#:prevTypeName}
+
+snippet throw
+  throw ${1:#:exCode}${2:, ${3:\#:message\}}
+
+snippet assert
+  assert ${0:TARGET}
+
+snippet block
+  block
+    ${0:TARGET}
+  end block
+
+snippet blockName
+  block ${1:#:blockName}
+    ${0:TARGET}
+  end block
+
+snippet class
+  class ${1:#:name}(${2:#:ParentClass})
+    ${0:TARGET}
+  end class
+
+snippet classFull
+  class ${1:#:name}(${2:#:ParentClass})
+    ${0:TARGET}
+
+    *func ctor()
+
+    end func
+
+    *func cmp(${1:t}: kuin@Class): int
+
+    end func
+  end class
+
+snippet ctor
+  *func ctor()
+    ${0:TARGET}
+  end func
+
+snippet cmp
+  *func cmp(t: kuin@Class): int
+    ${0:TARGET}
+  end func
+
+snippet enum
+  enum ${1:#:name}
+    ${0:TARGET}
+  end enum
+
+snippet ifdef
+  ifdef(${1:dbg})
+    ${0:TARGET}
+  end ifdef
+
+snippet ifdefName
+  ifdef ${1:#:blockName}(${2:dbg})
+    ${0:TARGET}
+  end ifdef
+
+snippet if
+  if(${1:#:cond})
+    ${0:TARGET}
+  end if
+
+snippet ifName
+  if ${1:#:blockName}(${2:#:cond})
+    ${0:TARGET}
+  end if
+
+snippet ifelse
+  if(${1:#:cond})
+    ${0:TARGET}
+  else
+
+  end if
+
+snippet ifelseName
+  if ${1:#:blockName}(${2:#:cond})
+    ${0:TARGET}
+  else
+
+  end if
+
+snippet ifelif
+  if(${1:#:cond})
+    ${0:TARGET}
+  elif(${2:#:cond})
+
+  end if
+
+snippet ifelifName
+  if ${1:#:blockName}(${2:#:cond})
+    ${0:TARGET}
+  elif(${3:#:cond})
+
+  end if
+
+snippet ifelifelse
+  if(${1:#:cond})
+    ${0:TARGET}
+  elif(${2:#:cond})
+
+  else
+
+  end if
+
+snippet ifelifelseName
+  if ${1:#:blockName}(${2:#:cond})
+    ${0:TARGET}
+  elif(${3:#:cond})
+
+  else
+
+  end if
+
+snippet switch
+  switch(${1:#:value})
+  case ${2:#:value}
+    ${0:TARGET}
+  ${3:default}
+
+  end switch
+
+snippet switchName
+  switch ${1:#:blockName}(${2:#:value})
+  case ${3:#:value}
+    ${0:TARGET}
+  ${4:default}
+
+  end switch
+
+snippet while
+  while(${1:#:cond})
+    ${0:TARGET}
+  end while
+
+snippet whileName
+  while ${1:#:blockName}(${2:#:cond})
+    ${0:TARGET}
+  end while
+
+snippet whileSkip
+alias doWhile
+  while(${1:#:cond}, skip)
+    ${0:TARGET}
+  end while
+
+snippet whileSkipName
+alias doWhileName
+  while ${1:#:blockName}(${2:#:cond}, skip)
+    ${0:TARGET}
+  end while
+
+snippet for
+  for ${1:i}(${2:0}, ${3:#:to}${4:, ${5:\#:step\}})
+    ${0:TARGET}
+  end for
+
+snippet foreach
+  foreach ${1:e}(${2:#:items})
+    ${0:TARGET}
+  end foreach
+
+snippet try
+  try
+    ${0:TARGET}
+  catch ${2:0}
+
+  ${3:finally}
+
+  end try
+
+snippet tryName
+  try ${1:#:blockName}
+    ${0:TARGET}
+  catch ${2:0}
+
+  ${3:finally}
+
+  end try
+
+snippet rnd
+abbr lib@rnd(int, int): int
+  lib@rnd(${1:#:min}, ${2:#:max})
+
+snippet rndFloat
+abbr lib@rndFloat(float, float): float
+  lib@rndFloat(${1:#:min}, ${2:#:max})
+
+snippet rndBit64
+abbr lib@rndBit64(): bit64
+  lib@rndBit64()
+
+snippet cos
+abbr lib@cos(float): float
+  lib@cos(${1:#:x})
+
+snippet sin
+abbr lib@sin(float): float
+  lib@sin(${1:#:x})
+
+snippet tan
+abbr lib@tan(float): float
+  lib@tan(${1:#:x})
+
+snippet acos
+abbr lib@acos(float): float
+  lib@acos(${1:#:x})
+
+snippet asin
+abbr lib@asin(float): float
+  lib@asin(${1:#:x})
+
+snippet atan
+abbr lib@atan(float): float
+  lib@atan(${1:#:x})
+
+snippet cosh
+abbr lib@cosh(float): float
+  lib@cosh(${1:#:x})
+
+snippet sinh
+abbr lib@sinh(float): float
+  lib@sinh(${1:#:x})
+
+snippet tanh
+abbr lib@tanh(float): float
+  lib@tanh(${1:#:x})
+
+snippet acosh
+abbr lib@acosh(float): float
+  lib@acosh(${1:#:x})
+
+snippet asinh
+abbr lib@asinh(float): float
+  lib@asinh(${1:#:x})
+
+snippet atanh
+abbr lib@atanh(float): float
+  lib@atanh(${1:#:x})
+
+snippet sqrt
+abbr lib@sqrt(float): float
+  lib@sqrt(${1:#:x})
+
+snippet exp
+abbr lib@exp(float): float
+  lib@exp(${1:#:x})
+
+snippet ln
+abbr lib@ln(float): float
+  lib@ln(${1:#:x})
+
+snippet log
+abbr lib@log(float, float): float
+  lib@log(${1:2}, ${1:#:x})
+
+snippet floor
+abbr lib@floor(float): float
+  lib@floor(${1:#:x})
+
+snippet ceil
+abbr lib@ceil(float): float
+  lib@ceil(${1:#:x})
+
+snippet round
+abbr lib@round(float, int): float
+  lib@round(${1:#:x}, ${2:#:precision})
+
+snippet rot
+abbr lib@rot(&float, &float, float, float)
+  lig@rot(${1:#:x}, ${2:#:y}, ${3:#:centerX}, ${4:#:centerY}, ${5:#:angle})
+
+snippet invRot
+abbr lib@invRot(float, float, float, float): float
+  lig@intRot(${1:#:x}, ${2:#:y}, ${3:#:centerX}, ${4:#:centerY}, ${5:#:angle})
+
+snippet dist
+abbr lib@dist(float, float, float, float): float
+  lig@dist(${1:#:x}, ${2:#:y}, ${3:#:centerX}, ${4:#:centerY})
+
+snippet chase
+abbr lib@chase(&float, float, float): bool
+  lig@chase(${1:#:x}, ${2:#:target}, ${3:#:vel})
+
+snippet hash
+abbr lib@hash([]bit8): []bit8
+  lib@hash(${1:#:data})
+
+snippet encrypt
+abbr lib@encrypt([]bit8, []bit8): []bit8
+  lib@encrypt(${1:#:data}, ${2:#:key})
+
+snippet decrypt
+abbr lib@decrypt([]bit8, []bit8): []bit8
+  lib@decrypt(${1:#:data}, ${2:#:key})
+
+snippet print
+abbr cui@print([]char)
+  cui@print(${1:#:str})
+
+snippet println
+abbr cui@print([]char ~ "\n")
+  cui@print(${1:#:str} ~ "\n")
+
+snippet input
+abbr cui@input()
+  cui@input()
+
+snippet cmdLine
+abbr cui@cmdLine()
+  cui@cmdLine()
