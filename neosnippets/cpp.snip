@@ -254,12 +254,12 @@ abbr foreach_typeof (GNU only)
   }
 
 snippet forref
-  for (auto&& ${1:#:eachvar} : ${2:#:container}) {
+  for (auto&& ${1:e} : ${2:#:container}) {
     ${0:TARGET}
   }
 
 snippet forref_c
-  for (const auto& ${1:#:eachvar} : ${2:#:container}) {
+  for (const auto& ${1:e} : ${2:#:container}) {
     ${0:TARGET}
   }
 
@@ -334,7 +334,7 @@ abbr std::sort <algorithm>
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:#:return x < y;}
+        return ${0:#:x < y};
       })
 
 snippet stable_sort
@@ -343,7 +343,7 @@ abbr std::stable_sort <algorithm>
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:#:return x < y;}
+        return ${0:#:x < y};
       })
 
 snippet shuffle
@@ -360,7 +360,7 @@ abbr std::min_element <algorithm>
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:#:return x < y;}
+        return ${0:#:x < y};
       })
 
 snippet max_element
@@ -369,7 +369,7 @@ abbr std::max_element <algorithm>
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:#:return x < y;}
+        return ${0:#:x < y};
       })
 
 snippet minmax_element
@@ -378,7 +378,7 @@ abbr std::minmax_element <algorithm>
       ${1}.begin(),
       $1.end(),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-        ${0:#:return x < y;}
+        return ${0:#:x < y};
       })
 
 snippet iota
@@ -460,6 +460,32 @@ alias filter select
         $1.end(),
         [](const decltype($1)::value_type& ${2:e}) {
           return ${0:TARGET};
+        }),
+      $1.end())
+
+snippet unique
+abbr std::unique <algorithm>
+  std::unique(${1}.begin(), $1.end())
+
+snippet unique_p
+abbr std::unique <algorithm>
+  std::unique(
+      ${1}.begin(),
+      $1.end(),
+      [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
+        return ${0:#:x == y};
+      })
+
+snippet unique_erase
+  ${1}.erase(std::unique($1.begin(), $1.end()), $1.end());
+
+snippet unique_erase_if
+  ${1}.erase(
+      std::unique(
+        $1.begin(),
+        $1.end(),
+        [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
+          return ${0:#:x == y};
         }),
       $1.end())
 
