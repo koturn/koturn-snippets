@@ -1,5 +1,11 @@
+snippet set
+  (set ${1:#:symbol} ${2:#:value})
+
 snippet setq
   (setq ${1:#:name} ${2:#:value})
+
+snippet setf
+  (setf ${1:#:name} ${2:#:value})
 
 snippet let
   (let (${1:#:bind-list (foo 1) (bar 2)})
@@ -10,47 +16,107 @@ snippet let*
     ${0:TARGET})
 
 snippet defun
-alias define-function define
-  (defun ${1:#:name} (${2:#:arg-list})
+alias fn define-function define
+  (defun ${1:#:name} (${2:#:args...})
     "${3:#:docstring}"
-    (${0:TARGET}))
+    ${0:TARGET})
 
 snippet lambda
   (lambda (${1:#:args...})
-    (${0:TARGET}))
+    ${0:TARGET})
 
 snippet defmacro
-  (defmacro ${1:#:macro-name} (${2:#:args})
-    `(${0:TARGET}))
+  (defmacro ${1:#:macro-name} (${2:#:args...})
+    \`(${0:TARGET}))
+
+snippet print
+  (print ${1:#:object} ${2:#:t})
+
+snippet prin1
+  (prin1 ${1:#:object} ${2:#:t})
+
+snippet princ
+  (princ ${1:#:object} ${2:#:t})
+
+snippet format
+alias printf
+  (format ${1:t} "${2:#:ctrl-seq}~%" ${3:#:args...})
+
+snippet dotimes
+  (dotimes (${1:i} ${2:#:n})
+    ${0:TARGET})
+
+snippet prog1
+  (prog1 ${0:TARGET})
+
+snippet prog2
+  (prog2 ${0:TARGET})
+
+snippet progn
+alias begin
+  (progn ${0:TARGET})
+
+snippet dolist
+  (dolist (${1:e} ${2:#:list})
+    ${0:TARGET})
+
+snippet loop-for
+  (loop for ${1:i} ${2:from} ${3:0}${4: ${5:to\} ${6:\#:to-n\}${7: by ${8:1\\}\}} do
+        ${0:TARGET})
+
+snippet loop-for-from
+  (loop for ${1:i} ${2:from} ${3:0} do
+        ${0:TARGET})
 
 snippet loop-for-from-to
-abbr (Common Lisp)
-  (loop for ${1:i} from ${2:0} to ${3} by ${4:1}
+  (loop for ${1:i} ${2:from} ${3:0} ${4:to} ${5:#:to-n} do
+        ${0:TARGET})
+
+snippet loop-for-from-to-by
+  (loop for ${1:i} ${2:from} ${3:0} ${4:to} ${5:#:to-n} by ${6:1} do
         ${0:TARGET})
 
 snippet loop-for-in
-  (loop for ${1:e} in ${2} do
+  (loop for ${1:e} in ${2:#:list} do
         ${0:TARGET})
 
-snippet dotimes
-  (dotimes (${1:i} ${2} ${3:#:nil})
-    (${4}))
+snippet loop-repeat-for
+  (loop repeat ${1:#:n}
+        for ${2:i} = ${3:0} then ${4:(incf $1)} do
+        ${0:TARGET})
 
 snippet if
-  (if ${1}
-    ${2:t}
-    ${3:#:nil})
+  (if ${1:#:cond}
+    ${2:#:true-form})
+
+snippet if-else
+  (if ${1:#:cond}
+    ${2:#:true-form}
+    ${3:#:false-form})
 
 snippet cond
   (cond
-    (${1:t}
-      ${2})
-    (${3:t}
-      ${4:t}))
+    (${1:#:cond1}
+      ${2:#:cond1-form})
+    (${3:#:cond2}
+      ${4:#:cond2-form})
+    (t
+      ${5:#:default-form}))
 
 snippet case
-  (case ${1}
-    (${2}
-      ${3})
+  (case ${1:#:obj}
+    (${2:#:case1}
+      ${3:#:case1-form})
     (${3:otherwise}
-      ${4:nil}))
+      ${4:#:otherwise-form}))
+
+snippet declaim-optimize
+alias optimize
+  (declaim (optimize (debug ${1:0}) (safety ${2:0}) (space ${3:0}) (speed ${4:3})))
+
+snippet declaim-inline
+alias inline
+  (declaim (inline ${1:#:function-name}))
+
+snippet declare-optimize
+  (declare (optimize (debug ${1:0}) (safety ${2:0}) (space ${3:0}) (speed ${4:3})))
