@@ -330,6 +330,10 @@ abbr std::any_of <algorithm>
 
 snippet sort
 abbr std::sort <algorithm>
+  std::sort(${1}.begin(), $1.end())
+
+snippet sort_p
+abbr std::sort <algorithm>
   std::sort(
       ${1}.begin(),
       $1.end(),
@@ -338,6 +342,10 @@ abbr std::sort <algorithm>
       })
 
 snippet stable_sort
+abbr std::stable_sort <algorithm>
+  std::stable_sort(${1}.begin(), $1.end())
+
+snippet stable_sort_p
 abbr std::stable_sort <algorithm>
   std::stable_sort(
       ${1}.begin(),
@@ -356,6 +364,10 @@ abbr std::partial_sum <numeric>
 
 snippet min_element
 abbr std::min_element <algorithm>
+  std::min_element(${1}.begin(), $1.end())
+
+snippet min_element_p
+abbr std::min_element <algorithm>
   std::min_element(
       ${1}.begin(),
       $1.end(),
@@ -365,6 +377,10 @@ abbr std::min_element <algorithm>
 
 snippet max_element
 abbr std::max_element <algorithm>
+  std::max_element(${1}.begin(), $1.end())
+
+snippet max_element_p
+abbr std::max_element <algorithm>
   std::max_element(
       ${1}.begin(),
       $1.end(),
@@ -373,6 +389,10 @@ abbr std::max_element <algorithm>
       })
 
 snippet minmax_element
+abbr std::minmax_element <algorithm>
+  std::minmax_element(${1}.begin(), $1.end())
+
+snippet minmax_element_p
 abbr std::minmax_element <algorithm>
   std::minmax_element(
       ${1}.begin(),
@@ -386,6 +406,7 @@ abbr std::iota <numeric>
   std::iota(${1}.begin(), $1.end(), ${2:0})
 
 snippet generate
+alias generate_p
 abbr std::generate <algorithm>
   std::generate(
       ${1}.begin(),
@@ -395,6 +416,7 @@ abbr std::generate <algorithm>
       })
 
 snippet generate_n
+alias generate_n_p
   std::generate(
       ${1:#:begin},
       ${2:#:size},
@@ -415,6 +437,7 @@ abbr std::count <algorithm>
   std::count(${1}.begin(), $1.end(), ${2:#:value})
 
 snippet count_if
+alias count_p
 abbr std::count_if <algorithm>
   std::count_if(
       ${1}.begin(),
@@ -428,6 +451,7 @@ abbr std::find <algorithm>
   std::find(${1}.begin(), $1.end(), ${2:#:value})
 
 snippet find_if
+alias find_p
 abbr std::find_if <algorithm>
   std::find_if(
       ${1}.begin(),
@@ -441,6 +465,7 @@ abbr std::remove <algorithm>
   std::remove(${1}.begin(), $1.end(), ${2:#:value})
 
 snippet remove_if
+alias remove_p
 abbr std::remove_if <algorithm>
   std::remove_if(
       ${1}.begin(),
@@ -453,7 +478,7 @@ snippet remove_erase
   ${1}.erase(std::remove($1.begin(), $1.end(), ${2:#:value}), $1.end());
 
 snippet remove_erase_if
-alias filter select
+alias remove_erase_p filter select
   ${1}.erase(
       std::remove_if(
         $1.begin(),
@@ -479,7 +504,7 @@ abbr std::unique <algorithm>
 snippet unique_erase
   ${1}.erase(std::unique($1.begin(), $1.end()), $1.end());
 
-snippet unique_erase_if
+snippet unique_erase_p
   ${1}.erase(
       std::unique(
         $1.begin(),
@@ -502,6 +527,7 @@ abbr std::copy_n <algorithm>
   std::copy_n(${1}.begin(), ${2:#:size}, ${3}.begin())
 
 snippet copy_if
+alias copy_p
 abbr std::copy_if <algorithm>
   std::copy_if(
       ${1}.begin(),
@@ -516,6 +542,7 @@ abbr std::replace <algorithm>
   std::replace(${1}.begin(), $1.end(), ${2:#:before}, ${3:#:after})
 
 snippet replace_if
+alias replace_p
 abbr std::replace_if <algorithm>
   std::replace_if(
       ${1}.begin(),
@@ -538,7 +565,7 @@ snippet foldr
       })
 
 snippet accumulate
-alias reduce
+alias accumulate_p reduce
 abbr std::acumulate <numeric>
   std::accumulate(
       ${1}.begin(),
@@ -553,7 +580,7 @@ abbr std::inner_product <numeric>
   std::inner_product(${1}.begin(), $1.end(), ${2}.begin(), ${3:decltype($1)::value_type()})
 
 snippet transform
-alias map_set select
+alias transform_p map_set select
 abbr std::transform <algorithm>
   std::transform(
       ${1}.begin(),
