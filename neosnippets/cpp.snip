@@ -19,7 +19,7 @@ snippet cout2
   std::cout << ${0:TARGET} << '\n';
 
 snippet cout_all
-  std::copy(${1}.begin(), $1.end(), std::ostream_iterator<const decltype($1)::value_type&>(std::cout));
+  std::copy(std::cbegin(${1}), std::cend($1), std::ostream_iterator<const decltype($1)::value_type&>(std::cout));
 
 snippet put
   std::cout.put(${0:TARGET})
@@ -295,8 +295,8 @@ abbr Functional object
 snippet for_each
 abbr std::for_each <algorithm>
   std::for_each(
-      ${1}.begin(),
-      $1.end(),
+      std::begin(${1}),
+      std::end($1),
       [](const decltype($1)::value_type& ${2:e}) {
         ${0:TARGET}
       })
@@ -304,8 +304,8 @@ abbr std::for_each <algorithm>
 snippet all_of
 abbr std::all_of <algorithm>
   std::all_of(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& ${2:e}) {
         return ${0:TARGET};
       })
@@ -313,8 +313,8 @@ abbr std::all_of <algorithm>
 snippet none_of
 abbr std::none_of <algorithm>
   std::none_of(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& ${2:e}) {
         return ${0:TARGET};
       })
@@ -322,95 +322,95 @@ abbr std::none_of <algorithm>
 snippet any_of
 abbr std::any_of <algorithm>
   std::any_of(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& ${2:e}) {
         return ${0:TARGET};
       })
 
 snippet sort
 abbr std::sort <algorithm>
-  std::sort(${1}.begin(), $1.end())
+  std::sort(std::begin(${1}), std::end($1))
 
 snippet sort_p
 abbr std::sort <algorithm>
   std::sort(
-      ${1}.begin(),
-      $1.end(),
+      std::begin(${1}),
+      std::end($1),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         return ${0:#:x < y};
       })
 
 snippet stable_sort
 abbr std::stable_sort <algorithm>
-  std::stable_sort(${1}.begin(), $1.end())
+  std::stable_sort(std::begin(${1}), std::end($1))
 
 snippet stable_sort_p
 abbr std::stable_sort <algorithm>
   std::stable_sort(
-      ${1}.begin(),
-      $1.end(),
+      std::begin(${1}),
+      std::end($1),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         return ${0:#:x < y};
       })
 
 snippet shuffle
 abbr std::shuffle <algorithm> <random>
-  std::shuffle(${1}.begin(), $1.end(), ${2:std\:\:mt19937()})
+  std::shuffle(std::begin(${1}), std::end($1), ${2:std\:\:mt19937()})
 
 snippet partial_sum
 abbr std::partial_sum <numeric>
-  std::partial_sum(${1}.begin(), $1.end(), ${2}.begin());
+  std::partial_sum(std::cbegin(${1}), std::cend($1), std::begin(${2}));
 
 snippet min_element
 abbr std::min_element <algorithm>
-  std::min_element(${1}.begin(), $1.end())
+  std::min_element(std::cbegin(${1}), std::cend($1))
 
 snippet min_element_p
 abbr std::min_element <algorithm>
   std::min_element(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         return ${0:#:x < y};
       })
 
 snippet max_element
 abbr std::max_element <algorithm>
-  std::max_element(${1}.begin(), $1.end())
+  std::max_element(std::cbegin(${1}), std::cend($1))
 
 snippet max_element_p
 abbr std::max_element <algorithm>
   std::max_element(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         return ${0:#:x < y};
       })
 
 snippet minmax_element
 abbr std::minmax_element <algorithm>
-  std::minmax_element(${1}.begin(), $1.end())
+  std::minmax_element(std::cbegin(${1}), std::cend($1))
 
 snippet minmax_element_p
 abbr std::minmax_element <algorithm>
   std::minmax_element(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
         return ${0:#:x < y};
       })
 
 snippet iota
 abbr std::iota <numeric>
-  std::iota(${1}.begin(), $1.end(), ${2:0})
+  std::iota(std::begin(${1}), std::end($1), ${2:0})
 
 snippet generate
 alias generate_p
 abbr std::generate <algorithm>
   std::generate(
-      ${1}.begin(),
-      $1.end(),
+      std::begin(${1}),
+      std::end($1),
       []{
         return ${0:TARGET};
       })
@@ -426,7 +426,7 @@ alias generate_n_p
 
 snippet fill
 abbr std::fill <algorithm>
-  std::fill(${1}.begin(), $1.end(), ${2:#:0})
+  std::fill(std::begin(${1}), std::end($1), ${2:#:0})
 
 snippet fill_n
 abbr std::fill_n <algorithm>
@@ -434,131 +434,131 @@ abbr std::fill_n <algorithm>
 
 snippet count
 abbr std::count <algorithm>
-  std::count(${1}.begin(), $1.end(), ${2:#:value})
+  std::count(std::cbegin(${1}), std::cend($1), ${2:#:value})
 
 snippet count_if
 alias count_p
 abbr std::count_if <algorithm>
   std::count_if(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& ${2:e}) {
         return ${0:TARGET};
       })
 
 snippet find
 abbr std::find <algorithm>
-  std::find(${1}.begin(), $1.end(), ${2:#:value})
+  std::find(std::cbegin(${1}), std::cend($1), ${2:#:value})
 
 snippet find_if
 alias find_p
 abbr std::find_if <algorithm>
   std::find_if(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       [](const decltype($1)::value_type& ${2:e}) {
         return ${0:TARGET};
       })
 
 snippet remove
 abbr std::remove <algorithm>
-  std::remove(${1}.begin(), $1.end(), ${2:#:value})
+  std::remove(std::begin(${1}), std::end($1), ${2:#:value})
 
 snippet remove_if
 alias remove_p
 abbr std::remove_if <algorithm>
   std::remove_if(
-      ${1}.begin(),
-      $1.end(),
+      std::begin(${1}),
+      std::end($1),
       [](const decltype($1)::value_type& ${2:e}) {
         return ${0:TARGET};
       })
 
 snippet remove_erase
-  ${1}.erase(std::remove($1.begin(), $1.end(), ${2:#:value}), $1.end());
+  ${1}.erase(std::remove(std::begin($1), std::end($1), ${2:#:value}), std::end($1));
 
 snippet remove_erase_if
 alias remove_erase_p filter select
   ${1}.erase(
       std::remove_if(
-        $1.begin(),
-        $1.end(),
+        std::begin($1),
+        std::end($1),
         [](const decltype($1)::value_type& ${2:e}) {
           return ${0:TARGET};
         }),
-      $1.end())
+      std::end($1))
 
 snippet unique
 abbr std::unique <algorithm>
-  std::unique(${1}.begin(), $1.end())
+  std::unique(std::begin(${1}), std::end($1))
 
 snippet unique_p
 abbr std::unique <algorithm>
   std::unique(
-      ${1}.begin(),
-      $1.end(),
+      std::begin(${1}),
+      std::end($1),
       [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
         return ${0:#:x == y};
       })
 
 snippet unique_erase
-  ${1}.erase(std::unique($1.begin(), $1.end()), $1.end());
+  ${1}.erase(std::unique(std::begin($1), std::end($1)), std::end($1));
 
 snippet unique_erase_p
   ${1}.erase(
       std::unique(
-        $1.begin(),
-        $1.end(),
+        std::begin($1),
+        std::end($1),
         [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
           return ${0:#:x == y};
         }),
-      $1.end())
+      std::end($1))
 
 snippet copy
 abbr std::copy <algorithm>
-  std::copy(${1}.begin(), $1.end(), ${2}.begin())
+  std::copy(std::cbegin(${1}), std::cend($1), std::begin(${2}))
 
 snippet copy_backward
 abbr std::copy_backword <algorithm>
-  std::copy_backward(${1}.begin(), $1.end(), ${2}.begin())
+  std::copy_backward(std::cbegin(${1}), std::cend($1), std::begin(${2}))
 
 snippet copy_n
 abbr std::copy_n <algorithm>
-  std::copy_n(${1}.begin(), ${2:#:size}, ${3}.begin())
+  std::copy_n(std::cbegin(${1}), ${2:#:size}, std::begin(${3}))
 
 snippet copy_if
 alias copy_p
 abbr std::copy_if <algorithm>
   std::copy_if(
-      ${1}.begin(),
-      $1.end(),
-      ${2}.begin(),
+      std::cbegin(${1}),
+      std::cend($1),
+      std::begin(${2}),
       [](const decltype($1)::value_type& ${3:e}) {
         return ${0:TARGET};
       })
 
 snippet replace
 abbr std::replace <algorithm>
-  std::replace(${1}.begin(), $1.end(), ${2:#:before}, ${3:#:after})
+  std::replace(std::begin(${1}), std::end($1), ${2:#:before}, ${3:#:after})
 
 snippet replace_if
 alias replace_p
 abbr std::replace_if <algorithm>
   std::replace_if(
-      ${1}.begin(),
-      $1.end(),
+      std::begin(${1}),
+      std::end($1),
       [](const decltype($1)::value_type& ${3:e}) {
         return ${0:TARGET};
       }, ${2:#:after})
 
 snippet sum
 alias foldl
-  std::accumulate(${1}.begin(), $1.end(), ${2:decltype($1)::value_type()})
+  std::accumulate(std::cbegin(${1}), std::cend($1), ${2:decltype($1)::value_type()})
 
 snippet foldr
   std::accumulate(
-      ${1}.rbegin(),
-      $1.rend(),
+      std::crbegin(${1}),
+      std::crend($1),
       ${2:decltype($1)::value_type()},
       [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& ${4:e}) {
         return $4 + acc;
@@ -568,8 +568,8 @@ snippet accumulate
 alias accumulate_p reduce
 abbr std::acumulate <numeric>
   std::accumulate(
-      ${1}.begin(),
-      $1.end(),
+      std::cbegin(${1}),
+      std::cend($1),
       ${2:decltype($1)::value_type()},
       [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& ${4:e}) {
         return ${5:acc + $4};
@@ -577,29 +577,29 @@ abbr std::acumulate <numeric>
 
 snippet inner_product
 abbr std::inner_product <numeric>
-  std::inner_product(${1}.begin(), $1.end(), ${2}.begin(), ${3:decltype($1)::value_type()})
+  std::inner_product(std::cbegin(${1}), std::cend($1), std::cbegin(${2}), ${3:decltype($1)::value_type()})
 
 snippet transform
 alias transform_p map_set select
 abbr std::transform <algorithm>
   std::transform(
-      ${1}.begin(),
-      $1.end(),
-      ${2}.begin(),
+      std::cbegin(${1}),
+      std::cend($1),
+      std::begin(${2}),
       [](const decltype($1)::value_type& ${3:e}) {
         return ${0:TARGET};
       })
 
 snippet tolower_string
-  std::transform(${1}.begin(), $1.end(), $1.begin(), static_cast<int (*)(int)>(std::tolower));
+  std::transform(std::cbegin(${1}), std::cend($1), std::begin($1), static_cast<int (*)(int)>(std::tolower));
 
 snippet toupper_string
-  std::transform(${1}.begin(), $1.end(), $1.begin(), static_cast<int (*)(int)>(std::toupper));
+  std::transform(std::cbegin(${1}), std::cend($1), std::begin($1), static_cast<int (*)(int)>(std::toupper));
 
 snippet next_permutation
   do {
     ${0:TARGET}
-  } while (std::next_permutation(${1}.begin(), $1.end()));
+  } while (std::next_permutation(std::begin(${1}), std::end($1)));
 
 snippet time_measurement
   std::chrono::system_clock::time_point ${1:start} = std::chrono::system_clock::now();
