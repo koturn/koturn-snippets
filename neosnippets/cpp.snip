@@ -610,6 +610,18 @@ snippet duration_cast
 abbr std::chrono::duration_cast<T>() <chrono>
   std::chrono::duration_cast<std::chrono::${1:milliseconds}>(${2})
 
+snippet lock_guard
+  {
+    std::lock_guard<decltype($2)> ${1:lock}(${2:#:mutex});
+    ${0:TARGET}
+  }
+
+snippet lock_guard_adopt
+  {
+    std::lock_guard<decltype($2)> ${1:lock}(${2:#:mutex}, std::adopt_lock);
+    ${0:TARGET}
+  }
+
 snippet update_min
   ${1:#:minValue} = std::min($1, ${2:#:newValue})
 
