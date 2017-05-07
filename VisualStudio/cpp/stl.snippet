@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <!-- STL containers -->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::array</Title>
+      <Shortcut>array</Shortcut>
+      <Description>A code snippet for a definition of variable of std::array.
+Requirements: &lt;array&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>n</ID>
+          <ToolTip>A number of elements</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::array<$type$, $n$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::vector</Title>
+      <Shortcut>vector</Shortcut>
+      <Description>A code snippet for a definition of variable of std::vector.
+Requirements: &lt;vector&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::vector<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::list</Title>
+      <Shortcut>list</Shortcut>
+      <Description>A code snippet for a definition of variable of std::list.
+Requirements: &lt;list&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::list<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::forward_list</Title>
+      <Shortcut>forwardlist</Shortcut>
+      <Description>A code snippet for a definition of variable of std::forward_list.
+Requirements: &lt;forward_list&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::forward_list<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::deque</Title>
+      <Shortcut>deque</Shortcut>
+      <Description>A code snippet for a definition of variable of std::deque.
+Requirements: &lt;deque&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::deque<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::stack</Title>
+      <Shortcut>stack</Shortcut>
+      <Description>A code snippet for a definition of variable of std::stack.
+Requirements: &lt;stack&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::stack<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::queue</Title>
+      <Shortcut></Shortcut>
+      <Description>A code snippet for a definition of variable of std::queue.
+Requirements: &lt;queue&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::queue<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::priority_queue</Title>
+      <Shortcut>priorityqueue</Shortcut>
+      <Description>A code snippet for a definition of variable of std::priority_queue.
+Requirements: &lt;priority_queue&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::priority_queue<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::priority_queue with custom predicate</Title>
+      <Shortcut>priorityqueue2</Shortcut>
+      <Description>A code snippet for a definition of variable of std::priority_queue with custom predicate.
+Requirements: &lt;priority_queue&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Name of variable</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::priority_queue<$type$, std::vector<$type$>, std::function<bool (const $type$& x, const $type$& y)> > $name$(
+          [](const $type$& x, const $type$& y) {
+            $end$
+          })]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::map</Title>
+      <Shortcut>map</Shortcut>
+      <Description>A code snippet for a definition of variable of std::map.
+Requirements: &lt;map&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>keyType</ID>
+          <ToolTip>Key type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>valType</ID>
+          <ToolTip>value type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::map<$keyType$, $valType$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unordered_map</Title>
+      <Shortcut>map</Shortcut>
+      <Description>A code snippet for a definition of variable of std::unordered_map.
+Requirements: &lt;unordered_map&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>keyType</ID>
+          <ToolTip>Key type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>valType</ID>
+          <ToolTip>value type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::unordered_map<$keyType$, $valType$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::multimap</Title>
+      <Shortcut></Shortcut>
+      <Description>A code snippet for a definition of variable of std::multimap.
+Requirements: &lt;multimap&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>keyType</ID>
+          <ToolTip>Key type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>valType</ID>
+          <ToolTip>value type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::multimap<$keyType$, $valType$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unordered_multimap</Title>
+      <Shortcut>unorderedmap</Shortcut>
+      <Description>A code snippet for a definition of variable of std::unordered_multimap.
+Requirements: &lt;unordered_multimap&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>keyType</ID>
+          <ToolTip>Key type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>valType</ID>
+          <ToolTip>value type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::unordered_multimap<$keyType$, $valType$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::set</Title>
+      <Shortcut>set</Shortcut>
+      <Description>A code snippet for a definition of variable of std::set.
+Requirements: &lt;set&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::set<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unordered_set</Title>
+      <Shortcut>unorderedset</Shortcut>
+      <Description>A code snippet for a definition of variable of std::unordered_set.
+Requirements: &lt;unordered_set&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::unordered_set<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::multiset</Title>
+      <Shortcut>multiset</Shortcut>
+      <Description>A code snippet for a definition of variable of std::multiset.
+Requirements: &lt;multiset&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::multiset<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unordered_multiset</Title>
+      <Shortcut>unorderedmultiset</Shortcut>
+      <Description>A code snippet for a definition of variable of std::unordered_multiset.
+Requirements: &lt;unordered_multiset&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::unordered_multiset<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::valarray</Title>
+      <Shortcut>valarray</Shortcut>
+      <Description>A code snippet for a definition of variable of std::valarray.
+Requirements: &lt;valarray&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::valarray<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::pair</Title>
+      <Shortcut>pair</Shortcut>
+      <Description>A code snippet for a definition of variable of std::pair.
+Requirements: &lt;utility&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type1</ID>
+          <ToolTip>Element type 1</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>type2</ID>
+          <ToolTip>Element type 2</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::pair<$type1$, $type2$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::initializer_list</Title>
+      <Shortcut>initializerlist</Shortcut>
+      <Description>A code snippet for a definition of variable of std::initializer_list.
+Requirements: &lt;initializer_list&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::initializer_list<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>2D std::array</Title>
+      <Shortcut>array2d</Shortcut>
+      <Description>A code snippet for for a definition of variable of 2D std::array.
+Requirements: &lt;array&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>height</ID>
+          <ToolTip>A number of row</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>width</ID>
+          <ToolTip>A number of column</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::array<std::array<$type$, $width$> $height$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>2D std::vector</Title>
+      <Shortcut>vector2d</Shortcut>
+      <Description>A code snippet for a definition of variable of 2D std::vector.
+Requirements: &lt;vector&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>height</ID>
+          <ToolTip>A number of row</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>width</ID>
+          <ToolTip>A number of column</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::vector<std::vector<$type$> > $end$($height$, std::vector<$type$>($width$))]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>2D valarrray</Title>
+      <Shortcut>valarray2d</Shortcut>
+      <Description>A code snippet for a definition of variable of 2D std::valarray.
+Requirements: &lt;valarray&gt; and &lt;vector&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>height</ID>
+          <ToolTip>A number of row</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>width</ID>
+          <ToolTip>A number of column</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::vector<std::valarray<$type$> > $end$($height$, std::valarray<$type$>($width$))]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <!-- Others -->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::string</Title>
+      <Shortcut>string</Shortcut>
+      <Description>A code snippet for a definition of variable of std::string.
+Requirements: &lt;string&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::string $name$ = "$end$"]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::complex</Title>
+      <Shortcut>complex</Shortcut>
+      <Description>A code snippet for a definition of variable of std::complex.
+Requirements: &lt;complex&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Element type</ToolTip>
+          <Default>double</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::complex<$type$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unique_ptr</Title>
+      <Shortcut>uniqueptr</Shortcut>
+      <Description>A code snippet for a variable of std::unique_ptr.
+Requirements: &lt;memory&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Pointer type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::unique_ptr<$type$> $name$($type$ $end$)]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::shared_ptr</Title>
+      <Shortcut>sharedptr</Shortcut>
+      <Description>A code snippet for a variable of std::shared_ptr.
+Requirements: &lt;memory&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Pointer type</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::shared_ptr<$type$> $name$($type$ $end$)]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::bitset</Title>
+      <Shortcut>bitset</Shortcut>
+      <Description>A code snippet for a variable of std::bitset.
+Requirements: &lt;bitset&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>n</ID>
+          <ToolTip>A number of bits</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::bitset<$n$> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Random generator</Title>
+      <Shortcut>random</Shortcut>
+      <Description>A code snippet for a variable of std::random.
+Requirements: &lt;random&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>randomGenerator</ID>
+          <ToolTip>Random generator</ToolTip>
+          <Default>mt19937</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::$randomGenerator$ $end$(std::random_device{}())]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::thread</Title>
+      <Shortcut>thread</Shortcut>
+      <Description>A code snippet for a generationg thread.
+Requirements: &lt;thread&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+          <Default>th</Default>
+        </Literal>
+        <Literal>
+          <ID>capture</ID>
+          <ToolTip>Lambda capture</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::thread $name$([$capture$] {
+          $end$
+        });
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::async</Title>
+      <Shortcut>async</Shortcut>
+      <Description>A code snippet for a generationg task.
+Requirements: &lt;future&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+          <Default>f</Default>
+        </Literal>
+        <Literal>
+          <ID>policy</ID>
+          <ToolTip>Task policy</ToolTip>
+          <Default>async</Default>
+        </Literal>
+        <Literal>
+          <ID>capture</ID>
+          <ToolTip>Lambda capture</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[auto $name$ = std::async(std::launch::$policy$, [$capture$] {
+          $end$
+        });
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::lock_guard</Title>
+      <Shortcut>lock</Shortcut>
+      <Description>A code snippet for a generationg lock_guard.
+Requirements: &lt;mutex&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+          <Default>lock</Default>
+        </Literal>
+        <Literal>
+          <ID>mutex</ID>
+          <ToolTip>Object of std::mutex</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[{
+          std::lock_guard<decltype($mutex$)> $name$($mutex$);
+          $end$
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
