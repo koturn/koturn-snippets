@@ -228,6 +228,40 @@ snippet async
     ${0:TARGET}
   });
 
+snippet regex
+  std::regex ${1:#:name}("${2:#:pattern}");
+
+snippet regex_match_loop
+  for (std::sregex_iterator ${1:itr} = std::sregex_iterator(std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}), ${4:end}; $1 != $4; ++$1) {
+    ${0:TARGET}
+  }
+
+snippet regex_split_loop
+  for (std::sregex_iterator ${1:itr} = std::sregex_iterator(std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1), ${4:end}; $1 != $4; ++$1) {
+    ${0:TARGET}
+  }
+
+snippet regex_match_container
+  std::${1:vector}<std::string> ${2:#:name}(std::regex_token_iterator(std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}), std::regex_token_iterator());
+
+snippet regex_split_container
+  std::${1:vector}<std::string> ${2:#:name}(std::regex_token_iterator(std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}, -1), std::regex_token_iterator());
+
+snippet regex_split_back_inserter
+  std::copy(
+      std::sregex_token_iterator(std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}),
+      std::sregex_token_iterator(),
+      std::back_inserter(${3}));
+
+snippet regex_match_back_inserter
+  std::copy(
+      std::sregex_token_iterator(std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}, -1),
+      std::sregex_token_iterator(),
+      std::back_inserter(${3}));
+
+snippet regex_replace
+  std::regex_replace(${1:#:text}, std::regex("${2:#:pattern}"), "${3:#:after}");
+
 snippet fn
   ${1:#:rettype}
   ${2:#:fucname}()${3: noexcept}
