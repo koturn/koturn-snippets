@@ -1,0 +1,1513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::foreach</Title>
+      <Shortcut>foreach</Shortcut>
+      <Description>A code snippet for calling std::foreach().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::foreach(
+          std::begin($container$),
+          std::end($container$),
+          [](const decltype($container$)::value_type& ${$element$}) {
+            $end$
+          });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::all_of</Title>
+      <Shortcut>allof</Shortcut>
+      <Description>A code snippet for calling std::all_of().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Container</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::all_of(
+        std::cbegin($container$),
+        std::cend($container$),
+        [](const decltype($container$)::value_type& $element$) {
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::none_of</Title>
+      <Shortcut>noneof</Shortcut>
+      <Description>A code snippet for calling std::none_of().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Container</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::none_of(
+        std::cbegin($container$),
+        std::cend($container$),
+        [](const decltype($container$)::value_type& $element$) {
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::any_of</Title>
+      <Shortcut>anyof</Shortcut>
+      <Description>A code snippet for calling std::any_of().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Container</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::any_of(
+        std::cbegin($container$),
+        std::cend($container$),
+        [](const decltype($container$)::value_type& $element$) {
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::sort</Title>
+      <Shortcut>sort</Shortcut>
+      <Description>A code snippet for calling std::sort().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::sort(std::begin($container$), std::end($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Reverse std::sort</Title>
+      <Shortcut>sortr</Shortcut>
+      <Description>A code snippet for calling std::sort() for reverse sort.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::sort(std::rbegin($container$), std::rend($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::sort with predicate</Title>
+      <Shortcut>sortp</Shortcut>
+      <Description>A code snippet for calling std::sort() with custom predicate.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::sort(
+        std::begin($container$),
+        std::end($container$),
+        [](const decltype($container$)::value_type& x, const decltype($container$)::value_type& y){
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::stable_sort</Title>
+      <Shortcut>stablesort</Shortcut>
+      <Description>A code snippet for calling std::stable_sort().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::stable_sort(std::begin($container$), std::end($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Reverse std::stable_sort</Title>
+      <Shortcut>stablesortr</Shortcut>
+      <Description>A code snippet for calling std::stable_sort() for reverse sort.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::stable_sort(std::rbegin($container$), std::rend($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::stable_sort with predicate</Title>
+      <Shortcut>stablesortp</Shortcut>
+      <Description>A code snippet for calling std::stable_sort() with custom predicate.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::stable_sort(
+        std::begin($container$),
+        std::end($container$),
+        [](const decltype($container$)::value_type& x, const decltype($container$)::value_type& y){
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::shuffle</Title>
+      <Shortcut>shuffle</Shortcut>
+      <Description>A code snippet for calling std::shuffle().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>randomEngine</ID>
+          <ToolTip>Random engine</ToolTip>
+          <Default>std::mt19937()</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::shuffle(std::begin($container$), std::end($container$), $randomEngine$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::partial_sum</Title>
+      <Shortcut>partialsum</Shortcut>
+      <Description>A code snippet for calling std::partial_sum().
+Requirements: &lt;numeric&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>srcContainer</ID>
+          <ToolTip>Source container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>dstContainer</ID>
+          <ToolTip>Destination container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::partial_sum(std::cbegin($srcContainer$), std::cend($srcContainer$), std::begin($dstContainer$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::min_element</Title>
+      <Shortcut>minelement</Shortcut>
+      <Description>A code snippet for calling std::min_element().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>containger</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::min_element(std::cbegin($container$), std::cend($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::min_element with custom predicate</Title>
+      <Shortcut>minelementp</Shortcut>
+      <Description>A code snippet for calling std::min_element() with custom predicate.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>containger</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::min_element(
+        std::cbegin($container$),
+        std::cend($container$),
+        [](const decltype($container$)::value_type& x, const decltype($container$)::value_type& y) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::max_element</Title>
+      <Shortcut>maxelement</Shortcut>
+      <Description>A code snippet for calling std::max_element().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>containger</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::max_element(std::cbegin($container$), std::cend($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::max_element with custom predicate</Title>
+      <Shortcut>maxelementp</Shortcut>
+      <Description>A code snippet for calling std::max_element() with custom predicate.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>containger</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::max_element(
+        std::cbegin($container$),
+        std::cend($container$),
+        [](const decltype($container$)::value_type& x, const decltype($container$)::value_type& y) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::minmax_element</Title>
+      <Shortcut>minmaxelement</Shortcut>
+      <Description>A code snippet for calling std::minmax_element().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>containger</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::minmax_element(std::cbegin($container$), std::cend($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::minmax_element with custom predicate</Title>
+      <Shortcut>minmaxelementp</Shortcut>
+      <Description>A code snippet for calling std::minmax_element() with custom predicate.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>containger</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::minmax_element(
+        std::cbegin($container$),
+        std::cend($container$),
+        [](const decltype($container$)::value_type& x, const decltype($container$)::value_type& y) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::iota</Title>
+      <Shortcut>iota</Shortcut>
+      <Description>A code snippet for call std::iota().
+Requirements: &lt;numeric&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Contaner</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>startValue</ID>
+          <ToolTip>Start value</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::iota(std::begin($container$), std::end($container$), $startValue$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::generate</Title>
+      <Shortcut>generatep</Shortcut>
+      <Description>A code snippet for calling std::generate().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Contaner</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::generate(
+        std::begin($container$),
+        std::end($container$),
+        []{
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::generate_n</Title>
+      <Shortcut>generatenp</Shortcut>
+      <Description>A code snippet for calling std::generate_n().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Contaner</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>size</ID>
+          <ToolTip>Number of elements</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::generate_n(
+        std::begin($container$),
+        $size$,
+        []{
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::fill</Title>
+      <Shortcut>fill</Shortcut>
+      <Description>A code snippet for calling std::fill().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Contaner</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>value</ID>
+          <ToolTip>A value to assign to each container elements</ToolTip>
+          <Default>0</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::fill(std::begin($container$), std::end($container$), $value$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::fill_n</Title>
+      <Shortcut>filln</Shortcut>
+      <Description>A code snippet for calling std::fill_n().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>size</ID>
+          <ToolTip>Number of elements</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>value</ID>
+          <ToolTip>A value to assign to each container elements</ToolTip>
+          <Default>0</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::fill_n(std::beign($container$), $size$, $value$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::count</Title>
+      <Shortcut>count</Shortcut>
+      <Description>A code snippet for calling std::count().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>value</ID>
+          <ToolTip>Target value</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::count(std::cbegin($container$), std::cbegin($container$), $value$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::count_if</Title>
+      <Shortcut>countp</Shortcut>
+      <Description>A code snippet for calling std::count_if().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::count_if(
+        std::cbegin($container$),
+        std::cbegin($container$),
+        [](const decltype($container$)::value_type& $element$) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::find</Title>
+      <Shortcut>find</Shortcut>
+      <Description>A code snippet for calling std::find().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>value</ID>
+          <ToolTip>Target value</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::find(std::cbegin($container$), std::cbegin($container$), $value$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::find_if</Title>
+      <Shortcut>findp</Shortcut>
+      <Description>A code snippet for calling std::find_if().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::find_if(
+        std::cbegin($container$),
+        std::cbegin($container$),
+        [](const decltype($container$)::value_type& $element$) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove</Title>
+      <Shortcut>remove</Shortcut>
+      <Description>A code snippet for calling std::remove().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>value</ID>
+          <ToolTip>Target value</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::remove(std::begin($container$), std::begin($container$), $value$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_if</Title>
+      <Shortcut>removep</Shortcut>
+      <Description>A code snippet for calling std::remove_if().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::remove_if(
+        std::begin($container$),
+        std::begin($container$),
+        [](const decltype($container$)::value_type& $element$) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove and std::erase</Title>
+      <Shortcut>removeerase</Shortcut>
+      <Description>A code snippet for calling std::erase() with std::remove().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>value</ID>
+          <ToolTip>Target value</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[$container$.erase(std::remove(std::begin($container$), std::end($container$), $value$), std::end($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_if and std::erase</Title>
+      <Shortcut>removeerasep</Shortcut>
+      <Description>A code snippet for calling std::erase() with std::remove_if().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each valiable name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[$container$.erase(
+        std::remove_if(
+          std::begin($container$),
+          std::end($container$),
+          [](const decltype($container$)::value_type& $element$) {
+            return $end$
+          }),
+        std::end($container$));]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unique</Title>
+      <Shortcut>unique</Shortcut>
+      <Description>A code snippet for calling std::unique().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::unique(std::begin($container$), std::begin($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unique with custom predicate</Title>
+      <Shortcut>uniquep</Shortcut>
+      <Description>A code snippet for calling std::unique() with custom predicate.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element1</ID>
+          <ToolTip>Each valiable name 1</ToolTip>
+          <Default>x</Default>
+        </Literal>
+        <Literal>
+          <ID>element2</ID>
+          <ToolTip>Each valiable name 2</ToolTip>
+          <Default>y</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::unique(
+        std::begin($container$),
+        std::begin($container$),
+        [](const decltype($container$)::value_type& $element1$, const decltype($container$)::value_type& $element2$) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unique and std::erase</Title>
+      <Shortcut>uniqueerase</Shortcut>
+      <Description>A code snippet for calling std::erase() with std::unique().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[$container$.erase(std::unique(std::begin($container$), std::end($container$)), std::end($container$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::unique and std::erase with custom predicate</Title>
+      <Shortcut>uniqueerasep</Shortcut>
+      <Description>A code snippet for calling std::erase() with std::unique() with custom predicate.
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element1</ID>
+          <ToolTip>Each valiable name 1</ToolTip>
+          <Default>x</Default>
+        </Literal>
+        <Literal>
+          <ID>element2</ID>
+          <ToolTip>Each valiable name 2</ToolTip>
+          <Default>y</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[$container$.erase(
+        std::unique(
+          std::begin($container$),
+          std::end($container$),
+          [](const decltype($container$)::value_type& $element1$, const decltype($container$)::value_type& $element2$) {
+            return $end$
+          }),
+        std::end($container$));]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::copy</Title>
+      <Shortcut>copy</Shortcut>
+      <Description>A code snippet for calling std::copy().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>srcContainer</ID>
+          <ToolTip>Source container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>dstContainer</ID>
+          <ToolTip>Destination container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::copy(std::cbegin($srcContainer$), std::cend($srcContainer$), std::begin($dstContainer$));]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::copy_backword</Title>
+      <Shortcut>copybackword</Shortcut>
+      <Description>A code snippet for calling std::copy_backword().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>srcContainer</ID>
+          <ToolTip>Source container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>dstContainer</ID>
+          <ToolTip>Destination container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::copy_backword(std::cbegin($srcContainer$), std::cend($srcContainer$), std::end($dstContainer$));]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::copy_n</Title>
+      <Shortcut>copyn</Shortcut>
+      <Description>A code snippet for calling std::copy_n().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>srcContainer</ID>
+          <ToolTip>Source container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>size</ID>
+          <ToolTip>Number of elements</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>dstContainer</ID>
+          <ToolTip>Destination container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::copy_n(std::cbegin($srcContainer$), $size$, std::begin($dstContainer$));]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::copy_if</Title>
+      <Shortcut>copyp</Shortcut>
+      <Description>A code snippet for calling std::copy_if().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>srcContainer</ID>
+          <ToolTip>Source container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>dstContainer</ID>
+          <ToolTip>Destination container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::copy_if(
+        std::cbegin($srcContainer$),
+        std::cend($srcContainer$),
+        std::begin($dstContainer$),
+        [](const decltype($1)::value_type& $element$) {
+          return $end$
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::replace</Title>
+      <Shortcut>replace</Shortcut>
+      <Description>A code snippet for calling std::replace().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>before</ID>
+          <ToolTip>Target value to replace</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>after</ID>
+          <ToolTip>After value</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::replace(std::begin($container$), std::end($container$), $before$, $after$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::replace_if</Title>
+      <Shortcut>replacep</Shortcut>
+      <Description>A code snippet for calling std::replace_if().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>after</ID>
+          <ToolTip>After value</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::replace_if(
+        std::begin($container$),
+        std::end($container$),
+        [](const decltype($1)::value_type& $element$) {
+          return $end$;
+        },
+        $after$);]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::accumulate</Title>
+      <Shortcut>accumulate</Shortcut>
+      <Description>A code snippet for calling std::accumulate().
+Requirements: &lt;numeric&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::accumulate(std::cbegin($container$), std::cend($container$), decltype($container$)::value_type())$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::accumulate with custom predicate</Title>
+      <Shortcut>accumulatep</Shortcut>
+      <Description>A code snippet for calling std::accumulate() with custom predicate.
+Requirements: &lt;numeric&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>accumulator</ID>
+          <ToolTip>Accumulator variable</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::accumulate(
+        std::cbegin($container$),
+        std::cend($container$),
+        decltype($container$)::value_type(),
+        [](const decltype($container$)::value_type& $accumulator$, const decltype($container$)::value_type& $element$) {
+          return $end$;
+        });]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::accumulate for foldr</Title>
+      <Shortcut>foldr</Shortcut>
+      <Description>A code snippet for calling std::accumulate() for foldr.
+Requirements: &lt;numeric&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>accumulator</ID>
+          <ToolTip>Accumulator variable</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::accumulate(
+        std::crbegin($container$),
+        std::crend($container$),
+        decltype($container$)::value_type(),
+        [](const decltype($container$)::value_type& $accumulator$, const decltype($container$)::value_type& $element$) {
+          return $element$ + $accumulator$;
+        });$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::inner_product</Title>
+      <Shortcut>innerproduct</Shortcut>
+      <Description>A code snippet for calling std::inner_product.
+Requirements: &lt;numeric&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>srcContainer</ID>
+          <ToolTip>Source container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>dstContainer</ID>
+          <ToolTip>Destination container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>startValue</ID>
+          <ToolTip>Start value</ToolTip>
+          <Default>0</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::inner_product(std::cbegin($srcContainer$), std::cend($srcContainer$), std::cbegin($dstContainer$), $startValue$);$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::transform</Title>
+      <Shortcut>transformp</Shortcut>
+      <Description>A code snippet for calling std::transform().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>srcContainer</ID>
+          <ToolTip>Source container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>dstContainer</ID>
+          <ToolTip>Destination container</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Each variable name</ToolTip>
+          <Default>e</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::transform(
+        std::cbegin($srcContainer$),
+        std::cend($srcContainer$),
+        std::begin($dstContainer$),
+        [](const decltype($srcContainer$)::value_type& $element$) {
+          return $end$;
+        });
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::tolower() for std::string</Title>
+      <Shortcut></Shortcut>
+      <Description>A code snippet for calling std::transform() with std::tolower().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::transform(std::cbegin($container$), std::cend($container$), std::begin($container$), static_cast<int (*)(int)>(std::tolower));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::toupper() for std::string</Title>
+      <Shortcut></Shortcut>
+      <Description>A code snippet for calling std::transform() with std::toupper().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::transform(std::cbegin($container$), std::cend($container$), std::begin($container$), static_cast<int (*)(int)>(std::toupper));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>next_permutation</Title>
+      <Shortcut>nextpermutation</Shortcut>
+      <Description>A code snippet for calling std::next_permutation().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[do {
+          $end$
+        } while (std::next_permutation(std::begin($container$), std::end($container$)));
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>prev_permutation</Title>
+      <Shortcut>prevpermutation</Shortcut>
+      <Description>A code snippet for calling std::prev_permutation().
+Requirements: &lt;algorithm&gt;.</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[do {
+          $end$
+        } while (std::prev_permutation(std::begin($container$), std::end($container$)));
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
