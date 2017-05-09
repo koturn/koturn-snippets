@@ -552,13 +552,21 @@ snippet copy
 abbr std::copy <algorithm>
   std::copy(std::cbegin(${1}), std::cend($1), std::begin(${2}))
 
+snippet copy_back_inserter
+abbr std::copy_back_inserter <algorithm>
+  std::copy(std::cbegin(${1}), std::cend($1), std::back_inserter(${2}))
+
 snippet copy_backward
 abbr std::copy_backword <algorithm>
-  std::copy_backward(std::cbegin(${1}), std::cend($1), std::begin(${2}))
+  std::copy_backward(std::cbegin(${1}), std::cend($1), std::end(${2}))
 
 snippet copy_n
 abbr std::copy_n <algorithm>
   std::copy_n(std::cbegin(${1}), ${2:#:size}, std::begin(${3}))
+
+snippet copy_n_back_inserter
+abbr std::copy_n_back_inserter <algorithm>
+  std::copy_n(std::cbegin(${1}), ${2:#:size}, std::back_inserter(${3}))
 
 snippet copy_if
 alias copy_p
@@ -567,6 +575,17 @@ abbr std::copy_if <algorithm>
       std::cbegin(${1}),
       std::cend($1),
       std::begin(${2}),
+      [](const decltype($1)::value_type& ${3:e}) {
+        return ${0:TARGET};
+      })
+
+snippet copy_if_back_inserter
+alias copy_p_back_inserter
+abbr std::copy_if_back_inserter <algorithm>
+  std::copy_if(
+      std::cbegin(${1}),
+      std::cend($1),
+      std::back_inserter(${2}),
       [](const decltype($1)::value_type& ${3:e}) {
         return ${0:TARGET};
       })
