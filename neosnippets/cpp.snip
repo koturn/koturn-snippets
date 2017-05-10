@@ -224,7 +224,7 @@ snippet thread
   });
 
 snippet async
-  std::async ${1:#:name}(std::launch::async, [${2:&}]{
+  auto ${1:#:name} = std::async(std::launch::${2:async}, [${3:&}]{
     ${0:TARGET}
   });
 
