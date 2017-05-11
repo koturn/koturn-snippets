@@ -218,6 +218,74 @@ snippet enable_if
 snippet remove_reference
   std::remove_reference<${0:TARGET}>::type
 
+snippet has_v
+  template<typename T>
+  struct has_v_${1:#:valueName}
+  {
+  private:
+    template<typename U>
+    static auto
+    check(U obj) -> decltype(obj.$1, std::true_type{});
+
+    static std::false_type
+    check(...);
+
+  public:
+    static bool const value = decltype(check(std::declval<T>()))::value;
+  };
+  ${0:TARGET}
+
+snippet has_static_f
+  template<typename T>
+  struct has_static_v_${1:#:valueName}
+  {
+  private:
+    template<typename U>
+    static auto
+    check(U) -> decltype(U::$1, std::true_type());
+
+    static std::false_type
+    check(...);
+
+  public:
+    static const bool value = decltype(check(std::declval<T>()))::value;
+  };
+  ${0:TARGET}
+
+snippet has_f
+  template<typename T>
+  struct has_f_${1:#:funcName}
+  {
+  private:
+    template<typename U>
+    static auto
+    check(U obj) -> decltype(obj.$1(), std::true_type{});
+
+    static std::false_type
+    check(...);
+
+  public:
+    static bool const value = decltype(check(std::declval<T>()))::value;
+  };
+  ${0:TARGET}
+
+snippet has_static_v
+  template<typename T>
+  struct has_static_f_${1:#:funcName}
+  {
+  private:
+    template<typename U>
+    static auto
+    check(U) -> decltype(U::$1(), std::true_type());
+
+    static std::false_type
+    check(...);
+
+  public:
+    static const bool value = decltype(check(std::declval<T>()))::value;
+  };
+  ${0:TARGET}
+
 snippet thread
   std::thread ${1:#:name}([${2:&}]{
     ${0:TARGET}
