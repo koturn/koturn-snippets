@@ -12,6 +12,19 @@ snippet main
     return EXIT_SUCCESS;
   }
 
+snippet DllMain
+  BOOL APIENTRY
+  DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
+  {
+    switch (ul_reason_for_call) {
+      case DLL_PROCESS_ATTACH:
+      case DLL_THREAD_ATTACH:
+      case DLL_THREAD_DETACH:
+      case DLL_PROCESS_DETACH:
+    }
+    return TRUE;
+  }
+
 snippet cout
   std::cout << ${0:TARGET} << std::endl;
 
@@ -563,6 +576,9 @@ alias generate_n_p
       return ${0:TARGET};
     });
 
+snippet fill_random
+  std::generate(std::begin(${1}), std::end($1), std::${2:mt19937}((std::random_device())()));
+
 snippet fill
 abbr std::fill <algorithm>
   std::fill(std::begin(${1}), std::end($1), ${2:#:0})
@@ -806,6 +822,25 @@ snippet include_math
   #  define _USE_MATH_DEFINES
   #endif
   #include <cmath>
+
+snippet include_guard
+  #ifndef ${0:#:name}_H
+  #define ${0:#:name}_H
+
+  ${0:TARGET}
+
+  #endif  // ${0:#:name}_H
+
+snippet extern_c
+  #ifdef __cplusplus
+  extern "C" {
+  #endif  // __cplusplus
+
+  ${0:TARGET}
+
+  #ifdef __cplusplus
+  }
+  #endif  // __cplusplus
 
 snippet constant
   static constexpr ${1:int} ${2:#:varname} = ${3:#:value}
