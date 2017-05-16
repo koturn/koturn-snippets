@@ -1,0 +1,1448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::enable_if</Title>
+      <Shortcut>enableif</Shortcut>
+      <Description>typename std::enable_if&lt;..., std::nullptr_t&gt;::type = nullptr</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[typename std::enable_if<$end$, std::nullptr_t>::type = nullptr]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_void</Title>
+      <Shortcut>isvoid</Shortcut>
+      <Description>std::is_void&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_void<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_null_pointer</Title>
+      <Shortcut>isnullpointer</Shortcut>
+      <Description>std::is_null_pointer&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_null_pointer<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_integral</Title>
+      <Shortcut>isintegral</Shortcut>
+      <Description>std::is_integral&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_integral<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_floating_point</Title>
+      <Shortcut>isfloatingpoint</Shortcut>
+      <Description>std::is_floating_point&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_floating_point<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_array</Title>
+      <Shortcut>isarray</Shortcut>
+      <Description>std::is_array&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_array<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_pointer</Title>
+      <Shortcut>ispointer</Shortcut>
+      <Description>std::is_pointer&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_pointer<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_lvalue_reference</Title>
+      <Shortcut>islvaluereference</Shortcut>
+      <Description>std::is_lvalue_reference&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_lvalue_reference<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_rvalue_reference</Title>
+      <Shortcut>isrvaluereference</Shortcut>
+      <Description>std::is_rvalue_reference&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_rvalue_reference<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_member_object_pointer</Title>
+      <Shortcut>ismemberobjectpointer</Shortcut>
+      <Description>std::is_member_object_pointer&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_member_object_pointer<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_member_function_pointer</Title>
+      <Shortcut>ismemberfunctionpointer</Shortcut>
+      <Description>std::is_member_function_pointer&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_member_function_pointer<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_enum</Title>
+      <Shortcut>isenum</Shortcut>
+      <Description>std::is_enum&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_enum<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_union</Title>
+      <Shortcut>isunion</Shortcut>
+      <Description>std::is_union&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_union<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_class</Title>
+      <Shortcut>isclass</Shortcut>
+      <Description>std::is_class&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_class<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_function</Title>
+      <Shortcut>isfunction</Shortcut>
+      <Description>std::is_function&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_function<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_reference</Title>
+      <Shortcut>isreference</Shortcut>
+      <Description>std::is_reference&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_reference<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_arithmetic</Title>
+      <Shortcut>isarithmetic</Shortcut>
+      <Description>std::is_arithmetic&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_arithmetic<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_fundamental</Title>
+      <Shortcut>isfundamental</Shortcut>
+      <Description>std::is_fundamental&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_fundamental<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_object</Title>
+      <Shortcut>isobject</Shortcut>
+      <Description>std::is_object&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_object<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_scalar</Title>
+      <Shortcut>isscalar</Shortcut>
+      <Description>std::is_scalar&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_scalar<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_compound</Title>
+      <Shortcut>iscompound</Shortcut>
+      <Description>std::is_compound&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_compound<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_member_pointer</Title>
+      <Shortcut>ismemberpointer</Shortcut>
+      <Description>std::is_member_pointer&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_member_pointer<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_const</Title>
+      <Shortcut>isconst</Shortcut>
+      <Description>std::is_const&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_const<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_volatile</Title>
+      <Shortcut>isvolatile</Shortcut>
+      <Description>std::is_volatile&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_volatile<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivial</Title>
+      <Shortcut>istrivial</Shortcut>
+      <Description>std::is_trivial&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivial<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_copyable</Title>
+      <Shortcut>istriviallycopyable</Shortcut>
+      <Description>std::is_trivially_copyable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_copyable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_standard_layout</Title>
+      <Shortcut>isstandardlayout</Shortcut>
+      <Description>std::is_standard_layout&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_standard_layout<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_pod</Title>
+      <Shortcut>ispod</Shortcut>
+      <Description>std::is_pod&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_pod<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_literal_type</Title>
+      <Shortcut>isliteraltype</Shortcut>
+      <Description>std::is_literal_type&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_literal_type<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_empty</Title>
+      <Shortcut>isempty</Shortcut>
+      <Description>std::is_empty&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_empty<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_polymorphic</Title>
+      <Shortcut>ispolymorphic</Shortcut>
+      <Description>std::is_polymorphic&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_polymorphic<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_abstract</Title>
+      <Shortcut>isabstract</Shortcut>
+      <Description>std::is_abstract&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_abstract<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_final</Title>
+      <Shortcut>isfinal</Shortcut>
+      <Description>std::is_final&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_final<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_signed</Title>
+      <Shortcut>issigned</Shortcut>
+      <Description>std::is_signed&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_signed<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_unsigned</Title>
+      <Shortcut>isunsigned</Shortcut>
+      <Description>std::is_unsigned&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_unsigned<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_constructible</Title>
+      <Shortcut>isconstructible</Shortcut>
+      <Description>std::is_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_default_constructible</Title>
+      <Shortcut>isdefaultconstructible</Shortcut>
+      <Description>std::is_default_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_default_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_copy_constructible</Title>
+      <Shortcut>iscopyconstructible</Shortcut>
+      <Description>std::is_copy_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_copy_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_move_constructible</Title>
+      <Shortcut>ismoveconstructible</Shortcut>
+      <Description>std::is_move_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_move_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_assignable</Title>
+      <Shortcut>isassignable</Shortcut>
+      <Description>std::is_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_copy_assignable</Title>
+      <Shortcut>iscopyassignable</Shortcut>
+      <Description>std::is_copy_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_copy_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_move_assignable</Title>
+      <Shortcut>ismoveassignable</Shortcut>
+      <Description>std::is_move_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_move_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_destructible</Title>
+      <Shortcut>isdestructible</Shortcut>
+      <Description>std::is_destructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_destructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_constructible</Title>
+      <Shortcut>istriviallyconstructible</Shortcut>
+      <Description>std::is_trivially_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_default_constructible</Title>
+      <Shortcut>istriviallydefaultconstructible</Shortcut>
+      <Description>std::is_trivially_default_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_default_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_copy_constructible</Title>
+      <Shortcut>istriviallycopyconstructible</Shortcut>
+      <Description>std::is_trivially_copy_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_copy_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_move_constructible</Title>
+      <Shortcut>istriviallymoveconstructible</Shortcut>
+      <Description>std::is_trivially_move_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_move_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_assignable</Title>
+      <Shortcut>istriviallyassignable</Shortcut>
+      <Description>std::is_trivially_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_copy_assignable</Title>
+      <Shortcut>istriviallycopyassignable</Shortcut>
+      <Description>std::is_trivially_copy_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_copy_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_move_assignable</Title>
+      <Shortcut>istriviallymoveassignable</Shortcut>
+      <Description>std::is_trivially_move_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_move_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_trivially_destructible</Title>
+      <Shortcut>istriviallydestructible</Shortcut>
+      <Description>std::is_trivially_destructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_trivially_destructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_constructible</Title>
+      <Shortcut>isnothrowconstructible</Shortcut>
+      <Description>std::is_nothrow_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_default_constructible</Title>
+      <Shortcut>isnothrowdefaultconstructible</Shortcut>
+      <Description>std::is_nothrow_default_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_default_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_copy_constructible</Title>
+      <Shortcut>isnothrowcopyconstructible</Shortcut>
+      <Description>std::is_nothrow_copy_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_copy_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_move_constructible</Title>
+      <Shortcut>isnothrowmoveconstructible</Shortcut>
+      <Description>std::is_nothrow_move_constructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_move_constructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_assignable</Title>
+      <Shortcut>isnothrowassignable</Shortcut>
+      <Description>std::is_nothrow_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_copy_assignable</Title>
+      <Shortcut>isnothrowcopyassignable</Shortcut>
+      <Description>std::is_nothrow_copy_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_copy_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_move_assignable</Title>
+      <Shortcut>isnothrowmoveassignable</Shortcut>
+      <Description>std::is_nothrow_move_assignable&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_move_assignable<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_nothrow_destructible</Title>
+      <Shortcut>isnothrowdestructible</Shortcut>
+      <Description>std::is_nothrow_destructible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_nothrow_destructible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::has_virtual_destructor</Title>
+      <Shortcut>hasvirtualdestructor</Shortcut>
+      <Description>std::has_virtual_destructor&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::has_virtual_destructor<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_same</Title>
+      <Shortcut>issame</Shortcut>
+      <Description>std::is_same&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_same<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_base_of</Title>
+      <Shortcut>isbaseof</Shortcut>
+      <Description>std::is_base_of&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_base_of<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::is_convertible</Title>
+      <Shortcut>isconvertible</Shortcut>
+      <Description>std::is_convertible&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::is_convertible<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_const</Title>
+      <Shortcut>removeconst</Shortcut>
+      <Description>std::remove_const&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::remove_const<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_volatile</Title>
+      <Shortcut>removevolatile</Shortcut>
+      <Description>std::remove_volatile&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::remove_volatile<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_cv</Title>
+      <Shortcut>removecv</Shortcut>
+      <Description>std::remove_cv&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::remove_cv<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::add_const</Title>
+      <Shortcut>addconst</Shortcut>
+      <Description>std::add_const&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::add_const<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::add_volatile</Title>
+      <Shortcut>addvolatile</Shortcut>
+      <Description>std::add_volatile&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::add_volatile<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::add_cv</Title>
+      <Shortcut>addcv</Shortcut>
+      <Description>std::add_cv&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::add_cv<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_reference</Title>
+      <Shortcut>removereference</Shortcut>
+      <Description>std::remove_reference&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::remove_reference<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::add_lvalue_reference</Title>
+      <Shortcut>addlvaluereference</Shortcut>
+      <Description>std::add_lvalue_reference&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::add_lvalue_reference<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::add_rvalue_reference</Title>
+      <Shortcut>addrvaluereference</Shortcut>
+      <Description>std::add_rvalue_reference&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::add_rvalue_reference<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::make_signed</Title>
+      <Shortcut>makesigned</Shortcut>
+      <Description>std::make_signed&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::make_signed<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::make_unsigned</Title>
+      <Shortcut>makeunsigned</Shortcut>
+      <Description>std::make_unsigned&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::make_unsigned<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_extent</Title>
+      <Shortcut>removeextent</Shortcut>
+      <Description>std::remove_extent&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::remove_extent<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_all_extents</Title>
+      <Shortcut>removeallextents</Shortcut>
+      <Description>std::remove_all_extents&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::remove_all_extents<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::add_pointer</Title>
+      <Shortcut>addpointer</Shortcut>
+      <Description>std::add_pointer&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::add_pointer<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::remove_pointer</Title>
+      <Shortcut>removepointer</Shortcut>
+      <Description>std::remove_pointer&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::remove_pointer<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::aligned_storage</Title>
+      <Shortcut>alignedstorage</Shortcut>
+      <Description>std::aligned_storage&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::aligned_storage<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::aligned_union</Title>
+      <Shortcut>alignedunion</Shortcut>
+      <Description>std::aligned_union&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::aligned_union<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::decay</Title>
+      <Shortcut>decay</Shortcut>
+      <Description>std::decay&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::decay<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::conditional</Title>
+      <Shortcut>conditional</Shortcut>
+      <Description>std::conditional&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::conditional<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::common_type</Title>
+      <Shortcut>commontype</Shortcut>
+      <Description>std::common_type&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::common_type<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::underlying_type</Title>
+      <Shortcut>underlyingtype</Shortcut>
+      <Description>std::underlying_type&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::underlying_type<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::result_of</Title>
+      <Shortcut>resultof</Shortcut>
+      <Description>std::result_of&lt;...&gt;::value</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::result_of<$end$>::value]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
