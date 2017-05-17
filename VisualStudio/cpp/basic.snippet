@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>main function</Title>
+      <Shortcut>main</Shortcut>
+      <Description>Define main function</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[int
+        main()
+        {
+          $end$
+          return EXIT_SUCCESS;
+        }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>main function with command-line arguments</Title>
+      <Shortcut>main_args</Shortcut>
+      <Description>Define main function with command-line arguments</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[int
+        main(int argc, const char* argv[])
+        {
+          $end$
+          return EXIT_SUCCESS;
+        }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Output something</Title>
+      <Shortcut>cout</Shortcut>
+      <Description>Insert std::cout ~ std::endl</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::cout << $end$ << std::endl;]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Range based for</Title>
+      <Shortcut>forrbf</Shortcut>
+      <Description>A code snippet for Range Based For</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Element</ToolTip>
+          <Default>e</Default>
+        </Literal>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[for (auto&& $element$ : $container$) {
+          $end$
+        }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Range based for (const)</Title>
+      <Shortcut>forrbfc</Shortcut>
+      <Description>A code snippet for Range Based For (each element is const)</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>Element</ToolTip>
+          <Default>e</Default>
+        </Literal>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[for (const auto& $element$ : $container$) {
+          $end$
+        }
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>static_cast&lt;&gt;()</Title>
+      <Shortcut>staticcast</Shortcut>
+      <Description>static_cast&lt;...&gt;(...)</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Destination type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[static_cast<$type$>($end$)]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>reinterpret_cast&lt;&gt;()</Title>
+      <Shortcut>reinterpretcast</Shortcut>
+      <Description>reinterpret_cast&lt;...&gt;(...)</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Destination type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[reinterpret_cast<$type$>($end$)]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>const_cast&lt;&gt;()</Title>
+      <Shortcut>constcast</Shortcut>
+      <Description>const_cast&lt;...&gt;(...)</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Destination type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[const_cast<$type$>($end$)]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>dynamic_cast&lt;&gt;()</Title>
+      <Shortcut>dynamiccast</Shortcut>
+      <Description>dynamic_cast&lt;...&gt;(...)</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Destination type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[dynamic_cast<$type$>($end$)]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::chrono::duration_cast&lt;&gt;()</Title>
+      <Shortcut>durationcast</Shortcut>
+      <Description>std::chrono::duration_cast&lt;...&gt;(...)</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>type</ID>
+          <ToolTip>Destination type</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::chrono::duration_cast<$type$>($end$)]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
