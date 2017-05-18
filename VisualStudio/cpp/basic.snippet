@@ -48,9 +48,9 @@
   </CodeSnippet>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Output something</Title>
+      <Title>std::cout and std::endl</Title>
       <Shortcut>cout</Shortcut>
-      <Description>Insert std::cout ~ std::endl</Description>
+      <Description>Insert std::cout &lt;&lt; ... &lt;&lt; std::endl</Description>
       <Author>koturn</Author>
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
@@ -65,8 +65,277 @@
   </CodeSnippet>
   <CodeSnippet Format="1.0.0">
     <Header>
+      <Title>std::cout with new line character</Title>
+      <Shortcut>cout2</Shortcut>
+      <Description>Insert std::cout &lt;&lt; ... &lt;&lt; '\n'</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::cout << $end$ << '\n';]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Output all elements in container</Title>
+      <Shortcut>coutall</Shortcut>
+      <Description>Output all elements in container to std::cout</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>container</ID>
+          <ToolTip>Container</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::copy(std::cbegin($container$), std::cend($container$), std::ostream_iterator<const decltype($container$)::value_type&>(std::cout));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Put one charcter</Title>
+      <Shortcut>put</Shortcut>
+      <Description>Put one charcter to std::cout</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::cout.put($end$);]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::cerr and std::endl</Title>
+      <Shortcut>cerr</Shortcut>
+      <Description>Insert std::cerr &lt;&lt; ... &lt;&lt; std::endl</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::cerr << $end$ << std::endl;]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::clog and std::endl</Title>
+      <Shortcut>clog</Shortcut>
+      <Description>Insert std::clog &lt;&lt; ... &lt;&lt; std::endl</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::clog << $end$ << std::endl;]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Read stdin from std::cin</Title>
+      <Shortcut>cin</Shortcut>
+      <Description>std::cin &gt;&gt;</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::cin >> $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Read one character from std::cin</Title>
+      <Shortcut>get</Shortcut>
+      <Description>std::cin.get()</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[std::cin.get();$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::setprecision</Title>
+      <Shortcut>setprecision</Shortcut>
+      <Description>Specify float/double number of digits after the decimal point</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>nDigits</ID>
+          <ToolTip>Number of digits after the decimal point</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::fixed << std::setprecision($nDigits$) << $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::setfill</Title>
+      <Shortcut>setfill</Shortcut>
+      <Description>Specify least width and a character to fill</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>width</ID>
+          <ToolTip>output width</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>fillCharacter</ID>
+          <ToolTip>Character to fill</ToolTip>
+          <Default>0</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::setw($width$) << std::setfill('$fillCharacter$') << $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>File open with std::fstream</Title>
+      <Shortcut>fstream</Shortcut>
+      <Description>File open with std::fstream and check an open error</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>streamType</ID>
+          <ToolTip>Stream type (fstream, ifstream or ofstream)</ToolTip>
+          <Default>fstream</Default>
+        </Literal>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+          <Default>fs</Default>
+        </Literal>
+        <Literal>
+          <ID>filename</ID>
+          <ToolTip>File name</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::$streamType$ $fs$($filename$);
+        if (!$fs$.is_open()) {
+          std::cerr << "Failed to open: " << $filename$ << std::endl;
+        }
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Read all from stream</Title>
+      <Shortcut>readall</Shortcut>
+      <Description>Read all characters from stream</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Variable name</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>stream</ID>
+          <ToolTip>Stream variable</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::string $name$((std::istreambuf_iterator<char>($stream$)), std::istreambuf_iterator<char>());$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Sleep with std::this_thread::sleep_for()</Title>
+      <Shortcut>sleep</Shortcut>
+      <Description>Sleep with std::this_thread::sleep_for()</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>timeUnit</ID>
+          <ToolTip>Unit of time</ToolTip>
+          <Default>milliseconds</Default>
+        </Literal>
+        <Literal>
+          <ID>sleepTime</ID>
+          <ToolTip>Sleep time</ToolTip>
+          <Default>1000</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::this_thread::sleep_for(std::chrono::$timeUnit$($sleepTime$));$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
       <Title>Range based for</Title>
-      <Shortcut>forrbf</Shortcut>
+      <Shortcut>rbf</Shortcut>
       <Description>A code snippet for Range Based For</Description>
       <Author>koturn</Author>
       <SnippetTypes>
@@ -89,15 +358,14 @@
       <Code Language="cpp">
         <![CDATA[for (auto&& $element$ : $container$) {
           $end$
-        }
-        ]]>
+        }]]>
       </Code>
     </Snippet>
   </CodeSnippet>
   <CodeSnippet Format="1.0.0">
     <Header>
       <Title>Range based for (const)</Title>
-      <Shortcut>forrbfc</Shortcut>
+      <Shortcut>rbfc</Shortcut>
       <Description>A code snippet for Range Based For (each element is const)</Description>
       <Author>koturn</Author>
       <SnippetTypes>
@@ -120,8 +388,7 @@
       <Code Language="cpp">
         <![CDATA[for (const auto& $element$ : $container$) {
           $end$
-        }
-        ]]>
+        }]]>
       </Code>
     </Snippet>
   </CodeSnippet>
