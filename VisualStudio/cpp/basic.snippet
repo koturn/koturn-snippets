@@ -48,6 +48,126 @@
   </CodeSnippet>
   <CodeSnippet Format="1.0.0">
     <Header>
+      <Title>DLL main function</Title>
+      <Shortcut>dllmain</Shortcut>
+      <Description>Define DllMain</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[BOOL APIENTRY
+        DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
+        {
+          switch (ul_reason_for_call)
+          {
+            case DLL_PROCESS_ATTACH:
+            case DLL_THREAD_ATTACH:
+            case DLL_THREAD_DETACH:
+            case DLL_PROCESS_DETACH:
+              break;
+          }
+          return TRUE;
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Define dllexport macro</Title>
+      <Shortcut>defdllexport</Shortcut>
+      <Description>Define dllexport macro</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>PREFIX</ID>
+          <ToolTip>Prefix of export macro</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[#ifdef $PREFIX$_EXPORTS
+        #  if defined(_MSC_VER)
+        #    define $PREFIX$_API  __declspec(dllexport)
+        #  elif defined(__GNUC__)
+        #    define $PREFIX$_API  __attiribute__((dllexport))
+        #  endif
+        #else
+        #  if defined(_MSC_VER)
+        #    define $PREFIX$_API  __declspec(dllimport)
+        #  elif defined(__GNUC__)
+        #    define $PREFIX$_API  __attiribute__((dllimport))
+        #  endif
+        #endif
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Include guard</Title>
+      <Shortcut>includeguard</Shortcut>
+      <Description>Write include guard</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>NAME</ID>
+          <ToolTip>Prefix of include guard macro</ToolTip>
+          <Default></Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[#ifndef $NAME$_H
+        #define $NAME$_H
+
+        $end$
+
+        #endif  // $NAME$_H]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Extern C</Title>
+      <Shortcut>externc</Shortcut>
+      <Description>extern "C" { ... }</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="cpp">
+        <![CDATA[#ifdef __cplusplus
+        extern "C" {
+        #endif  /* __cplusplus */
+
+        $end$
+
+        #ifdef __cplusplus
+        }
+        #endif  /* __cplusplus */
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
       <Title>std::cout and std::endl</Title>
       <Shortcut>cout</Shortcut>
       <Description>Insert std::cout &lt;&lt; ... &lt;&lt; std::endl</Description>
