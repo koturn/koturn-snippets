@@ -1445,4 +1445,152 @@
       </Code>
     </Snippet>
   </CodeSnippet>
+
+  <!-- Custom meta functions -->
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Has member value</Title>
+      <Shortcut>hasv</Shortcut>
+      <Description>Define meta function to identify which the type has specified member or not</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>memberName</ID>
+          <ToolTip>Name of member</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[template<typename T>
+        struct has_v_$memberName$
+        {
+        private:
+          template<typename U>
+          static auto
+          check(U obj) -> decltype(obj.$memberName$, std::true_type{});
+
+          static std::false_type
+          check(...);
+
+        public:
+          static bool const value = decltype(check(std::declval<T>()))::value;
+        };
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Has static member value</Title>
+      <Shortcut>hasvstatic</Shortcut>
+      <Description>Define meta function to identify which the type has specified static member or not</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Name of member</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[template<typename T>
+        struct has_static_v_$memberName$
+        {
+        private:
+          template<typename U>
+          static auto
+          check(U) -> decltype(U::$memberName$, std::true_type());
+
+          static std::false_type
+          check(...);
+
+        public:
+          static const bool value = decltype(check(std::declval<T>()))::value;
+        };
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Has member function</Title>
+      <Shortcut>hasf</Shortcut>
+      <Description>Define meta function to identify which the type has specified member function or not</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>functionName</ID>
+          <ToolTip>Name of member function</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[template<typename T>
+        struct has_f_$functionName$
+        {
+        private:
+          template<typename U>
+          static auto
+          check(U obj) -> decltype(obj.$functionName$(), std::true_type{});
+
+          static std::false_type
+          check(...);
+
+        public:
+          static bool const value = decltype(check(std::declval<T>()))::value;
+        };]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Has static member function</Title>
+      <Shortcut>hasf</Shortcut>
+      <Description>Define meta function to identify which the type has specified static member function or not</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>functionName</ID>
+          <ToolTip>Name of member function</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[template<typename T>
+        struct has_f_$functionName$
+        {
+        private:
+          template<typename U>
+          static auto
+          check(U) -> decltype(U::$functionName$(), std::true_type{});
+
+          static std::false_type
+          check(...);
+
+        public:
+          static bool const value = decltype(check(std::declval<T>()))::value;
+        };]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
 </CodeSnippets>
