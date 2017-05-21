@@ -627,4 +627,189 @@
       </Code>
     </Snippet>
   </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Split std::string</Title>
+      <Shortcut>split</Shortcut>
+      <Description>Split std::string by std::string</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>tokens</ID>
+          <ToolTip>Token vector</ToolTip>
+          <Default>tokens</Default>
+        </Literal>
+        <Literal>
+          <ID>spos</ID>
+          <ToolTip>Start index</ToolTip>
+          <Default>spos</Default>
+        </Literal>
+        <Literal>
+          <ID>epos</ID>
+          <ToolTip>End index</ToolTip>
+          <Default>epos</Default>
+        </Literal>
+        <Literal>
+          <ID>delimiterLength</ID>
+          <ToolTip>Delimiter length</ToolTip>
+          <Default>delimlen</Default>
+        </Literal>
+        <Literal>
+          <ID>delimiter</ID>
+          <ToolTip>Delimiter string</ToolTip>
+          <Default>","</Default>
+        </Literal>
+        <Literal>
+          <ID>srcString</ID>
+          <ToolTip>Source string</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::vector<std::string> $tokens$;
+        std::string::size_type $spos$ = 0, $epos$, $delimiterLength$ = sizeof($delimiter$) - 1;
+        while (($epos$ = $srcString$.find_first_of($delimiter$, $spos$)) != std::string::npos) {
+          $tokens$.emplace_back($srcString$.substr($spos$, $epos$ - $spos$));
+          $spos$ = $epos$ + $delimiterLength$;
+        }
+        $tokens$.emplace_back($srcString$.substr($spos$));
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Join std::string</Title>
+      <Shortcut>join</Shortcut>
+      <Description>join std::string by std::string</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>ostringstream</ID>
+          <ToolTip>std::ostringstream to join elements</ToolTip>
+          <Default>oss</Default>
+        </Literal>
+        <Literal>
+          <ID>elements</ID>
+          <ToolTip>Elements to join</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>delimiter</ID>
+          <ToolTip>Delimiter string</ToolTip>
+          <Default>","</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::ostringstream $ostringstream$;
+        if (!$elements$.empty()) {
+          std::copy(std::cbegin($elements$), std::prev(std::cend($elements$)), std::ostream_iterator<const decltype($elements$)::value_type&>($ostringstream$, $delimiter$));
+          $ostringstream$ << *std::crbegin($elements$);
+        }
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Join std::string by one character</Title>
+      <Shortcut>jointostring</Shortcut>
+      <Description>join std::string by one character</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>elements</ID>
+          <ToolTip>Elements to join</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>acc</ID>
+          <ToolTip>Accumulator variable</ToolTip>
+          <Default>acc</Default>
+        </Literal>
+        <Literal>
+          <ID>element</ID>
+          <ToolTip>One element variable</ToolTip>
+          <Default>e</Default>
+        </Literal>
+        <Literal>
+          <ID>delimiter</ID>
+          <ToolTip>Delimiter string</ToolTip>
+          <Default>","</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[$elements$.empty() ? "" : std::accumulate(
+        std::cbegin($elements$) + 1,
+        std::cend($elements$),
+        std::to_string($elements$[0]),
+        [](const std::string& $acc$, const decltype($elements$)::value_type& $element$) {
+          return $acc$ + $delimiter$ + std::to_string($element$);
+        })$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Split std::string by one charcter</Title>
+      <Shortcut>splitchar</Shortcut>
+      <Description>Split std::string by one charcter</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>tokens</ID>
+          <ToolTip>Token vector</ToolTip>
+          <Default>tokens</Default>
+        </Literal>
+        <Literal>
+          <ID>istringstream</ID>
+          <ToolTip>Input string stream to split std::string</ToolTip>
+          <Default>iss</Default>
+        </Literal>
+        <Literal>
+          <ID>srcString</ID>
+          <ToolTip>Source string</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>token</ID>
+          <ToolTip>One token</ToolTip>
+          <Default>token</Default>
+        </Literal>
+        <Literal>
+          <ID>delimiter</ID>
+          <ToolTip>Delimiter character</ToolTip>
+          <Default>','</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::vector<std::string> $tokens$;
+        std::istringstream $istringstream$($srcString$);
+        for (std::string $token$; std::getline($istringstream$, $token$, $delimiter$);) {
+          $tokens$.push_back($token$);
+        }
+        $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
 </CodeSnippets>
