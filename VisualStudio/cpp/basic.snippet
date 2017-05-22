@@ -755,7 +755,7 @@
       </Declarations>
       <Code Language="cpp">
         <![CDATA[$elements$.empty() ? "" : std::accumulate(
-        std::cbegin($elements$) + 1,
+        std::next(std::cbegin($elements$)),
         std::cend($elements$),
         std::to_string($elements$[0]),
         [](const std::string& $acc$, const decltype($elements$)::value_type& $element$) {
