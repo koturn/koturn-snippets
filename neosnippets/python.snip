@@ -1,0 +1,33 @@
+snippet shebang
+  #!/usr/bin/env python
+  # -*- coding: utf-8 -*-
+
+  ${0}
+
+snippet main
+  if __name__ == '__main__':
+      ${0}
+
+snippet condexpr
+  ${1:#:true_value} if ${2:#:cond} else ${3:#:false_value}
+
+snippet print_nonl
+  print(${0}, end='')
+
+snippet print_error
+  print(${0}, file=sys.stderr)
+
+snippet print_error_nonl
+  print(${0}, end='', file=sys.stderr)
+
+snippet lambda
+  lambda ${1:#:args...}: ${2:#:pred}
+
+snippet map
+  map(${1:lambda e\: ${2\:e\}}, ${3:#:list})
+
+snippet filter
+  filter(${1:lambda e\: ${2\:e\}}, ${3:#:list})
+
+snippet join
+  ${1:#:separator}.join(${2:#:list})
