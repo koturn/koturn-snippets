@@ -31,3 +31,18 @@ snippet filter
 
 snippet join
   ${1:#:separator}.join(${2:#:list})
+
+snippet listcomp
+  [${0:#:pred} for ${1:e} in ${2:#:collection}]
+
+snippet tuplecomp
+  tuple(${0:#:pred} for ${1:e} in ${2:#:collection})
+
+snippet gencomp
+  (${0:#:pred} for ${1:e} in ${2:#:collection})
+
+snippet setcomp
+  {${0:#:pred} for ${1:e} in ${2:#:collection}}
+
+snippet dictcomp
+  {${3:#:key}: ${0:#:value} for ${1:e} in ${2:#:collection}}
