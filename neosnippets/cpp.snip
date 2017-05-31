@@ -1140,9 +1140,13 @@ snippet def_enum
     {
       $2
     };
+    $1()
+    {}
+
     $1($1Enum value) :
       value(value)
     {}
+
     operator $1Enum() const throw()
     {
       return value;
@@ -1379,6 +1383,60 @@ snippet if_gcc
 snippet if_msvc
   #ifdef _MSC_VER
   ${0:TARGET}
+  #endif
+
+snippet polyfill_likely
+  #if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
+  #  define ${1:#:PREFIX}_LIKELY(cond)  __builtin_expect((cond), 1)
+  #else
+  #  define $1_LIKELY(cond)  (cond)
+  #endif
+
+snippet polyfill_unlikely
+  #if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
+  #  define ${1:#:PREFIX}_UNLIKELY(cond)  __builtin_expect((cond), 0)
+  #else
+  #  define $1_UNLIKELY(cond)  (cond)
+  #endif
+
+snippet polyfill_constexpr_cpp11
+  #if __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
+  #  define ${1:#:PREFIX}_CONSTEXPR11 constexpr
+  #else
+  #  define $1_CONSTEXPR11
+  #endif  //  __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
+  ${0:TARGET}
+
+snippet polyfill_constexpr_cpp14
+  #if __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
+  #  define ${1:#:PREFIX}_CONSTEXPR14 constexpr
+  #else
+  #  define $1_CONSTEXPR14
+  #endif  //  __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
+  ${0:TARGET}
+
+snippet polyfill_override
+  #if __cplusplus >= 201103L \
+    || defined(_MSC_VER) && _MSC_VER >= 1500
+  #  define ${1:#:NAME}_OVERRIDE  override
+  #else
+  #  define $1_OVERRIDE
+  #endif
+
+snippet polyfill_nullptr
+  #if __cplusplus >= 201103L \
+    || defined(_MSC_VER) && _MSC_VER >= 1600
+  #  define ${1:#:NAME}_NULLPTR  nullptr
+  #else
+  #  define $1_NULLPTR  NULL
+  #endif
+
+snippet polyfill_noexcept
+  #if __cplusplus >= 201103L \
+    || defined(_MSC_VER) && (_MSC_VER > 1800 || _MSC_VER == 1800 && _MSC_FULL_VER == 180021114)
+  #  define ${1:#:NAME}_NOEXCEPT  noexcept
+  #else
+  #  define $1_NOEXCEPT  throw()
   #endif
 
 snippet connect
