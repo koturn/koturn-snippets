@@ -1,5 +1,6 @@
 include c.snip
 
+delete class
 delete main
 delete p
 delete try
@@ -77,6 +78,28 @@ snippet toppop
 snippet itrrange
   ${1}.begin(), $1.end()
 
+snippet class
+  class ${1:#:ClassName}
+  {
+    $1() noexcept${0:TARGET}
+  };  // class $1
+
+snippet crtp_base
+  template<typename ${1:T}>
+  class ${2:#:ClassName}
+  {
+    ${0:TARGET}
+  };  // class $2
+
+snippet crtp_derived
+  class ${1:#:DerivedClassName}
+    : public ${2:#:BaseClassName}<$1>
+  {
+    friend class $2<$1>;
+
+    ${0:TARGET}
+  };  // class $1
+
 snippet constructor
 alias ctor
   ${1:#:ClassName}() noexcept ${0:TARGET}
@@ -91,13 +114,29 @@ alias move_ctor
 
 snippet destructor
 alias dtor
-  ~something() noexcept ${0:TARGET}
+  ~${1:#:ClassName}() ${0:TARGET}
 
 snippet op_assign
   ${1:#:ClassName}& operator=(const $1&) ${0:TARGET};
 
 snippet op_move_assign
   ${1:#:ClassName}& operator=($1&&) noexcept ${0:TARGET};
+
+snippet op_ostream
+  template<typename CharT, typename Traits>
+  friend std::basic_ostream<CharT, Traits>&
+  operator<<(std::basic_ostream<CharT, Traits>& ${1:os}, const ${2:#:ClassName}& ${3:this_})
+  {
+    return $1;
+  }
+
+snippet op_istream
+  template<typename CharT, typename Traits>
+  friend std::basic_istream<CharT, Traits>&
+  operator>>(std::basic_istream<CharT, Traits>& ${1:is}, ${2:#:ClassName}& ${3:this_})
+  {
+    return $1;
+  }
 
 snippet numeric_limits
   std::numeric_limits<${1:int}>::${0:TARGET}()
@@ -1064,7 +1103,8 @@ snippet update_max_if
   }
 
 snippet include
-  #include <${0:TARGET}>
+snippet inc
+  #include <${0}>
 
 snippet include_math
   #ifdef _MSC_VER
@@ -1073,12 +1113,13 @@ snippet include_math
   #include <cmath>
 
 snippet include_guard
-  #ifndef ${0:#:name}_H
-  #define ${0:#:name}_H
+alias inc_guard
+  #ifndef ${1:#:NAME}
+  #define $1
 
-  ${0:TARGET}
+  ${0}
 
-  #endif  // ${0:#:name}_H
+  #endif  // $1
 
 snippet extern_c
   #ifdef __cplusplus
