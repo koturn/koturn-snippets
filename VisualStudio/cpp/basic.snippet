@@ -58,20 +58,70 @@
       </SnippetTypes>
     </Header>
     <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>constructor</ID>
+          <ToolTip>On attached function</ToolTip>
+          <Default>constructor</Default>
+        </Literal>
+        <Literal>
+          <ID>destructor</ID>
+          <ToolTip>On detached function</ToolTip>
+          <Default>destructor</Default>
+        </Literal>
+      </Declarations>
       <Code Language="cpp">
-        <![CDATA[BOOL APIENTRY
-        DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
+        <![CDATA[#if defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
+        #  if defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
+        BOOL APIENTRY
+        DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved);
+        #  endif  /* defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__) */
+        static void
+        $constructor$();
+
+        static void
+        $destructor$();
+
+        BOOL APIENTRY
+        DllMain(HMODULE /* hModule */, DWORD ul_reason_for_call, LPVOID /* lpReserved */)
         {
-          switch (ul_reason_for_call)
-          {
+          switch (ul_reason_for_call) {
             case DLL_PROCESS_ATTACH:
+              $constructor$();
+              break;
             case DLL_THREAD_ATTACH:
+              break;
             case DLL_THREAD_DETACH:
+              break;
             case DLL_PROCESS_DETACH:
+              $destructor$();
               break;
           }
           return TRUE;
-        }]]>
+        }
+        #elif defined(__GNUC__)
+        __attribute__((constructor))
+        static void
+        $constructor$();
+
+        __attribute__((destructor))
+        static void
+        $destructor$();
+        #endif  /* defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__) */
+
+        static void
+        $constructor$()
+        {
+
+        }
+
+        static void
+        $destructor$()
+        {
+
+        }
+
+        $end$]]>
       </Code>
     </Snippet>
   </CodeSnippet>
@@ -94,20 +144,39 @@
         </Literal>
       </Declarations>
       <Code Language="cpp">
-        <![CDATA[#ifdef $PREFIX$_EXPORTS
-        #  if defined(_MSC_VER)
-        #    define $PREFIX$_API  __declspec(dllexport)
-        #  elif defined(__GNUC__)
-        #    define $PREFIX$_API  __attiribute__((dllexport))
-        #  endif
+        <![CDATA[#if defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
+        #  define $PREFIX$_API_IMPORT __declspec(dllimport)
+        #  define $PREFIX$_API_EXPORT __declspec(dllexport)
+        #  define $PREFIX$_API_LOCAL
+        #elif defined(__GNUC__) && __GNUC__ >= 4
+        #  define $PREFIX$_API_IMPORT __attribute__((visibility("default")))
+        #  define $PREFIX$_API_EXPORT __attribute__((visibility("default")))
+        #  define $PREFIX$_API_LOCAL  __attribute__((visibility("hidden")))
         #else
-        #  if defined(_MSC_VER)
-        #    define $PREFIX$_API  __declspec(dllimport)
-        #  elif defined(__GNUC__)
-        #    define $PREFIX$_API  __attiribute__((dllimport))
-        #  endif
-        #endif
-        ]]>
+        #  define $PREFIX$_API_IMPORT
+        #  define $PREFIX$_API_EXPORT
+        #  define $PREFIX$_API_LOCAL
+        #endif  /* defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__) */
+
+        #ifdef $PREFIX$_DLL
+        #  ifdef $PREFIX$_EXPORTS
+        #    define $PREFIX$_API $PREFIX$_API_EXPORT
+        #  else
+        #    define $PREFIX$_API $PREFIX$_API_IMPORT
+        #  endif  /* $PREFIX$_EXPORTS */
+        #  define $PREFIX$_LOCAL $PREFIX$_API_LOCAL
+        #else
+        #  define $PREFIX$_API
+        #  define $PREFIX$_LOCAL
+        #endif  /* $PREFIX$_DLL */
+
+        $end$
+
+        #undef $PREFIX$_API_IMPORT
+        #undef $PREFIX$_API_EXPORT
+        #undef $PREFIX$_API_LOCAL
+        #undef $PREFIX$_API
+        #undef $PREFIX$_LOCAL]]>
       </Code>
     </Snippet>
   </CodeSnippet>
@@ -809,6 +878,110 @@
           $tokens$.push_back($token$);
         }
         $end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::regex</Title>
+      <Shortcut>regex</Shortcut>
+      <Description>std::regex ...("...")</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Name of variable</ToolTip>
+          <Default>re</Default>
+        </Literal>
+        <Literal>
+          <ID>pattern</ID>
+          <ToolTip>Regex pattern string</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[std::regex $name$("$pattern$");]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::regex match loop</Title>
+      <Shortcut>regexmatchloop</Shortcut>
+      <Description>Expand regex match loop</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>iterator</ID>
+          <ToolTip>Regex iterator</ToolTip>
+          <Default>itr</Default>
+        </Literal>
+        <Literal>
+          <ID>text</ID>
+          <ToolTip>Target string</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>regex</ID>
+          <ToolTip>std::regex object (not temporary object)</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>end</ID>
+          <ToolTip>End of iterator</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[for (std::sregex_iterator $iterator$ = std::sregex_iterator(std::cbegin($text$), std::cend($text$), $regex$), $end$; $iterator$ != $end$; ++$iterator$) {
+          ${0:TARGET}
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>std::regex split loop</Title>
+      <Shortcut>regexsplitloop</Shortcut>
+      <Description>Expand regex split loop</Description>
+      <Author>koturn</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+        <SnippetType>SurroundsWith</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>iterator</ID>
+          <ToolTip>Regex iterator</ToolTip>
+          <Default>itr</Default>
+        </Literal>
+        <Literal>
+          <ID>text</ID>
+          <ToolTip>Target string</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>regex</ID>
+          <ToolTip>std::regex object (not temporary object)</ToolTip>
+        </Literal>
+        <Literal>
+          <ID>end</ID>
+          <ToolTip>End of iterator</ToolTip>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[for (std::sregex_iterator $iterator$ = std::sregex_iterator(std::cbegin($text$), std::cend($text$), $regex$, -1), $end$; $iterator$ != $end$; ++$iterator$) {
+          ${0:TARGET}
+        }]]>
       </Code>
     </Snippet>
   </CodeSnippet>
