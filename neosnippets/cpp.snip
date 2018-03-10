@@ -1112,9 +1112,9 @@ snippet next_permutation
   } while (std::next_permutation(std::begin(${1}), std::end($1)));
 
 snippet time_measurement
-  auto ${1:start} = std::chrono::system_clock::now();
+  const auto ${1:start} = std::chrono::${2:high_resolution_clock}::now();
   ${0:TARGET};
-  double ${2:elapsed} = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() - $1).count();
+  const auto ${3:elapsed} = std::chrono::duration_cast<std::chrono::${4:milliseconds}>(std::chrono::$2::now() - $1).count();
 
 snippet duration_cast
 abbr std::chrono::duration_cast<T>() <chrono>
@@ -1150,6 +1150,42 @@ snippet update_max_if
     ${0:TARGET}
   }
 
+snippet impl_ScopedStopWatch
+  template<
+    typename Duration = std::chrono::milliseconds,
+    typename Clock = std::chrono::high_resolution_clock,
+    typename F = std::function<std::int64_t(Duration, Clock)>
+  >
+  class ${1:ScopedStopWatch} : F
+  {
+  public:
+    explicit $1(F&& f) noexcept
+      : F(std::forward<F>(f))
+      , m_start(Clock::now())
+    {}
+
+    ~$1()
+    {
+      F::operator()(std::chrono::duration_cast<Duration>(Clock::now() - m_start).count());
+    }
+
+  private:
+    const typename Clock::time_point m_start;
+  };  // class $1
+
+
+  template<
+    typename Duration = std::chrono::milliseconds,
+    typename Clock = std::chrono::high_resolution_clock,
+    typename F = std::function<std::int64_t(Duration, Clock)>
+  >
+  static inline decltype(auto)
+  make$1(F&& f) noexcept
+  {
+    return $1<Duration, Clock, F>{std::forward<F>(f)};
+  }
+
+  ${0}
 snippet include
 snippet inc
   #include <${0}>
