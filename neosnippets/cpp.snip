@@ -312,6 +312,9 @@ abbr std::vector<std::valarray<T> > <valarray>
 snippet random
   std::${1:mt19937} ${2:rnd}((std::random_device())())
 
+snippet forward
+  std::forward<${2:decltype($1)}>(${1})
+
 snippet is_void
   std::is_void<${1}>::value
 
@@ -1186,6 +1189,79 @@ snippet impl_ScopedStopWatch
   }
 
   ${0}
+
+
+
+snippet impl_fixpoint
+  #if __cplusplus >= 201703L
+  template<typename... F>
+  class ${1:FixPoint} : F...
+  #else
+  template<typename F>
+  class $1 : F
+  #endif  // __cplusplus >= 201703L
+  {
+  #if __cplusplus >= 201703L
+    using F::operator()...;
+  #else
+    using F::operator();
+  #endif  // __cplusplus >= 201703L
+
+  public:
+  #if __cplusplus >= 201703L
+    explicit constexpr $1(F&&... f) noexcept
+      : F(std::forward<F>(f))...
+    {}
+  #else
+    explicit constexpr $1(F&& f) noexcept
+      : F(std::forward<F>(f))
+    {}
+  #endif  // __cplusplus >= 201703L
+
+    template<typename... Args>
+    constexpr decltype(auto)
+    operator()(Args&&... args) const
+    {
+      return operator()(*this, std::forward<Args>(args)...);
+    }
+  };  // class $1
+
+  template<typename F>
+  static inline constexpr decltype(auto)
+  makeFixPoint(F&& f) noexcept
+  {
+    return $1<F>{std::forward<F>(f)};
+  }
+
+  ${0}
+
+
+snippet ycombinator
+alias ycomb
+  [](auto f) {
+    return [=](auto&&... args) {
+      return f(f, std::forward<decltype(args)>(args)...);
+    };
+  }([${1:&}](auto ${2:f}, ${3:#:args...}) {
+    ${0}
+  })
+
+snippet zcombinator
+alias zcomb
+  [](auto f) {
+    return [=](auto g) {
+      return [=](auto&&... args) {
+        return f(g(g), std::forward<decltype(args)>(args)...);
+      };
+    }([=](auto g) {
+      return [=](auto&&... args) {
+        return f(g(g), std::forward<decltype(args)>(args)...);
+      };
+    });
+  }([${3:&}](auto ${4:f}, ${5:#:args...}) {
+    ${0};
+  })
+
 snippet include
 snippet inc
   #include <${0}>
