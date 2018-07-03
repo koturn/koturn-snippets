@@ -73,7 +73,13 @@ snippet cout2
   std::cout << ${0:TARGET} << '\n';
 
 snippet cout_all
-  std::copy(std::cbegin(${1}), std::cend($1), std::ostream_iterator<const decltype($1)::value_type&>(std::cout, ${2:" "}));
+  if (!${1}.empty()) {
+    std::copy(
+      std::cbegin($1),
+      std::prev(std::cend($1)),
+      std::ostream_iterator<const decltype($1)::value_type&>($1, ${2:" "}));
+    ${3:std\:\:cout} << *std::crbegin($1) << "\n";
+  }
 
 snippet put
   std::cout.put(${0:TARGET})
@@ -92,6 +98,11 @@ snippet endl
 
 snippet flush
   std::cout << std::flush;
+
+snippet init_cppio
+  std::cin.tie(nullptr);
+  std::ios::sync_with_stdio(false);
+  {0}
 
 snippet precision
   std::fixed << std::setprecision(${1}) << ${0:TARGET}
@@ -729,6 +740,11 @@ snippet fn_auto
   ${2:#:fucname}()${3: noexcept} -> ${1:#:rettype}
   {
     ${0:TARGET}
+  }
+
+snippet for_stl
+  for (decltype(${1:#:container})::size_type ${2:i} = ${3:0}; $2 < ${4:$1.size()}; $2++) {
+    ${0}
   }
 
 snippet foreach_const_iterator
@@ -1533,6 +1549,10 @@ snippet include
 snippet inc
   #include <${0}>
 
+snippet include_local
+snippet incl
+  #include "${0}"
+
 snippet include_math
   #ifdef _MSC_VER
   #  define _USE_MATH_DEFINES
@@ -1618,10 +1638,10 @@ snippet def_LOOP
   #define LOOP(n)  for (decltype(n) __loop_tmp_var__ = 0; i < n; i++)
 
 snippet def_REP
-  #define REP(i, n)  for (decltype(n) i = 0; i < n; i++)
+  #define REP(i, n)  for (decltype(n) i = 0; i < (n); i++)
 
 snippet def_FOR
-  #define FOR(i, from, to)  for (decltype(from) i = from; i < to; i++)
+  #define FOR(i, from, to)  for (decltype(from) i = (from); i < (to); i++)
 
 snippet def_CLEAR
   #define CLEAR(array)  std::memset((array), 0, sizeof(array))
@@ -1730,60 +1750,6 @@ snippet impl_stoi
   }  // namespace std
   #endif
 
-snippet impl_gcd
-  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
-  static inline IntType
-  gcd(IntType a, IntType b)
-  {
-  #ifdef __GNUC__
-    return std::__gcd(a, b);  // <algorithm>
-  #else
-    IntType r;
-    while ((r = a % b) != 0) {
-      a = b;
-      b = r;
-    }
-    return a;
-  #endif
-  }
-
-snippet impl_lcm
-  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
-  static inline IntType
-  lcm(IntType a, IntType b)
-  {
-    return a / gcd(a, b) * b;
-  }
-
-snippet impl_powmod
-  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
-  static IntType
-  powmod(IntType a, int p, IntType mod)
-  {
-    IntType ans = 1, mul = a;
-    for (; p > 0; p >>= 1, mul = (mul * mul) % mod) {
-      if ((p & 1) == 1) {
-        ans = (ans * mul) % mod;
-      }
-    }
-    return ans;
-  }
-
-snippet impl_popcnt
-  #ifdef __GNUC__
-  #  define popcnt(n)  __builtin_popcount(n)
-  #else
-  static unsigned int
-  popcnt(unsigned int n)
-  {
-    unsigned int cnt = 0;
-    while (n != 0) {
-      cnt += (n & 0x01);
-      n >>= 1;
-    }
-  }
-  #endif
-
 snippet impl_split
   static std::vector<std::string>
   split(const std::string& str, char delim)
@@ -1829,45 +1795,6 @@ abbr #define LENGTH
   }
   #endif
 
-
-snippet impl_modfact
-  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
-  static IntType
-  modfact(IntType n, IntType mod)
-  {
-    IntType p = 1;
-    for (; n > 0; n--) {
-      p = (p * n) % mod;
-    }
-    return p;
-  }
-
-snippet impl_extgcd
-  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
-  static IntType
-  extgcd(IntType a, IntType b, IntType& x, IntType& y)
-  {
-    IntType v = x = 0;
-    IntType u = y = 1;
-    while (a != 0) {
-      IntType q = b / a;
-      std::swap(x -= q * u, u);
-      std::swap(y -= q * v, v);
-      std::swap(b -= q * a, a);
-    }
-    return b;
-  }
-
-snippet impl_modinv
-  template<typename IntType, typename std::enable_if<std::is_integral<IntType>::value, std::nullptr_t>::type = nullptr>
-  static IntType
-  modinv(IntType a, IntType mod)
-  {
-    IntType x, y;
-    extgcd(a, mod, x, y);
-    return (mod + x % mod) % mod;
-  }
-
 snippet if_cpp11
   #if __cplusplus >= 201103L
   ${0:TARGET}
@@ -1875,6 +1802,11 @@ snippet if_cpp11
 
 snippet if_cpp14
   #if __cplusplus >= 201402L
+  ${0:TARGET}
+  #endif
+
+snippet if_cpp17
+  #if __cplusplus >= 201703L
   ${0:TARGET}
   #endif
 
