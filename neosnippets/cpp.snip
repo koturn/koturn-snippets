@@ -67,10 +67,10 @@ snippet DllMain
   ${0}
 
 snippet cout
-  std::cout << ${0:TARGET} << std::endl;
+  std::cout << ${0} << std::endl;
 
 snippet cout2
-  std::cout << ${0:TARGET} << '\n';
+  std::cout << ${0} << '\n';
 
 snippet cout_all
   if (!${1}.empty()) {
@@ -82,16 +82,16 @@ snippet cout_all
   }
 
 snippet put
-  std::cout.put(${0:TARGET})
+  std::cout.put(${0})
 
 snippet cerr
-  std::cerr << ${0:TARGET} << std::endl;
+  std::cerr << ${0} << std::endl;
 
 snippet clog
-  std::clog << ${0:TARGET} << std::endl;
+  std::clog << ${0} << std::endl;
 
 snippet cin
-  std::cin >> ${0:TARGET};
+  std::cin >> ${0};
 
 snippet endl
   std::cout << std::endl;
@@ -105,17 +105,17 @@ snippet init_cppio
   {0}
 
 snippet precision
-  std::fixed << std::setprecision(${1}) << ${0:TARGET}
+  std::fixed << std::setprecision(${1}) << ${0}
 
 snippet setfill
-  std::setw(${1:#:n}) << std::setfill(${2:'0'}) << ${0:TARGET}
+  std::setw(${1:#:n}) << std::setfill(${2:'0'}) << ${0}
 
 snippet fstream
   std::${1:fstream} ${2:fs}(${3:#:filename}${4:, std::ios::binary});
   if (!$2.is_open()) {
     ${5:std\:\:cerr << "Failed to open\: " << $3 << std\:\:endl;}
   }
-  ${0:TARGET}
+  ${0}
 
 snippet read_all
   std::string ${1:text}((std::istreambuf_iterator<char>(${2:#:stream})), std::istreambuf_iterator<char>())
@@ -132,14 +132,14 @@ snippet itrrange
 snippet class
   class ${1:#:ClassName}
   {
-    $1() noexcept${0:TARGET}
+    $1() noexcept${0}
   };  // class $1
 
 snippet crtp_base
   template<typename ${1:T}>
   class ${2:#:ClassName}
   {
-    ${0:TARGET}
+    ${0}
   };  // class $2
 
 snippet crtp_derived
@@ -148,30 +148,30 @@ snippet crtp_derived
   {
     friend class $2<$1>;
 
-    ${0:TARGET}
+    ${0}
   };  // class $1
 
 snippet constructor
 alias ctor
-  ${1:#:ClassName}() noexcept ${0:TARGET}
+  ${1:#:ClassName}() noexcept ${0}
 
 snippet copy_constructor
 alias copy_ctor
-  ${1:#:ClassName}(const $1& ${2:that}) ${0:TARGET}
+  ${1:#:ClassName}(const $1& ${2:that}) ${0}
 
 snippet move_constructor
 alias move_ctor
-  ${1:#:ClassName}($1&& ${2:that}) noexcept ${0:TARGET}
+  ${1:#:ClassName}($1&& ${2:that}) noexcept ${0}
 
 snippet destructor
 alias dtor
-  ~${1:#:ClassName}() ${0:TARGET}
+  ~${1:#:ClassName}() ${0}
 
 snippet op_assign
-  ${1:#:ClassName}& operator=(const $1&) ${0:TARGET};
+  ${1:#:ClassName}& operator=(const $1&) ${0};
 
 snippet op_move_assign
-  ${1:#:ClassName}& operator=($1&&) noexcept ${0:TARGET};
+  ${1:#:ClassName}& operator=($1&&) noexcept ${0};
 
 snippet op_ostream
   template<typename CharT, typename Traits>
@@ -190,76 +190,76 @@ snippet op_istream
   }
 
 snippet numeric_limits
-  std::numeric_limits<${1:int}>::${0:TARGET}()
+  std::numeric_limits<${1:int}>::${0}()
 
 snippet unique_ptr
 abbr std::unique_ptr<T> <memory>
-  std::unique_ptr<${1}> ${2}(new $1 ${0:TARGET})
+  std::unique_ptr<${1}> ${2}(new $1 ${0})
 
 snippet shared_ptr
 abbr std::shared_ptr<T> <memory>
-  std::shared_ptr<${1}> ${2}(new $1 ${0:TARGET})
+  std::shared_ptr<${1}> ${2}(new $1 ${0})
 
 snippet make_unique
 abbr std::make_unique<T>(...) <memory>
-  std::make_unique<${1}>(${0:TARGET})
+  std::make_unique<${1}>(${0})
 
 snippet make_shared
 abbr std::make_shared<T>(...) <memory>
-  std::make_shared<${1}>(${0:TARGET})
+  std::make_shared<${1}>(${0})
 
 snippet foreach_iterator
   for (std::${1:vector}<${2}>::iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet string
 abbr std::string <string>
-  std::string ${0:TARGET}
+  std::string ${0}
 
 snippet complex
 abbr std::complex<T> <complex>
-  std::complex<${1:double}> ${0:TARGET}
+  std::complex<${1:double}> ${0}
 
 snippet array
 abbr std::array<T, N> <array>
-  std::array<${1:int}, ${2:#:N}> ${0:TARGET}
+  std::array<${1:int}, ${2:#:N}> ${0}
 
 snippet vector
 abbr std::vector<T> <vector>
-  std::vector<${1:int}> ${0:TARGET}
+  std::vector<${1:int}> ${0}
 
 snippet valarray
 abbr std::valarray<T> <valarray>
-  std::valarray<${1:int}> ${0:TARGET}
+  std::valarray<${1:int}> ${0}
 
 snippet bitset
 abbr std::bitset<N> <bitset>
-  std::bitset<${1:8}> ${0:TARGET}
+  std::bitset<${1:8}> ${0}
 
 snippet list
 abbr std::list<T> <list>
-  std::list<${1:int}> ${0:TARGET}
+  std::list<${1:int}> ${0}
 
 snippet forward_list
 abbr std::forward_list<T> <forward_list>
-  std::forward_list<${1:int}> ${0:TARGET}
+  std::forward_list<${1:int}> ${0}
 
 snippet deque
 abbr std::deque<T> <deque>
-  std::deque<${1:int}> ${0:TARGET}
+  std::deque<${1:int}> ${0}
 
 snippet stack
 abbr std::stack<T> <stack>
-  std::stack<${1:int}> ${0:TARGET}
+  std::stack<${1:int}> ${0}
 
 snippet queue
 abbr std::queue<T> <queue>
-  std::queue<${1:int}> ${0:TARGET}
+  std::queue<${1:int}> ${0}
 
 snippet priority_queue
 abbr std::priority_queue<T> <queue>
-  std::priority_queue<${1:int}> ${0:TARGET}
+  std::priority_queue<${1:int}> ${0}
 
 snippet priority_queue2
 abbr std::priority_queue<T> <queue>
@@ -270,47 +270,47 @@ abbr std::priority_queue<T> <queue>
 
 snippet map
 abbr std::map<K, V> <map>
-  std::map<${1:int}, ${2:int}> ${0:TARGET}
+  std::map<${1:int}, ${2:int}> ${0}
 
 snippet unordered_map
 abbr std::unordered_map<K, V> <unordered_map>
-  std::unordered_map<${1:int}, ${2:int}> ${0:TARGET}
+  std::unordered_map<${1:int}, ${2:int}> ${0}
 
 snippet multimap
 abbr std::multimap<K, V> <map>
-  std::multimap<${1:int}, ${2:int}> ${0:TARGET}
+  std::multimap<${1:int}, ${2:int}> ${0}
 
 snippet unordered_multimap
 abbr std::unordered_multimap<K, V> <unordered_map>
-  std::unordered_multimap<${1:int}, ${2:int}> ${0:TARGET}
+  std::unordered_multimap<${1:int}, ${2:int}> ${0}
 
 snippet set
 abbr std::set<T> <set>
-  std::set<${1:int}> ${0:TARGET}
+  std::set<${1:int}> ${0}
 
 snippet unordered_set
 abbr std::unordered_set<T> <unordered_set>
-  std::unordered_set<${1:int}> ${0:TARGET}
+  std::unordered_set<${1:int}> ${0}
 
 snippet multiset
 abbr std::multiset<T> <set>
-  std::multiset<${1:int}> ${0:TARGET}
+  std::multiset<${1:int}> ${0}
 
 snippet unordered_multiset
 abbr std::unordered_multiset<T> <unordered_set>
-  std::unordered_multiset<${1:int}> ${0:TARGET}
+  std::unordered_multiset<${1:int}> ${0}
 
 snippet pair
 abbr std::pair<T1, T2> <utility>
-  std::pair<${1:int}, ${2:int}> ${0:TARGET}
+  std::pair<${1:int}, ${2:int}> ${0}
 
 snippet initializer_list
 abbr std::initializer_list<T> <initializer_list>
-  std::initializer_list<${1:int}> ${0:TARGET}
+  std::initializer_list<${1:int}> ${0}
 
 snippet array2d
 abbr std::array<std::array<T, W>, H> <array>
-  std::array<std::array<${1:int}, ${3:#:W}>, ${2:#:H}> ${0:TARGET}
+  std::array<std::array<${1:int}, ${3:#:W}>, ${2:#:H}> ${0}
 
 snippet vector2d
 abbr std::vector<std::vector<T> > <vector>
@@ -567,7 +567,7 @@ snippet decay
   std::decay<${1}>::type
 
 snippet enable_if
-  typename std::enable_if<${0:TARGET}, std::nullptr_t>::type = nullptr
+  typename std::enable_if<${0}, std::nullptr_t>::type = nullptr
 
 snippet conditional
   std::conditional<${1}>::type
@@ -596,7 +596,7 @@ snippet has_v
   public:
     static bool const value = decltype(check(std::declval<T>()))::value;
   };
-  ${0:TARGET}
+  ${0}
 
 snippet has_static_v
   template<typename T>
@@ -613,7 +613,7 @@ snippet has_static_v
   public:
     static const bool value = decltype(check(std::declval<T>()))::value;
   };
-  ${0:TARGET}
+  ${0}
 
 snippet has_f
   template<typename T>
@@ -630,7 +630,7 @@ snippet has_f
   public:
     static bool const value = decltype(check(std::declval<T>()))::value;
   };
-  ${0:TARGET}
+  ${0}
 
 snippet has_static_f
   template<typename T>
@@ -647,16 +647,16 @@ snippet has_static_f
   public:
     static const bool value = decltype(check(std::declval<T>()))::value;
   };
-  ${0:TARGET}
+  ${0}
 
 snippet thread
   std::thread ${1:#:name}([${2:&}]{
-    ${0:TARGET}
+    ${0}
   });
 
 snippet async
   auto ${1:#:name} = std::async(std::launch::${2:async}, [${3:&}]{
-    ${0:TARGET}
+    ${0}
   });
 
 snippet join
@@ -665,7 +665,7 @@ snippet join
     std::copy(std::cbegin($2), std::prev(std::cend($2)), std::ostream_iterator<const decltype($2)::value_type&>($1, ${3:","}));
     $1 << *std::crbegin($2);
   }
-  ${0:TARGET}
+  ${0}
 
 snippet join_to_string
   ${1}.empty() ? "" : std::accumulate(
@@ -674,7 +674,7 @@ snippet join_to_string
     std::to_string($1[0]),
     [](const std::string& ${2:acc}, const decltype($1)::value_type& ${3:e}) {
       return $2 + ${4:","} + std::to_string($3);
-    })${0:TARGET}
+    })${0}
 
 snippet split
   std::vector<std::string> ${1:tokens};
@@ -684,7 +684,7 @@ snippet split
     $2 = $3 + $4;
   }
   $1.emplace_back($6.substr($2));
-  ${0:TARGET}
+  ${0}
 
 snippet split_by_char
   std::vector<std::string> ${1:tokens};
@@ -692,19 +692,19 @@ snippet split_by_char
   for (std::string ${4:token}; std::getline($2, $4, ${5:','});) {
     $1.push_back($4);
   }
-  ${0:TARGET}
+  ${0}
 
 snippet regex
   std::regex ${1:#:name}("${2:#:pattern}");
 
 snippet regex_match_loop
   for (std::sregex_iterator ${1:itr} = std::sregex_iterator(std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}), ${4:end}; $1 != $4; ++$1) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet regex_split_loop
   for (std::sregex_iterator ${1:itr} = std::sregex_iterator(std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1), ${4:end}; $1 != $4; ++$1) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet regex_match_container
@@ -732,14 +732,14 @@ snippet fn
   ${1:#:rettype}
   ${2:#:fucname}()${3: noexcept}
   {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet fn_auto
   auto
   ${2:#:fucname}()${3: noexcept} -> ${1:#:rettype}
   {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet for_stl
@@ -749,30 +749,30 @@ snippet for_stl
 
 snippet foreach_const_iterator
   for (std::${1:vector}<${2}>::const_iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet foreach_typeof
 abbr foreach_typeof (GNU only)
   for (typeof(${1}.begin()) ${2:itr} = $1.begin(); $2 != $1.end(); ++$2) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet forref
 alias rbf
   for (auto&& ${1:e} : ${2:#:container}) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet forref_c
 alias rbfc
   for (const auto& ${1:e} : ${2:#:container}) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet try
   try {
-    ${0:TARGET}
+    ${0}
   } catch (${1:const std::exception&} ${2:e}) {
     ${3:std::cerr << $2.what() << std::endl;}
   }
@@ -784,7 +784,7 @@ abbr Functional object
     ${2}
     operator()(${3}) const
     {
-      ${0:TARGET}
+      ${0}
     }
   };
 
@@ -795,7 +795,7 @@ abbr Functional object
   public:
     ${2} operator()(${3}) const
     {
-      ${0:TARGET}
+      ${0}
     }
   };
 
@@ -1395,12 +1395,12 @@ snippet toupper_string11
 
 snippet next_permutation
   do {
-    ${0:TARGET}
+    ${0}
   } while (std::next_permutation(std::begin(${1}), std::end($1)));
 
 snippet time_measurement
   const auto ${1:start} = std::chrono::${2:high_resolution_clock}::now();
-  ${0:TARGET};
+  ${0};
   const auto ${3:elapsed} = std::chrono::duration_cast<std::chrono::${4:milliseconds}>(std::chrono::$2::now() - $1).count();
 
 snippet duration_cast
@@ -1410,13 +1410,13 @@ abbr std::chrono::duration_cast<T>() <chrono>
 snippet lock_guard
   {
     std::lock_guard<decltype($2)> ${1:lock}(${2:#:mutex});
-    ${0:TARGET}
+    ${0}
   }
 
 snippet lock_guard_adopt
   {
     std::lock_guard<decltype($2)> ${1:lock}(${2:#:mutex}, std::adopt_lock);
-    ${0:TARGET}
+    ${0}
   }
 
 snippet update_min
@@ -1428,13 +1428,13 @@ snippet update_max
 snippet update_min_if
   if (${1:#:minValue} > ${2:#:newValue}) {
     $1 = $2;
-    ${0:TARGET}
+    ${0}
   }
 
 snippet update_max_if
   if (${1:#:maxValue} < ${2:#:newValue}) {
     $1 = $2;
-    ${0:TARGET}
+    ${0}
   }
 
 snippet impl_ScopedStopWatch
@@ -1573,7 +1573,7 @@ snippet extern_c
   extern "C" {
   #endif  // __cplusplus
 
-  ${0:TARGET}
+  ${0}
 
   #ifdef __cplusplus
   }
@@ -1585,18 +1585,18 @@ snippet constant
 snippet LOOP
 alias loop
   LOOP (${2:#:n}) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet REP
 alias rep
   REP (${1:i}, ${2:#:n}) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet FOR
   FOR (${1:i}, ${2:#:from}, ${3:#:to}) {
-    ${0:TARGET}
+    ${0}
   }
 
 snippet def_dllexport
@@ -1797,27 +1797,27 @@ abbr #define LENGTH
 
 snippet if_cpp11
   #if __cplusplus >= 201103L
-  ${0:TARGET}
+  ${0}
   #endif
 
 snippet if_cpp14
   #if __cplusplus >= 201402L
-  ${0:TARGET}
+  ${0}
   #endif
 
 snippet if_cpp17
   #if __cplusplus >= 201703L
-  ${0:TARGET}
+  ${0}
   #endif
 
 snippet if_gcc
   #ifdef __GNUC__
-  ${0:TARGET}
+  ${0}
   #endif
 
 snippet if_msvc
   #ifdef _MSC_VER
-  ${0:TARGET}
+  ${0}
   #endif
 
 snippet polyfill_likely
@@ -1840,7 +1840,7 @@ snippet polyfill_constexpr_cpp11
   #else
   #  define $1_CONSTEXPR11
   #endif  //  __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
-  ${0:TARGET}
+  ${0}
 
 snippet polyfill_constexpr_cpp14
   #if __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
@@ -1848,7 +1848,7 @@ snippet polyfill_constexpr_cpp14
   #else
   #  define $1_CONSTEXPR14
   #endif  //  __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
-  ${0:TARGET}
+  ${0}
 
 snippet polyfill_override
   #if __cplusplus >= 201103L \
@@ -1880,4 +1880,4 @@ abbr Qt
 
 snippet connect_lambda
 abbr Qt
-  connect(${1:#:sender_ptr}, ${2:&std\:\:remove_pointer<decltype($1)>\:\:type\:\:${3\:\#\:signal\}}, [${4:#:capture}]${5:(${6:#:args\})}{ ${0:TARGET} })
+  connect(${1:#:sender_ptr}, ${2:&std\:\:remove_pointer<decltype($1)>\:\:type\:\:${3\:\#\:signal\}}, [${4:#:capture}]${5:(${6:#:args\})}{ ${0} })
