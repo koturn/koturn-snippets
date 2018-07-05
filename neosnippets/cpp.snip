@@ -77,9 +77,10 @@ snippet cout_all
     std::copy(
       std::cbegin($1),
       std::prev(std::cend($1)),
-      std::ostream_iterator<const decltype($1)::value_type&>($1, ${2:" "}));
-    ${3:std\:\:cout} << *std::crbegin($1) << "\n";
+      std::ostream_iterator<const decltype($1)::value_type&>{${2:std\:\:cout}, ${3:" "}});
+    $2 << *std::crbegin($1) << "\n";
   }
+  ${0}
 
 snippet put
   std::cout.put(${0})
@@ -118,16 +119,16 @@ snippet fstream
   ${0}
 
 snippet read_all
-  std::string ${1:text}((std::istreambuf_iterator<char>(${2:#:stream})), std::istreambuf_iterator<char>())
+  std::string ${1:text}{(std::istreambuf_iterator<char>{${2:#:stream}}), std::istreambuf_iterator<char>{}}
 
 snippet sleep
-  std::this_thread::sleep_for(std::chrono::${1:milliseconds}(${2:1000}));
+  std::this_thread::sleep_for(std::chrono::${1:milliseconds}{${2:1000}});
 
 snippet toppop
   ${1:#:Type} ${2:#:e} = ${3:#:queue}.top(); $3.pop();
 
 snippet itrrange
-  ${1}.begin(), $1.end()
+  std::begin(${1}), std::end($1)
 
 snippet class
   class ${1:#:ClassName}
@@ -263,10 +264,10 @@ abbr std::priority_queue<T> <queue>
 
 snippet priority_queue2
 abbr std::priority_queue<T> <queue>
-  std::priority_queue<${1:int}, std::vector<$1>, std::function<bool (const $1& x, const $1& y)> > ${2}(
-    [](const $1& x, const $1& y) {
-      return ${0:#:x > y};
-    });
+  auto ${1:f} = [](const $5& ${2:x}, const $5& ${3:y}){
+    return ${4:$2 > $3};
+  };
+  std::priority_queue<${5:int}, std::vector<$5>, decltype($1)> ${0}($1);
 
 snippet map
 abbr std::map<K, V> <map>
@@ -321,7 +322,7 @@ abbr std::vector<std::valarray<T> > <valarray>
   std::vector<std::valarray<${1:int}> > ${2:#:varname}(${3:#:height}, std::valarray<$1>(${4:#:width}))
 
 snippet random
-  std::${1:mt19937} ${2:rnd}((std::random_device())())
+  std::${1:mt19937} ${2:rnd}{std::random_device{}()}
 
 snippet forward
   std::forward<${2:decltype($1)}>(${1})
@@ -581,78 +582,26 @@ snippet underlying_type
 snippet result_of
   std::result_of<${1}>::type
 
-snippet has_v
-  template<typename T>
-  struct has_v_${1:#:valueName}
+snippet impl_meta
+  struct ${1:name}_impl
   {
-  private:
-    template<typename U>
+    template<typename T>
     static auto
-    check(U obj) -> decltype(obj.$1, std::true_type{});
+    check(${2}) -> decltype(${3}, std::true_type{});
 
-    static std::false_type
-    check(...);
+    template<typename T>
+    static auto
+    check(...) -> std::false_type;
+  };  // struct $1_impl
 
-  public:
-    static bool const value = decltype(check(std::declval<T>()))::value;
-  };
-  ${0}
-
-snippet has_static_v
   template<typename T>
-  struct has_static_v_${1:#:valueName}
-  {
-  private:
-    template<typename U>
-    static auto
-    check(U) -> decltype(U::$1, std::true_type());
-
-    static std::false_type
-    check(...);
-
-  public:
-    static const bool value = decltype(check(std::declval<T>()))::value;
-  };
-  ${0}
-
-snippet has_f
-  template<typename T>
-  struct has_f_${1:#:funcName}
-  {
-  private:
-    template<typename U>
-    static auto
-    check(U obj) -> decltype(obj.$1(), std::true_type{});
-
-    static std::false_type
-    check(...);
-
-  public:
-    static bool const value = decltype(check(std::declval<T>()))::value;
-  };
-  ${0}
-
-snippet has_static_f
-  template<typename T>
-  struct has_static_f_${1:#:funcName}
-  {
-  private:
-    template<typename U>
-    static auto
-    check(U) -> decltype(U::$1(), std::true_type());
-
-    static std::false_type
-    check(...);
-
-  public:
-    static const bool value = decltype(check(std::declval<T>()))::value;
-  };
-  ${0}
+  class $1 :
+    public decltype($1_impl::check(std::declval<T>())){};
 
 snippet thread
-  std::thread ${1:#:name}([${2:&}]{
+  std::thread ${1:#:name}{[${2:&}]{
     ${0}
-  });
+  }};
 
 snippet async
   auto ${1:#:name} = std::async(std::launch::${2:async}, [${3:&}]{
@@ -688,41 +637,41 @@ snippet split
 
 snippet split_by_char
   std::vector<std::string> ${1:tokens};
-  std::istringstream ${2:iss}(${3:#:string});
+  std::istringstream ${2:iss}{${3:#:string}};
   for (std::string ${4:token}; std::getline($2, $4, ${5:','});) {
     $1.push_back($4);
   }
   ${0}
 
 snippet regex
-  std::regex ${1:#:name}("${2:#:pattern}");
+  std::regex ${1:#:name}{"${2:#:pattern}"};
 
 snippet regex_match_loop
-  for (std::sregex_iterator ${1:itr} = std::sregex_iterator(std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}), ${4:end}; $1 != $4; ++$1) {
+  for (std::sregex_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}}, ${4:end}; $1 != $4; ++$1) {
     ${0}
   }
 
 snippet regex_split_loop
-  for (std::sregex_iterator ${1:itr} = std::sregex_iterator(std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1), ${4:end}; $1 != $4; ++$1) {
+  for (std::sregex_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1}, ${4:end}; $1 != $4; ++$1) {
     ${0}
   }
 
 snippet regex_match_container
-  std::${1:vector}<std::string> ${2:#:name}(std::regex_token_iterator(std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}), std::regex_token_iterator());
+  std::${1:vector}<std::string> ${2:#:name}{std::regex_token_iterator{std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}}, std::regex_token_iterator{}};
 
 snippet regex_split_container
-  std::${1:vector}<std::string> ${2:#:name}(std::regex_token_iterator(std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}, -1), std::regex_token_iterator());
+  std::${1:vector}<std::string> ${2:#:name}{std::regex_token_iterator{std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}, -1}, std::regex_token_iterator{}};
 
 snippet regex_split_back_inserter
   std::copy(
-    std::sregex_token_iterator(std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}),
-    std::sregex_token_iterator(),
+    std::sregex_token_iterator{std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}},
+    std::sregex_token_iterator{},
     std::back_inserter(${3}));
 
 snippet regex_match_back_inserter
   std::copy(
-    std::sregex_token_iterator(std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}, -1),
-    std::sregex_token_iterator(),
+    std::sregex_token_iterator{std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}, -1},
+    std::sregex_token_iterator{},
     std::back_inserter(${3}));
 
 snippet regex_replace
@@ -1303,19 +1252,25 @@ abbr std::replace_if <algorithm>
       return {0};
     }, ${2:#:after});
 
+snippet reverse
+  std::reverse(std::begin(${1}), std::end($1))
+
+snippet rotate
+  std::rotate(std::begin(${1}), std::next(std::begin($1), ${2:1}), std::end($1))
+
 snippet sum
 alias foldl
-  std::accumulate(std::cbegin(${1}), std::cend($1), ${2:decltype($1)::value_type()})
+  std::accumulate(std::cbegin(${1}), std::cend($1), ${2:decltype($1)::value_type{}})
 
 snippet sum11
 alias foldl11
-  std::accumulate(std::begin(${1}), std::end($1), ${2:decltype($1)::value_type()})
+  std::accumulate(std::begin(${1}), std::end($1), ${2:decltype($1)::value_type{}})
 
 snippet foldr
   std::accumulate(
     std::crbegin(${1}),
     std::crend($1),
-    ${2:decltype($1)::value_type()},
+    ${2:decltype($1)::value_type{}},
     [](const auto& ${3:acc}, const auto& ${4:e}) {
       return $4 + acc;
     });
@@ -1324,7 +1279,7 @@ snippet foldr11
   std::accumulate(
     std::rbegin(${1}),
     std::rend($1),
-    ${2:decltype($1)::value_type()},
+    ${2:decltype($1)::value_type{}},
     [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& ${4:e}) {
       return $4 + acc;
     });
@@ -1335,7 +1290,7 @@ abbr std::acumulate <numeric>
   std::accumulate(
     std::cbegin(${1}),
     std::cend($1),
-    ${2:decltype($1)::value_type()},
+    ${2:decltype($1)::value_type{}},
     [](const auto& ${3:acc}, const auto& ${4:e}) {
       return ${5:acc + $4};
     });
@@ -1346,18 +1301,46 @@ abbr std::acumulate <numeric>
   std::accumulate(
     std::begin(${1}),
     std::end($1),
-    ${2:decltype($1)::value_type()},
+    ${2:decltype($1)::value_type{}},
     [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& ${4:e}) {
       return ${5:acc + $4};
     });
 
 snippet inner_product
 abbr std::inner_product <numeric>
-  std::inner_product(std::cbegin(${1}), std::cend($1), std::cbegin(${2}), ${3:decltype($1)::value_type()})
+  std::inner_product(std::cbegin(${1}), std::cend($1), std::cbegin(${2}), ${3:decltype($1)::value_type{}})
 
 snippet inner_product11
 abbr std::inner_product <numeric>
-  std::inner_product(std::begin(${1}), std::end($1), std::begin(${2}), ${3:decltype($1)::value_type()})
+  std::inner_product(std::begin(${1}), std::end($1), std::begin(${2}), ${3:decltype($1)::value_type{}})
+
+snippet inner_product_f
+abbr std::inner_product <numeric>
+  std::inner_product(
+    std::cbegin(${1}),
+    std::cend($1),
+    std::cbegin(${2}),
+    ${3:decltype($1)::value_type{}}
+    [](const auto& ${4:acc}, const auto& ${5:e}){
+      return ${6:$4 + $5};
+    },
+    [](const auto& ${7:x}, const auto& ${8:y}){
+      return ${9:$7 * $8};
+    })${0}
+
+snippet inner_product_f11
+abbr std::inner_product <numeric>
+  std::inner_product(
+    std::cbegin(${1}),
+    std::cend($1),
+    std::cbegin(${2}),
+    ${3:decltype($1)::value_type{}}
+    [](const decltype($1)::value_type& ${4:acc}, const decltype($1)::value_type& ${5:e}){
+      return ${6:$4 + $5};
+    },
+    [](const decltype($1)::value_type& ${7:x}, const decltype($2)::value_type& ${8:y}){
+      return ${9:$7 * $8};
+    })${0}
 
 snippet transform
 alias transform_f map_set select
@@ -1409,13 +1392,13 @@ abbr std::chrono::duration_cast<T>() <chrono>
 
 snippet lock_guard
   {
-    std::lock_guard<decltype($2)> ${1:lock}(${2:#:mutex});
+    std::lock_guard<decltype($2)> ${1:lock}{${2:#:mutex}};
     ${0}
   }
 
 snippet lock_guard_adopt
   {
-    std::lock_guard<decltype($2)> ${1:lock}(${2:#:mutex}, std::adopt_lock);
+    std::lock_guard<decltype($2)> ${1:lock}{${2:#:mutex}, std::adopt_lock};
     ${0}
   }
 
@@ -1779,8 +1762,8 @@ snippet impl_split
 
 snippet impl_LENGTH
 abbr #define LENGTH
-  template<typename ${1:Type}, std::size_t ${2:SIZE}>
-  static std::size_t
+  template<typename ${1:T}, std::size_t ${2:kSize}>
+  static inline std::size_t
   LENGTH(const $1 (&)[$2])
   {
     return $2;
@@ -1788,8 +1771,8 @@ abbr #define LENGTH
 
   #if __cplusplus >= 201103L
   template<typename $1, std::size_t $2>
-  static typename std::array<$1, $2>::size_type
-  LENGTH(const std::array<$1, $2>& ${3:array})
+  static inline constexpr typename std::array<$1, $2>::size_type
+  LENGTH(const std::array<$1, $2>& ${3:array}) noexcept
   {
     return $3.size();
   }
