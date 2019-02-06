@@ -1258,6 +1258,34 @@ abbr std::count_if <algorithm>
       return ${0};
     });
 
+snippet equal
+abbr std::equal <algorithm>
+  std::equal(std::cbegin(${1}), std::cend($1), std::cbegin($2));
+
+snippet equal11
+abbr std::equal <algorithm>
+  std::equal(std::begin(${1}), std::end($1), std::begin($2));
+
+snippet equal_f
+abbr std::equal <algorithm>
+  std::equal(
+    std::cbegin(${1}),
+    std::cend($1),
+    std::cbegin($2),
+    [](const auto& ${3:x}, const auto& ${4:y}) {
+      return ${0:#:x == y};
+    });
+
+snippet equal_f11
+abbr std::equal <algorithm>
+  std::equal(
+    std::begin(${1}),
+    std::end($1),
+    std::begin($2),
+    [](const decltype($1)::value_type& ${3:x}, const decltype($2)::value_type& ${4:y}) {
+      return ${0:#:x == y};
+    });
+
 snippet find
 abbr std::find <algorithm>
   std::find(std::cbegin(${1}), std::cend($1), ${2:#:value})
@@ -1283,6 +1311,62 @@ abbr std::find_if <algorithm>
     std::begin(${1}),
     std::end($1),
     [](const decltype($1)::value_type& ${2:e}) {
+      return ${0};
+    });
+
+snippet lower_bound
+abbr std::lower_bound <algorithm>
+  std::lower_bound(std::cbegin(${1}), std::cend($1), ${2:#:value});
+
+snippet lower_bound11
+abbr std::lower_bound <algorithm>
+  std::lower_bound(std::begin(${1}), std::end($1), ${2:#:value});
+
+snippet lower_bound_f
+abbr std::lower_bound <algorithm>
+  std::lower_bound(
+    std::cbegin(${1}),
+    std::cend($1),
+    ${2:#:value},
+    [](const auto& ${3:e}) {
+      return ${0};
+    });
+
+snippet lower_bound_f11
+abbr std::lower_bound <algorithm>
+  std::lower_bound(
+    std::begin(${1}),
+    std::end($1),
+    ${2:#:value},
+    [](const decltype($1)::value_type& ${3:e}) {
+      return ${0};
+    });
+
+snippet upper_bound
+abbr std::upper_bound <algorithm>
+  std::upper_bound(std::cbegin(${1}), std::cend($1), ${2:#:value});
+
+snippet upper_bound11
+abbr std::upper_bound <algorithm>
+  std::upper_bound(std::begin(${1}), std::end($1), ${2:#:value});
+
+snippet upper_bound_f
+abbr std::upper_bound <algorithm>
+  std::upper_bound(
+    std::cbegin(${1}),
+    std::cend($1),
+    ${2:#:value},
+    [](const auto& ${3:e}) {
+      return ${0};
+    });
+
+snippet upper_bound_f11
+abbr std::upper_bound <algorithm>
+  std::upper_bound(
+    std::begin(${1}),
+    std::end($1),
+    ${2:#:value},
+    [](const decltype($1)::value_type& ${3:e}) {
       return ${0};
     });
 
@@ -1700,40 +1784,74 @@ snippet impl_ScopedStopWatch
     const typename Clock::time_point m_start;
   };  // class $1
 
-
+  namespace
+  {
   template<
     typename Duration = std::chrono::milliseconds,
     typename Clock = std::chrono::high_resolution_clock,
     typename F = std::function<std::int64_t(Duration, Clock)>
   >
-  static inline decltype(auto)
+  inline decltype(auto)
   make$1(F&& f) noexcept
   {
     return $1<Duration, Clock, F>{std::forward<F>(f)};
   }
+  }  // namespace
 
   ${0}
 
 
 snippet impl_fixpoint
+  template<typename F>
+  class ${1:FixPoint} : private F
+  {
+    using F::operator();
+
+  public:
+    explicit constexpr $1(F&& f) noexcept
+      : F(std::forward<F>(f))
+    {}
+
+    template<typename... Args>
+    constexpr decltype(auto)
+    operator()(Args&&... args) const
+    {
+      return operator()(*this, std::forward<Args>(args)...);
+    }
+  };  // class $1
+
+  namespace
+  {
+  template<typename F>
+  inline constexpr decltype(auto)
+  makeFixPoint(F&& f) noexcept
+  {
+    return $1<F>{std::forward<F>(f)};
+  }
+  }  // namespace
+
+  ${0}
+
+
+snippet impl_fixpoint_many
   #if __cplusplus >= 201703L
-  template<typename... F>
-  class ${1:FixPoint} : F...
+  template<typename... Fs>
+  class ${1:FixPoint} : Fs...
   #else
   template<typename F>
   class $1 : F
   #endif  // __cplusplus >= 201703L
   {
   #if __cplusplus >= 201703L
-    using F::operator()...;
+    using Fs::operator()...;
   #else
     using F::operator();
   #endif  // __cplusplus >= 201703L
 
   public:
   #if __cplusplus >= 201703L
-    explicit constexpr $1(F&&... f) noexcept
-      : F(std::forward<F>(f))...
+    explicit constexpr $1(Fs&&... fs) noexcept
+      : Fs(std::forward<Fs>(fs))...
     {}
   #else
     explicit constexpr $1(F&& f) noexcept
@@ -1749,12 +1867,15 @@ snippet impl_fixpoint
     }
   };  // class $1
 
-  template<typename F>
-  static inline constexpr decltype(auto)
-  makeFixPoint(F&& f) noexcept
+  namespace
   {
-    return $1<F>{std::forward<F>(f)};
+  template<typename... Fs>
+  inline constexpr decltype(auto)
+  makeFixPoint(Fs&&... fs) noexcept
+  {
+    return $1<Fs...>{std::forward<Fs>(fs)...};
   }
+  }  // namespace
 
   ${0}
 
@@ -1956,8 +2077,10 @@ snippet def_DUMP
 
 snippet impl_LENGTH
 abbr #define LENGTH
+  namespace
+  {
   template<typename ${1:T}, std::size_t ${2:kSize}>
-  static inline std::size_t
+  inline std::size_t
   LENGTH(const $1 (&)[$2])
   {
     return $2;
@@ -1965,37 +2088,43 @@ abbr #define LENGTH
 
   #if __cplusplus >= 201103L
   template<typename $1, std::size_t $2>
-  static inline constexpr typename std::array<$1, $2>::size_type
+  inline constexpr typename std::array<$1, $2>::size_type
   LENGTH(const std::array<$1, $2>& ${3:array}) noexcept
   {
     return $3.size();
   }
-  #endif
+  #endif // __cplusplus >= 201103L
+  }  // namespace
 
 snippet if_cpp11
   #if __cplusplus >= 201103L
   ${0}
-  #endif
+  #endif  // __cplusplus >= 201103L
 
 snippet if_cpp14
   #if __cplusplus >= 201402L
   ${0}
-  #endif
+  #endif  // __cplusplus >= 201402L
 
 snippet if_cpp17
   #if __cplusplus >= 201703L
   ${0}
-  #endif
+  #endif  // __cplusplus >= 201703L
 
 snippet if_gcc
   #ifdef __GNUC__
   ${0}
-  #endif
+  #endif  // __GNUC__
 
 snippet if_msvc
   #ifdef _MSC_VER
   ${0}
-  #endif
+  #endif  // _MSC_VER
+
+snippet if_cppcli
+  #if defined(_M_CEE) || defined(_MANAGED)
+  ${0}
+  #endif  // defined(_M_CEE) || defined(_MANAGED)
 
 snippet polyfill_likely
   #if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
@@ -2050,6 +2179,49 @@ snippet polyfill_noexcept
   #else
   #  define $1_NOEXCEPT  throw()
   #endif
+
+snippet def_printf_arg_check
+  #if defined(_MSC_VER) && _MSC_VER >= 1400
+  #    include <sal.h>
+  #    if _MSC_VER > 1400
+  #        define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) _Printf_format_string_ fmtarg
+  #    else
+  #        define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) __format_string fmtarg
+  #    endif  //  _MSC_VER > 1400
+  #else
+  #    define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) fmtarg
+  #endif  // _MSC_VER
+
+  #if defined(__GNUC__)
+  #    define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex) __attribute__((format(printf, index, vaIndex)))
+  #else
+  #    define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex)
+  #endif
+
+  ${0}
+
+snippet def_scanf_arg_check
+  #if defined(_MSC_VER) && _MSC_VER >= 1400
+  #    include <sal.h>
+  #    if _MSC_VER > 1400
+  #        define MSVC_CHECK_SCANF_FMTSTR(fmtarg) _Scanf_format_string_ fmtarg
+  #    else
+  #        define MSVC_CHECK_SCANF_FMTSTR(fmtarg) __format_string fmtarg
+  #    endif  //  _MSC_VER > 1400
+  #else
+  #    define MSVC_CHECK_SCANF_FMTSTR(fmtarg) fmtarg
+  #endif  // _MSC_VER
+
+  #if defined(__GNUC__)
+  #    define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex) __attribute__((format(scanf, index, vaIndex)))
+  #else
+  #    define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex)
+  #endif
+
+  ${0}
+
+snippet pragma_comment_lib
+  #pragma comment(lib, ${0})
 
 snippet connect
 abbr Qt
