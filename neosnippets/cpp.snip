@@ -94,12 +94,14 @@ snippet clog
 snippet cin
   std::cin >> ${0};
 
+snippet cinn
+  std::cin >> `join(split(input('Variables> '), ' '), ' >> ')`;
+
 snippet endl
   std::cout << std::endl;
 
 snippet flush
   std::cout << std::flush;
-
 snippet init_cppio
   std::cin.tie(nullptr);
   std::ios::sync_with_stdio(false);
@@ -124,11 +126,39 @@ snippet read_all
 snippet sleep
   std::this_thread::sleep_for(std::chrono::${1:milliseconds}{${2:1000}});
 
+snippet get_datetime
+  const auto ${2:start} = std::chrono::${1:high_resolution_clock}::now();
+  const auto ${3:tick} = std::chrono::$1::to_time_t($2);
+  const auto ${4:datetime} = std::localtime(&$3);
+  const auto ${5:d} = $2.time_since_epoch();
+  const auto ${6:ms} = (std::chrono::duration_cast<std::chrono::milliseconds>($5) - std::chrono::duration_cast<std::chrono::seconds>($5)).count();
+  // std::printf(
+  //   // "%04d/%02d/%02d %02d:%02d:%02d.%03lld\n"
+  //   "%04" PRId32 "/%02" PRId32 "/%02" PRId32 " %02" PRId32 ":%02" PRId32 ":%02" PRId32 ".%03" PRId64 ": %\n",  // <cinttypes>
+  //   datetime->tm_year + 1900,
+  //   datetime->tm_mon + 1,
+  //   datetime->tm_mday,
+  //   datetime->tm_hour,
+  //   datetime->tm_min,
+  //   datetime->tm_sec,
+  //   ms);
+  ${0}
+
+
 snippet toppop
   ${1:#:Type} ${2:#:e} = ${3:#:queue}.top(); $3.pop();
 
 snippet itrrange
   std::begin(${1}), std::end($1)
+
+delete namespace
+snippet namespace
+  namespace ${1}
+  {
+
+  ${0}
+
+  }  // namespace $1
 
 snippet class
   class ${1:#:ClassName}
@@ -1071,8 +1101,8 @@ abbr std::sort <algorithm>
   std::sort(
     std::begin(${1}),
     std::end($1),
-    [](const auto& x, const auto& y) {
-      return ${0:#:x < y};
+    [](const auto& ${2:x}, const auto& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet sort_f11
@@ -1080,8 +1110,8 @@ abbr std::sort <algorithm>
   std::sort(
     std::begin(${1}),
     std::end($1),
-    [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-      return ${0:#:x < y};
+    [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet stable_sort
@@ -1093,8 +1123,8 @@ abbr std::stable_sort <algorithm>
   std::stable_sort(
     std::begin(${1}),
     std::end($1),
-    [](const auto& x, const auto& y) {
-      return ${0:#:x < y};
+    [](const auto& ${2:x}, const auto& ${3:x}) {
+      return ${0:$2 < $3};
     });
 
 snippet stable_sort_f11
@@ -1102,13 +1132,13 @@ abbr std::stable_sort <algorithm>
   std::stable_sort(
     std::begin(${1}),
     std::end($1),
-    [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-      return ${0:#:x < y};
+    [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet shuffle
 abbr std::shuffle <algorithm> <random>
-  std::shuffle(std::begin(${1}), std::end($1), ${2:std\:\:mt19937()})
+  std::shuffle(std::begin(${1}), std::end($1), ${2:std\:\:mt19937{}})
 
 snippet partial_sum
 abbr std::partial_sum <numeric>
@@ -1131,8 +1161,8 @@ abbr std::min_element <algorithm>
   std::min_element(
     std::begin(${1}),
     std::end($1),
-    [](const auto& x, const auto& y) {
-      return ${0:#:x < y};
+    [](const auto& ${2:x}, const auto& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet min_element_f11
@@ -1140,8 +1170,8 @@ abbr std::min_element <algorithm>
   std::min_element(
     std::begin(${1}),
     std::end($1),
-    [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-      return ${0:#:x < y};
+    [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet max_element
@@ -1157,8 +1187,8 @@ abbr std::max_element <algorithm>
   std::max_element(
     std::cbegin(${1}),
     std::cend($1),
-    [](const auto& x, const auto& y) {
-      return ${0:#:x < y};
+    [](const auto& ${2:x}, const auto& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet max_element_f11
@@ -1166,8 +1196,8 @@ abbr std::max_element <algorithm>
   std::max_element(
     std::begin(${1}),
     std::end($1),
-    [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-      return ${0:#:x < y};
+    [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet minmax_element
@@ -1183,8 +1213,8 @@ abbr std::minmax_element <algorithm>
   std::minmax_element(
     std::cbegin(${1}),
     std::cend($1),
-    [](const auto& x, const auto& y) {
-      return ${0:#:x < y};
+    [](const auto& ${2:x}, const auto& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet minmax_element_f11
@@ -1192,8 +1222,8 @@ abbr std::minmax_element <algorithm>
   std::minmax_element(
     std::begin(${1}),
     std::end($1),
-    [](const decltype($1)::value_type& x, const decltype($1)::value_type& y) {
-      return ${0:#:x < y};
+    [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
+      return ${0:$2 < $3};
     });
 
 snippet iota
@@ -1220,7 +1250,7 @@ alias generate_n_f
     });
 
 snippet fill_random
-  std::generate(std::begin(${1}), std::end($1), std::${2:mt19937}((std::random_device())()));
+  std::generate(std::begin(${1}), std::end($1), std::${2:mt19937}{std::random_device{}()});
 
 snippet fill
 abbr std::fill <algorithm>
@@ -1273,7 +1303,7 @@ abbr std::equal <algorithm>
     std::cend($1),
     std::cbegin($2),
     [](const auto& ${3:x}, const auto& ${4:y}) {
-      return ${0:#:x == y};
+      return ${0:$3 == $4};
     });
 
 snippet equal_f11
@@ -1283,7 +1313,7 @@ abbr std::equal <algorithm>
     std::end($1),
     std::begin($2),
     [](const decltype($1)::value_type& ${3:x}, const decltype($2)::value_type& ${4:y}) {
-      return ${0:#:x == y};
+      return ${0:$3 == $4};
     });
 
 snippet find
@@ -1419,6 +1449,78 @@ alias remove_erase_p11 filter11 select11
       }),
     std::end($1));
 
+snippet search
+  std::search(
+    std::cbegin(${1}),
+    std::cend($1),
+    std::cbegin(${2}),
+    std::cend($2));
+
+snippet search11
+  std::search(
+    std::begin(${1}),
+    std::end($1),
+    std::begin(${2}),
+    std::end($2));
+
+snippet search_f
+  std::search(
+    std::cbegin(${1}),
+    std::cend($1),
+    std::cbegin(${2}),
+    std::cend($2),
+    [](const auto& ${3:x}, const auto& ${4:y}) {
+      return ${0:$3 == $4};
+    });
+
+snippet search_f11
+  std::search(
+    std::begin(${1}),
+    std::end($1),
+    std::begin(${2}),
+    std::end($2),
+    [](const auto& ${3:x}, const auto& ${4:y}) {
+      return ${0:$3 == $4};
+    });
+
+snippet set_union
+  std::set_union(
+    std::cbegin(${1}),
+    std::cend($1),
+    std::cbegin(${2}),
+    std::cend($2),
+    std::begin(${3}));
+
+snippet set_union11
+  std::set_union(
+    std::begin(${1}),
+    std::end($1),
+    std::begin(${2}),
+    std::end($2),
+    std::begin(${3}));
+
+snippet set_union_f
+  std::set_union(
+    std::cbegin(${1}),
+    std::cend($1),
+    std::cbegin(${2}),
+    std::cend($2),
+    std::begin(${3}),
+    [](const auto& ${4:x}, const auto& ${5:y}) {
+      return ${0:$4 == $5};
+    });
+
+snippet set_union_f11
+  std::set_union(
+    std::begin(${1}),
+    std::end($1),
+    std::begin(${2}),
+    std::end($2),
+    std::begin(${3}),
+    [](const decltype($1)::value_type& ${4:x}, const decltype($1)::value_type& ${5:y}) {
+      return ${0:$4 == $5};
+    });
+
 snippet unique
 abbr std::unique <algorithm>
   std::unique(std::begin(${1}), std::end($1))
@@ -1429,7 +1531,7 @@ abbr std::unique <algorithm>
     std::begin(${1}),
     std::end($1),
     [](const auto& ${2:x}, const auto& ${3:y}) {
-      return ${0:#:x == y};
+      return ${0:$2 == $3};
     });
 
 snippet unique_f11
@@ -1438,7 +1540,7 @@ abbr std::unique <algorithm>
     std::begin(${1}),
     std::end($1),
     [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
-      return ${0:#:x == y};
+      return ${0:$2 == $3};
     });
 
 snippet unique_erase
@@ -1450,7 +1552,7 @@ snippet unique_erase_f
       std::begin($1),
       std::end($1),
       [](const auto& ${2:x}, const auto& ${3:y}) {
-        return ${0:#:x == y};
+        return ${0:$2 == $3};
       }),
     std::end($1));
 
@@ -1460,7 +1562,7 @@ snippet unique_erase_f11
       std::begin($1),
       std::end($1),
       [](const decltype($1)::value_type& ${2:x}, const decltype($1)::value_type& ${3:y}) {
-        return ${0:#:x == y};
+        return ${0:$2 == $3};
       }),
     std::end($1));
 
@@ -1612,7 +1714,7 @@ abbr std::acumulate <numeric>
     std::cend($1),
     ${2:decltype($1)::value_type{}},
     [](const auto& ${3:acc}, const auto& ${4:e}) {
-      return ${5:acc + $4};
+      return ${5:$3 + $4};
     });
 
 snippet accumulate11
@@ -1623,7 +1725,7 @@ abbr std::acumulate <numeric>
     std::end($1),
     ${2:decltype($1)::value_type{}},
     [](const decltype($1)::value_type& ${3:acc}, const decltype($1)::value_type& ${4:e}) {
-      return ${5:acc + $4};
+      return ${5:$3 + $4};
     });
 
 snippet inner_product
@@ -2182,40 +2284,40 @@ snippet polyfill_noexcept
 
 snippet def_printf_arg_check
   #if defined(_MSC_VER) && _MSC_VER >= 1400
-  #    include <sal.h>
-  #    if _MSC_VER > 1400
-  #        define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) _Printf_format_string_ fmtarg
-  #    else
-  #        define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) __format_string fmtarg
-  #    endif  //  _MSC_VER > 1400
+  #  include <sal.h>
+  #  if _MSC_VER > 1400
+  #    define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) _Printf_format_string_ fmtarg
+  #  else
+  #    define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) __format_string fmtarg
+  #  endif  //  _MSC_VER > 1400
   #else
-  #    define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) fmtarg
+  #  define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) fmtarg
   #endif  // _MSC_VER
 
   #if defined(__GNUC__)
-  #    define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex) __attribute__((format(printf, index, vaIndex)))
+  #  define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex) __attribute__((format(printf, index, vaIndex)))
   #else
-  #    define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex)
+  #  define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex)
   #endif
 
   ${0}
 
 snippet def_scanf_arg_check
   #if defined(_MSC_VER) && _MSC_VER >= 1400
-  #    include <sal.h>
-  #    if _MSC_VER > 1400
-  #        define MSVC_CHECK_SCANF_FMTSTR(fmtarg) _Scanf_format_string_ fmtarg
-  #    else
-  #        define MSVC_CHECK_SCANF_FMTSTR(fmtarg) __format_string fmtarg
-  #    endif  //  _MSC_VER > 1400
+  #  include <sal.h>
+  #  if _MSC_VER > 1400
+  #    define MSVC_CHECK_SCANF_FMTSTR(fmtarg) _Scanf_format_string_ fmtarg
+  #  else
+  #    define MSVC_CHECK_SCANF_FMTSTR(fmtarg) __format_string fmtarg
+  #  endif  //  _MSC_VER > 1400
   #else
-  #    define MSVC_CHECK_SCANF_FMTSTR(fmtarg) fmtarg
+  #  define MSVC_CHECK_SCANF_FMTSTR(fmtarg) fmtarg
   #endif  // _MSC_VER
 
   #if defined(__GNUC__)
-  #    define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex) __attribute__((format(scanf, index, vaIndex)))
+  #  define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex) __attribute__((format(scanf, index, vaIndex)))
   #else
-  #    define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex)
+  #  define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex)
   #endif
 
   ${0}
