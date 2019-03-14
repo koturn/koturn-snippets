@@ -2322,6 +2322,39 @@ snippet def_scanf_arg_check
 
   ${0}
 
+snippet supress_warnings_gcc
+  #if (defined(__GNUC__) && (__GNUC__ > 4 || __GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+  #  define ${1:#:PREFIX}_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+  #endif
+
+  #ifdef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+  #  pragma GCC diagnostic push
+  #  pragma GCC diagnostic ignored "-Weffc++"
+  #  ${0}
+  #endif  // $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+
+  #ifdef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+  #  pragma GCC diagnostic pop
+  #endif  // $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+
+
+  #ifdef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+  #  undef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+  #endif  // $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
+
+snippet supress_warnings_msvc
+  #ifdef _MSC_VER
+  #  pragma warning(push)
+  #  pragma warning(disable: 4505)
+  #endif  // _MSC_VER
+
+  ${0}
+
+  #ifdef _MSC_VER
+  #  pragma warning(pop)
+  #endif  // _MSC_VER
+
+
 snippet pragma_comment_lib
   #pragma comment(lib, ${0})
 
