@@ -2235,6 +2235,10 @@ snippet polyfill_likely
   #  define $1_LIKELY(cond)  (cond)
   #endif
 
+  ${0}
+
+  #undef $1_LIKELY
+
 snippet polyfill_unlikely
   #if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
   #  define ${1:#:PREFIX}_UNLIKELY(cond)  __builtin_expect((cond), 0)
@@ -2242,13 +2246,20 @@ snippet polyfill_unlikely
   #  define $1_UNLIKELY(cond)  (cond)
   #endif
 
+  ${0}
+
+  #undef $1_UNLIKELY
+
 snippet polyfill_constexpr_cpp11
   #if __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
   #  define ${1:#:PREFIX}_CONSTEXPR11 constexpr
   #else
   #  define $1_CONSTEXPR11
   #endif  //  __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
+
   ${0}
+
+  #undef $1_CONSTEXPR11
 
 snippet polyfill_constexpr_cpp14
   #if __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
@@ -2256,7 +2267,10 @@ snippet polyfill_constexpr_cpp14
   #else
   #  define $1_CONSTEXPR14
   #endif  //  __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
+
   ${0}
+
+  #undef $1_CONSTEXPR14
 
 snippet polyfill_override
   #if __cplusplus >= 201103L \
@@ -2266,6 +2280,10 @@ snippet polyfill_override
   #  define $1_OVERRIDE
   #endif
 
+  ${0}
+
+  #undef $1_OVERRIDE
+
 snippet polyfill_nullptr
   #if __cplusplus >= 201103L \
     || defined(_MSC_VER) && _MSC_VER >= 1600
@@ -2273,6 +2291,10 @@ snippet polyfill_nullptr
   #else
   #  define $1_NULLPTR  NULL
   #endif
+
+  ${0}
+
+  #undef $1_NULLPTR
 
 snippet polyfill_noexcept
   #if __cplusplus >= 201103L \
@@ -2282,45 +2304,68 @@ snippet polyfill_noexcept
   #  define $1_NOEXCEPT  throw()
   #endif
 
+  ${0}
+
+  #undef $1_NOEXCEPT
+
 snippet def_printf_arg_check
   #if defined(_MSC_VER) && _MSC_VER >= 1400
   #  include <sal.h>
   #  if _MSC_VER > 1400
-  #    define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) _Printf_format_string_ fmtarg
+  #    define ${1:#:PREFIX}_MSVC_CHECK_PRINTF_FMTSTR(fmtarg) _Printf_format_string_ fmtarg
   #  else
-  #    define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) __format_string fmtarg
+  #    define $1_MSVC_CHECK_PRINTF_FMTSTR(fmtarg) __format_string fmtarg
   #  endif  //  _MSC_VER > 1400
   #else
-  #  define MSVC_CHECK_PRINTF_FMTSTR(fmtarg) fmtarg
-  #endif  // _MSC_VER
+  #  define $1_MSVC_CHECK_PRINTF_FMTSTR(fmtarg) fmtarg
+  #endif  // defined(_MSC_VER) && _MSC_VER >= 1400
 
-  #if defined(__GNUC__)
-  #  define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex) __attribute__((format(printf, index, vaIndex)))
+  #ifdef __GNUC__
+  #  define $1_GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex) __attribute__((format(printf, index, vaIndex)))
   #else
-  #  define GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex)
-  #endif
+  #  define $1_GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex)
+  #endif  // __GNUC__
 
   ${0}
+
+  #undef $1_MSVC_CHECK_PRINTF_FMTSTR
+  #undef $1_GNUC_CHECK_PRINTF_FMTSTR
 
 snippet def_scanf_arg_check
   #if defined(_MSC_VER) && _MSC_VER >= 1400
   #  include <sal.h>
   #  if _MSC_VER > 1400
-  #    define MSVC_CHECK_SCANF_FMTSTR(fmtarg) _Scanf_format_string_ fmtarg
+  #    define ${1:#:PREFIX}_MSVC_CHECK_SCANF_FMTSTR(fmtarg) _Scanf_format_string_ fmtarg
   #  else
-  #    define MSVC_CHECK_SCANF_FMTSTR(fmtarg) __format_string fmtarg
+  #    define $1_MSVC_CHECK_SCANF_FMTSTR(fmtarg) __format_string fmtarg
   #  endif  //  _MSC_VER > 1400
   #else
-  #  define MSVC_CHECK_SCANF_FMTSTR(fmtarg) fmtarg
-  #endif  // _MSC_VER
+  #  define $1_MSVC_CHECK_SCANF_FMTSTR(fmtarg) fmtarg
+  #endif  // defined(_MSC_VER) && _MSC_VER >= 1400
 
-  #if defined(__GNUC__)
-  #  define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex) __attribute__((format(scanf, index, vaIndex)))
+  #ifdef __GNUC__
+  #  define $1_GNUC_CHECK_SCANF_FMTSTR(index, vaIndex) __attribute__((format(scanf, index, vaIndex)))
   #else
-  #  define GNUC_CHECK_SCANF_FMTSTR(index, vaIndex)
-  #endif
+  #  define $1_GNUC_CHECK_SCANF_FMTSTR(index, vaIndex)
+  #endif  // __GNUC__
 
   ${0}
+
+  #undef $1_MSVC_CHECK_SCANF_FMTSTR
+  #undef $1_GNUC_CHECK_SCANF_FMTSTR
+
+snippet def_assume
+  #if defined(_MSC_VER)
+  #  define ${1:#:PREFIX}_ASSUME(x)  __assume(x)
+  #elif defined(assert)
+  #  define $1_ASSUME(x)  assert(x)
+  #else
+  #  define $1_ASSUME(x)
+  #endif  // defined(_MSC_VER)
+
+  ${0}
+
+  #undef $1_ASSUME
 
 snippet supress_warnings_gcc
   #if (defined(__GNUC__) && (__GNUC__ > 4 || __GNUC__ == 4 && __GNUC_MINOR__ >= 6))
