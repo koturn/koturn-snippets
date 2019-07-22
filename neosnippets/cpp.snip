@@ -1858,10 +1858,17 @@ snippet impl_meta
   class $1 :
     public decltype($1_impl::check(std::declval<T>())){};
 
-  #if __cplusplus >= 201402L
+snippet impl_type_metafunc_alias
+  #if __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
   template<typename T>
-  constexpr bool $1_v = $1<T>::value;
-  #endif  // __cplusplus >= 201402L
+  using ${1:name}_t = typename $1<T>::type;
+  #endif  // __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
+
+snippet impl_bool_metafunc_alias
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  template<typename T>
+  inline constexpr bool ${1:name}_v = $1<T>::value;
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
 
 snippet impl_ScopedStopWatch
   template<
@@ -1936,22 +1943,22 @@ snippet impl_fixpoint
 
 
 snippet impl_fixpoint_many
-  #if __cplusplus >= 201703L
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
   template<typename... Fs>
   class ${1:FixPoint} : Fs...
   #else
   template<typename F>
   class $1 : F
-  #endif  // __cplusplus >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
   {
-  #if __cplusplus >= 201703L
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
     using Fs::operator()...;
   #else
     using F::operator();
-  #endif  // __cplusplus >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
 
   public:
-  #if __cplusplus >= 201703L
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
     explicit constexpr $1(Fs&&... fs) noexcept
       : Fs(std::forward<Fs>(fs))...
     {}
@@ -1959,7 +1966,7 @@ snippet impl_fixpoint_many
     explicit constexpr $1(F&& f) noexcept
       : F(std::forward<F>(f))
     {}
-  #endif  // __cplusplus >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
 
     template<typename... Args>
     constexpr decltype(auto)
@@ -2199,19 +2206,19 @@ abbr #define LENGTH
   }  // namespace
 
 snippet if_cpp11
-  #if __cplusplus >= 201103L
+  #if __cplusplus >= 201103L || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L
   ${0}
-  #endif  // __cplusplus >= 201103L
+  #endif  // __cplusplus >= 201103L || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L
 
 snippet if_cpp14
-  #if __cplusplus >= 201402L
+  #if __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
   ${0}
-  #endif  // __cplusplus >= 201402L
+  #endif  // __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
 
 snippet if_cpp17
-  #if __cplusplus >= 201703L
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
   ${0}
-  #endif  // __cplusplus >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
 
 snippet if_gcc
   #ifdef __GNUC__
