@@ -709,22 +709,34 @@ snippet has_virtual_destructor_v
   std::has_virtual_destructor_v<${1}>
 
 snippet is_same
-  std::is_same<${1}>::value
+  std::is_same<${1:#:T1}, ${1:#:T2}>::value
 
 snippet is_same_v
-  std::is_same_v<${1}>
+  std::is_same_v<${1:#:T1}, ${1:#:T2}>
 
 snippet is_base_of
-  std::is_base_of<${1}>::value
+  std::is_base_of<${1:#:BaseClass}, ${2:#:TargetClass}>::value
 
 snippet is_base_of_v
-  std::is_base_of_v<${1}>
+  std::is_base_of_v<${1:#:BaseClass}, ${2:#:TargetClass}>
 
 snippet is_convertible
-  std::is_convertible<${1}>::value
+  std::is_convertible<${1:#:From}, ${2:#:To}>::value
 
 snippet is_convertible_v
-  std::is_convertible_v<${1}>
+  std::is_convertible_v<${1:#:From}, ${2:#:To}>
+
+snippet is_invocable
+  std::is_invocable<${1:#:F}, ${2:#:Args...}>::value
+
+snippet is_invocable_v
+  std::is_invocable_v<${1:#:F}, ${2:#:Args...}>
+
+snippet is_nothrow_invocable
+  std::is_nothrow_invocable<${1:#:F}, ${2:#:Args...}>::value
+
+snippet is_nothrow_invocable_v
+  std::is_nothrow_invocable_v<${1:#:F}, ${2:#:Args...}>
 
 snippet remove_const
   std::remove_const<${1}>::type
@@ -804,6 +816,18 @@ snippet remove_all_extents
 snippet remove_all_extents_t
   std::remove_all_extents_t<${1}>
 
+snippet remove_cvref11
+  std::remove_cv<typename std::remove_reference<${1}>::type>::type
+
+snippet remove_cvref_t14
+  std::remove_cv_t<std::remove_reference_t<${1}>>
+
+snippet remove_cvref
+  std::remove_cvref<${1}>::type
+
+snippet remove_cvref_t
+  std::remove_cvref_t<${1}>
+
 snippet add_pointer
   std::add_pointer<${1}>::type
 
@@ -841,16 +865,16 @@ snippet enable_if_t
   typename std::enable_if_t<${0}, std::nullptr_t> = nullptr
 
 snippet conditional
-  std::conditional<${1}>::type
+  std::conditional<${1:#:bool_metafunc}, ${2:#:true_type}, ${3:#:false_type}>::type
 
 snippet conditional_t
-  std::conditional_t<${1}>
+  std::conditional_t<${1:#:bool_metafunc}, ${2:#:true_type}, ${3:#:false_type}>
 
 snippet common_type
-  std::common_type<${1}>::type
+  std::common_type<${1:#:Args...}>::type
 
 snippet common_type_t
-  std::common_type_t<${1}>
+  std::common_type_t<${1:#:Args...}>
 
 snippet underlying_type
   std::underlying_type<${1}>::type
@@ -859,10 +883,22 @@ snippet underlying_type_t
   std::underlying_type_t<${1}>
 
 snippet result_of
-  std::result_of<${1}>::type
+  std::result_of<${1:#:F}(${2:#:Args...})>::type
 
 snippet result_of_t
-  std::result_of_t<${1}>
+  std::result_of_t<${1:#:F}(${2:#:Args...})>
+
+snippet invoke_result
+  std::invoke_result<${1:#:F}, ${2:#:Args...}>::type
+
+snippet invoke_result_t
+  std::invoke_result_t<${1:#:F}, ${2:#:Args...}>
+
+snippet bool_constant11
+  std::conditional<${1:#:bool_metafunc}, std::true_type, std::false_type>
+
+snippet bool_constant
+  std::bool_constant<${1:#:bool_metafunc}>
 
 snippet thread
   std::thread ${1:#:name}{[${2:&}]{
