@@ -96,6 +96,7 @@ snippet cin
 
 snippet cinn
   std::cin >> `join(split(input('Variables> '), ' '), ' >> ')`;
+  ${0}
 
 snippet endl
   std::cout << std::endl;
@@ -949,12 +950,12 @@ snippet regex
   std::regex ${1:#:name}{"${2:#:pattern}"};
 
 snippet regex_match_loop
-  for (std::sregex_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}}, ${4:end}; $1 != $4; ++$1) {
+  for (std::sregex_token_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}}, ${4:end}; $1 != $4; ++$1) {
     ${0}
   }
 
 snippet regex_split_loop
-  for (std::sregex_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1}, ${4:end}; $1 != $4; ++$1) {
+  for (std::sregex_token_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1}, ${4:end}; $1 != $4; ++$1) {
     ${0}
   }
 
@@ -1901,10 +1902,12 @@ snippet impl_type_metafunc_alias
   #endif  // __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
 
 snippet impl_bool_metafunc_alias
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #if __cplusplus >= 201703L \
+    || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
+    || defined(__cpp_inline_variables)
   template<typename T>
   inline constexpr bool ${1:name}_v = $1<T>::value;
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_inline_variables)
 
 snippet impl_ScopedStopWatch
   template<
@@ -1946,12 +1949,119 @@ snippet impl_ScopedStopWatch
   ${0}
 
 
+snippet impl_finally
+  template<typename F>
+  class
+  #if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+  [[nodiscard]]
+  #elif defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+  __attribute__((warn_unused_result))
+  #endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+  ${1:Finally} final
+  {
+  private:
+  #if defined(__cplusplus) && __cplusplus >= 201703L \
+    || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
+    || defined(__cpp_lib_is_invocable)
+    static_assert(std::is_invocable_v<F>, "[$1] Finally function must be callable with no arguments.");
+  #else
+    struct is_invocable_impl
+    {
+      template<typename T, typename... Args>
+      static auto
+      check(T&& obj, Args&&... args) -> decltype(obj(std::forward<Args>(args)...), std::true_type{});
+
+      template<typename...>
+      static auto
+      check(...) -> std::false_type;
+    };  // struct is_invocable_impl
+
+    template<typename T, typename... Args>
+    class is_invocable
+      : public decltype(is_invocable_impl::check(std::declval<T>(), std::declval<Args>()...))
+    {};
+
+    static_assert(is_invocable<F>::value, "[$1] Finally function must be callable with no arguments.");
+  #endif
+
+  public:
+    explicit $1(F&& f)
+  #if defined(__cplusplus) && __cplusplus >= 201103L \
+    || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L \
+    || defined(_MSC_VER) && (_MSC_VER > 1800 || (_MSC_VER == 1800 && _MSC_FULL_VER == 180021114))
+      noexcept
+  #else
+      throw()
+  #endif
+      : f_(std::forward<F>(f))
+    {}
+
+    ~$1()
+    {
+      f_();
+    }
+
+    $1(const $1&) = delete;
+    $1& operator=(const $1&) = delete;
+
+  #if defined(_MSC_VER) && _MSC_VER == 1800
+    $1($1&& other) throw()
+      : f_{std::move(other.f_)}
+    {}
+
+    $1&
+    operator=($1&& rhs) throw()
+    {
+      f_ = std::move(rhs.f_);
+      return *this;
+    }
+  #else
+    $1($1&&) = default;
+    $1& operator=($1&&) = default;
+  #endif  // defined(_MSC_VER) && _MSC_VER == 1800
+
+  template<typename... Args>
+  static void*
+  operator new(std::size_t, Args&&...) = delete;
+
+  template<typename... Args>
+  static void
+  operator delete(void*, Args&&...) = delete;
+
+  private:
+    const F f_;
+  };  // class $1
+
+  namespace
+  {
+  template<typename F>
+  inline $1<F>
+  make$1(F&& f)
+  #if defined(__cplusplus) && __cplusplus >= 201103 \
+    || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L \
+    || defined(_MSC_VER) && (_MSC_VER > 1800 || (_MSC_VER == 1800 && _MSC_FULL_VER == 180021114))
+    noexcept
+  #else
+    throw()
+  #endif
+  {
+    return $1<F>{std::forward<F>(f)};
+  }
+  }  // namespace
+
+  ${0}
+
+
 snippet impl_fixpoint
   template<typename F>
-  class ${1:FixPoint} : private F
+  class
+  #if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+  [[nodiscard]]
+  #elif defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+  __attribute__((warn_unused_result))
+  #endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+  ${1:FixPoint} final : private F
   {
-    using F::operator();
-
   public:
     explicit constexpr $1(F&& f) noexcept
       : F(std::forward<F>(f))
@@ -1960,8 +2070,11 @@ snippet impl_fixpoint
     template<typename... Args>
     constexpr decltype(auto)
     operator()(Args&&... args) const
+  #if !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
+      noexcept(noexcept(F::operator()(std::declval<FixPoint>(), std::declval<Args>()...)))
+  #endif  // !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
     {
-      return operator()(*this, std::forward<Args>(args)...);
+      return F::operator()(*this, std::forward<Args>(args)...);
     }
   };  // class $1
 
@@ -1969,7 +2082,7 @@ snippet impl_fixpoint
   {
   template<typename F>
   inline constexpr decltype(auto)
-  makeFixPoint(F&& f) noexcept
+  fix(F&& f) noexcept
   {
     return $1<F>{std::forward<F>(f)};
   }
@@ -1979,22 +2092,32 @@ snippet impl_fixpoint
 
 
 snippet impl_fixpoint_many
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
   template<typename... Fs>
-  class ${1:FixPoint} : Fs...
   #else
   template<typename F>
-  class $1 : F
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+  class
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
+    || defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+  [[nodiscard]]
+  #elif defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+  __attribute__((warn_unused_result))
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+  ${1:FixPoint} final : private Fs...
+  #else
+  $1 final : private F
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
   {
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
     using Fs::operator()...;
   #else
     using F::operator();
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
 
   public:
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
     explicit constexpr $1(Fs&&... fs) noexcept
       : Fs(std::forward<Fs>(fs))...
     {}
@@ -2002,11 +2125,14 @@ snippet impl_fixpoint_many
     explicit constexpr $1(F&& f) noexcept
       : F(std::forward<F>(f))
     {}
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
 
     template<typename... Args>
     constexpr decltype(auto)
     operator()(Args&&... args) const
+  #if !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
+      noexcept(noexcept(operator()(std::declval<FixPoint>(), std::declval<Args>()...)))
+  #endif  // !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
     {
       return operator()(*this, std::forward<Args>(args)...);
     }
@@ -2016,7 +2142,7 @@ snippet impl_fixpoint_many
   {
   template<typename... Fs>
   inline constexpr decltype(auto)
-  makeFixPoint(Fs&&... fs) noexcept
+  fix(Fs&&... fs) noexcept
   {
     return $1<Fs...>{std::forward<Fs>(fs)...};
   }
@@ -2398,13 +2524,17 @@ snippet def_scanf_arg_check
   #undef $1_GNUC_CHECK_SCANF_FMTSTR
 
 snippet def_assume
-  #if defined(_MSC_VER)
-  #  define ${1:#:PREFIX}_ASSUME(x)  __assume(x)
+  #if defined(NDEBUG)
+  #  ifdef _MSC_VER
+  #    define ${1:#:PREFIX}_ASSUME(x)  __assume(x)
+  #  else
+  #    define $1_ASSUME(x)
+  #  endif  // _MSC_VER
   #elif defined(assert)
   #  define $1_ASSUME(x)  assert(x)
   #else
   #  define $1_ASSUME(x)
-  #endif  // defined(_MSC_VER)
+  #endif  // defined(NDEBUG)
 
   ${0}
 
