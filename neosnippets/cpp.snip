@@ -1327,18 +1327,18 @@ abbr std::count_if <algorithm>
 
 snippet equal
 abbr std::equal <algorithm>
-  std::equal(std::cbegin(${1}), std::cend($1), std::cbegin($2));
+  std::equal(std::cbegin(${1}), std::cend($1), std::cbegin(${2}));
 
 snippet equal11
 abbr std::equal <algorithm>
-  std::equal(std::begin(${1}), std::end($1), std::begin($2));
+  std::equal(std::begin(${1}), std::end($1), std::begin(${2}));
 
 snippet equal_f
 abbr std::equal <algorithm>
   std::equal(
     std::cbegin(${1}),
     std::cend($1),
-    std::cbegin($2),
+    std::cbegin(${2}),
     [](const auto& ${3:x}, const auto& ${4:y}) {
       return ${0:$3 == $4};
     });
@@ -1348,7 +1348,7 @@ abbr std::equal <algorithm>
   std::equal(
     std::begin(${1}),
     std::end($1),
-    std::begin($2),
+    std::begin(${2}),
     [](const decltype($1)::value_type& ${3:x}, const decltype($2)::value_type& ${4:y}) {
       return ${0:$3 == $4};
     });
@@ -2491,6 +2491,25 @@ snippet polyfill_noexcept
   ${0}
 
   #undef $1_NOEXCEPT
+
+snippet polyfill_inline_var
+  #if __cplusplus > 201703L \
+    || defined(_MSVC_LANG) && _MSVC_LANG > 201703L \
+    || defined(__cpp_inline_variables)
+  #  define ${1:#:NAME}_INLINE_VAR  inline
+  #elif defined(_MSC_VER)
+  #  define $1_INLINE_VAR  __declspec(selectany)
+  #elif defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
+  #  define $1_INLINE_VAR  __attribute__((selectany))
+  #else defined(__GNUC__)
+  #  define $1_INLINE_VAR  __attribute__((weak))
+  #else
+  #  define $1_INLINE_VAR  static
+  #endif
+
+  ${0}
+
+  #undef $1_INLINE_VAR
 
 snippet def_likely_if
   #if __cplusplus > 201703L \
