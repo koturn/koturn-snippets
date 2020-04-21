@@ -4,6 +4,7 @@ delete class
 delete main
 delete p
 delete try
+delete static_assert
 
 snippet main
   int
@@ -151,6 +152,12 @@ snippet toppop
 
 snippet itrrange
   std::begin(${1}), std::end($1)
+
+snippet static_assert
+  static_assert(${1:#:condition}, "${2:#:message}");
+
+snippet static_assert_false
+  static_assert([]{ return false; }(), "${2:#:message}");
 
 delete namespace
 snippet namespace
