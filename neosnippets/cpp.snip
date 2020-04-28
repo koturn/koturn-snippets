@@ -1976,8 +1976,6 @@ snippet impl_finally
   class
   #if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
   [[nodiscard]]
-  #elif defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
-  __attribute__((warn_unused_result))
   #endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
   ${1:Finally} final
   {
@@ -2015,7 +2013,7 @@ snippet impl_finally
   #else
       throw()
   #endif
-      : f_(std::forward<F>(f))
+      : f_{std::forward<F>(f)}
     {}
 
     ~$1()
@@ -2057,6 +2055,13 @@ snippet impl_finally
   namespace
   {
   template<typename F>
+  #if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
+  #  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+  __attribute__((warn_unused_result))
+  #  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
+  _Check_return_
+  #  endif
+  #endif
   inline $1<F>
   make$1(F&& f)
   #if defined(__cplusplus) && __cplusplus >= 201103 \
@@ -2079,14 +2084,12 @@ snippet impl_fixpoint
   class
   #if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
   [[nodiscard]]
-  #elif defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
-  __attribute__((warn_unused_result))
   #endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
   ${1:FixPoint} final : private F
   {
   public:
     explicit constexpr $1(F&& f) noexcept
-      : F(std::forward<F>(f))
+      : F{std::forward<F>(f)}
     {}
 
     template<typename... Args>
@@ -2103,6 +2106,13 @@ snippet impl_fixpoint
   namespace
   {
   template<typename F>
+  #if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
+  #  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+  __attribute__((warn_unused_result))
+  #  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
+  _Check_return_
+  #  endif
+  #endif
   inline constexpr decltype(auto)
   fix(F&& f) noexcept
   {
@@ -2123,8 +2133,6 @@ snippet impl_fixpoint_many
   #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
     || defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
   [[nodiscard]]
-  #elif defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
-  __attribute__((warn_unused_result))
   #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
   #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
   ${1:FixPoint} final : private Fs...
@@ -2141,11 +2149,11 @@ snippet impl_fixpoint_many
   public:
   #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
     explicit constexpr $1(Fs&&... fs) noexcept
-      : Fs(std::forward<Fs>(fs))...
+      : Fs{std::forward<Fs>(fs)}...
     {}
   #else
     explicit constexpr $1(F&& f) noexcept
-      : F(std::forward<F>(f))
+      : F{std::forward<F>(f)}
     {}
   #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
 
@@ -2163,6 +2171,13 @@ snippet impl_fixpoint_many
   namespace
   {
   template<typename... Fs>
+  #if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
+  #  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+  __attribute__((warn_unused_result))
+  #  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
+  _Check_return_
+  #  endif
+  #endif
   inline constexpr decltype(auto)
   fix(Fs&&... fs) noexcept
   {
