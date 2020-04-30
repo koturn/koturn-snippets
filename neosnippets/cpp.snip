@@ -2520,11 +2520,11 @@ snippet polyfill_inline_var
     || defined(__cpp_inline_variables)
   #  define ${1:#:NAME}_INLINE_VAR  inline
   #elif defined(_MSC_VER)
-  #  define $1_INLINE_VAR  __declspec(selectany)
-  #elif defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
-  #  define $1_INLINE_VAR  __attribute__((selectany))
+  #  define $1_INLINE_VAR  __declspec(selectany) extern
+  #elif defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
+  #  define $1_INLINE_VAR  __attribute__((selectany)) extern
   #else defined(__GNUC__)
-  #  define $1_INLINE_VAR  __attribute__((weak))
+  #  define $1_INLINE_VAR  __attribute__((weak)) extern
   #else
   #  define $1_INLINE_VAR  static
   #endif
