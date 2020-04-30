@@ -5,8 +5,36 @@ snippet shebang
   ${0}
 
 snippet main
-  if __name__ == '__main__':
+  def main():
       ${0}
+
+  if __name__ == '__main__':
+      main()
+
+snippet fn
+  def ${1:#:name}(${2:#:args}):
+      ${0}
+
+snippet getter
+  @property
+  def ${1:#:name}(self):
+      return self.${2:__$1}
+
+  ${0}
+
+snippet setter
+  @$1.setter
+  def ${1:#:name}(self, ${2:$1}):
+      self.${3:__$1} = $2
+
+  ${0}
+
+snippet deleter
+  @$1.deleter
+  def ${1:#:name}(self):
+      self.${2:__$1} = ${3:None}
+
+  ${0}
 
 snippet condexpr
   ${1:#:true_value} if ${2:#:cond} else ${3:#:false_value}
