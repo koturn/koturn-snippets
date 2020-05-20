@@ -74,6 +74,16 @@ snippet cout2
   std::cout << ${0} << '\n';
 
 snippet cout_all
+  if (!std::empty(${1})) {
+    std::copy(
+      std::cbegin($1),
+      std::prev(std::cend($1)),
+      std::ostream_iterator<const decltype($1)::value_type&>{${2:std\:\:cout}, ${3:" "}});
+    $2 << *std::crbegin($1) << "\n";
+  }
+  ${0}
+
+snippet cout_all14
   if (!${1}.empty()) {
     std::copy(
       std::cbegin($1),
@@ -870,7 +880,7 @@ snippet enable_if
   typename std::enable_if<${0}, std::nullptr_t>::type = nullptr
 
 snippet enable_if_t
-  typename std::enable_if_t<${0}, std::nullptr_t> = nullptr
+  std::enable_if_t<${0}, std::nullptr_t> = nullptr
 
 snippet conditional
   std::conditional<${1:#:bool_metafunc}, ${2:#:true_type}, ${3:#:false_type}>::type
@@ -920,6 +930,14 @@ snippet async
 
 snippet join
   std::ostringstream ${1:oss};
+  if (!std::empty(${2})) {
+    std::copy(std::cbegin($2), std::prev(std::cend($2)), std::ostream_iterator<const decltype($2)::value_type&>($1, ${3:","}));
+    $1 << *std::crbegin($2);
+  }
+  ${0}
+
+snippet join14
+  std::ostringstream ${1:oss};
   if (!${2}.empty()) {
     std::copy(std::cbegin($2), std::prev(std::cend($2)), std::ostream_iterator<const decltype($2)::value_type&>($1, ${3:","}));
     $1 << *std::crbegin($2);
@@ -927,12 +945,21 @@ snippet join
   ${0}
 
 snippet join_to_string
+  std::empty(${1}) ? "" : std::accumulate(
+    std::next(std::cbegin($1)),
+    std::cend($1),
+    std::to_string($1[0]),
+    [](const std::string& ${2:acc}, const decltype($1)::value_type& ${3:e}) {
+      return $2 + std::string{${4:","}} + std::to_string($3);
+    })${0}
+
+snippet join_to_string14
   ${1}.empty() ? "" : std::accumulate(
     std::next(std::cbegin($1)),
     std::cend($1),
     std::to_string($1[0]),
     [](const std::string& ${2:acc}, const decltype($1)::value_type& ${3:e}) {
-      return $2 + ${4:","} + std::to_string($3);
+      return $2 + std::string{${4:","}} + std::to_string($3);
     })${0}
 
 snippet split
@@ -1916,17 +1943,17 @@ snippet impl_bool_metafunc_alias
   inline constexpr bool ${1:name}_v = $1<T>::value;
   #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_inline_variables)
 
-snippet impl_lazy_false
-  template<typename T>
-  struct lazy_false
+snippet impl_always_false
+  template<typename... T>
+  struct always_false
     : std::false_type
   {};
 
   #if __cplusplus >= 201703L \
     || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
     || defined(__cpp_inline_variables)
-  template<typename T>
-  inline constexpr bool lazy_false_v = lazy_false<T>::value;
+  template<typename... T>
+  inline constexpr bool always_false_v = always_false<T...>::value;
   #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_inline_variables)
 
   ${0}
