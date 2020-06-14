@@ -1,0 +1,497 @@
+delete property
+delete for
+delete foreach
+delete try_catch
+delete try_catch_finally
+delete try_finally
+delete lock
+delete using
+delete unsafe
+delete fixed
+
+snippet classSingleton
+abbr singleton
+  /// <summary>
+  /// Description of $1.
+  /// </summary>
+  public sealed class ${1:ClassName}
+  {
+    public static $1 ${2:Instance} { get; private set; }
+
+    static $1()
+    {
+      $2 = new $1();
+    }
+
+    private $1()
+    {
+      ${0}
+    }
+  }
+
+snippet property
+alias prop
+abbr public Type Name { get; set; } (C# 3)
+  ${1:public} ${2:#:Type} ${3:#:Name} { get; set; }${0}
+
+snippet propertyFull
+alias propFull
+abbr public Type Name { get { return propVar; } set { propVar = value; } }
+  ${1:public} ${2:#:Type} ${3:#:Name}
+  {
+    get { return ${4:#:memberVar}; }
+    set { $4 = value; }
+  }${0}
+
+snippet propertyReadOnly
+alias propRead
+abbr public Type Name { get; private set; } (C# 3)
+  ${1:public} ${2:#:Type} ${3:#:Name} { get; private set; }${0}
+
+snippet propertyGetOnly
+alias propGet propGetOnly
+abbr public Type Name { get; private get; } (C# 6)
+  ${1:public} ${2:#:Type} ${3:#:Name} { get; }${0}
+
+snippet propertyExpr
+alias propExpr
+abbr public Type Name => Expr; (C# 6)
+  ${1:public} ${2:#:Type} ${3:#:Name} => ${4:#:Expr};
+
+snippet using
+abbr using (var varName = resource) { ... }
+  using (var ${1:#:varName} = ${2:#:resource})
+  {
+    ${0}
+  }
+
+snippet usingStreamWriter
+  using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Create}, FileAccess.${4:Write}, FileShare.${5:Read}))
+  using (var ${6:sw} = new StreamWriter($1))
+  {
+    ${0}
+  }
+
+snippet usingStreamReader
+  using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Open}, FileAccess.${4:Read}, FileShare.${5:Read}))
+  using (var ${6:sr} = new StreamReader($1))
+  {
+    ${0}
+  }
+
+snippet for
+abbr for (int i = 0; i < max; i++) { ... }
+  for (${1:int} ${2:i} = ${3:0}; $2 < ${4:#:max}; ${5:$2++})
+  {
+    ${0}
+  }
+
+snippet foreach
+abbr for (var x in enumerable) { ... }
+alias fore
+  for (var ${1:#:x} in ${2:#:enumerable})
+  {
+    ${0}
+  }
+
+snippet try_catch
+alias try
+abbr try { ... } catch (Exception e) { ... }
+options head
+  try
+  {
+    ${0}
+  }
+  catch (${1:Exception} ${2:e})
+  {
+    ${3:Console.Error.WriteLine(e.Message);}
+  }
+
+snippet try_catch_finally
+alias try_cf
+abbr try { ... } catch (Exception e) { ... } finally { ... }
+options head
+  try
+  {
+    ${0}
+  }
+  catch (${1:Exception} ${2:e})
+  {
+    ${3:Console.Error.WriteLine(e.Message);}
+  }
+  finally
+  {
+    ${4}
+  }
+
+snippet try_finally
+alias try_f
+abbr try { ... } finally { ... }
+options head
+  try
+  {
+    ${0}
+  }
+  finally
+  {
+    ${4}
+  }
+
+snippet lock
+abbr lock (resource) { ... }
+  lock (${1:#:resource})
+  {
+    ${0}
+  }
+
+snippet unsafe
+abbr unsafe { ... }
+  unsafe
+  {
+    ${0}
+  }
+
+snippet fixed
+abbr fixed { type* ptr = address } { ... }
+  fixed (${1:#:Type}* ${2:ptr} = ${3:#:address})
+  {
+    ${0}
+  }
+
+snippet TaskRun
+abbr Task.Run(() => { ... });
+  Task.Run(() =>
+  {
+    ${0}
+  });
+
+snippet TaskRun2
+abbr Task.Run(() => { ... }, token);
+  var ${1:cts} = new CancellationTokenSource();
+  var ${2:cancelToken} = $1.Token;
+  Task.Run(() =>
+  {
+    ${0}
+    // $2.ThrowIfCancellationRequested();
+    if ($2.IsCancellationRequested)
+    {
+    }
+  }, $2);
+
+snippet docComment
+alias doc
+abbr /// <summary>...</summary>
+  /// <summary>
+  /// ${0}
+  /// </summary>
+
+snippet inline
+abbr [MethodImpl(MethodImplOptions.AggressiveInlining)]
+  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
+snippet noinline
+abbr [MethodImpl(MethodImplOptions.NoInlining)]
+  [MethodImpl(MethodImplOptions.NoInlining)]
+
+snippet attrDllImport
+abbr [DllImport("Foo.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
+  [DllImport("${1:#:DllName}"${2:, CharSet = CharSet.Unicode}${3:, ExactSpelling = true})]${0}
+
+snippet attrConditional
+abbr [Conditional]
+  [Conditional("${1:DEBUG}")]
+
+snippet attrSuppressUnmanagedCodeSecurity
+abbr [SuppressUnmanagedCodeSecurity]
+  [SuppressUnmanagedCodeSecurity]
+
+snippet attrObsolete
+abbr [Obsolete("Description")]
+  [Obsolete("${1}")]${0}
+
+snippet attrNonSerialized
+abbr [NonSerialized]
+  [NonSerialized]
+
+snippet attrSerializeField
+abbr [SerializeField] (Unity)
+  [SerializeField]
+
+snippet attrHideInInspector
+abbr [HideInInspector] (Unity)
+  [HideInInspector]
+
+snippet attrRequiredComponent
+abbr [RequiredComponent(typeof(Type))] (Unity)
+  [RequiredComponent(typeof(${1:#:Type}))]${0}
+
+snippet attrTooltip
+abbr [Tooltip("Description")] (Unity)
+  [Tooltip("${1}")]${0}
+
+snippet attrHeader
+abbr [Header("Description")] (Unity)
+  [Header("${1}")]${0}
+
+snippet InvokeEvent
+abbr Event?.Invoke(...); (C# 6)
+  ${1:#:Event}?.Invoke(${2:#:args...});
+
+snippet InvokeEventCs5
+abbr var handler = Event; if (hander != null) { handler(...); }
+  var ${1:handler} = ${2:#:Event};
+  if ($1 != null)
+  {
+    $1(${3:#:args...});
+  }
+
+snippet ImplDispose
+abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose() { ... }
+  #region IDisposable Support
+  /// <summary>
+  /// A flag property which indicates this instance is disposed or not.
+  /// </summary>
+  public bool ${1:IsDisposed} { get; private set; }
+
+  /// <summary>
+  /// Dispose method
+  /// </summary>
+  /// <param name="$2">A flag that indicates this method is called from Dispose or finalizer</param>
+  protected virtual void Dispose(bool ${2:disposing})
+  {
+    if ($1)
+    {
+      return;
+    }
+    if ($2)
+    {
+      // TODO: dispose managed state (managed objects)
+      ${0};
+    }
+    // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+    // TODO: set large fields to null
+    $1 = true;
+  }
+
+  // TODO: override finalizer only if 'Dispose(bool $2)' has code to free unmanaged resources
+  // /// <summary>
+  // /// Finalizer. Dispose unmanaged resources.
+  // /// </summary>
+  // ~${3:#:ClassName}()
+  // {
+  //     // Do not change this code. Put cleanup code in 'Dispose(bool $2)' method
+  //     Dispose(false);
+  // }
+
+  /// <summary>
+  /// Dispose this instance
+  /// </summary>
+  public void Dispose()
+  {
+    // Do not change this code. Put cleanup code in 'Dispose(bool $2)' method
+    Dispose(true);
+    // TODO: Add following code when finalizer is implemented.
+    // GC.SuppressFinalize(this);
+  }
+  #endregion
+
+snippet ImplThrowMethod
+  /// <summary>
+  /// Throw $1
+  /// </summary>
+  private static void Throw$1(${0})
+  {
+    throw new ${1:#:Exception}();
+  }
+
+snippet ImplException
+  [Serializable]
+  public class ${1:#:Name}Exception : Exception
+  {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="$1Exception"/> class.
+    /// </summary>
+    public $1Exception()
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="$1Exception"/> class with a specified error message.
+    /// </summary>
+    /// <param name="$2">The error message that explains the reason for the exception.</param>
+    public $1Exception(string ${2:message})
+      : base($2)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="$1Exception"/> class with
+    /// a specified error message and a reference to the inner exception that
+    /// is the cause of this exception.
+    /// </summary>
+    /// <param name="$2">The error message that explains the reason for the exception.</param>
+    /// <param name="$3">The exception that is the cause of the current exception.
+    /// If the innerException parameter is not a null reference,
+    /// the current exception is raised in a catch block that handles the inner exception.</param>
+    public $1Exception(string $2, Exception ${3:inner})
+      : base($2, $3)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="$1Exception"/> class with serialized data.
+    /// </summary>
+    /// <param name="$4">The object that holds the serialized object data.</param>
+    /// <param name="$5">The contextual information about the source or destination.</param>
+    protected $1Exception(SerializationInfo info, StreamingContext context)
+      : base(${4:info}, ${5:context})
+    {
+    }
+  }  // class $1Exception
+
+snippet ImplEvent
+alias event
+abbr public event EventHandler EventName
+  ${1:public} event ${2:EventHandler} ${3:#:EventName};
+
+snippet ImplEventT
+alias eventT
+abbr public event EventHandler<T> EventName
+  ${1:public} event EventHandler<${2:#:T}> ${3:#:EventName};
+
+snippet ImplEventArgs
+  /// <summary>
+  /// Custom event argument
+  /// </summary>
+  public class ${1:ClassName} : ${2:EventArgs}
+  {
+    /// <summary>
+    /// Ctor
+    /// </summary>
+    public $1()
+    {
+      ${0};
+    }
+  }  // public class $1
+
+snippet ImplEventDelegate
+  /// <summary>
+  /// Custom event delegate
+  /// </summary>
+  /// <param name="$3">Event source</param>
+  /// <param name="$5">Event argument</param>
+  public delegate ${1:void} ${2:#:DelegateName}(object ${3:sender}, ${4:EventArgs} ${5:e});
+
+snippet ImplAwake
+abbr private void Awake() (Unity)
+  /// <summary>
+  /// This method is called only once during the lifetime of the script
+  /// instance.
+  /// </summary>
+  private void Awake()
+  {
+    ${0}
+  }
+
+snippet ImplStart
+abbr private void Start() (Unity)
+  /// <summary>
+  /// This method is called on the frame when a script is enabled just before
+  /// any of the Update methods are called the first time.
+  /// </summary>
+  private void Start()
+  {
+    ${0}
+  }
+
+snippet ImplUpdate
+abbr private void Update() (Unity)
+  /// <summary>
+  /// This method is called every frame.
+  /// </summary>
+  private void Update()
+  {
+    ${0}
+  }
+
+snippet ImplOnEnable
+abbr private void OnEnable() (Unity)
+  /// <summary>
+  /// This method is called when the object is enabled.
+  /// </summary>
+  private void OnEnable()
+  {
+    ${0}
+  }
+
+snippet ImplOnDisable
+abbr private void OnDisable() (Unity)
+  /// <summary>
+  /// This method is called when the object is disabled.
+  /// </summary>
+  private void OnDisable()
+  {
+    ${0}
+  }
+
+snippet OnDestroy
+abbr private void OnDestroy() (Unity)
+  /// <summary>
+  /// This method is called when the object is destroyed.
+  /// </summary>
+  private void OnDestroy()
+  {
+    ${0}
+  }
+
+snippet ImplOnSpawn
+abbr public override void OnSpawn() (U#)
+  /// <summary>
+  /// This method is called when the object is spawned.
+  /// </summary>
+  public override void OnSpawn()
+  {
+    ${0}
+  }
+
+snippet ImplInteract
+abbr public override void Interact() (U#)
+  /// <summary>
+  /// This method is called when the object is interacted.
+  /// </summary>
+  public override void Interact()
+  {
+    ${0}
+  }
+
+snippet ImplOnPickup
+abbr public override void OnPickup() (U#)
+  /// <summary>
+  /// This method is called when the object is pickuped.
+  /// </summary>
+  public override void OnPickup()
+  {
+    ${0}
+  }
+
+snippet ImplOnPickupUseDown
+abbr public override void OnPickupUseDown() (U#)
+  /// <summary>
+  /// This method is called when the trigger is pulled while grabbing the
+  /// object whose AutoHold is "Yes".
+  /// </summary>
+  public override void OnPickupUseDown()
+  {
+    ${0}
+  }
+
+snippet ImplOnPickupUseUp
+abbr public override void OnPickupUseUp() (U#)
+  /// <summary>
+  /// This method is called when the trigger is released while grabbing the
+  /// object whose AutoHold is "Yes".
+  /// </summary>
+  public override void OnPickupUseUp()
+  {
+    ${0}
+  }
