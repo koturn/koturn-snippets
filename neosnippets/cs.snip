@@ -1,3 +1,4 @@
+delete class
 delete property
 delete for
 delete foreach
@@ -9,22 +10,99 @@ delete using
 delete unsafe
 delete fixed
 
-snippet classSingleton
-abbr singleton
-  /// <summary>
-  /// Description of $1.
-  /// </summary>
-  public sealed class ${1:ClassName}
+snippet class
+  ${1:public} class ${2:#:ClassName}
   {
-    public static $1 ${2:Instance} { get; private set; }
-
-    static $1()
+    /// <summary>
+    /// Initializes a new instance of <see cref="$2"/> class.
+    /// </summary>
+    public $2()
     {
-      $2 = new $1();
+      ${0}
+    }
+  }  // class $2
+
+snippet classSingleton
+alias singleton
+  /// <summary>
+  /// Description of $2.
+  /// </summary>
+  ${1:public} sealed class ${2:#:ClassName}
+  {
+    /// <summary>
+    /// Get the only instance of <see cref="$2"/> class.
+    /// </summary>
+    public static $2 ${3:Instance} { get; }
+
+    /// <summary>
+    /// Create the only instance of <see cref="$2"/> class.
+    /// </summary>
+    static $2()
+    {
+      $3 = new $2();
     }
 
-    private $1()
+    /// <summary>
+    /// Initializes a new instance of <see cref="$2"/> class.
+    /// </summary>
+    private $2()
     {
+      ${0}
+    }
+  }  // class $2
+
+snippet classSingletonLazy
+alias singletonLazy
+  /// <summary>
+  /// Description of $2.
+  /// </summary>
+  ${1:public} sealed class ${2:#:ClassName}
+  {
+    /// <summary>
+    /// The only instance of <see cref="$2"/> class.
+    /// </summary>
+    private static $2 ${3:_instance};
+
+    /// <summary>
+    /// Get the only instance of <see cref="$2"/> class.
+    /// </summary>
+    public static $2 ${4:Instance} => $3 ??= new $2();
+
+    /// <summary>
+    /// Initializes a new instance of <see cref="$2"/> class.
+    /// </summary>
+    private $2()
+    {
+      ${0}
+    }
+  }  // class $2
+
+snippet singletonMonoBehaviour
+alias singletonMono
+  /// <summary>
+  /// Description of $2.
+  /// <summary>
+  ${1:public} class ${2:#:ClassName} : MonoBehaviour
+  {
+    /// <summary>
+    /// The only instance of <see cref="$2"/> class.
+    /// </summary>
+    public static $2 ${3:Instance} { get; private set; }
+
+    /// <summary>
+    /// This method is called only once during the lifetime of the script instance.
+    /// </summary>
+    private void Awake()
+    {
+      if ($3 == null)
+      {
+        $3 = this;
+        DontDestroyOnLoad(gameObject);
+      }
+      else
+      {
+        Destroy(gameObject);
+      }
       ${0}
     }
   }
@@ -66,6 +144,7 @@ abbr using (var varName = resource) { ... }
   }
 
 snippet usingStreamWriter
+alias StreamWriter
   using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Create}, FileAccess.${4:Write}, FileShare.${5:Read}))
   using (var ${6:sw} = new StreamWriter($1))
   {
@@ -73,6 +152,7 @@ snippet usingStreamWriter
   }
 
 snippet usingStreamReader
+alias StreamReader
   using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Open}, FileAccess.${4:Read}, FileShare.${5:Read}))
   using (var ${6:sr} = new StreamReader($1))
   {
@@ -254,9 +334,10 @@ abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose(
   public bool ${1:IsDisposed} { get; private set; }
 
   /// <summary>
-  /// Dispose method
+  /// Release resources.
   /// </summary>
-  /// <param name="$2">A flag that indicates this method is called from Dispose or finalizer</param>
+  /// <param name="$2"><c>true</c> to release both managed and unmanaged resources;
+  /// <c>false</c> to release only unmanaged resources.</param>
   protected virtual void Dispose(bool ${2:disposing})
   {
     if ($1)
@@ -275,7 +356,7 @@ abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose(
 
   // TODO: override finalizer only if 'Dispose(bool $2)' has code to free unmanaged resources
   // /// <summary>
-  // /// Finalizer. Dispose unmanaged resources.
+  // /// Release unmanaged resources.
   // /// </summary>
   // ~${3:#:ClassName}()
   // {
@@ -284,7 +365,7 @@ abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose(
   // }
 
   /// <summary>
-  /// Dispose this instance
+  /// Release all resources used by the <see cref="$3"/> object.
   /// </summary>
   public void Dispose()
   {
@@ -385,8 +466,7 @@ snippet ImplEventDelegate
 snippet ImplAwake
 abbr private void Awake() (Unity)
   /// <summary>
-  /// This method is called only once during the lifetime of the script
-  /// instance.
+  /// This method is called only once during the lifetime of the script instance.
   /// </summary>
   private void Awake()
   {
