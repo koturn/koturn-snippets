@@ -1,7 +1,11 @@
 delete class
 delete property
+delete if
+delete ifelse
 delete for
 delete foreach
+delete while
+delete do
 delete try_catch
 delete try_catch_finally
 delete try_finally
@@ -159,6 +163,24 @@ alias StreamReader
     ${0}
   }
 
+snippet if
+abbr if (...) { ... }
+  if (${1:#:condition})
+  {
+    ${0}
+  }
+
+snippet ifelse
+abbr if (...) { ... } else { ... }
+  if (${1:#:condition})
+  {
+    ${0}
+  }
+  else
+  {
+
+  }
+
 snippet for
 abbr for (int i = 0; i < max; i++) { ... }
   for (${1:int} ${2:i} = ${3:0}; $2 < ${4:#:max}; ${5:$2++})
@@ -173,6 +195,20 @@ alias fore
   {
     ${0}
   }
+
+snippet while
+abbr while (...) { ... }
+  while (${1:#:condition})
+  {
+    ${0}
+  }
+
+snippet do
+abbr do { ... } while (...)
+  do
+  {
+    ${0}
+  } while (${1:#:condition})
 
 snippet try_catch
 alias try
