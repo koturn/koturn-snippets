@@ -506,6 +506,7 @@ abbr var handler = Event; if (hander != null) { handler(...); }
   }
 
 snippet ImplDispose
+alias Dispose
 abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose() { ... }
   #region IDisposable Support
   /// <summary>
@@ -644,6 +645,7 @@ snippet ImplEventDelegate
   public delegate ${1:void} ${2:#:DelegateName}(object ${3:sender}, ${4:EventArgs} ${5:e});
 
 snippet ImplAwake
+alias Awake
 abbr private void Awake() (Unity)
   /// <summary>
   /// This method is called only once during the lifetime of the script instance.
@@ -654,6 +656,7 @@ abbr private void Awake() (Unity)
   }
 
 snippet ImplStart
+alias Start
 abbr private void Start() (Unity)
   /// <summary>
   /// This method is called on the frame when a script is enabled just before
@@ -665,6 +668,7 @@ abbr private void Start() (Unity)
   }
 
 snippet ImplUpdate
+alias Update
 abbr private void Update() (Unity)
   /// <summary>
   /// This method is called every frame.
@@ -675,6 +679,7 @@ abbr private void Update() (Unity)
   }
 
 snippet ImplOnEnable
+alias OnEnable
 abbr private void OnEnable() (Unity)
   /// <summary>
   /// This method is called when the object is enabled.
@@ -685,6 +690,7 @@ abbr private void OnEnable() (Unity)
   }
 
 snippet ImplOnDisable
+alias OnDisable
 abbr private void OnDisable() (Unity)
   /// <summary>
   /// This method is called when the object is disabled.
@@ -694,7 +700,8 @@ abbr private void OnDisable() (Unity)
     ${0}
   }
 
-snippet OnDestroy
+snippet ImplOnDestroy
+alias OnDestroy
 abbr private void OnDestroy() (Unity)
   /// <summary>
   /// This method is called when the object is destroyed.
@@ -704,7 +711,44 @@ abbr private void OnDestroy() (Unity)
     ${0}
   }
 
+snippet ImplOnCollisionEnter
+alias OnCollisionEnter
+abbr private void OnCollisionEnter(other) (Unity)
+  /// <summary>
+  /// This method is called when this collider/rigidbody has begun touching
+  /// another rigidbody/collider.
+  /// </summary>
+  private void OnCollisionEnter(Collision ${1:other})
+  {
+    ${0}
+  }
+
+snippet ImplOnCollisionExit
+alias OnCollisionExit
+abbr private void OnCollisionExit(other) (Unity)
+  /// <summary>
+  /// This method is called when this collider/rigidbody has stopped touching
+  /// another rigidbody/collider.
+  /// </summary>
+  private void OnCollisionExit(Collision ${1:other})
+  {
+    ${0}
+  }
+
+snippet ImplOnCollisionStay
+alias OnCollisionStay
+abbr private void OnCollisionStay(other) (Unity)
+  /// <summary>
+  /// This method is called once per frame for every collider/rigidbody
+  /// that is touching rigidbody/collider.
+  /// </summary>
+  private void OnCollisionStay(Collision ${1:other})
+  {
+    ${0}
+  }
+
 snippet ImplOnSpawn
+alias OnSpawn
 abbr public override void OnSpawn() (U#)
   /// <summary>
   /// This method is called when the object is spawned.
@@ -715,6 +759,7 @@ abbr public override void OnSpawn() (U#)
   }
 
 snippet ImplInteract
+alias Interact
 abbr public override void Interact() (U#)
   /// <summary>
   /// This method is called when the object is interacted.
@@ -725,6 +770,7 @@ abbr public override void Interact() (U#)
   }
 
 snippet ImplOnPickup
+alias OnPickup
 abbr public override void OnPickup() (U#)
   /// <summary>
   /// This method is called when the object is pickuped.
@@ -735,6 +781,7 @@ abbr public override void OnPickup() (U#)
   }
 
 snippet ImplOnPickupUseDown
+alias OnPickupUseDown
 abbr public override void OnPickupUseDown() (U#)
   /// <summary>
   /// This method is called when the trigger is pulled while grabbing the
@@ -746,6 +793,7 @@ abbr public override void OnPickupUseDown() (U#)
   }
 
 snippet ImplOnPickupUseUp
+alias OnPickupUseUp
 abbr public override void OnPickupUseUp() (U#)
   /// <summary>
   /// This method is called when the trigger is released while grabbing the
