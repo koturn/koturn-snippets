@@ -13,6 +13,22 @@ delete lock
 delete using
 delete unsafe
 delete fixed
+delete c
+delete code
+delete example
+delete exception
+delete include
+delete param
+delete paramref
+delete returns
+delete remarks
+delete see
+delete seealso
+delete summary
+delete typeparam
+delete typeparamref
+delete value
+
 
 snippet class
   ${1:public} class ${2:#:ClassName}
@@ -839,3 +855,78 @@ abbr public override void OnPickupUseUp() (U#)
   {
     ${0}
   }
+
+snippet c
+abbr <c></c> (XML Doc.)
+regexp '\/\/\/.*'
+  <c>${0}</c>
+
+snippet code
+abbr <code></code> (XML Doc.)
+regexp '\/\/\/.*'
+  <code>${0}</code>
+
+snippet example
+abbr <example></example> (XML Doc.)
+regexp '\/\/\/.*'
+  <example>${0}</example>
+
+snippet exception
+abbr <exception cref=""></exception> (XML Doc.)
+regexp '\/\/\/.*'
+  <exception cref="${1:#:class}">${0}</exception>
+
+snippet include
+abbr <include file='' path=''/> (XML Doc.)
+regexp '\/\/\/.*'
+  <include file='${1:#:filename}' path='${2:#:tabpath}[@${3:#:name}="${4:#:id}"]'/>${0}
+
+snippet param
+abbr <param name=""></param> (XML Doc.)
+regexp '\/\/\/.*'
+  <param name="${1:#:name}">${0}</param>
+
+snippet paramref
+abbr <paramref name=""/> (XML Doc.)
+regexp '\/\/\/.*'
+  <paramref name="${1:#:name}"/>${0}
+
+snippet returns
+abbr <returns></returns> (XML Doc.)
+regexp '\/\/\/.*'
+  <returns>${0}</returns>
+
+snippet remarks
+abbr <remarks></remarks> (XML Doc.)
+regexp '\/\/\/.*'
+  <remarks>${0}</remarks>
+
+snippet see
+abbr <see cref=""/> (XML Doc.)
+regexp '\/\/\/.*'
+  <see cref="${1:#:name}"/>${0}
+
+snippet seealso
+abbr <seealso cref=""/> (XML Doc.)
+regexp '\/\/\/.*'
+  <seealso cref="${1:#:name}"/>${0}
+
+snippet summary
+abbr <summary></summary> (XML Doc.)
+regexp '\/\/\/.*'
+  <summary>${0}</summary>
+
+snippet typeparam
+abbr <typeparam name=""></typeparam> (XML Doc.)
+regexp '\/\/\/.*'
+  <typeparam name="${1:#:name}">${0}</typeparam>
+
+snippet typeparamref
+abbr <typeparamref name=""/> (XML Doc.)
+regexp '\/\/\/.*'
+  <typeparamref name="${1:#:name}"/>${0}
+
+snippet value
+abbr <value></value> (XML Doc.)
+regexp '\/\/\/.*'
+  <value>${0}</value>
