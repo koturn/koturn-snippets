@@ -258,6 +258,186 @@ abbr Task.Run(() => { ... }, token);
     }
   }, $2);
 
+snippet .Select
+alias Select
+abbr Select(e => ...) (LINQ)
+  .Select(${1:e} => ${0})
+
+snippet .SelectMany
+alias SelectMany
+abbr SelectMany(e => ...) (LINQ)
+  .SelectMany(${1:e} => ${0})
+
+snippet .Where
+alias Where
+abbr Where(e => ...) (LINQ)
+  Where(${1:e} => ${2:#:predicate})${0}
+
+snippet .Take
+alias Take
+abbr Take(count) (LINQ)
+  .Take(${1:#:count})${0}
+
+snippet .TakeWhile
+alias TakeWhile
+abbr TakeWhile(e => ...) (LINQ)
+  .TakeWhile(${1:e} => ${2:#:predicate})${0}
+
+snippet .Skip
+alias Skip
+abbr Skip(count) (LINQ)
+  .Skip(${1:#:count})${0}
+
+snippet .SkipWhile
+alias SkipWhile
+abbr SkipWhile(e => ...) (LINQ)
+  .SkipWhile(${1:e} => ${2:#:predicate})${0}
+
+snippet .First
+alias First
+abbr First({e => ...}) (LINQ)
+  .First(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+
+snippet .FirstOrDefault
+alias FirstOrDefault
+abbr FirstOrDefault({e => ...}) (LINQ)
+  .First(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+
+snippet .Last
+alias Last
+abbr Last({e => ...}) (LINQ)
+  .Last(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+
+snippet .LastOrDefault
+alias LastOrDefault
+abbr LastOrDefault({e => ...}) (LINQ)
+  .Last(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+
+snippet .Single
+alias Single
+abbr Single({e => ...}) (LINQ)
+  .Single(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+
+snippet .SingleOrDefault
+alias SingleOrDefault
+abbr SingleOrDefault({e => ...}) (LINQ)
+  .Single(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+
+snippet .ElementAt
+alias ElementAt
+abbr ElementAt(index) (LINQ)
+  .ElementAt(${1:#:index})${0}
+
+snippet .ElementAtOrDefault
+alias ElementAtOrDefault
+abbr ElementAtOrDefault(index) (LINQ)
+  .ElementAt(${1:#:index})${0}
+
+snippet .OrderBy
+alias OrderBy
+abbr OrderBy(e => ...) (LINQ)
+  .OrderBy(${1:e} => ${2:#:keySelector})${0}
+
+snippet .OrderByDescending
+alias OrderByDescending
+abbr OrderByDescending(e => ...) (LINQ)
+  .OrderByDescending(${1:e} => ${2:#:keySelector})${0}
+
+snippet .ThenBy
+alias ThenBy
+abbr ThenBy(e => ...) (LINQ)
+  .ThenBy(${1:e} => ${2:#:keySelector})${0}
+
+snippet .ThenByDescending
+alias ThenByDescending
+abbr ThenByDescending(e => ...) (LINQ)
+  .ThenByDescending(${1:e} => ${2:#:keySelector})${0}
+
+snippet .Concat
+alias Concat
+abbr Concat(e => ...) (LINQ)
+  .Concat(${1:#:second})${0}
+
+snippet .Zip
+alias Zip
+abbr Zip(e => ...) (LINQ)
+  .Zip(${1:#:second})${0}
+
+snippet .Reverse
+alias Reverse
+abbr Reverse() (LINQ)
+  .Reverse()${0}
+
+snippet .Distinct
+alias Distinct
+abbr Distinct() (LINQ)
+  .Distinct()${0}
+
+snippet .Union
+alias Union
+abbr Union(...) (LINQ)
+  .Union(${1:#:group})${0}
+
+snippet .Except
+alias Except
+abbr Except(...) (LINQ)
+  .Except(${1:#:group})${0}
+
+snippet .Intersect
+alias Intersect
+abbr Intersect(...) (LINQ)
+  .Intersect(${1:#:group})${0}
+
+snippet .ToArray
+alias ToArray
+abbr ToArray() (LINQ)
+  .ToArray()${0}
+
+snippet .ToList
+alias ToList
+abbr ToList() (LINQ)
+  .ToList()${0}
+
+snippet .Min
+alias Min
+abbr Min() (LINQ)
+  .Min()${0}
+
+snippet .Max
+alias Max
+abbr Max() (LINQ)
+  .Max()${0}
+
+snippet .Average
+alias Average
+abbr Average() (LINQ)
+  .Average()${0}
+
+snippet .Sum
+alias Sum
+abbr Sum() (LINQ)
+  .Sum()${0}
+
+snippet .Aggregate
+alias Aggregate
+abbr Aggregate(seed, (acc, e) => acc + e{, resultSelector}) (LINQ)
+  .Aggregate(${1:#:seed}, (${2:acc}, ${3:e}) => ${4:#:acc + e}${5:, $\{6:#:resultSelector\}})${0}
+
+snippet .All
+alias All
+abbr All(e => ...) (LINQ)
+  .All(${1:e} => ${2:#:predicate})${0}
+
+snippet .Any
+alias Any
+abbr Any(e => ...) (LINQ)
+  .Any(${1:e} => ${2:#:predicate})${0}
+
+snippet .Contains
+alias Contains
+abbr Contains(val) (LINQ)
+  .Contains(${1:#:value})${0}
+
 snippet docComment
 alias doc
 abbr /// <summary>...</summary>
