@@ -1,3 +1,6 @@
+delete main
+delete writeline
+delete write
 delete class
 delete property
 delete if
@@ -29,6 +32,29 @@ delete typeparam
 delete typeparamref
 delete value
 
+
+snippet Main
+alias main
+  ${1:private} static ${2:void} Main(${3:string[] $\{4:args\}})
+  {
+    ${0}
+  }
+
+snippet WriteLine
+alias wl writeline println
+  Console.WriteLine(${1:#:message});${0}
+
+snippet Write
+alias write print
+  Console.WriteLine(${1:#:message});${0}
+
+snippet WriteLineError
+alias wle writelineerror printlnerr
+  Console.Error.WriteLine(${1:#:message});${0}
+
+snippet WriteError
+alias we writeerror printerr
+  Console.Error.Write(${1:#:message});${0}
 
 snippet class
   ${1:public} class ${2:#:ClassName}
@@ -695,6 +721,19 @@ snippet ImplEventDelegate
   /// <param name="$3">Event source</param>
   /// <param name="$5">Event argument</param>
   public delegate ${1:void} ${2:#:DelegateName}(object ${3:sender}, ${4:EventArgs} ${5:e});
+
+snippet Log
+alias log
+abbr Debug.Log(...); (Unity)
+  Debug.Log(${1});${0}
+
+snippet LogWarning
+abbr Debug.LogWarning(...); (Unity)
+  Debug.LogWarning(${1});${0}
+
+snippet LogError
+abbr Debug.LogError(...); (Unity)
+  Debug.LogLogError(${1});${0}
 
 snippet ImplAwake
 alias Awake
