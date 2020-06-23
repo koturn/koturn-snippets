@@ -217,6 +217,18 @@ alias singletonMono
     }
   }
 
+snippet fn
+abbr public void Method(...) { ... }
+alias method function
+  ${1:public} ${2:void} ${3:#:MethodName}(${4:#:args...})
+  {
+    ${0}
+  }
+
+snippet lambda
+abbr (args...) =>
+  ${1:($\{2\:#:args...\})} => ${0}
+
 snippet property
 alias prop
 abbr public Type Name { get; set; } (C# 3)
@@ -378,6 +390,36 @@ abbr fixed { type* ptr = address } { ... }
   fixed (${1:#:Type}* ${2:ptr} = ${3:#:address})
   {
     ${0}
+  }
+
+snippet BlockCopy
+abbr Buffer.BlockCopy(src, 0, dst, 0, Buffer.ByteLength(src))
+  Buffer.BlockCopy(${1:#:src}, ${2:0}, ${3:#:dst}, ${4:0}, ${5:Buffer.ByteLength($1)})${0}
+
+snippet GCHandle
+alias pin
+abbr var gch = GCHandle.Alloc(structObj, GCHandleType.Pinned); ...
+  var ${1:gch} = GCHandle.Alloc(${2:#:structObj}, GCHandleType.${3:Pinned});
+  try
+  {
+    ${0}
+  }
+  finally
+  {
+    $1.Free();
+  }
+
+snippet AllocCoTaskMem
+alias Alloc
+abbr var ptr = Marshal.AllocCoTaskMem(size); ...
+  var ${1:ptr} = Marshal.AllocCoTaskMem(${2:#:size});
+  try
+  {
+    ${0}
+  }
+  finally
+  {
+    Marshal.FreeCoTaskMem($1);
   }
 
 snippet TaskRun
@@ -744,13 +786,22 @@ abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose(
   }
   #endregion
 
-snippet ImplThrowMethod
-  /// <summary>
-  /// Throw $1
-  /// </summary>
-  private static void Throw$1(${0})
+snippet ImplDeconstruct
+abbr public void Deconstruct(out x, out y, ...) (C#7)
+alias Deconstruct
+  ${1:public} void Deconstruct(${2:#:out args...})
   {
-    throw new ${1:#:Exception}();
+    ${0}
+  }
+
+snippet ImplThrowMethod
+abbr private static void ThrowException(...) { throw ... }
+  /// <summary>
+  /// Throw $2
+  /// </summary>
+  ${1:private} static void Throw$2(${0})
+  {
+    throw new ${2:#:Exception}();
   }
 
 snippet ImplEvent
@@ -985,6 +1036,11 @@ snippet include
 abbr <include file='' path=''/> (XML Doc.)
 regexp '\/\/\/.*'
   <include file='${1:#:filename}' path='${2:#:tabpath}[@${3:#:name}="${4:#:id}"]'/>${0}
+
+snippet para
+abbr <para></para> (XML Doc.)
+regexp '\/\/\/.*'
+  <para>${0}</para>
 
 snippet param
 abbr <param name=""></param> (XML Doc.)
