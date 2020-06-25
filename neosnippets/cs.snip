@@ -734,6 +734,119 @@ abbr var handler = Event; if (hander != null) { handler(...); }
     $1(${3:#:args...});
   }
 
+snippet ToString
+alias ImplToString
+abbr public override string ToString()
+  /// <summary>
+  /// Get string representation of this instance.
+  /// </summary>
+  /// <returns>String representation of this instance.</returns>
+  public override string ToString()
+  {
+    return ${0};
+  }
+
+snippet Clone
+alias ImplClone
+abbr public object Clone() (ICloneable)
+  /// <summary>
+  /// Create a clone of this instance.
+  /// </summary>
+  /// <returns>A clone of this instance.</returns>
+  public object Clone()
+  {
+    return new ${1:#:ClassName}(${0});
+  }
+
+snippet Equals
+alias ImplEquals
+abbr public bool Equals(T other) (IEquatable<T>)
+  /// <summary>
+  /// Checks if this instance is equal to the specified instance.
+  /// </summary>
+  /// <param name="$2">The instance to compare.</param>
+  /// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
+  public bool Equals(${1:#:ClassName} ${2:other})
+  {
+    if (ReferenceEquals(other, null))
+    {
+      return false;
+    }
+    if (ReferenceEquals(this, other))
+    {
+      return true;
+    }
+    if (GetType() != other.GetType())
+    {
+      return false;
+    }
+
+    return ${0};
+  }
+
+snippet EqualsSimple
+alias ImplEqualsSimple
+abbr public bool Equals(T other) (IEquatable<T>)
+  /// <summary>
+  /// Checks if this instance is equal to the specified instance.
+  /// </summary>
+  /// <param name="$2">The instance to compare.</param>
+  /// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
+  public bool Equals(${1:#:ClassName} ${2:other})
+  {
+    return !ReferenceEquals(other, null)
+      && (ReferenceEquals(this, other)
+        || !(GetType() != other.GetType())
+        && ${0});
+  }
+
+snippet EqualsObject
+alias ImplEqualsObject
+abbr public override bool Equals(object obj)
+  /// <summary>
+  /// Checks if this instance is equal to the specified instance.
+  /// </summary>
+  /// <remarks>
+  /// See <see cref="Equals($2)"/>.
+  /// </remarks>
+  /// <param name="$1">The instance to compare.</param>
+  /// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
+  public override bool Equals(object ${1:obj})
+  {
+    // You must implement the IEquatable<T>.Equals().
+    return Equals($1 as ${2:#:ClassName})
+  }
+
+snippet CompareTo
+alias ImplCompareTo
+abbr public int CompareTo(T other) (IComparable<T>)
+  /// <summary>
+  ///
+  /// </summary>
+  /// <param name="$2"></param>
+  /// <returns></returns>
+  public int CompareTo(${1:#:ClassName} ${2:other})
+  {
+    return other == null ? 1
+      : ${0};
+  }
+
+snippet CompareToObject
+alias ImplCompareToObject
+abbr public int CompareTo(object obj) (IComparable)
+  /// <summary>
+  ///
+  /// </summary>
+  /// <remarks>
+  /// See <see cref="CompareTo($2)"/>.
+  /// </remarks>
+  /// <param name="$1"></param>
+  /// <returns></returns>
+  public int CompareTo(object ${1:obj})
+  {
+    return CompareTo($1 as ${2:#:ClassName});
+  }
+
 snippet ImplDispose
 alias Dispose
 abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose() { ... }
@@ -741,7 +854,7 @@ abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose(
   /// <summary>
   /// A flag property which indicates this instance is disposed or not.
   /// </summary>
-  public bool ${1:IsDisposed} { get; private set; }
+  public bool ${1:IsDisposed} { get; private set; } = false;
 
   /// <summary>
   /// Release resources.
