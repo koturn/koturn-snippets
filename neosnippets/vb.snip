@@ -1,0 +1,284 @@
+snippet Dim
+alias dim var
+abbr Dim name As Type =
+	Dim ${1:#:name} As ${2:#:Type}${3: = $\{4\}}${0}
+
+snippet Const
+alias const
+abbr Const name As Type = value
+	Const ${1:name} As ${2:#:Type} = ${3:#:value}
+
+snippet Function
+alias fn function
+abbr Public Function Name(args...) As Type
+	${1:Public} Function ${2:#:Name}(${3:#:args...}) As ${4:#:Type}
+		$2 = ${0}
+	End Function
+
+snippet Sub
+alias sub
+abbr Public Sub Name(args...)
+	${1:Public} Sub ${2:#:Name}(${3:#:args...})
+		${0}
+	End Sub
+
+snippet With
+alias with
+abbr With target
+	With ${1:#:target}
+		${0}
+	End With
+
+snippet If
+alias if
+abbr If condition Then
+	If ${1:#:condition} Then
+		${0}
+	End If
+
+snippet For
+alias for
+abbr For i = 0 To end
+	For ${1:i} = ${2:0} To ${3}
+		${0}
+	Next
+
+snippet For2
+alias for2 forstep ForStep
+abbr For i = 0 To end Step step
+	For ${1:i} = ${2:0} To ${3} Step ${4}
+		${0}
+	Next
+
+snippet Foreach
+alias forEach
+abbr For Each var In group
+	For Each ${1:#:var} In ${2:#:group}
+		${0}
+	Next
+
+snippet While
+alias while
+abbr While condition
+	While ${1:#:condition}
+		${0}
+	Wend
+
+snippet DoWhile
+alias DoWhileLoop dowhile
+abbr Do While condition
+	Do While ${1:#:condition}
+		${0}
+	Loop
+
+snippet DoLoop
+alias DoLoopWhile doloop dowhile
+abbr Do ... Loop While condition
+	Do
+		${0}
+	Loop While ${1:#:condition}
+
+snippet Select
+alias select switch
+abbr Select Case var  Case ...  Case Else
+	Select Case ${1:#:var}
+		Case ${2:#:value1}
+			' Case for $2
+			${0}
+		Case ${3:#:value2}
+			' Case for $3
+		Case Else
+			' Default case
+	End Select
+
+snippet Type
+alias type
+abbr Public Type Name
+	${1:Public} Type ${2:#:Name}
+		${0}
+	End Enum
+
+snippet Enum
+alias enum
+abbr Public Enum Name
+	${1:Public} Enum ${2:#:Name}
+		${0}
+	End Enum
+
+snippet OnErrorGoTo
+alias OnError onerror
+abbr On Error GoTo label
+	On Error GoTo ${1:onerror}
+	${0}
+	$1:
+	With Err
+		Debug.Print "<<< Error >>>"
+		Debug.Print "Description: " & .Description
+		Debug.Print "HelpContext: " & .HelpContext
+		Debug.Print "HelpFile: " & .HelpFile
+		Debug.Print "LastDLLError: " & .LastDLLError
+		Debug.Print "Number: " & .Number
+		Debug.Print "Source: " & .Source
+		MsgBox _
+			"Error Code: " & Err.Number & vbCrLf & .Description, _
+			vbOKOnly, _
+			"Error", _
+			.HelpFile, _
+			.HelpContext
+	End With
+
+snippet OnErrorResumeNext
+abbr On Error Resume Next
+	On Error Resume Next
+	${0}
+
+snippet vbaDim
+alias DimVBA vbavar
+abbr Dim name As Type: name =
+	Dim ${1:#:name} As ${2:#:Type}${3:\: $1 = $\{4\}}${0}
+
+snippet vbawf
+alias vbaWorksheetFunction
+abbr Application.WorksheetFunction.
+	Application.WorksheetFunction.${0}
+
+snippet vbaDeclareFunc
+alias vbaDeclFn
+abbr Public Declare PtrSafe Function Name Lib "dllName" (args...) As Type
+	#If VBA7 Then
+	${1:Public} Declare PtrSafe Function ${2:#:Name} Lib "${3:#:dllname}" (${4:#:args...}) As ${5:#:ReturnType}
+	#Else
+	$1 Declare Function $2 Lib "$3" ($4) As $5
+	#End If
+
+snippet vbaDeclareSub
+alias  vbaDeclSub
+abbr Public Declare PtrSafe Sub Name Lib "dllName" (args...) As Type
+	#If VBA7 Then
+	${1:Public} Declare PtrSafe Sub ${2:#:Name} Lib "${3:#:dllname}" (${4:#:args...})
+	#Else
+	$1 Declare Sub $2 Lib "$3" ($4)
+	#End If
+
+snippet vbaDefSetupAppForVBA
+abbr Private Sub SetupAppForVBA(ByVal isOn As Boolean)
+	${1:Private} Sub ${2:SetupAppForVBA}(ByVal isOn As Boolean)
+		With Application
+			.Calculation = IIf(isOn, xlCalculationManual, xlCalculationAutomatic)
+			.EnableEvents = Not (isOn)
+			.ScreenUpdating = Not (isOn)
+			.Cursor = IIf(isOn, xlWait, xlDefault)
+		End With
+	End Sub
+
+snippet docComment
+alias doc
+abbr ''' <summary>...</summary>
+	''' <summary>
+	''' ${0}
+	''' </summary>
+
+snippet c
+abbr <c></c> (XML Doc.)
+regexp "'''.*"
+	<c>${0}</c>
+
+snippet code
+abbr <code></code> (XML Doc.)
+regexp "'''.*"
+	<code>${0}</code>
+
+snippet example
+abbr <example></example> (XML Doc.)
+regexp "'''.*"
+	<example>${0}</example>
+
+snippet exception
+abbr <exception cref=""></exception> (XML Doc.)
+regexp "'''.*"
+	<exception cref="${1:#:class}">${0}</exception>
+
+snippet include
+abbr <include file='' path=''/> (XML Doc.)
+regexp "'''.*"
+	<include file='${1:#:filename}' path='${2:#:tabpath}[@${3:#:name}="${4:#:id}"]'/>${0}
+
+snippet inheritdoc
+abbr <inheritdoc [cref="ITestInterface"]/> (XML Doc.)
+regexp "'''.*"
+	<inheritdoc${1: cref="$\{2\:#:IInterface\}"}/>${0}
+
+snippet list
+abbr <list type="bullet"> (XML Doc.)
+regexp "'''.*"
+	<list type="${1:#:bullet|number|table}">
+	'''   <listheader>
+	'''     <term>Term for header</term>
+	'''     <description>Description for header</description>
+	'''   </listheader>
+	'''   <item>
+	'''     <term>Term for item</term>
+	'''     <description>Description for item</description>
+	'''   </item>
+	''' </list>
+	${0}
+
+snippet para
+abbr <para></para> (XML Doc.)
+regexp "'''.*"
+	<para>${0}</para>
+
+snippet param
+abbr <param name=""></param> (XML Doc.)
+regexp "'''.*"
+	<param name="${1:#:name}">${0}</param>
+
+snippet paramref
+abbr <paramref name=""/> (XML Doc.)
+regexp "'''.*"
+	<paramref name="${1:#:name}"/>${0}
+
+snippet permission
+abbr <permission cref=""></permission> (XML Doc.)
+regexp "'''.*"
+	<permission cref="${1:name}">${0}</permission>
+
+snippet returns
+abbr <returns></returns> (XML Doc.)
+regexp "'''.*"
+	<returns>${0}</returns>
+
+snippet remarks
+abbr <remarks></remarks> (XML Doc.)
+regexp "'''.*"
+	<remarks>${0}</remarks>
+
+snippet see
+abbr <see cref=""/> (XML Doc.)
+regexp "'''.*"
+	<see cref="${1:#:name}"/>${0}
+
+snippet seealso
+abbr <seealso cref=""/> (XML Doc.)
+regexp "'''.*"
+	<seealso cref="${1:#:name}"/>${0}
+
+snippet summary
+abbr <summary></summary> (XML Doc.)
+regexp "'''.*"
+	<summary>${0}</summary>
+
+snippet typeparam
+abbr <typeparam name=""></typeparam> (XML Doc.)
+regexp "'''.*"
+	<typeparam name="${1:#:name}">${0}</typeparam>
+
+snippet typeparamref
+abbr <typeparamref name=""/> (XML Doc.)
+regexp "'''.*"
+	<typeparamref name="${1:#:name}"/>${0}
+
+snippet value
+abbr <value></value> (XML Doc.)
+regexp "'''.*"
+	<value>${0}</value>
