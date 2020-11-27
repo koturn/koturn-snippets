@@ -160,6 +160,24 @@ abbr Public Declare PtrSafe Sub Name Lib "dllName" (args...) As Type
 	$1 Declare Sub $2 Lib "$3" ($4)
 	#End If
 
+snippet vbaProperty
+alias vbaProp
+	${1:Public} Property Get ${2:#:PropName}() As ${3:Type}
+		$2 = ${4:#:_memberName}
+	End Property
+
+	${5:Public} Property Let $2(${6:rhs} As $3)
+		$4 = $6
+	End Property
+	${0}
+
+snippet vbaPropertyReadOnly
+alias vbaPropRead
+	${1:Public} Property Get ${2:#:PropName}() As ${3:Type}
+		$2 = ${4:#:_memberName}
+	End Property
+	${0}
+
 snippet vbaDefSetupAppForVBA
 abbr Private Sub SetupAppForVBA(ByVal isOn As Boolean)
 	${1:Private} Sub ${2:SetupAppForVBA}(ByVal isOn As Boolean)
@@ -170,6 +188,31 @@ abbr Private Sub SetupAppForVBA(ByVal isOn As Boolean)
 			.Cursor = IIf(isOn, xlWait, xlDefault)
 		End With
 	End Sub
+
+snippet vbaOpenRead
+	Dim ${1:fn} As Long: $1 = FreeFile
+	Dim ${2:strLine} As String
+	Open ${3:#:filePath} For Input _
+		Access Read _
+		Lock Shared As #$1
+
+	Do While Not EOF($1)
+		Line Input #$1, $2
+		Debug.Print $2
+		${0}
+	Loop
+
+	Close $1
+
+snippet vbaOpenWrite
+	Dim ${1:fn} As Long: $1 = FreeFile
+	Open ${3:#:filePath} For Output _
+		Access Read Write _
+		Lock Write As #$1
+
+	Print #$1, "${0}"
+
+	Close $1
 
 snippet docComment
 alias doc
