@@ -189,7 +189,16 @@ abbr Private Sub SetupAppForVBA(ByVal isOn As Boolean)
 		End With
 	End Sub
 
-snippet vbaOpenRead
+snippet vbaOpen
+	Dim ${1:fn} As Long: $1 = FreeFile
+	Open ${2:#:filePath} For ${3:#:Append|Binary|Input|Output|Random} _
+		Access ${4:#:Read|Write|Read Write} _
+		${5:#:Shared|Lock Read|Rock Write|Lock Read Write} As #$1
+
+	Close $1
+
+snippet vbaOpenInput
+alias vbaOpenRead
 	Dim ${1:fn} As Long: $1 = FreeFile
 	Dim ${2:strLine} As String
 	Open ${3:#:filePath} For Input _
@@ -204,10 +213,11 @@ snippet vbaOpenRead
 
 	Close $1
 
-snippet vbaOpenWrite
+snippet vbaOpenOutput
+alias vbaOpenWrite
 	Dim ${1:fn} As Long: $1 = FreeFile
 	Open ${3:#:filePath} For Output _
-		Access Read Write _
+		Access Write _
 		Lock Write As #$1
 
 	Print #$1, "${0}"
