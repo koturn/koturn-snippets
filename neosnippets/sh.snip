@@ -16,65 +16,99 @@ snippet trap-once
   ${0}
   trap $2
 
-snippet remove-suffix
+snippet var_remove_suffix
+abbr ${var%.*}
   ${${1:#:var}%.*}
 
-snippet default-if-null
+snippet var_default_if_null
+abbr ${var:-default}
   ${${1:#:var}:-${2:#:default}}
 
-snippet default-if-not-null
-  ${${1:#:var}:+${2:#:default}}
-
-snippet output-if-null
-  ${${1:#:var}:?${2:#:default}}
-
-snippet assing-if0null
+snippet var_assing_if_null
+abbr ${var:=default}
   ${${1:#:var}:=${2:#:value}}
 
-snippet if-test
+snippet var_default_if_not_defined
+abbr ${var-default}
+  ${${1:#:var}-${2:#:default}}
+
+snippet var_assing_if_not_defined
+abbr ${var=default}
+  ${${1:#:var}=${2:#:value}}
+
+snippet var_error_if_not_null
+abbr ${var:?message}
+  ${${1:#:var}:?${2:#:message}}
+
+snippet var_default_if_not_null
+abbr ${var+message}
+  ${${1:#:var}+${2:#:default}}
+
+snippet var_assign_if_not_null
+abbr ${var:+message}
+  ${${1:#:var}:+${2:#:default}}
+
+snippet var_remove_shortest_forward_match
+abbr ${var#word}
+  ${${1:#:var}#${2:#:word}}
+
+snippet var_remove_longest_forward_match
+abbr ${var##word}
+  ${${1:#:var}##${2:#:word}}
+
+snippet var_remove_shortest_backward_match
+abbr ${var%word}
+  ${${1:#:var}%${2:#:word}}
+
+snippet var_remove_longest_backward_match
+abbr ${var%%word}
+  ${${1:#:var}%%${2:#:word}}
+
+
+snippet if_test
   if test ${1}; then
     ${0}
   fi
 
-snippet if-defined
+snippet if_defined
   if ${${1:#:var}+:} false; then
     ${0}
   fi
 
-snippet if-not-defined
+snippet if_not_defined
   if ! ${${1:#:var}+:} false; then
     ${0}
   fi
 
-snippet if-executable
+snippet if_executable
   [ "`which` ${1:#:command}" != '' -a \\$? -eq 0 ]; then
     ${0}
   fi
 
-snippet if-not-executable
+snippet if_not_executable
   [ "`which` ${1:#:command}" = '' -o \\$? -ne 0 ]; then
     ${0}
   fi
 
-snippet while-index
+snippet while_index
   ${1:i}=${2:0}
   while [ "$$1" -lt ${3:#:nLoop} ]; do
     ${0}
     $1=\`expr "$$1" + 1\`
   done
 
-snippet posix-array
+snippet posix_array
   ${1:#:var}="\
   ${0}
   "
   ${2:$1_list}=\`echo \$$1 | cut -f 1- -d ' '\`
 
-snippet bash-if
+snippet bash_if
   if [[ ${1} ]]; then
     ${0}
   fi
 
-snippet bash-for
+snippet bash_for
   declare -i ${1:i}
   for (($1 = ${2:0}; $1 < ${3}; $1++)) {
     ${0}
@@ -82,7 +116,7 @@ snippet bash-for
 
 snippet getopt
   unset GETOPT_COMPATIBLE
-  local ${1:opt}=\`getopt -o ${2:#:short-options} -l ${3:#:long-options} -- "\$@"\`
+  local ${1:opt}=\`getopt -o '${2:#:short-options}' -l '${3:#:long-options}' -- "\$@"\`
   eval set -- "\$$1"
   while [ \$# -gt 0 ]; do
     case \$1 in
@@ -97,7 +131,7 @@ snippet getopt
     shift
   done
 
-snippet identify-os
+snippet identify_os
   case ${OSTYPE} in
     cygwin | msys)
       ${0}
