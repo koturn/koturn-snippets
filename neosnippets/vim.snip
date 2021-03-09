@@ -51,7 +51,7 @@ snippet for_dict
 snippet sid
 abbr SID
   function! s:get_sid() abort
-    return matchstr(expand('<sfile>'), '^function <SNR>\zs\d\+\ze_get_sid$')
+    return matchstr(expand('<sfile>'), 'function <SNR>\zs\d\+\ze_get_sid$')
   endfunction
   let s:sid = s:get_sid()
   delfunction s:get_sid
@@ -59,7 +59,7 @@ abbr SID
 snippet sid_prefix
 abbr <SNR>xxx_
   function! s:get_sid_prefix() abort
-    return matchstr(expand('<sfile>'), '^function \zs<SNR>\d\+_\zeget_sid_prefix$')
+    return matchstr(expand('<sfile>'), 'function \zs<SNR>\d\+_\zeget_sid_prefix$')
   endfunction
   let s:sid_prefix = s:get_sid_prefix()
   delfunction s:get_sid_prefix
