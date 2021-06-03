@@ -1,3 +1,14 @@
+snippet shebang
+  #!/bin/${1:sh}
+
+  ${0}
+
+snippet script_dir
+  \${0%/*}
+
+snippet script_dir2
+  \$(dirname \$0)
+
 snippet echoerr
   echo >&2 ${0}
 
@@ -6,19 +17,34 @@ snippet echoline
   ${0}
   "
 
+snippet redir_errout
+  2>&1
+
 snippet fn
   ${1:#:name}() {
     ${0}
   }
 
 snippet trap-once
-  trap '${1:#:action}; trap $2' ${2:SIGHUP SIGINT SIGTERM}
+  trap '${1:#:action}; trap $2' ${2:HUP INT TERM}
   ${0}
   trap $2
+
+snippet var_get_suffix
+abbr ${var##*.}
+  ${${1:#:var}##*.}
+
+snippet var_basename
+alias basename
+  ${${1:#:var}##*/}
 
 snippet var_remove_suffix
 abbr ${var%.*}
   ${${1:#:var}%.*}
+
+snippet var_dirname
+alias dirname
+  ${${1:#:var}%/*}
 
 snippet var_default_if_null
 abbr ${var:-default}
@@ -103,27 +129,34 @@ snippet posix_array
   "
   ${2:$1_list}=\`echo \$$1 | cut -f 1- -d ' '\`
 
+snippet bash_var_regex_one
+  ${${1:#:var}/${2:#:pattern}/${3:#:after}}
+
+snippet bash_var_regex
+alias bash_var_regex_all
+  ${${1:#:var}//${2:#:pattern}/${3:#:after}}
+
 snippet bash_if
-abbr if [[ ${1} ]]; then ...; fi
+abbr if [[ ${1} ]]; then ...; fi (bash)
   if [[ ${1} ]]; then
     ${0}
   fi
 
 snippet bash_for
-abbr for ((i = 0; i < n; i++)) { ... }
+abbr for ((i = 0; i < n; i++)) { ... } (bash)
   declare -i ${1:i}
   for (($1 = ${2:0}; $1 < ${3}; $1++)) {
     ${0}
   }
 
 snippet bash_foreach_brace
-abbr for i in {0..n}; do ...; done
+abbr for i in {0..n}; do ...; done (bash)
   for i in {${1:0}..${2}}; do
     ${0}
   done
 
 snippet bash_foreach_brace2
-abbr for i in {0..n..step}; do ...; done
+abbr for i in {0..n..step}; do ...; done (bash)
   for i in {${1:0}..${2:#:to}..${3:#:step}}; do
     ${0}
   done
