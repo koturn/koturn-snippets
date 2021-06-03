@@ -1,31 +1,40 @@
 snippet shebang
+abbr #!/bin/sh
   #!/bin/${1:sh}
 
   ${0}
 
 snippet script_dir
+abbr ${0%/*}
   \${0%/*}
 
 snippet script_dir2
+abbr $(dirname $0)
   \$(dirname \$0)
 
 snippet echoerr
+alias stderr
+abbr echo >&2
   echo >&2 ${0}
 
 snippet echoline
+abbr echo ""
   echo "\
   ${0}
   "
 
 snippet redir_errout
+abbr 2>&1
   2>&1
 
 snippet fn
+abbr f() { ... }
   ${1:#:name}() {
     ${0}
   }
 
 snippet trap-once
+abbr trap '...; trap HUP INT TERM' HUP INT TERM
   trap '${1:#:action}; trap $2' ${2:HUP INT TERM}
   ${0}
   trap $2
@@ -36,6 +45,7 @@ abbr ${var##*.}
 
 snippet var_basename
 alias basename
+abbr ${var##*/}
   ${${1:#:var}##*/}
 
 snippet var_remove_suffix
@@ -44,6 +54,7 @@ abbr ${var%.*}
 
 snippet var_dirname
 alias dirname
+abbr ${var%/*}
   ${${1:#:var}%/*}
 
 snippet var_default_if_null
@@ -90,33 +101,38 @@ snippet var_remove_longest_backward_match
 abbr ${var%%word}
   ${${1:#:var}%%${2:#:word}}
 
-
 snippet if_test
+abbr if test ...; then ...; fi
   if test ${1}; then
     ${0}
   fi
 
 snippet if_defined
+abbr if ${var+:} false; then
   if ${${1:#:var}+:} false; then
     ${0}
   fi
 
 snippet if_not_defined
+abbr if ! ${var+:} false; then
   if ! ${${1:#:var}+:} false; then
     ${0}
   fi
 
 snippet if_executable
-  [ "`which` ${1:#:command}" != '' -a \\$? -eq 0 ]; then
+abbr if [ "$(while cmd 2> /dev/null)" = '' -o $? -eq 0 ]; then
+  if [ "$(which ${1:#:command} 2> /dev/null)" = '' -o \$? -eq 0 ]; then
     ${0}
   fi
 
 snippet if_not_executable
-  [ "`which` ${1:#:command}" = '' -o \\$? -ne 0 ]; then
+abbr if [ "$(while cmd 2> /dev/null)" = '' -o $? -ne 0 ]; then
+  if [ "$(which ${1:#:command} 2> /dev/null)" = '' -o \$? -ne 0 ]; then
     ${0}
   fi
 
 snippet while_index
+abbr i=0 while [ $i -lt N ]; do ... done
   ${1:i}=${2:0}
   while [ "$$1" -lt ${3:#:nLoop} ]; do
     ${0}
@@ -130,10 +146,12 @@ snippet posix_array
   ${2:$1_list}=\`echo \$$1 | cut -f 1- -d ' '\`
 
 snippet bash_var_regex_one
+abbr ${var/pattern/after}
   ${${1:#:var}/${2:#:pattern}/${3:#:after}}
 
 snippet bash_var_regex
 alias bash_var_regex_all
+abbr ${var//pattern/after}
   ${${1:#:var}//${2:#:pattern}/${3:#:after}}
 
 snippet bash_if
