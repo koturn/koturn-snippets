@@ -1,0 +1,563 @@
+snippet ImplInteract
+alias Interact
+abbr public override void Interact()
+	/// <summary>
+	/// Called when a VRChat player interacts with this object.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#interact"/></remarks>
+	public override void Interact()
+	{
+		${0}
+	}
+
+snippet ImplOnDrop
+alias OnDrop
+abbr public override void OnDrop()
+	/// <summary>
+	/// Called when a VRChat player drops this object after being held.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#ondrop"/></remarks>
+	public override void OnDrop()
+	{
+		${0}
+	}
+
+snippet ImplOnOwnershipTransfer
+alias OnOwnershipTransfer
+abbr public override void OnOwnershipTransfer()
+	/// <summary>
+	/// Called when the ownership of this object is transferred via some mechanic.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onownershiptransferred"/></remarks>
+	public override void OnOwnershipTransfer(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPickup
+alias OnPickup
+abbr public override void OnPickup()
+	/// <summary>
+	/// Called when this object is picked up by a VRChat player.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onpickup"/></remarks>
+	public override void OnPickup()
+	{
+		${0}
+	}
+
+snippet ImplOnPickupUseDown
+alias OnPickupUseDown
+abbr public override void OnPickupUseDown()
+	/// <summary>
+	/// Called when this object is held and the Use button is pressed.
+	/// Calls on button down.
+	/// The "AutoHold" of this object must be Yes.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onpickupusedown"/></remarks>
+	public override void OnPickupUseDown()
+	{
+		${0}
+	}
+
+snippet ImplOnPickupUseUp
+alias OnPickupUseUp
+abbr public override void OnPickupUseUp()
+	/// <summary>
+	/// Called when this object is held and the Use button is pressed.
+	/// Calls on button up.
+	/// The "AutoHold" of this object must be Yes.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onpickupuseup"/></remarks>
+	public override void OnPickupUseUp()
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerJoined
+alias OnPlayerJoined
+abbr public override void OnPlayerJoined()
+	/// <summary>
+	/// Called when a VRChat player joins the instance.
+	/// </summary>
+	/// <param name="$1">Joined player information.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayerjoined"/></remarks>
+	public override void OnPlayerJoined(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerLeft
+alias OnPlayerLeft
+abbr public override void OnPlayerLeft()
+	/// <summary>
+	/// Called when a VRChat player leaves the instance.
+	/// </summary>
+	/// <param name="$1">Left player information.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayerleft"/></remarks>
+	public override void OnPlayerLeft(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnSpawn
+alias OnSpawn
+abbr public override void OnSpawn()
+	/// <summary>
+	/// Called when this object spawns for the local player.
+	/// Unbuffered, so late joiners do not get this event.
+	/// Only fires when the object is spawned via network instantiation.
+	/// Will not fire if the object is present in the base scene.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onspawn"/></remarks>
+	public override void OnSpawn()
+	{
+		${0}
+	}
+
+snippet ImplOnStationEntered
+alias OnStationEntered
+abbr public override void OnStationEntered()
+	/// <summary>
+	/// Called when a VRChat player enters the station on this object.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onstationentered"/></remarks>
+	public override void OnStationEntered()
+	{
+		${0}
+	}
+
+snippet ImplOnStationExited
+alias OnStationExited
+abbr public override void OnStationExited()
+	/// <summary>
+	/// Called when a VRChat player exits the station on this object.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onstationexited"/></remarks>
+	public override void OnStationExited()
+	{
+		${0}
+	}
+
+snippet ImplOnVideoEnd
+alias OnVideoEnd
+abbr public override void OnVideoEnd()
+	/// <summary>
+	/// Called when the video player on this object is finished playing,
+	/// either via the end of the video or via player interaction.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onvideoend"/></remarks>
+	public override void OnVideoEnd()
+	{
+		${0}
+	}
+
+snippet ImplOnVideoError
+alias OnVideoError
+abbr public override void OnVideoError()
+	/// <summary>
+	/// Called when the video player encounters an error loading the video
+	/// </summary>
+	/// <param name="$1">Error reason enum.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onvideoerror"/></remarks>
+	public override void OnVideoError(VRC.SDK3.Components.Video.VideoError ${1:videoError})
+	{
+		${0}
+	}
+
+snippet ImplOnVideoLoop
+alias OnVideoLoop
+abbr public override void OnVideoLoop()
+	/// <summary>
+	/// If looping is enabled, called when the video player finishes a loop.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onvideoloop"/></remarks>
+	public override void OnVideoLoop()
+	{
+		${0}
+	}
+
+snippet ImplOnVideoPause
+alias OnVideoPause
+abbr public override void OnVideoPause()
+	/// <summary>
+	/// Called when the video player on this object is paused.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onvideopause"/></remarks>
+	public override void OnVideoPause()
+	{
+		${0}
+	}
+
+snippet ImplOnVideoPlay
+alias OnVideoPlay
+abbr public override void OnVideoPlay()
+	/// <summary>
+	/// Called when the video player on this object starts playback,
+	/// either via the start of a new video in a queue, unpausing, or via player interaction.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onvideoplay"/></remarks>
+	public override void OnVideoPlay()
+	{
+		${0}
+	}
+
+snippet ImplOnVideoReady
+alias OnVideoReady
+abbr public override void OnVideoReady()
+	/// <summary>
+	/// Called when the video player loads a new video.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onvideoready"/></remarks>
+	public override void OnVideoReady()
+	{
+		${0}
+	}
+
+snippet ImplOnVideoStart
+alias OnVideoStart
+abbr public override void OnVideoStart()
+	/// <summary>
+	/// Called when the video player on this object starts playback from a stopped state.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onvideostart"/></remarks>
+	public override void OnVideoStart()
+	{
+		${0}
+	}
+
+snippet ImplOnPreSerialization
+alias OnPreSerialization
+abbr public override void OnPreSerialization()
+	/// <summary>
+	/// This event triggers just before serialized data will be sent out,
+	/// it's a good place to set synced variables that you want to be updated for other players.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/network-components#onpreserialization"/></remarks>
+	public override void OnPreSerialization()
+	{
+		${0}
+	}
+
+snippet ImplOnDeserialization
+alias OnDeserialization
+abbr public override void OnDeserialization()
+	/// <summary>
+	/// This event triggers when sync data has been transformed from bytes back into usable variables.
+	/// It does not tell you which data has been updated,
+	/// but serves as a jumping-off point to either update everything that watches synced variables,
+	/// or a place to check new data against old data and make specific updates.
+	/// </summary>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/network-components#ondeserialization"/></remarks>
+	public override void OnDeserialization()
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerTriggerEnter
+alias OnPlayerTriggerEnter
+abbr public override void OnPlayerTriggerEnter()
+	/// <summary>
+	/// Called when a player's capsule enters a trigger collider.
+	/// This object must have a collider with "IsTrigger" checked.
+	/// </summary>
+	/// <param name="$1">An information of the player who have entered a trigger collider.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayertriggerenter"/></remarks>
+	public override void OnPlayerTriggerEnter(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerTriggerExit
+alias OnPlayerTriggerExit
+abbr public override void OnPlayerTriggerExit()
+	/// <summary>
+	/// Called when a player's capsule exits a Trigger Collider.
+	/// This object must have a collider with "IsTrigger" checked.
+	/// </summary>
+	/// <param name="$1">An information of the player who have exited from a trigger collider.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayertriggerexit"/></remarks>
+	public override void OnPlayerTriggerExit(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerTriggerStay
+alias OnPlayerTriggerStay
+abbr public override void OnPlayerTriggerStay()
+	/// <summary>
+	/// Called on frames while a player's capsule is inside a Trigger Collider.
+	/// This object must have a collider with "IsTrigger" checked.
+	/// </summary>
+	/// <param name="$1">An information of the player who have stayed in a trigger collider.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayertriggerstay"/></remarks>
+	public override void OnPlayerTriggerStay(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerCollisionEnter
+alias OnPlayerCollisionEnter
+abbr public override void OnPlayerCollisionEnter()
+	/// <summary>
+	/// Called when a player's capsule enters a Collider.
+	/// This object must have a collider with "IsTrigger" unchecked.
+	/// It does not respond to stationary objects, so use <see cref="OnPlayerTriggerEnter"/> for stationary objects instead.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayercollisionenter"/></remarks>
+	public override void OnPlayerCollisionEnter(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerCollisionExit
+alias OnPlayerCollisionExit
+abbr public override void OnPlayerCollisionExit()
+	/// <summary>
+	/// Called when a player's capsule exits a Collider.
+	/// This object must have a collider with "IsTrigger" unchecked.
+	/// It does not respond to stationary objects, so use <see cref="OnPlayerTriggerStay"/> for stationary objects instead.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayercollisionexit"/></remarks>
+	public override void OnPlayerCollisionExit(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerCollisionStay
+alias OnPlayerCollisionStay
+abbr public override void OnPlayerCollisionStay()
+	/// <summary>
+	/// Called on frames while a player's capsule is inside a Collider.
+	/// This object must have a collider with "IsTrigger" unchecked.
+	/// It does not respond to stationary objects, so use <see cref="OnPlayerTriggerExit"/> for stationary objects instead.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayercollisionstay"/></remarks>
+	public override void OnPlayerCollisionStay(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerParticleCollision
+alias OnPlayerParticleCollision
+abbr public override void OnPlayerParticleCollision()
+	/// <summary>
+	/// Called when a particle collides with a player's capsule, assuming that Particle System has Collision and Send Collision Messages turned on.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayerparticlecollision"/></remarks>
+	public override void OnPlayerParticleCollision(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerRespawn
+alias OnPlayerRespawn
+abbr public override void OnPlayerRespawn()
+	/// <summary>
+	/// Called when a player respawns using their menu.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/event-nodes#onplayerrespawn"/></remarks>
+	public override void OnPlayerRespawn(VRC.SDKBase.VRCPlayerApi ${1:player})
+	{
+		${0}
+	}
+
+snippet ImplOnPostSerialization
+alias OnPostSerialization
+abbr public override void OnPostSerialization()
+	/// <summary>
+	/// This event triggers when sync data has been transformed from bytes back into usable variables.
+	/// It does not tell you which data has been updated,
+	/// but serves as a jumping-off point to either update everything that watches synced variables,
+	/// or a place to check new data against old data and make specific updates.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/network-components#onpostserialization"/></remarks>
+	public override void OnPostSerialization(VRC.Udon.Common.SerializationResult ${1:result})
+	{
+		${0}
+	}
+
+snippet ImplOnOwnershipRequest
+alias OnOwnershipRequest
+abbr public override bool OnOwnershipRequest()
+	/// <summary>
+	/// This event is triggered when someone has requested to take ownership.
+	/// It includes the Player Objects for the Requester and the Requested Owner.
+	/// To approve or deny the change, set a boolean value into a "Set Return Value" node.
+	/// This logic runs locally on both the requester and the owner, so be aware that disagreements in logic between the two will cause a desync.
+	/// This is most likely to be expressed by the ownership transfer being unexpectedly rejected by the owner.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/network-components#onownershiptransferred"/></remarks>
+	public override bool OnOwnershipRequest(VRC.SDKBase.VRCPlayerApi ${1:requestingPlayer}, VRC.SDKBase.VRCPlayerApi ${2:requestedOwner})
+	{
+		${0}
+	}
+
+snippet ImplMidiNoteOn
+alias MidiNoteOn
+abbr public override void MidiNoteOn()
+	/// <summary>
+	/// Called when a Note On message is received, typically by pressing a key / pad on your device.
+	/// </summary>
+	/// <param name="$1">Midi Channel that received the event, 0-15.</param>
+	/// <param name="$2">Note number from 0-127 (your midi Device may not output the full range)</param>
+	/// <param name="$3">This value is typically 0 for Note Off events, but may vary depending on your device.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/midi#midinoteon"/></remarks>
+	public override void MidiNoteOn(int ${1:channel}, int ${2:number}, int ${3:velocity})
+	{
+		${0}
+	}
+
+snippet ImplMidiNoteOff
+alias MidiNoteOff
+abbr public override void MidiNoteOff()
+	/// <summary>
+	/// Called when a Note Off message is received, typically by releasing a key / pad on your device.
+	/// </summary>
+	/// <param name="$1">Midi Channel that received the event, 0-15.</param>
+	/// <param name="$2">Note number from 0-127 (your midi Device may not output the full range)</param>
+	/// <param name="$3">This value is typically 0 for Note Off events, but may vary depending on your device.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/midi#midinoteoff"/></remarks>
+	public override void MidiNoteOff(int ${1:channel}, int ${2:number}, int ${3:velocity})
+	{
+		${0}
+	}
+
+snippet ImplMidiControlChange
+alias MidiControlChange
+abbr public override void MidiControlChange()
+	/// <summary>
+	/// Called when a control change is received. These are typically sent by knobs and sliders on your Midi device.
+	/// </summary>
+	/// <param name="$1">Midi Channel that received the event, 0-15.</param>
+	/// <param name="$2">Note number from 0-127 (your midi Device may not output the full range)</param>
+	/// <param name="$3">Number from 0-127 representing the value sent by your controller.
+	/// For some knobs that can spin endlessly rather than being limited by physical start / end positions,
+	/// this value might be simply 0 and 1 or some other range indicating "positive" and "negative" increments that you must manage on your own.</param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/midi#midicontrolchange"/></remarks>
+	public override void MidiControlChange(int ${1:channel}, int ${2:number}, int ${3:value})
+	{
+		${0}
+	}
+
+snippet ImplInputJump
+alias InputJump
+abbr public override void InputJump()
+	/// <summary>
+	/// Spacebar on Desktop, typically a face button on controllers.
+	/// </summary>
+	/// <param name="$1">true when the button is pressed and false when it is released.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputjump"/></remarks>
+	public override void InputJump(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}
+
+snippet ImplInputUse
+alias InputUse
+abbr public override void InputUse()
+	/// <summary>
+	/// Left-Click on Desktop, typically a trigger button on controllers.
+	/// </summary>
+	/// <param name="$1">true when the button is pressed and false when it is released.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputuse"/></remarks>
+	public override void InputUse(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}
+
+snippet ImplInputGrab
+alias InputGrab
+abbr public override void InputGrab()
+	/// <summary>
+	/// Left-Click on Desktop, typically a grip button on VR controllers.
+	/// </summary>
+	/// <param name="$1">true when the button is pressed and false when it is released.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputgrab"/></remarks>
+	public override void InputGrab(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}
+
+snippet ImplInputDrop
+alias InputDrop
+abbr public override void InputDrop()
+	/// <summary>
+	/// Right-Click on Desktop, press grip button on Vive Wands and some Windows Mixed Reality Controllers, release grip button on others.
+	/// </summary>
+	/// <param name="$1">true when the button is pressed and false when it is released.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputdrop"/></remarks>
+	public override void InputDrop(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}
+
+snippet ImplInputMoveHorizontal
+alias InputMoveHorizontal
+abbr public override void InputMoveHorizontal()
+	/// <summary>
+	/// A and D on Desktop, typically the left stick/pad moving left and right on controllers.
+	/// </summary>
+	/// <param name="$1">A float value which typically ranges between -1 and 1.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputmovehorizontal"/></remarks>
+	public override void InputMoveHorizontal(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}
+
+snippet ImplInputMoveVertical
+alias InputMoveVertical
+abbr public override void InputMoveVertical()
+	/// <summary>
+	/// W and S on Desktop, typically the left stick/pad moving up and down on controllers.
+	/// </summary>
+	/// <param name="$1">A float value which typically ranges between -1 and 1.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputmovevertical"/></remarks>
+	public override void InputMoveVertical(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}
+
+snippet ImplInputLookHorizontal
+alias InputLookHorizontal
+abbr public override void InputLookHorizontal()
+	/// <summary>
+	/// Moving the mouse left and right on Desktop, turning left and right using the right stick/pad without Comfort Turning on VR controllers,
+	/// typically the right stick left and right on gamepad controllers.
+	/// </summary>
+	/// <param name="$1">A float value which typically ranges between -1 and 1.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputlookhorizontal"/></remarks>
+	public override void InputLookHorizontal(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}
+
+snippet ImplInputLookVertical
+alias InputLookVertical
+abbr public override void InputLookVertical()
+	/// <summary>
+	/// Moving the mouse up and down on Desktop, typically the right stick up and down on gamepad and VR controllers.
+	/// </summary>
+	/// <param name="$1">A float value which typically ranges between -1 and 1.</param>
+	/// <param name="$2"></param>
+	/// <remarks><seealso href="https://docs.vrchat.com/docs/input-events#inputlookvertical"/></remarks>
+	public override void InputLookVertical(bool ${1:value}, VRC.Udon.Common.UdonInputEventArgs ${2:args})
+	{
+		${0}
+	}

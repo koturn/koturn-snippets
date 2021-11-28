@@ -32,6 +32,8 @@ delete typeparam
 delete typeparamref
 delete value
 
+include include/cs.unity.snip
+include include/cs.udon.snip
 
 snippet Main
 alias main
@@ -455,7 +457,7 @@ abbr SelectMany(e => ...) (LINQ)
 snippet .Where
 alias Where
 abbr Where(e => ...) (LINQ)
-  Where(${1:e} => ${2:#:predicate})${0}
+  .Where(${1:e} => ${2:#:predicate})${0}
 
 snippet .Take
 alias Take
@@ -964,166 +966,6 @@ snippet LogError
 alias loge logerror
 abbr Debug.LogError(...); (Unity)
   Debug.LogLogError(${1});${0}
-
-snippet ImplAwake
-alias Awake
-abbr private void Awake() (Unity)
-  /// <summary>
-  /// This method is called only once during the lifetime of the script instance.
-  /// </summary>
-  private void Awake()
-  {
-    ${0}
-  }
-
-snippet ImplStart
-alias Start
-abbr private void Start() (Unity)
-  /// <summary>
-  /// This method is called on the frame when a script is enabled just before
-  /// any of the Update methods are called the first time.
-  /// </summary>
-  private void Start()
-  {
-    ${0}
-  }
-
-snippet ImplUpdate
-alias Update
-abbr private void Update() (Unity)
-  /// <summary>
-  /// This method is called every frame.
-  /// </summary>
-  private void Update()
-  {
-    ${0}
-  }
-
-snippet ImplOnEnable
-alias OnEnable
-abbr private void OnEnable() (Unity)
-  /// <summary>
-  /// This method is called when the object is enabled.
-  /// </summary>
-  private void OnEnable()
-  {
-    ${0}
-  }
-
-snippet ImplOnDisable
-alias OnDisable
-abbr private void OnDisable() (Unity)
-  /// <summary>
-  /// This method is called when the object is disabled.
-  /// </summary>
-  private void OnDisable()
-  {
-    ${0}
-  }
-
-snippet ImplOnDestroy
-alias OnDestroy
-abbr private void OnDestroy() (Unity)
-  /// <summary>
-  /// This method is called when the object is destroyed.
-  /// </summary>
-  private void OnDestroy()
-  {
-    ${0}
-  }
-
-snippet ImplOnCollisionEnter
-alias OnCollisionEnter
-abbr private void OnCollisionEnter(other) (Unity)
-  /// <summary>
-  /// This method is called when this collider/rigidbody has begun touching
-  /// another rigidbody/collider.
-  /// </summary>
-  private void OnCollisionEnter(Collision ${1:other})
-  {
-    ${0}
-  }
-
-snippet ImplOnCollisionExit
-alias OnCollisionExit
-abbr private void OnCollisionExit(other) (Unity)
-  /// <summary>
-  /// This method is called when this collider/rigidbody has stopped touching
-  /// another rigidbody/collider.
-  /// </summary>
-  private void OnCollisionExit(Collision ${1:other})
-  {
-    ${0}
-  }
-
-snippet ImplOnCollisionStay
-alias OnCollisionStay
-abbr private void OnCollisionStay(other) (Unity)
-  /// <summary>
-  /// This method is called once per frame for every collider/rigidbody
-  /// that is touching rigidbody/collider.
-  /// </summary>
-  private void OnCollisionStay(Collision ${1:other})
-  {
-    ${0}
-  }
-
-snippet ImplOnSpawn
-alias OnSpawn
-abbr public override void OnSpawn() (U#)
-  /// <summary>
-  /// This method is called when the object is spawned.
-  /// </summary>
-  public override void OnSpawn()
-  {
-    ${0}
-  }
-
-snippet ImplInteract
-alias Interact
-abbr public override void Interact() (U#)
-  /// <summary>
-  /// This method is called when the object is interacted.
-  /// </summary>
-  public override void Interact()
-  {
-    ${0}
-  }
-
-snippet ImplOnPickup
-alias OnPickup
-abbr public override void OnPickup() (U#)
-  /// <summary>
-  /// This method is called when the object is pickuped.
-  /// </summary>
-  public override void OnPickup()
-  {
-    ${0}
-  }
-
-snippet ImplOnPickupUseDown
-alias OnPickupUseDown
-abbr public override void OnPickupUseDown() (U#)
-  /// <summary>
-  /// This method is called when the trigger is pulled while grabbing the
-  /// object whose AutoHold is "Yes".
-  /// </summary>
-  public override void OnPickupUseDown()
-  {
-    ${0}
-  }
-
-snippet ImplOnPickupUseUp
-alias OnPickupUseUp
-abbr public override void OnPickupUseUp() (U#)
-  /// <summary>
-  /// This method is called when the trigger is released while grabbing the
-  /// object whose AutoHold is "Yes".
-  /// </summary>
-  public override void OnPickupUseUp()
-  {
-    ${0}
-  }
 
 snippet c
 abbr <c></c> (XML Doc.)

@@ -1,0 +1,745 @@
+snippet ImplAwake
+alias Awake
+abbr private void Awake()
+	/// <summary>
+	/// Called when the script instance is being loaded.
+	/// </summary>
+	private void Awake()
+	{
+		${0}
+	}
+
+snippet ImplFixedUpdate
+alias FixedUpdate
+abbr private void FixedUpdate()
+	/// <summary>
+	/// Frame-rate independent <see cref="FixedUpdate"/> message for physics calculations.
+	/// </summary>
+	private void FixedUpdate()
+	{
+		${0}
+	}
+
+snippet ImplLateUpdate
+alias LateUpdate
+abbr private void LateUpdate()
+	/// <summary>
+	/// Called every frame, if the <see cref="Behaviour"/> is enabled.
+	/// </summary>
+	private void LateUpdate()
+	{
+		${0}
+	}
+
+snippet ImplOnAnimatorIK
+alias OnAnimatorIK
+abbr private void OnAnimatorIK()
+	/// <summary>
+	/// Callback for setting up animation IK (inverse kinematics).
+	/// </summary>
+	/// <param name="$1">The index of the layer on which the IK solver is called.</param>
+	private void OnAnimatorIK(int ${1:layerIndex})
+	{
+		${0}
+	}
+
+snippet ImplOnAnimatorMove
+alias OnAnimatorMove
+abbr private void OnAnimatorMove()
+	/// <summary>
+	/// Callback for processing animation movements for modifying root motion.
+	/// </summary>
+	private void OnAnimatorMove()
+	{
+		${0}
+	}
+
+snippet ImplOnApplicationFocus
+alias OnApplicationFocus
+abbr private void OnApplicationFocus()
+	/// <summary>
+	/// Sent to all <see cref="GameObject"/>s when the player gets or loses focus.
+	/// </summary>
+	/// <param name="$1"><c>true</c> if the GameObjects have focus, else <c>false</c>.</param>
+	private void OnApplicationFocus(bool ${1:hasFocus})
+	{
+		${0}
+	}
+
+snippet ImplOnApplicationPause
+alias OnApplicationPause
+abbr private void OnApplicationPause()
+	/// <summary>
+	/// Sent to all <see cref="GameObject"/>s when the application pauses.
+	/// </summary>
+	/// <param name="$1"><c>true</c> if the application is paused, else <c>false</c>.</param>
+	private void OnApplicationPause(bool ${1:pauseStatus})
+	{
+		${0}
+	}
+
+snippet ImplOnApplicationQuit
+alias OnApplicationQuit
+abbr private void OnApplicationQuit()
+	/// <summary>
+	/// Sent to all <see cref="GameObject"/>s before the application quits.
+	/// </summary>
+	private void OnApplicationQuit()
+	{
+		${0}
+	}
+
+snippet ImplOnAudioFilterRead
+alias OnAudioFilterRead
+abbr private void OnAudioFilterRead()
+	/// <summary>
+	/// If this method is implemented, Unity will insert a custom filter into the audio DSP chain.
+	/// </summary>
+	/// <param name="$1">An array of <see cref="float"/>s comprising the audio data.</param>
+	/// <param name="$2">An <see cref="int"/> that stores the number of channels of audio data passed to this delegate.</param>
+	private void OnAudioFilterRead(float[] ${1:data}, int ${2:channels})
+	{
+		${0}
+	}
+
+snippet ImplOnBecameInvisible
+alias OnBecameInvisible
+abbr private void OnBecameInvisible()
+	/// <summary>
+	/// Called when the renderer is no longer visible by any camera.
+	/// </summary>
+	private void OnBecameInvisible()
+	{
+		${0}
+	}
+
+snippet ImplOnBecameVisible
+alias OnBecameVisible
+abbr private void OnBecameVisible()
+	/// <summary>
+	/// Called when the renderer became visible by any camera.
+	/// </summary>
+	private void OnBecameVisible()
+	{
+		${0}
+	}
+
+snippet ImplOnCollisionEnter
+alias OnCollisionEnter
+abbr private void OnCollisionEnter()
+	/// <summary>
+	/// Called when this collider/rigidbody has begun touching another rigidbody/collider.
+	/// </summary>
+	/// <param name="$1">The <see cref="Collision"/> data associated with this collision.</param>
+	private void OnCollisionEnter(Collision ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnCollisionEnter2D
+alias OnCollisionEnter2D
+abbr private void OnCollisionEnter2D()
+	/// <summary>
+	/// Sent when an incoming collider makes contact with this object's collider (2D physics only).
+	/// </summary>
+	/// <param name="$1">The <see cref="Collision2D"/> data associated with this collision.</param>
+	private void OnCollisionEnter2D(Collision2D ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnCollisionExit
+alias OnCollisionExit
+abbr private void OnCollisionExit()
+	/// <summary>
+	/// Called when this collider/rigidbody has stopped touching another rigidbody/collider.
+	/// </summary>
+	/// <param name="$1">The <see cref="Collision"/> data associated with this collision.</param>
+	private void OnCollisionExit(Collision ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnCollisionExit2D
+alias OnCollisionExit2D
+abbr private void OnCollisionExit2D()
+	/// <summary>
+	/// Sent when a collider on another object stops touching this object's collider (2D physics only).
+	/// </summary>
+	/// <param name="$1">The <see cref="Collision2D"/> data associated with this collision.</param>
+	private void OnCollisionExit2D(Collision2D ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnCollisionStay
+alias OnCollisionStay
+abbr private void OnCollisionStay()
+	/// <summary>
+	/// Called once per frame for every collider/rigidbody that is touching rigidbody/collider.
+	/// </summary>
+	/// <param name="$1">The <see cref="Collider"/> data associated with this collision.</param>
+	private void OnCollisionStay(Collision ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnCollisionStay2D
+alias OnCollisionStay2D
+abbr private void OnCollisionStay2D()
+	/// <summary>
+	/// Sent each frame where a collider on another object is touching this object's collider (2D physics only).
+	/// </summary>
+	/// <param name="$1">The <see cref="Collider2D"/> data associated with this collision.</param>
+	private void OnCollisionStay2D(Collision2D ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnConnectedToServer
+alias OnConnectedToServer
+abbr private void OnConnectedToServer()
+	/// <summary>
+	/// Called on the client when you have successfully connected to a server.
+	/// </summary>
+	private void OnConnectedToServer()
+	{
+		${0}
+	}
+
+snippet ImplOnControllerColliderHit
+alias OnControllerColliderHit
+abbr private void OnControllerColliderHit()
+	/// <summary>
+	/// Called when the controller hits a collider while performing a Move.
+	/// </summary>
+	/// <param name="$1">ControllerColliderHit is used by CharacterController.OnControllerColliderHit to give detailed information about the collision and how to deal with it.</param>
+	private void OnControllerColliderHit(ControllerColliderHit ${1:hit})
+	{
+		${0}
+	}
+
+snippet ImplOnDestroy
+alias OnDestroy
+abbr private void OnDestroy()
+	/// <summary>
+	/// Destroying the attached <see cref="Behaviour"/> will result in the game or Scene receiving <see cref="OnDestroy"/>.
+	/// </summary>
+	private void OnDestroy()
+	{
+		${0}
+	}
+
+snippet ImplOnDisable
+alias OnDisable
+abbr private void OnDisable()
+	/// <summary>
+	/// This function is called when the <see cref="Behaviour"/> becomes disabled.
+	/// </summary>
+	private void OnDisable()
+	{
+		${0}
+	}
+
+snippet ImplOnDisconnectedFromServer
+alias OnDisconnectedFromServer
+abbr private void OnDisconnectedFromServer()
+	/// <summary>
+	/// Called on the client when the connection was lost or you disconnected from the server.
+	/// </summary>
+	/// <param name="$1">The reason a disconnect event occurred.</param>
+	private void OnDisconnectedFromServer(NetworkDisconnection ${1:info})
+	{
+		${0}
+	}
+
+snippet ImplOnDrawGizmos
+alias OnDrawGizmos
+abbr private void OnDrawGizmos()
+	/// <summary>
+	/// Implement this method if you want to draw gizmos that are also pickable and always drawn.
+	/// </summary>
+	private void OnDrawGizmos()
+	{
+		${0}
+	}
+
+snippet ImplOnDrawGizmosSelected
+alias OnDrawGizmosSelected
+abbr private void OnDrawGizmosSelected()
+	/// <summary>
+	/// Implement this method to draw a gizmo if the object is selected.
+	/// </summary>
+	private void OnDrawGizmosSelected()
+	{
+		${0}
+	}
+
+snippet ImplOnEnable
+alias OnEnable
+abbr private void OnEnable()
+	/// <summary>
+	/// Called when the object becomes enabled and active.
+	/// </summary>
+	private void OnEnable()
+	{
+		${0}
+	}
+
+snippet ImplOnFailedToConnect
+alias OnFailedToConnect
+abbr private void OnFailedToConnect()
+	/// <summary>
+	/// Called on the client when a connection attempt fails for some reason.
+	/// </summary>
+	/// <param name="$1">Possible status messages returned by Network.</param>
+	private void OnFailedToConnect(NetworkConnectionError ${1:error})
+	{
+		${0}
+	}
+
+snippet ImplOnFailedToConnectToMasterServer
+alias OnFailedToConnectToMasterServer
+abbr private void OnFailedToConnectToMasterServer()
+	/// <summary>
+	/// Called on clients or servers when there is a problem connecting to the MasterServer.
+	/// </summary>
+	/// <param name="$1">Possible status messages returned by Network.</param>
+	private void OnFailedToConnectToMasterServer(NetworkConnectionError ${1:error})
+	{
+		${0}
+	}
+
+snippet ImplOnGUI
+alias OnGUI
+abbr private void OnGUI()
+	/// <summary>
+	/// Called for rendering and handling GUI events.
+	/// </summary>
+	private void OnGUI()
+	{
+		${0}
+	}
+
+snippet ImplOnJointBreak
+alias OnJointBreak
+abbr private void OnJointBreak()
+	/// <summary>
+	/// Called when a joint attached to the same game object broke.
+	/// </summary>
+	/// <param name="$1">The force that needs to be applied for this joint to break.</param>
+	private void OnJointBreak(float ${1:breakForce})
+	{
+		${0}
+	}
+
+snippet ImplOnJointBreak2D
+alias OnJointBreak2D
+abbr private void OnJointBreak2D()
+	/// <summary>
+	/// Called when a Joint2D attached to the same game object breaks.
+	/// </summary>
+	/// <param name="$1">The information of force that needs to be applied for this joint to break.</param>
+	private void OnJointBreak2D(Joint2D ${1:brokenJoint})
+	{
+		${0}
+	}
+
+snippet ImplOnMasterServerEvent
+alias OnMasterServerEvent
+abbr private void OnMasterServerEvent()
+	/// <summary>
+	/// Called on clients or servers when reporting events from the MasterServer.
+	/// </summary>
+	/// <param name="$1">Describes status messages from the master server.</param>
+	private void OnMasterServerEvent(MasterServerEvent ${1:event})
+	{
+		${0}
+	}
+
+snippet ImplOnMouseDown
+alias OnMouseDown
+abbr private void OnMouseDown()
+	/// <summary>
+	/// Called when the user has pressed the mouse button while over the Collider.
+	/// </summary>
+	private void OnMouseDown()
+	{
+		${0}
+	}
+
+snippet ImplOnMouseDrag
+alias OnMouseDrag
+abbr private void OnMouseDrag()
+	/// <summary>
+	/// Called when the user has clicked on a Collider and is still holding down the mouse.
+	/// </summary>
+	private void OnMouseDrag()
+	{
+		${0}
+	}
+
+snippet ImplOnMouseEnter
+alias OnMouseEnter
+abbr private void OnMouseEnter()
+	/// <summary>
+	/// Called when the mouse enters the Collider.
+	/// </summary>
+	private void OnMouseEnter()
+	{
+		${0}
+	}
+
+snippet ImplOnMouseExit
+alias OnMouseExit
+abbr private void OnMouseExit()
+	/// <summary>
+	/// Called when the mouse is not any longer over the Collider.
+	/// </summary>
+	private void OnMouseExit()
+	{
+		${0}
+	}
+
+snippet ImplOnMouseOver
+alias OnMouseOver
+abbr private void OnMouseOver()
+	/// <summary>
+	/// Called every frame while the mouse is over the Collider.
+	/// </summary>
+	private void OnMouseOver()
+	{
+		${0}
+	}
+
+snippet ImplOnMouseUp
+alias OnMouseUp
+abbr private void OnMouseUp()
+	/// <summary>
+	/// Called when the user has released the mouse button.
+	/// </summary>
+	private void OnMouseUp()
+	{
+		${0}
+	}
+
+snippet ImplOnMouseUpAsButton
+alias OnMouseUpAsButton
+abbr private void OnMouseUpAsButton()
+	/// <summary>
+	/// Only called when the mouse is released over the same Collider as it was pressed.
+	/// </summary>
+	private void OnMouseUpAsButton()
+	{
+		${0}
+	}
+
+snippet ImplOnNetworkInstantiate
+alias OnNetworkInstantiate
+abbr private void OnNetworkInstantiate()
+	/// <summary>
+	/// Called on objects which have been network instantiated with <see cref="Network.Instantiate"/>.
+	/// </summary>
+	/// <param name="$1"></param>
+	private void OnNetworkInstantiate(NetworkMessageInfo ${1:info})
+	{
+		${0}
+	}
+
+snippet ImplOnParticleCollision
+alias OnParticleCollision
+abbr private void OnParticleCollision()
+	/// <summary>
+	/// Called when a particle hits a Collider.
+	/// </summary>
+	/// <param name="$1"></param>
+	private void OnParticleCollision(GameObject ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnParticleSystemStopped
+alias OnParticleSystemStopped
+abbr private void OnParticleSystemStopped()
+	/// <summary>
+	/// Called when all particles in the system have died, and no new particles will be born.
+	/// New particles cease to be created either after Stop is called, or when the duration property of a non-looping system has been exceeded.
+	/// </summary>
+	private void OnParticleSystemStopped()
+	{
+		${0}
+	}
+
+snippet ImplOnParticleTrigger
+alias OnParticleTrigger
+abbr private void OnParticleTrigger()
+	/// <summary>
+	/// Called when any particles in a Particle System meet the conditions in the trigger module.
+	/// </summary>
+	private void OnParticleTrigger()
+	{
+		${0}
+	}
+
+snippet ImplOnParticleUpdateJobScheduled
+alias OnParticleUpdateJobScheduled
+abbr private void OnParticleUpdateJobScheduled()
+	/// <summary>
+	/// Called when a Particle System's built-in update job has been scheduled.
+	/// </summary>
+	private void OnParticleUpdateJobScheduled()
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerConnected
+alias OnPlayerConnected
+abbr private void OnPlayerConnected()
+	/// <summary>
+	/// Called on the server whenever a new player has successfully connected.
+	/// </summary>
+	private void OnPlayerConnected()
+	{
+		${0}
+	}
+
+snippet ImplOnPlayerDisconnected
+alias OnPlayerDisconnected
+abbr private void OnPlayerDisconnected()
+	/// <summary>
+	/// Called on the server whenever a player disconnected from the server.
+	/// </summary>
+	private void OnPlayerDisconnected()
+	{
+		${0}
+	}
+
+snippet ImplOnPostRender
+alias OnPostRender
+abbr private void OnPostRender()
+	/// <summary>
+	/// Called after a camera finished rendering the Scene.
+	/// </summary>
+	private void OnPostRender()
+	{
+		${0}
+	}
+
+snippet ImplOnPreCull
+alias OnPreCull
+abbr private void OnPreCull()
+	/// <summary>
+	/// Called before a camera culls the Scene.
+	/// </summary>
+	private void OnPreCull()
+	{
+		${0}
+	}
+
+snippet ImplOnPreRender
+alias OnPreRender
+abbr private void OnPreRender()
+	/// <summary>
+	/// Called before a camera starts rendering the Scene.
+	/// </summary>
+	private void OnPreRender()
+	{
+		${0}
+	}
+
+snippet ImplOnRenderImage
+alias OnRenderImage
+abbr private void OnRenderImage()
+	/// <summary>
+	/// Called after all rendering is complete to render image.
+	/// </summary>
+	/// <param name="$1">The incoming image.</param>
+	/// <param name="$2">The result image.</param>
+	private void OnRenderImage(RenderTexture ${1:src}, RenderTexture ${2:dest})
+	{
+		${0}
+	}
+
+snippet ImplOnRenderObject
+alias OnRenderObject
+abbr private void OnRenderObject()
+	/// <summary>
+	/// Called after camera has rendered the Scene.
+	/// </summary>
+	private void OnRenderObject()
+	{
+		${0}
+	}
+
+snippet ImplOnSerializeNetworkView
+alias OnSerializeNetworkView
+abbr private void OnSerializeNetworkView()
+	/// <summary>
+	/// Used to customize synchronization of variables in a script watched by a network view.
+	/// </summary>
+	/// <param name="$1"></param>
+	/// <param name="$2"></param>
+	private void OnSerializeNetworkView(BitStream ${1:stream}, NetworkMessageInfo ${2:info})
+	{
+		${0}
+	}
+
+snippet ImplOnServerInitialized
+alias OnServerInitialized
+abbr private void OnServerInitialized()
+	/// <summary>
+	/// Called on the server whenever a <see cref="Network.InitializeServer"/> was invoked and has completed.
+	/// </summary>
+	private void OnServerInitialized()
+	{
+		${0}
+	}
+
+snippet ImplOnTransformChildrenChanged
+alias OnTransformChildrenChanged
+abbr private void OnTransformChildrenChanged()
+	/// <summary>
+	/// Called when the list of children of the transform of the <see cref="GameObject"/> has changed.
+	/// </summary>
+	private void OnTransformChildrenChanged()
+	{
+		${0}
+	}
+
+snippet ImplOnTransformParentChanged
+alias OnTransformParentChanged
+abbr private void OnTransformParentChanged()
+	/// <summary>
+	/// Called when the parent property of the transform of the <see cref="GameObject"/> has changed.
+	/// </summary>
+	private void OnTransformParentChanged()
+	{
+		${0}
+	}
+
+snippet ImplOnTriggerEnter
+alias OnTriggerEnter
+abbr private void OnTriggerEnter()
+	/// <summary>
+	/// Called when a <see cref="GameObject"/> collides with another <see cref="GameObject"/>.
+	/// </summary>
+	/// <param name="$1">The other <see cref="Collider"/> involved in this collision.</param>
+	private void OnTriggerEnter(Collider ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnTriggerEnter2D
+alias OnTriggerEnter2D
+abbr private void OnTriggerEnter2D()
+	/// <summary>
+	/// Sent when another object enters a trigger collider attached to this object (2D physics only).
+	/// </summary>
+	/// <param name="$1">The other <see cref="Collider2D"/> involved in this collision.</param>
+	private void OnTriggerEnter2D(Collider2D ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnTriggerExit
+alias OnTriggerExit
+abbr private void OnTriggerExit()
+	/// <summary>
+	/// Called when the Collider other has stopped touching the trigger.
+	/// </summary>
+	/// <param name="$1">The other <see cref="Collider"/> involved in this collision.</param>
+	private void OnTriggerExit(Collider ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnTriggerExit2D
+alias OnTriggerExit2D
+abbr private void OnTriggerExit2D()
+	/// <summary>
+	/// Sent when another object leaves a trigger collider attached to this object (2D physics only).
+	/// </summary>
+	/// <param name="$1">The other <see cref="Collider2D"/> involved in this collision.</param>
+	private void OnTriggerExit2D(Collider2D ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnTriggerStay
+alias OnTriggerStay
+abbr private void OnTriggerStay()
+	/// <summary>
+	/// Called once per physics update for every Collider other that is touching the trigger.
+	/// </summary>
+	/// <param name="$1">The other <see cref="Collider"/> involved in this collision.</param>
+	private void OnTriggerStay(Collider ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnTriggerStay2D
+alias OnTriggerStay2D
+abbr private void OnTriggerStay2D()
+	/// <summary>
+	/// Sent each frame where another object is within a trigger collider attached to this object (2D physics only).
+	/// </summary>
+	/// <param name="$1">The other <see cref="Collider2D"/> involved in this collision.</param>
+	private void OnTriggerStay2D(Collider2D ${1:other})
+	{
+		${0}
+	}
+
+snippet ImplOnValidate
+alias OnValidate
+abbr private void OnValidate()
+	/// <summary>
+	/// Called when the script is loaded or a value is changed in the Inspector (Called in the editor only).
+	/// </summary>
+	private void OnValidate()
+	{
+		${0}
+	}
+
+snippet ImplOnWillRenderObject
+alias OnWillRenderObject
+abbr private void OnWillRenderObject()
+	/// <summary>
+	/// Called for each camera if the object is visible and not a UI element.
+	/// </summary>
+	private void OnWillRenderObject()
+	{
+		${0}
+	}
+
+snippet ImplReset
+alias Reset
+abbr private void Reset()
+	/// <summary>
+	/// Reset to default values.
+	/// </summary>
+	private void Reset()
+	{
+		${0}
+	}
+
+snippet ImplStart
+alias Start
+abbr private void Start()
+	/// <summary>
+	/// Called on the frame when a script is enabled just before any of the Update methods are called the first time.
+	/// </summary>
+	private void Start()
+	{
+		${0}
+	}
+
+snippet ImplUpdate
+alias Update
+abbr private void Update()
+	/// <summary>
+	/// Called every frame, if the <see cref="MonoBehaviour"/> is enabled.
+	/// </summary>
+	private void Update()
+	{
+		${0}
+	}
