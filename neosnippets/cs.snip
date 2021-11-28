@@ -37,1012 +37,1029 @@ include include/cs.udon.snip
 
 snippet Main
 alias main
-  ${1:private} static ${2:void} Main(${3:string[] $\{4:args\}})
-  {
-    ${0}
-  }
+	${1:private} static ${2:void} Main(${3:string[] $\{4:args\}})
+	{
+		${0}
+	}
 
 snippet WriteLine
 alias wl writeline println
-  Console.WriteLine(${1:#:message});${0}
+	Console.WriteLine(${1:#:message});${0}
 
 snippet Write
 alias write print
-  Console.WriteLine(${1:#:message});${0}
+	Console.WriteLine(${1:#:message});${0}
 
 snippet WriteLineError
 alias wle writelineerror printlnerr
-  Console.Error.WriteLine(${1:#:message});${0}
+	Console.Error.WriteLine(${1:#:message});${0}
 
 snippet WriteError
 alias we writeerror printerr
-  Console.Error.Write(${1:#:message});${0}
+	Console.Error.Write(${1:#:message});${0}
 
 snippet class
-  ${1:public} class ${2:#:ClassName}
-  {
-    /// <summary>
-    /// Initializes a new instance of <see cref="$2"/> class.
-    /// </summary>
-    public $2()
-    {
-      ${0}
-    }
-  }  // class $2
+	${1:public} class ${2:#:ClassName}
+	{
+		/// <summary>
+		/// Initializes a new instance of <see cref="$2"/> class.
+		/// </summary>
+		public $2()
+		{
+			${0}
+		}
+	}  // class $2
 
 snippet classException
 alias ImplException
-  [Serializable]
-  ${1:public} class ${2:#:Name}Exception : Exception
-  {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="$2Exception"/> class.
-    /// </summary>
-    public $2Exception()
-    {
-    }
+	[Serializable]
+	${1:public} class ${2:#:Name}Exception : Exception
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="$2Exception"/> class.
+		/// </summary>
+		public $2Exception()
+		{
+		}
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="$2Exception"/> class with a specified error message.
-    /// </summary>
-    /// <param name="$3">The error message that explains the reason for the exception.</param>
-    public $2Exception(string ${3:message})
-      : base($3)
-    {
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="$2Exception"/> class with a specified error message.
+		/// </summary>
+		/// <param name="$3">The error message that explains the reason for the exception.</param>
+		public $2Exception(string ${3:message})
+			: base($3)
+		{
+		}
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="$2Exception"/> class with
-    /// a specified error message and a reference to the inner exception that
-    /// is the cause of this exception.
-    /// </summary>
-    /// <param name="$3">The error message that explains the reason for the exception.</param>
-    /// <param name="$4">The exception that is the cause of the current exception.
-    /// If the innerException parameter is not a null reference,
-    /// the current exception is raised in a catch block that handles the inner exception.</param>
-    public $2Exception(string $3, Exception ${4:inner})
-      : base($3, $4)
-    {
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="$2Exception"/> class with
+		/// a specified error message and a reference to the inner exception that
+		/// is the cause of this exception.
+		/// </summary>
+		/// <param name="$3">The error message that explains the reason for the exception.</param>
+		/// <param name="$4">The exception that is the cause of the current exception.
+		/// If the innerException parameter is not a null reference,
+		/// the current exception is raised in a catch block that handles the inner exception.</param>
+		public $2Exception(string $3, Exception ${4:inner})
+			: base($3, $4)
+		{
+		}
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="$2Exception"/> class with serialized data.
-    /// </summary>
-    /// <param name="$5">The object that holds the serialized object data.</param>
-    /// <param name="$6">The contextual information about the source or destination.</param>
-    protected $2Exception(SerializationInfo info, StreamingContext context)
-      : base(${5:info}, ${6:context})
-    {
-    }
-  }  // class $2Exception
+		/// <summary>
+		/// Initializes a new instance of the <see cref="$2Exception"/> class with serialized data.
+		/// </summary>
+		/// <param name="$5">The object that holds the serialized object data.</param>
+		/// <param name="$6">The contextual information about the source or destination.</param>
+		protected $2Exception(SerializationInfo info, StreamingContext context)
+			: base(${5:info}, ${6:context})
+		{
+		}
+	}  // class $2Exception
 
 snippet classAttribute
 alias ImplAttribute
 abbr public class NameAttribute : Attribute { ... }
-  /// <summary>
-  /// Attribute class
-  /// </summary>
-  [AttributeUsage(AttributeTargets.All)]
-  ${1:public} class ${2:#:Name}Attribute : Attribute
-  {
-    /// <summary>
-    /// Ctor
-    /// </summary>
-    public $2()
-    {
-      ${0}
-    }
-  }  // class $2Attribute
+	/// <summary>
+	/// Attribute class
+	/// </summary>
+	[AttributeUsage(AttributeTargets.All)]
+	${1:public} class ${2:#:Name}Attribute : Attribute
+	{
+		/// <summary>
+		/// Ctor
+		/// </summary>
+		public $2()
+		{
+			${0}
+		}
+	}  // class $2Attribute
 
 snippet classSingleton
 alias singleton
-  /// <summary>
-  /// Description of $2.
-  /// </summary>
-  ${1:public} sealed class ${2:#:ClassName}
-  {
-    /// <summary>
-    /// Get the only instance of <see cref="$2"/> class.
-    /// </summary>
-    public static $2 ${3:Instance} { get; }
+	/// <summary>
+	/// Description of $2.
+	/// </summary>
+	${1:public} sealed class ${2:#:ClassName}
+	{
+		/// <summary>
+		/// Get the only instance of <see cref="$2"/> class.
+		/// </summary>
+		public static $2 ${3:Instance} { get; }
 
-    /// <summary>
-    /// Create the only instance of <see cref="$2"/> class.
-    /// </summary>
-    static $2()
-    {
-      $3 = new $2();
-    }
+		/// <summary>
+		/// Create the only instance of <see cref="$2"/> class.
+		/// </summary>
+		static $2()
+		{
+			$3 = new $2();
+		}
 
-    /// <summary>
-    /// Initializes a new instance of <see cref="$2"/> class.
-    /// </summary>
-    private $2()
-    {
-      ${0}
-    }
-  }  // class $2
+		/// <summary>
+		/// Initializes a new instance of <see cref="$2"/> class.
+		/// </summary>
+		private $2()
+		{
+			${0}
+		}
+	}  // class $2
 
 snippet classSingletonLazy
 alias singletonLazy
-  /// <summary>
-  /// Description of $2.
-  /// </summary>
-  ${1:public} sealed class ${2:#:ClassName}
-  {
-    /// <summary>
-    /// The only instance of <see cref="$2"/> class.
-    /// </summary>
-    private static $2 ${3:_instance};
+	/// <summary>
+	/// Description of $2.
+	/// </summary>
+	${1:public} sealed class ${2:#:ClassName}
+	{
+		/// <summary>
+		/// The only instance of <see cref="$2"/> class.
+		/// </summary>
+		private static $2 ${3:_instance};
 
-    /// <summary>
-    /// Get the only instance of <see cref="$2"/> class.
-    /// </summary>
-    public static $2 ${4:Instance} => $3 ??= new $2();
+		/// <summary>
+		/// Get the only instance of <see cref="$2"/> class.
+		/// </summary>
+		public static $2 ${4:Instance} => $3 ??= new $2();
 
-    /// <summary>
-    /// Initializes a new instance of <see cref="$2"/> class.
-    /// </summary>
-    private $2()
-    {
-      ${0}
-    }
-  }  // class $2
+		/// <summary>
+		/// Initializes a new instance of <see cref="$2"/> class.
+		/// </summary>
+		private $2()
+		{
+			${0}
+		}
+	}  // class $2
 
 snippet singletonMonoBehaviour
 alias singletonMono
-  /// <summary>
-  /// Description of $2.
-  /// <summary>
-  ${1:public} class ${2:#:ClassName} : MonoBehaviour
-  {
-    /// <summary>
-    /// The only instance of <see cref="$2"/> class.
-    /// </summary>
-    public static $2 ${3:Instance} { get; private set; }
+	/// <summary>
+	/// Description of $2.
+	/// <summary>
+	${1:public} class ${2:#:ClassName} : MonoBehaviour
+	{
+		/// <summary>
+		/// The only instance of <see cref="$2"/> class.
+		/// </summary>
+		public static $2 ${3:Instance} { get; private set; }
 
-    /// <summary>
-    /// This method is called only once during the lifetime of the script instance.
-    /// </summary>
-    private void Awake()
-    {
-      if ($3 == null)
-      {
-        $3 = this;
-        DontDestroyOnLoad(gameObject);
-      }
-      else
-      {
-        Destroy(gameObject);
-      }
-      ${0}
-    }
-  }
+		/// <summary>
+		/// This method is called only once during the lifetime of the script instance.
+		/// </summary>
+		private void Awake()
+		{
+			if ($3 == null)
+			{
+				$3 = this;
+				DontDestroyOnLoad(gameObject);
+			}
+			else
+			{
+				Destroy(gameObject);
+			}
+			${0}
+		}
+	}
 
 snippet fn
 abbr public void Method(...) { ... }
 alias method function
-  ${1:public} ${2:void} ${3:#:MethodName}(${4:#:args...})
-  {
-    ${0}
-  }
+	${1:public} ${2:void} ${3:#:MethodName}(${4:#:args...})
+	{
+		${0}
+	}
 
 snippet lambda
 abbr (args...) =>
-  ${1:($\{2\:#:args...\})} => ${0}
+	${1:($\{2\:#:args...\})} => ${0}
 
 snippet property
 alias prop
 abbr public Type Name { get; set; } (C# 3)
-  ${1:public} ${2:#:Type} ${3:#:Name} { get; set; }${0}
+	${1:public} ${2:#:Type} ${3:#:Name} { get; set; }${0}
 
 snippet propertyFull
 alias propFull
 abbr public Type Name { get { return propVar; } set { propVar = value; } }
-  ${1:public} ${2:#:Type} ${3:#:Name}
-  {
-    get { return ${4:#:memberVar}; }
-    set { $4 = value; }
-  }${0}
+	${1:public} ${2:#:Type} ${3:#:Name}
+	{
+		get { return ${4:#:memberVar}; }
+		set { $4 = value; }
+	}${0}
 
 snippet propertyReadOnly
 alias propRead
 abbr public Type Name { get; private set; } (C# 3)
-  ${1:public} ${2:#:Type} ${3:#:Name} { get; private set; }${0}
+	${1:public} ${2:#:Type} ${3:#:Name} { get; private set; }${0}
 
 snippet propertyGetOnly
 alias propGet propGetOnly
 abbr public Type Name { get; private get; } (C# 6)
-  ${1:public} ${2:#:Type} ${3:#:Name} { get; }${0}
+	${1:public} ${2:#:Type} ${3:#:Name} { get; }${0}
 
 snippet propertyExpr
 alias propExpr
 abbr public Type Name => Expr; (C# 6)
-  ${1:public} ${2:#:Type} ${3:#:Name} => ${4:#:Expr};
+	${1:public} ${2:#:Type} ${3:#:Name} => ${4:#:Expr};
 
 snippet using
 abbr using (var varName = resource) { ... }
-  using (var ${1:#:varName} = ${2:#:resource})
-  {
-    ${0}
-  }
+	using (var ${1:#:varName} = ${2:#:resource})
+	{
+		${0}
+	}
 
 snippet usingStreamWriter
 alias StreamWriter
-  using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Create}, FileAccess.${4:Write}, FileShare.${5:Read}))
-  using (var ${6:sw} = new StreamWriter($1))
-  {
-    ${0}
-  }
+	using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Create}, FileAccess.${4:Write}, FileShare.${5:Read}))
+	using (var ${6:sw} = new StreamWriter($1))
+	{
+		${0}
+	}
 
 snippet usingStreamReader
 alias StreamReader
-  using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Open}, FileAccess.${4:Read}, FileShare.${5:Read}))
-  using (var ${6:sr} = new StreamReader($1))
-  {
-    ${0}
-  }
+	using (var ${1:fs} = new FileStream(${2:#:filePath}, FileMode.${3:Open}, FileAccess.${4:Read}, FileShare.${5:Read}))
+	using (var ${6:sr} = new StreamReader($1))
+	{
+		${0}
+	}
 
 snippet if
 abbr if (...) { ... }
-  if (${1:#:condition})
-  {
-    ${0}
-  }
+	if (${1:#:condition})
+	{
+		${0}
+	}
 
 snippet ifelse
 abbr if (...) { ... } else { ... }
-  if (${1:#:condition})
-  {
-    ${0}
-  }
-  else
-  {
+	if (${1:#:condition})
+	{
+		${0}
+	}
+	else
+	{
 
-  }
+	}
 
 snippet for
 abbr for (int i = 0; i < max; i++) { ... }
-  for (${1:int} ${2:i} = ${3:0}; $2 < ${4:#:max}; ${5:$2++})
-  {
-    ${0}
-  }
+	for (${1:int} ${2:i} = ${3:0}; $2 < ${4:#:max}; ${5:$2++})
+	{
+		${0}
+	}
 
 snippet foreach
 abbr for (var x in enumerable) { ... }
 alias fore
-  for (var ${1:#:x} in ${2:#:enumerable})
-  {
-    ${0}
-  }
+	for (var ${1:#:x} in ${2:#:enumerable})
+	{
+		${0}
+	}
 
 snippet while
 abbr while (...) { ... }
-  while (${1:#:condition})
-  {
-    ${0}
-  }
+	while (${1:#:condition})
+	{
+		${0}
+	}
 
 snippet do
 abbr do { ... } while (...)
-  do
-  {
-    ${0}
-  } while (${1:#:condition})
+	do
+	{
+		${0}
+	} while (${1:#:condition})
 
 snippet try_catch
 alias try
 abbr try { ... } catch (Exception e) { ... }
 options head
-  try
-  {
-    ${0}
-  }
-  catch (${1:Exception} ${2:e})
-  {
-    ${3:Console.Error.WriteLine(e.Message);}
-  }
+	try
+	{
+		${0}
+	}
+	catch (${1:Exception} ${2:e})
+	{
+		${3:Console.Error.WriteLine(e.Message);}
+	}
 
 snippet try_catch_finally
 alias try_cf
 abbr try { ... } catch (Exception e) { ... } finally { ... }
 options head
-  try
-  {
-    ${0}
-  }
-  catch (${1:Exception} ${2:e})
-  {
-    ${3:Console.Error.WriteLine(e.Message);}
-  }
-  finally
-  {
-    ${4}
-  }
+	try
+	{
+		${0}
+	}
+	catch (${1:Exception} ${2:e})
+	{
+		${3:Console.Error.WriteLine(e.Message);}
+	}
+	finally
+	{
+		${4}
+	}
 
 snippet try_finally
 alias try_f
 abbr try { ... } finally { ... }
 options head
-  try
-  {
-    ${0}
-  }
-  finally
-  {
-    ${4}
-  }
+	try
+	{
+		${0}
+	}
+	finally
+	{
+		${4}
+	}
 
 snippet lock
 abbr lock (resource) { ... }
-  lock (${1:#:resource})
-  {
-    ${0}
-  }
+	lock (${1:#:resource})
+	{
+		${0}
+	}
 
 snippet unsafe
 abbr unsafe { ... }
-  unsafe
-  {
-    ${0}
-  }
+	unsafe
+	{
+		${0}
+	}
 
 snippet fixed
 abbr fixed { type* ptr = address } { ... }
-  fixed (${1:#:Type}* ${2:ptr} = ${3:#:address})
-  {
-    ${0}
-  }
+	fixed (${1:#:Type}* ${2:ptr} = ${3:#:address})
+	{
+		${0}
+	}
 
 snippet BlockCopy
 abbr Buffer.BlockCopy(src, 0, dst, 0, Buffer.ByteLength(src))
-  Buffer.BlockCopy(${1:#:src}, ${2:0}, ${3:#:dst}, ${4:0}, ${5:Buffer.ByteLength($1)})${0}
+	Buffer.BlockCopy(${1:#:src}, ${2:0}, ${3:#:dst}, ${4:0}, ${5:Buffer.ByteLength($1)})${0}
 
 snippet GCHandle
 alias pin
 abbr var gch = GCHandle.Alloc(structObj, GCHandleType.Pinned); ...
-  var ${1:gch} = GCHandle.Alloc(${2:#:structObj}, GCHandleType.${3:Pinned});
-  try
-  {
-    ${0}
-  }
-  finally
-  {
-    $1.Free();
-  }
+	var ${1:gch} = GCHandle.Alloc(${2:#:structObj}, GCHandleType.${3:Pinned});
+	try
+	{
+		${0}
+	}
+	finally
+	{
+		$1.Free();
+	}
 
 snippet AllocCoTaskMem
 alias Alloc
 abbr var ptr = Marshal.AllocCoTaskMem(size); ...
-  var ${1:ptr} = Marshal.AllocCoTaskMem(${2:#:size});
-  try
-  {
-    ${0}
-  }
-  finally
-  {
-    Marshal.FreeCoTaskMem($1);
-  }
+	var ${1:ptr} = Marshal.AllocCoTaskMem(${2:#:size});
+	try
+	{
+		${0}
+	}
+	finally
+	{
+		Marshal.FreeCoTaskMem($1);
+	}
 
 snippet TaskRun
 abbr Task.Run(() => { ... });
-  Task.Run(() =>
-  {
-    ${0}
-  });
+	Task.Run(() =>
+	{
+		${0}
+	});
 
 snippet TaskRun2
 abbr Task.Run(() => { ... }, token);
-  var ${1:cts} = new CancellationTokenSource();
-  var ${2:cancelToken} = $1.Token;
-  Task.Run(() =>
-  {
-    ${0}
-    // $2.ThrowIfCancellationRequested();
-    if ($2.IsCancellationRequested)
-    {
-    }
-  }, $2);
+	var ${1:cts} = new CancellationTokenSource();
+	var ${2:cancelToken} = $1.Token;
+	Task.Run(() =>
+	{
+		${0}
+		// $2.ThrowIfCancellationRequested();
+		if ($2.IsCancellationRequested)
+		{
+		}
+	}, $2);
 
 snippet .Select
 alias Select
 abbr Select(e => ...) (LINQ)
-  .Select(${1:e} => ${0})
+	.Select(${1:e} => ${0})
 
 snippet .SelectMany
 alias SelectMany
 abbr SelectMany(e => ...) (LINQ)
-  .SelectMany(${1:e} => ${0})
+	.SelectMany(${1:e} => ${0})
 
 snippet .Where
 alias Where
 abbr Where(e => ...) (LINQ)
-  .Where(${1:e} => ${2:#:predicate})${0}
+	.Where(${1:e} => ${2:#:predicate})${0}
 
 snippet .Take
 alias Take
 abbr Take(count) (LINQ)
-  .Take(${1:#:count})${0}
+	.Take(${1:#:count})${0}
 
 snippet .TakeWhile
 alias TakeWhile
 abbr TakeWhile(e => ...) (LINQ)
-  .TakeWhile(${1:e} => ${2:#:predicate})${0}
+	.TakeWhile(${1:e} => ${2:#:predicate})${0}
 
 snippet .Skip
 alias Skip
 abbr Skip(count) (LINQ)
-  .Skip(${1:#:count})${0}
+	.Skip(${1:#:count})${0}
 
 snippet .SkipWhile
 alias SkipWhile
 abbr SkipWhile(e => ...) (LINQ)
-  .SkipWhile(${1:e} => ${2:#:predicate})${0}
+	.SkipWhile(${1:e} => ${2:#:predicate})${0}
 
 snippet .First
 alias First
 abbr First({e => ...}) (LINQ)
-  .First(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+	.First(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
 
 snippet .FirstOrDefault
 alias FirstOrDefault
 abbr FirstOrDefault({e => ...}) (LINQ)
-  .First(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+	.First(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
 
 snippet .Last
 alias Last
 abbr Last({e => ...}) (LINQ)
-  .Last(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+	.Last(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
 
 snippet .LastOrDefault
 alias LastOrDefault
 abbr LastOrDefault({e => ...}) (LINQ)
-  .Last(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+	.Last(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
 
 snippet .Single
 alias Single
 abbr Single({e => ...}) (LINQ)
-  .Single(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+	.Single(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
 
 snippet .SingleOrDefault
 alias SingleOrDefault
 abbr SingleOrDefault({e => ...}) (LINQ)
-  .Single(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
+	.Single(${1:$\{2:e\} => $\{3:\#:predicate\}})${0}
 
 snippet .ElementAt
 alias ElementAt
 abbr ElementAt(index) (LINQ)
-  .ElementAt(${1:#:index})${0}
+	.ElementAt(${1:#:index})${0}
 
 snippet .ElementAtOrDefault
 alias ElementAtOrDefault
 abbr ElementAtOrDefault(index) (LINQ)
-  .ElementAt(${1:#:index})${0}
+	.ElementAt(${1:#:index})${0}
 
 snippet .OrderBy
 alias OrderBy
 abbr OrderBy(e => ...) (LINQ)
-  .OrderBy(${1:e} => ${2:#:keySelector})${0}
+	.OrderBy(${1:e} => ${2:#:keySelector})${0}
 
 snippet .OrderByDescending
 alias OrderByDescending
 abbr OrderByDescending(e => ...) (LINQ)
-  .OrderByDescending(${1:e} => ${2:#:keySelector})${0}
+	.OrderByDescending(${1:e} => ${2:#:keySelector})${0}
 
 snippet .ThenBy
 alias ThenBy
 abbr ThenBy(e => ...) (LINQ)
-  .ThenBy(${1:e} => ${2:#:keySelector})${0}
+	.ThenBy(${1:e} => ${2:#:keySelector})${0}
 
 snippet .ThenByDescending
 alias ThenByDescending
 abbr ThenByDescending(e => ...) (LINQ)
-  .ThenByDescending(${1:e} => ${2:#:keySelector})${0}
+	.ThenByDescending(${1:e} => ${2:#:keySelector})${0}
 
 snippet .Concat
 alias Concat
 abbr Concat(e => ...) (LINQ)
-  .Concat(${1:#:second})${0}
+	.Concat(${1:#:second})${0}
 
 snippet .Zip
 alias Zip
 abbr Zip(e => ...) (LINQ)
-  .Zip(${1:#:second})${0}
+	.Zip(${1:#:second})${0}
 
 snippet .Reverse
 alias Reverse
 abbr Reverse() (LINQ)
-  .Reverse()${0}
+	.Reverse()${0}
 
 snippet .Distinct
 alias Distinct
 abbr Distinct() (LINQ)
-  .Distinct()${0}
+	.Distinct()${0}
 
 snippet .Union
 alias Union
 abbr Union(...) (LINQ)
-  .Union(${1:#:group})${0}
+	.Union(${1:#:group})${0}
 
 snippet .Except
 alias Except
 abbr Except(...) (LINQ)
-  .Except(${1:#:group})${0}
+	.Except(${1:#:group})${0}
 
 snippet .Intersect
 alias Intersect
 abbr Intersect(...) (LINQ)
-  .Intersect(${1:#:group})${0}
+	.Intersect(${1:#:group})${0}
 
 snippet .ToArray
 alias ToArray
 abbr ToArray() (LINQ)
-  .ToArray()${0}
+	.ToArray()${0}
 
 snippet .ToList
 alias ToList
 abbr ToList() (LINQ)
-  .ToList()${0}
+	.ToList()${0}
 
 snippet .Min
 alias Min
 abbr Min() (LINQ)
-  .Min()${0}
+	.Min()${0}
 
 snippet .Max
 alias Max
 abbr Max() (LINQ)
-  .Max()${0}
+	.Max()${0}
 
 snippet .Average
 alias Average
 abbr Average() (LINQ)
-  .Average()${0}
+	.Average()${0}
 
 snippet .Sum
 alias Sum
 abbr Sum() (LINQ)
-  .Sum()${0}
+	.Sum()${0}
 
 snippet .Aggregate
 alias Aggregate
 abbr Aggregate(seed, (acc, e) => acc + e{, resultSelector}) (LINQ)
-  .Aggregate(${1:#:seed}, (${2:acc}, ${3:e}) => ${4:#:acc + e}${5:, $\{6:#:resultSelector\}})${0}
+	.Aggregate(${1:#:seed}, (${2:acc}, ${3:e}) => ${4:#:acc + e}${5:, $\{6:#:resultSelector\}})${0}
 
 snippet .All
 alias All
 abbr All(e => ...) (LINQ)
-  .All(${1:e} => ${2:#:predicate})${0}
+	.All(${1:e} => ${2:#:predicate})${0}
 
 snippet .Any
 alias Any
 abbr Any(e => ...) (LINQ)
-  .Any(${1:e} => ${2:#:predicate})${0}
+	.Any(${1:e} => ${2:#:predicate})${0}
 
 snippet .Contains
 alias Contains
 abbr Contains(val) (LINQ)
-  .Contains(${1:#:value})${0}
+	.Contains(${1:#:value})${0}
+
+snippet InvokeRequired
+	if (InvokeRequired)
+	{
+		Invoke((MethodInvoker)(() => ${1:#:callFunction}));
+		return;
+	}
+	${0}
+
+snippet CheckAccess
+abbr if (!Dispatcher.CheckAccess()) { ...; return; } ... (WPF)
+	if (!Dispatcher.CheckAccess())
+	{
+		Dispatcher.Invoke((Action)(() => ${1:#:callFunction}));
+		return;
+	}
+	${0}
 
 snippet docComment
 alias doc
 abbr /// <summary>...</summary>
-  /// <summary>
-  /// ${0}
-  /// </summary>
+	/// <summary>
+	/// ${0}
+	/// </summary>
 
 snippet inline
 abbr [MethodImpl(MethodImplOptions.AggressiveInlining)]
-  [MethodImpl(MethodImplOptions.AggressiveInlining)]
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 
 snippet noinline
 abbr [MethodImpl(MethodImplOptions.NoInlining)]
-  [MethodImpl(MethodImplOptions.NoInlining)]
+	[MethodImpl(MethodImplOptions.NoInlining)]
 
 snippet DllImport
 alias attrDllImport
 abbr [DllImport("Foo.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
-  [DllImport("${1:#:DllName}"${2:, CharSet = CharSet.Unicode}${3:, ExactSpelling = true})]${0}
+	[DllImport("${1:#:DllName}"${2:, CharSet = CharSet.Unicode}${3:, ExactSpelling = true})]${0}
 
 snippet Conditional
 alias attrConditional
 abbr [Conditional]
-  [Conditional("${1:DEBUG}")]
+	[Conditional("${1:DEBUG}")]
 
 snippet SuppressUnmanagedCodeSecurity
 alias attrSuppressUnmanagedCodeSecurity
 abbr [SuppressUnmanagedCodeSecurity]
-  [SuppressUnmanagedCodeSecurity]
+	[SuppressUnmanagedCodeSecurity]
 
 snippet Obsolete
 alias attrObsolete
 abbr [Obsolete("Description")]
-  [Obsolete("${1}")]${0}
+	[Obsolete("${1}")]${0}
 
 snippet NonSerialized
 alias attrNonSerialized
 abbr [NonSerialized]
-  [NonSerialized]
+	[NonSerialized]
 
 snippet Category
 alias attrCategory
 abbr [Category("")]
-  [Category("${1:#:category}")]${0}
+	[Category("${1:#:category}")]${0}
 
 snippet DefaultValue
 alias attrDefaultValue
 abbr [DefaultValue("")]
-  [DefaultValue("${1:#:defaultValue}")]${0}
+	[DefaultValue("${1:#:defaultValue}")]${0}
 
 snippet Description
 alias attrDescription
 abbr [Description("")]
-  [Description("${1:#:description}")]${0}
+	[Description("${1:#:description}")]${0}
 
 snippet Browsable
 alias attrBrowsable
 abbr [Browsable(true)]
-  [Browsable(${1:true})]${0}
+	[Browsable(${1:true})]${0}
 
 snippet Required
 alias attrRequired
 abbr [Required{(ErrorMessage = "")}]
-  [Required${1:(ErrorMessage = "$\{2:\#:message\}")}]
+	[Required${1:(ErrorMessage = "$\{2:\#:message\}")}]
 
 snippet Range
 alias attrRange
 abbr [Range(min, max{, ErrorMessage = ""})]
-  [Range(${1:#:min}, ${2:#:max}${3:, ErrorMessage = "$\{4:\#:message\}"})]
+	[Range(${1:#:min}, ${2:#:max}${3:, ErrorMessage = "$\{4:\#:message\}"})]
 
 snippet StringLength
 alias attrStringLength
 abbr [StringLength(length{, ErrorMessage = ""})]
-  [StringLength(${1:#:length}${2:, ErrorMessage = "$\{3:\#:message\}"})]
+	[StringLength(${1:#:length}${2:, ErrorMessage = "$\{3:\#:message\}"})]
 
 snippet SerializeField
 alias attrSerializeField
 abbr [SerializeField] (Unity)
-  [SerializeField]
+	[SerializeField]
 
 snippet HideInInspector
 alias attrHideInInspector
 abbr [HideInInspector] (Unity)
-  [HideInInspector]
+	[HideInInspector]
 
 snippet RequiredComponent
 alias attrRequiredComponent
 abbr [RequiredComponent(typeof(Type))] (Unity)
-  [RequiredComponent(typeof(${1:#:Type}))]${0}
+	[RequiredComponent(typeof(${1:#:Type}))]${0}
 
 snippet Tooltip
 alias attrTooltip
 abbr [Tooltip("Description")] (Unity)
-  [Tooltip("${1}")]${0}
+	[Tooltip("${1}")]${0}
 
 snippet Header
 alias attrHeader
 abbr [Header("Description")] (Unity)
-  [Header("${1}")]${0}
+	[Header("${1}")]${0}
 
 snippet InvokeEvent
 abbr Event?.Invoke(...); (C# 6)
-  ${1:#:Event}?.Invoke(${2:#:args...});
+	${1:#:Event}?.Invoke(${2:#:args...});
 
 snippet InvokeEventCs5
 abbr var handler = Event; if (hander != null) { handler(...); }
-  var ${1:handler} = ${2:#:Event};
-  if ($1 != null)
-  {
-    $1(${3:#:args...});
-  }
+	var ${1:handler} = ${2:#:Event};
+	if ($1 != null)
+	{
+		$1(${3:#:args...});
+	}
 
 snippet ToString
 alias ImplToString
 abbr public override string ToString()
-  /// <summary>
-  /// Get string representation of this instance.
-  /// </summary>
-  /// <returns>String representation of this instance.</returns>
-  public override string ToString()
-  {
-    return ${0};
-  }
+	/// <summary>
+	/// Get string representation of this instance.
+	/// </summary>
+	/// <returns>String representation of this instance.</returns>
+	public override string ToString()
+	{
+		return ${0};
+	}
 
 snippet Clone
 alias ImplClone
 abbr public object Clone() (ICloneable)
-  /// <summary>
-  /// Create a clone of this instance.
-  /// </summary>
-  /// <returns>A clone of this instance.</returns>
-  public object Clone()
-  {
-    return new ${1:#:ClassName}(${0});
-  }
+	/// <summary>
+	/// Create a clone of this instance.
+	/// </summary>
+	/// <returns>A clone of this instance.</returns>
+	public object Clone()
+	{
+		return new ${1:#:ClassName}(${0});
+	}
 
 snippet Equals
 alias ImplEquals
 abbr public bool Equals(T other) (IEquatable<T>)
-  /// <summary>
-  /// Checks if this instance is equal to the specified instance.
-  /// </summary>
-  /// <param name="$2">The instance to compare.</param>
-  /// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
-  public bool Equals(${1:#:ClassName} ${2:other})
-  {
-    if (ReferenceEquals(other, null))
-    {
-      return false;
-    }
-    if (ReferenceEquals(this, other))
-    {
-      return true;
-    }
-    if (GetType() != other.GetType())
-    {
-      return false;
-    }
+	/// <summary>
+	/// Checks if this instance is equal to the specified instance.
+	/// </summary>
+	/// <param name="$2">The instance to compare.</param>
+	/// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
+	public bool Equals(${1:#:ClassName} ${2:other})
+	{
+		if (ReferenceEquals(other, null))
+		{
+			return false;
+		}
+		if (ReferenceEquals(this, other))
+		{
+			return true;
+		}
+		if (GetType() != other.GetType())
+		{
+			return false;
+		}
 
-    return ${0};
-  }
+		return ${0};
+	}
 
 snippet EqualsSimple
 alias ImplEqualsSimple
 abbr public bool Equals(T other) (IEquatable<T>)
-  /// <summary>
-  /// Checks if this instance is equal to the specified instance.
-  /// </summary>
-  /// <param name="$2">The instance to compare.</param>
-  /// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
-  public bool Equals(${1:#:ClassName} ${2:other})
-  {
-    return !ReferenceEquals(other, null)
-      && (ReferenceEquals(this, other)
-        || !(GetType() != other.GetType())
-        && ${0});
-  }
+	/// <summary>
+	/// Checks if this instance is equal to the specified instance.
+	/// </summary>
+	/// <param name="$2">The instance to compare.</param>
+	/// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
+	public bool Equals(${1:#:ClassName} ${2:other})
+	{
+		return !ReferenceEquals(other, null)
+			&& (ReferenceEquals(this, other)
+				|| !(GetType() != other.GetType())
+				&& ${0});
+	}
 
 snippet EqualsObject
 alias ImplEqualsObject
 abbr public override bool Equals(object obj)
-  /// <summary>
-  /// Checks if this instance is equal to the specified instance.
-  /// </summary>
-  /// <remarks>
-  /// See <see cref="Equals($2)"/>.
-  /// </remarks>
-  /// <param name="$1">The instance to compare.</param>
-  /// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
-  public override bool Equals(object ${1:obj})
-  {
-    // You must implement the IEquatable<T>.Equals().
-    return Equals($1 as ${2:#:ClassName})
-  }
+	/// <summary>
+	/// Checks if this instance is equal to the specified instance.
+	/// </summary>
+	/// <remarks>
+	/// See <see cref="Equals($2)"/>.
+	/// </remarks>
+	/// <param name="$1">The instance to compare.</param>
+	/// <returns><c>true</c> this instance is equal to <paramref name="$2"></paramref>, <c>false</c> otherwise.</returns>
+	public override bool Equals(object ${1:obj})
+	{
+		// You must implement the IEquatable<T>.Equals().
+		return Equals($1 as ${2:#:ClassName})
+	}
 
 snippet CompareTo
 alias ImplCompareTo
 abbr public int CompareTo(T other) (IComparable<T>)
-  /// <summary>
-  ///
-  /// </summary>
-  /// <param name="$2"></param>
-  /// <returns></returns>
-  public int CompareTo(${1:#:ClassName} ${2:other})
-  {
-    return other == null ? 1
-      : ${0};
-  }
+	/// <summary>
+	///
+	/// </summary>
+	/// <param name="$2"></param>
+	/// <returns></returns>
+	public int CompareTo(${1:#:ClassName} ${2:other})
+	{
+		return other == null ? 1
+			: ${0};
+	}
 
 snippet CompareToObject
 alias ImplCompareToObject
 abbr public int CompareTo(object obj) (IComparable)
-  /// <summary>
-  ///
-  /// </summary>
-  /// <remarks>
-  /// See <see cref="CompareTo($2)"/>.
-  /// </remarks>
-  /// <param name="$1"></param>
-  /// <returns></returns>
-  public int CompareTo(object ${1:obj})
-  {
-    return CompareTo($1 as ${2:#:ClassName});
-  }
+	/// <summary>
+	///
+	/// </summary>
+	/// <remarks>
+	/// See <see cref="CompareTo($2)"/>.
+	/// </remarks>
+	/// <param name="$1"></param>
+	/// <returns></returns>
+	public int CompareTo(object ${1:obj})
+	{
+		return CompareTo($1 as ${2:#:ClassName});
+	}
 
 snippet ImplDispose
 alias Dispose
 abbr protected virtual void Dispose(bool disposing) { ... } public void Dispose() { ... }
-  #region IDisposable Support
-  /// <summary>
-  /// A flag property which indicates this instance is disposed or not.
-  /// </summary>
-  public bool ${1:IsDisposed} { get; private set; } = false;
+	#region IDisposable Support
+	/// <summary>
+	/// A flag property which indicates this instance is disposed or not.
+	/// </summary>
+	public bool ${1:IsDisposed} { get; private set; } = false;
 
-  /// <summary>
-  /// Release resources.
-  /// </summary>
-  /// <param name="$2"><c>true</c> to release both managed and unmanaged resources;
-  /// <c>false</c> to release only unmanaged resources.</param>
-  protected virtual void Dispose(bool ${2:disposing})
-  {
-    if ($1)
-    {
-      return;
-    }
-    if ($2)
-    {
-      // TODO: dispose managed state (managed objects)
-      ${0};
-    }
-    // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-    // TODO: set large fields to null
-    $1 = true;
-  }
+	/// <summary>
+	/// Release resources.
+	/// </summary>
+	/// <param name="$2"><c>true</c> to release both managed and unmanaged resources;
+	/// <c>false</c> to release only unmanaged resources.</param>
+	protected virtual void Dispose(bool ${2:disposing})
+	{
+		if ($1)
+		{
+			return;
+		}
+		if ($2)
+		{
+			// TODO: dispose managed state (managed objects)
+			${0};
+		}
+		// TODO: free unmanaged resources (unmanaged objects) and override finalizer
+		// TODO: set large fields to null
+		$1 = true;
+	}
 
-  // TODO: override finalizer only if 'Dispose(bool $2)' has code to free unmanaged resources
-  // /// <summary>
-  // /// Release unmanaged resources.
-  // /// </summary>
-  // ~${3:#:ClassName}()
-  // {
-  //     // Do not change this code. Put cleanup code in 'Dispose(bool $2)' method
-  //     Dispose(false);
-  // }
+	// TODO: override finalizer only if 'Dispose(bool $2)' has code to free unmanaged resources
+	// /// <summary>
+	// /// Release unmanaged resources.
+	// /// </summary>
+	// ~${3:#:ClassName}()
+	// {
+	//     // Do not change this code. Put cleanup code in 'Dispose(bool $2)' method
+	//     Dispose(false);
+	// }
 
-  /// <summary>
-  /// Release all resources used by the <see cref="$3"/> object.
-  /// </summary>
-  public void Dispose()
-  {
-    // Do not change this code. Put cleanup code in 'Dispose(bool $2)' method
-    Dispose(true);
-    // TODO: Add following code when finalizer is implemented.
-    // GC.SuppressFinalize(this);
-  }
-  #endregion
+	/// <summary>
+	/// Release all resources used by the <see cref="$3"/> object.
+	/// </summary>
+	public void Dispose()
+	{
+		// Do not change this code. Put cleanup code in 'Dispose(bool $2)' method
+		Dispose(true);
+		// TODO: Add following code when finalizer is implemented.
+		// GC.SuppressFinalize(this);
+	}
+	#endregion
 
 snippet ImplDeconstruct
 abbr public void Deconstruct(out x, out y, ...) (C#7)
 alias Deconstruct
-  ${1:public} void Deconstruct(${2:#:out args...})
-  {
-    ${0}
-  }
+	${1:public} void Deconstruct(${2:#:out args...})
+	{
+		${0}
+	}
 
 snippet ImplThrowMethod
 abbr private static void ThrowException(...) { throw ... }
-  /// <summary>
-  /// Throw $2
-  /// </summary>
-  ${1:private} static void Throw$2(${0})
-  {
-    throw new ${2:#:Exception}();
-  }
+	/// <summary>
+	/// Throw $2
+	/// </summary>
+	${1:private} static void Throw$2(${0})
+	{
+		throw new ${2:#:Exception}();
+	}
 
 snippet ImplEvent
 alias event
 abbr public event EventHandler EventName
-  ${1:public} event ${2:EventHandler} ${3:#:EventName};
+	${1:public} event ${2:EventHandler} ${3:#:EventName};
 
 snippet ImplEventT
 alias eventT
 abbr public event EventHandler<T> EventName
-  ${1:public} event EventHandler<${2:#:T}> ${3:#:EventName};
+	${1:public} event EventHandler<${2:#:T}> ${3:#:EventName};
 
 snippet ImplEventArgs
-  /// <summary>
-  /// Custom event argument
-  /// </summary>
-  ${1:public} class ${2:ClassName} : ${3:EventArgs}
-  {
-    /// <summary>
-    /// Ctor
-    /// </summary>
-    public $2()
-    {
-      ${0};
-    }
-  }  // class $2
+	/// <summary>
+	/// Custom event argument
+	/// </summary>
+	${1:public} class ${2:ClassName} : ${3:EventArgs}
+	{
+		/// <summary>
+		/// Ctor
+		/// </summary>
+		public $2()
+		{
+			${0};
+		}
+	}  // class $2
 
 snippet ImplEventDelegate
-  /// <summary>
-  /// Custom event delegate
-  /// </summary>
-  /// <param name="$4">Event source</param>
-  /// <param name="$6">Event argument</param>
-  ${1:public} delegate ${2:void} ${3:#:DelegateName}(object ${4:sender}, ${5:EventArgs} ${6:e});
+	/// <summary>
+	/// Custom event delegate
+	/// </summary>
+	/// <param name="$4">Event source</param>
+	/// <param name="$6">Event argument</param>
+	${1:public} delegate ${2:void} ${3:#:DelegateName}(object ${4:sender}, ${5:EventArgs} ${6:e});
 
 snippet Log
 alias log
 abbr Debug.Log(...); (Unity)
-  Debug.Log(${1});${0}
+	Debug.Log(${1});${0}
 
 snippet LogWarning
 alias logw logwarning
 abbr Debug.LogWarning(...); (Unity)
-  Debug.LogWarning(${1});${0}
+	Debug.LogWarning(${1});${0}
 
 snippet LogError
 alias loge logerror
 abbr Debug.LogError(...); (Unity)
-  Debug.LogLogError(${1});${0}
+	Debug.LogLogError(${1});${0}
 
 snippet c
 abbr <c></c> (XML Doc.)
 regexp '\/\/\/.*'
-  <c>${0}</c>
+	<c>${0}</c>
 
 snippet code
 abbr <code></code> (XML Doc.)
 regexp '\/\/\/.*'
-  <code>${0}</code>
+	<code>${0}</code>
 
 snippet example
 abbr <example></example> (XML Doc.)
 regexp '\/\/\/.*'
-  <example>${0}</example>
+	<example>${0}</example>
 
 snippet exception
 abbr <exception cref=""></exception> (XML Doc.)
 regexp '\/\/\/.*'
-  <exception cref="${1:#:class}">${0}</exception>
+	<exception cref="${1:#:class}">${0}</exception>
 
 snippet include
 abbr <include file='' path=''/> (XML Doc.)
 regexp '\/\/\/.*'
-  <include file='${1:#:filename}' path='${2:#:tabpath}[@${3:#:name}="${4:#:id}"]'/>${0}
+	<include file='${1:#:filename}' path='${2:#:tabpath}[@${3:#:name}="${4:#:id}"]'/>${0}
 
 snippet para
 abbr <para></para> (XML Doc.)
 regexp '\/\/\/.*'
-  <para>${0}</para>
+	<para>${0}</para>
 
 snippet param
 abbr <param name=""></param> (XML Doc.)
 regexp '\/\/\/.*'
-  <param name="${1:#:name}">${0}</param>
+	<param name="${1:#:name}">${0}</param>
 
 snippet paramref
 abbr <paramref name=""/> (XML Doc.)
 regexp '\/\/\/.*'
-  <paramref name="${1:#:name}"/>${0}
+	<paramref name="${1:#:name}"/>${0}
 
 snippet returns
 abbr <returns></returns> (XML Doc.)
 regexp '\/\/\/.*'
-  <returns>${0}</returns>
+	<returns>${0}</returns>
 
 snippet remarks
 abbr <remarks></remarks> (XML Doc.)
 regexp '\/\/\/.*'
-  <remarks>${0}</remarks>
+	<remarks>${0}</remarks>
 
 snippet see
 abbr <see cref=""/> (XML Doc.)
 regexp '\/\/\/.*'
-  <see cref="${1:#:name}"/>${0}
+	<see cref="${1:#:name}"/>${0}
 
 snippet seealso
 abbr <seealso cref=""/> (XML Doc.)
 regexp '\/\/\/.*'
-  <seealso cref="${1:#:name}"/>${0}
+	<seealso cref="${1:#:name}"/>${0}
 
 snippet summary
 abbr <summary></summary> (XML Doc.)
 regexp '\/\/\/.*'
-  <summary>${0}</summary>
+	<summary>${0}</summary>
 
 snippet typeparam
 abbr <typeparam name=""></typeparam> (XML Doc.)
 regexp '\/\/\/.*'
-  <typeparam name="${1:#:name}">${0}</typeparam>
+	<typeparam name="${1:#:name}">${0}</typeparam>
 
 snippet typeparamref
 abbr <typeparamref name=""/> (XML Doc.)
 regexp '\/\/\/.*'
-  <typeparamref name="${1:#:name}"/>${0}
+	<typeparamref name="${1:#:name}"/>${0}
 
 snippet value
 abbr <value></value> (XML Doc.)
 regexp '\/\/\/.*'
-  <value>${0}</value>
+	<value>${0}</value>
