@@ -1,0 +1,652 @@
+snippet Shader
+abbr Shader "..." {}
+	Shader "${1:`fnamemodify(expand('%'), ':t:r')`}"
+	{
+		${0}
+	}
+
+snippet Properties
+abbr Properties {}
+	Properties
+	{
+		${0}
+	}
+
+snippet SubShader
+abbr SubShader {}
+	SubShader
+	{
+		${0}
+	}
+
+snippet Tags
+abbr Tags {}
+	Tags
+	{
+		"RenderType" = "${1:Transparent}"
+		"Queue" = "${2:Transparent}"
+		${0}
+	}
+
+snippet Pass
+abbr Pass {}
+	Pass
+	{
+		${0}
+	}
+
+snippet Cull
+abbr Cull ...
+	Cull ${1:Back}${0}
+
+snippet Blend
+abbr Blend [_SrcBlend] [_DstBlend], [_SrcBlendAlpha] [_DstBlendAlpha]
+	Blend ${1:SrcAlpha} ${2:OneMinusSrcAlpha}${3:, ${4:SrcAlpha\} ${5:OneMinusSrcAlpha\}}${0}
+
+snippet BlendOp
+abbr BlendOp [_BlendOp], [_BlendOpAlpha]
+	BlendOp ${1:Add}${2:, ${3:Add\}}${0}
+
+snippet ZWrite
+abbr ZWrite [_ZWrite]
+	ZWrite ${1:Off}${0}
+
+snippet ZTest
+abbr ZTest [_ZTest]
+	ZTest ${1:LEqual}${0}
+
+snippet ColorMask
+abbr ColorMask [_ColorMask]
+	ColorMask ${1:RGBA}${0}
+
+snippet AlphaToMask
+abbr AlphaToMask [_AlphaToMask]
+	AlphaToMask ${1:Off}${0}
+
+snippet Stencil
+abbr Stencil {}
+	Stencil
+	{
+		Ref ${1:0}
+		ReadMask ${2:255}
+		WriteMask ${3:255}
+		Comp ${4:Always}
+		Pass ${5:Keep}
+		Fail ${6:Keep}
+		ZFail ${7:Keep}
+	}${0}
+
+snippet Fallback
+abbr Fallback "..."
+	Fallback "${1}"${0}
+
+snippet CustomEditor
+abbr CustomEditor "..."
+	CustomEditor "${1}"${0}
+
+snippet Property2D
+alias PropertyTexture Prop2D PropTexture
+abbr PropName("Description", 2D) = "..." {}
+	${1:#:Name}("${2:#:Description}", 2D) = "${3:white}" {}${0}
+
+snippet Property3D
+alias Prop3D
+abbr PropName("Description", 3D) = "..." {}
+	${1:#:Name}("${2:#:Description}", 3D) = "" {}${0}
+
+snippet PropertyCube
+alias PropCube
+abbr PropName("Description", Cube) = "..." {}
+	${1:#:Name}("${2:#:Description}", Cube) = "" {}${0}
+
+snippet PropertyColor
+alias PropColor
+abbr PropName("Description", Color) = (...)
+	${1:#:Name}("${2:#:Description}", Color) = (${3:#:Value1st}, ${4:#:Value2nd}, ${5:#:Value3rd}, ${6:#:Value4th})${0}
+
+snippet PropertyFloat
+alias PropFloat
+abbr PropName("Description", Float) = DefaultValue
+	${1:#:Name}("${2:#:Description}", Float) = ${3:#:DefaultValue}${0}
+
+snippet PropertyInt
+alias PropInt
+abbr PropName("Description", Int) = DefaultValue
+	${1:#:Name}("${2:#:Description}", Int) = ${3:#:DefaultValue}${0}
+
+snippet PropertyRange
+alias PropRange
+abbr PropName("Description", Range(FromValue, ToValue)) = DefaultValue
+	${1:#:Name}("${2:#:Description}", Range(${3:#:FromValue}, ${4:#:ToValue})) = ${5:#:DefaultValue}${0}
+
+snippet PropertyVector
+alias PropVector
+abbr PropName("Description", Vector) = (...)
+	${1:#:Name}("${2:#:Description}", Vector) = (${3:#:Value1st}, ${4:#:Value2nd}, ${5:#:Value3rd}, ${6:#:Value4th})${0}
+
+snippet _Cull
+alias PropertyCull PropCull
+abbr _Cull("Culling Mode", Int) = 2
+	[Enum(UnityEngine.Rendering.CullMode)]
+	${1:_Cull}("${2:Culling Mode}", Int) = 2  // Default: Back${0}
+
+snippet _SrcBlend
+alias PropertySrcBlend PropSrcBlend
+abbr _SrcBlend("Blend Source Factor", Int) = 5
+	[Enum(UnityEngine.Rendering.BlendMode)]
+	${1:_SrcBlend}("${2:Blend Source Factor}", Int) = 5  // Default: SrcAlpha${0}
+
+snippet _DstBlend
+alias PropertyDstBlend PropDstBlend
+abbr _DstBlend("Blend Destination Factor", Int) = 10
+	[Enum(UnityEngine.Rendering.BlendMode)]
+	${1:_DstBlend}("${2:Blend Destination Factor}", Int) = 10  // Default: OneMinusSrcAlpha${0}
+
+snippet _BlendOp
+alias PropertyBlendOp PropBlendOp
+abbr _BlendOp("Blend Operation", Int) = 0
+	[Enum(UnityEngine.Rendering.BlendOp)]
+	${1:_BlendOp}("${2:Blend Operation}", Int) = 0  // Default: Add${0}
+
+snippet _ZWrite
+alias PropertyZWrite PropZWrite
+abbr _ZWrite("ZWrite", Int) = 0
+	[Enum(Off, 0, On, 1)]
+	${1:_ZWrite}("${2:ZWrite}", Int) = 0  // Default: Off${0}
+
+snippet _ZTest
+alias PropertyZTest PropZTest
+abbr _ZTest("ZTest", Int) = 4
+	[Enum(UnityEngine.Rendering.CompareFunction)]
+	${1:_ZTest}("${2:ZTest}", Int) = 4  // Default: LEqual${0}
+
+snippet _OffsetFact
+alias PropertyOffsetFact PropOffsetFact
+abbr _OffsetFact("Offset Factor", Int) = 0
+	[Enum(2D, 0, 3D, 1)]
+	${1:_OffsetFact}("${2:Offset Factor}", Int) = 0${0}
+
+snippet _OffsetUnit
+alias PropertyOffsetUnit PropOffsetUnit
+abbr _OffsetUnit("Offset Units", Range(-100, 100)) = 0
+	${1:_OffsetUnit}("${2:Offset Units}", Range(-100, 100)) = 0${0}
+
+snippet _ColorMask
+alias PropertyColorMask PropColorMask
+abbr _ColorMask("Color Mask", Int) = 15
+	${1:_ColorMask}("${2:Color Mask}", Int) = 15  // Default: RGBA${0}
+
+snippet _AlphaToMask
+alias PropertyAlphaToMask PropAlphaToMask
+abbr _AlphaToMask("Alpha To Mask", Int) = 0
+	[Enum(Off, 0, On, 1)]
+	${1:_AlphaToMask}("${2:Alpha To Mask}", Int) = 0  // Default: Off${0}
+
+snippet _StencilRef
+alias Property Prop
+abbr _StencilRef("Stencil Reference Value", Range(0, 255)) = 0
+	[IntRange]
+	${1:_StencilRef}("${2:Stencil Reference Value}", Range(0, 255)) = 0${0}
+
+snippet _StencilReadMask
+alias PropertyStencilReadMask PropStencilReadMask
+abbr _StencilReadMask("Stencil ReadMask Value", Range(0, 255)) = 255
+	[IntRange]
+	${1:_StencilReadMask}("${2:Stencil ReadMask Value}", Range(0, 255)) = 255${0}
+
+snippet _StencilWriteMask
+alias Property Prop
+abbr _StencilWriteMask("Stencil WriteMask Value", Range(0, 255)) = 255
+	[IntRange]
+	${1:_StencilWriteMask}("${2:Stencil WriteMask Value}", Range(0, 255)) = 255${0}
+
+snippet _StencilCompFunc
+alias PropertyStencilCompFunc PropStencilCompFunc
+abbr _StencilCompFunc("Stencil Compare Function", Int) = 8
+	[Enum(UnityEngine.Rendering.CompareFunction)]
+	${1:_StencilCompFunc}("${2:Stencil Compare Function}", Int) = 8  // Default: Always${0}
+
+snippet _StencilPass
+alias PropertyStencilPass PropStencilPass
+abbr _StencilPass("Stencil Pass", Int) = 0
+	[Enum(UnityEngine.Rendering.StencilOp)]
+	${1:_StencilPass}("${2:Stencil Pass}", Int) = 0  // Default: Keep${0}
+
+snippet _StencilFail
+alias PropertyStencilFail PropStencilFail
+abbr _StencilFail("Stencil Fail", Int) = 0
+	[Enum(UnityEngine.Rendering.StencilOp)]
+	${1:_StencilFail}("${2:Stencil Fail}", Int) = 0  // Default: Keep${0}
+
+snippet _StencilZFail
+alias PropertyStencilZFail PropStencilZFail
+abbr _StencilZFail("Stencil ZFail", Int) = 0
+	[Enum(UnityEngine.Rendering.StencilOp)]
+	${1:_StencilZFail}("${2:Stencil ZFail}", Int) = 0  // Default: Keep${0}
+
+snippet [MainTexture]
+alias attrMainTexture
+abbr [MainTexture]
+	[MainTexture]
+
+snippet [MainColor]
+alias attrMainColor
+abbr [MainColor]
+	[MainColor]
+
+snippet [NoScaleOffset]
+alias attrNoScaleOffset
+abbr [NoScaleOffset]
+	[NoScaleOffset]
+
+snippet [Normal]
+alias attrNormal
+abbr [Normal]
+	[Normal]
+
+snippet [PerRendererData]
+alias attrPerRendererData
+abbr [PerRendererData]
+	[PerRendererData]
+
+snippet HDR
+alias attrHDR
+abbr [HDR]
+	[HDR]
+
+snippet Gamma
+alias attrGamma
+abbr [Gamma]
+	[Gamma]
+
+snippet Enum
+alias attrEnum
+abbr [Enum]
+	[Enum(${1:#:Name1}, ${2:#:Const1}, ${3:#:Name2}, ${4:#:Const2})]${0}
+
+snippet KeywordEnum
+alias attrKeywordEnum
+abbr [KeywordEnum]
+	[KeywordEnum(${1:#:Name1}, ${2:#:Name2})]${0}
+
+snippet Toggle
+alias attrToggle
+abbr [Toggle]
+	[Toggle${1:(${2:\#:Keyword\})}]${0}
+
+snippet PowerSlider
+alias attrPowerSlider
+abbr [PowerSlider(...)]
+	[PowerSlider(${1:#:Value})]${0}
+
+snippet IntRage
+alias attrIntRange
+abbr [IntRange]
+	[IntRange]
+
+snippet Space
+alias attrSpace
+abbr [Space]
+	[Space${1:(\${2:#:Value})}]${0}
+
+snippet Header
+alias attrHeader
+abbr [Header]
+	[Header(${1:#:Header Text})]${0}
+
+snippet HideInInspector
+alias attrHideInInspector
+abbr [HideInInspector]
+	[HideInInspector]
+
+snippet maxvertexcount
+alias attrMaxvertexcount
+abbr [maxvertexcount()]
+	[maxvertexcount(${1:#:maxVertexCount})]${0}
+
+snippet branch
+alias attrBranch UNITY_BRANCH
+abbr UNITY_BRANCH
+	UNITY_BRANCH
+
+snippet flatten
+alias attrFlatten UNITY_FLATTEN
+abbr UNITY_FLATTEN
+	UNITY_FLATTEN
+
+snippet unroll
+alias attrUnroll UNITY_UNROLL
+abbr UNITY_UNROLL
+	UNITY_UNROLL
+
+snippet loop
+alias attrLoop UNITY_LOOP
+abbr UNITY_LOOP
+	UNITY_LOOP
+
+snippet fastopt
+alias attrFastOpt UNITY_FASTOPT
+abbr UNITY_FASTOPT
+	UNITY_FASTOPT
+
+snippet CGPROGRAM
+abbr CGPROGRAM ... ENDCG
+	CGPROGRAM
+	${0}
+	ENDCG
+
+snippet CGINCLUDE
+abbr CGINCLUDE ... ENDCG
+	CGINCLUDE
+	${0}
+	ENDCG
+
+snippet HLSLPROGRAM
+abbr HLSLPROGRAM ... ENDHLSL
+	HLSLPROGRAM
+	${0}
+	ENDHLSL
+
+snippet HLSLINCLUDE
+abbr HLSLINCLUDE ... ENDHLSL
+	HLSLINCLUDE
+	${0}
+	ENDHLSL
+
+snippet if
+abbr if () {}
+	UNITY_FLATTEN
+	if (${1:#:condition}) {
+		${0}
+	}
+
+snippet elseif
+alias elif elsif
+abbr else if () {}
+	else if (${1:#:condition}) {
+		${0}
+	}
+
+snippet else
+abbr else {}
+	UNITY_FLATTEN
+	else {
+		${0}
+	}
+
+snippet switch
+abbr switch () {}
+	switch (${1:#:var}) {
+		case ${2:#:val}:
+			${0}
+			break;
+	}
+
+snippet case
+abbr case: break;
+	case ${1:#:val}:
+		${0}
+		break;
+
+snippet default
+abbr default: break;
+	default:
+		${0}
+		break;
+
+snippet for
+abbr for () {}
+	UNITY_UNROLL
+	for (${1:int} ${2:i} = ${3:0}; $2 < ${4}; $2++) {
+		${0}
+	}
+
+snippet while
+abbr while () {}
+	while (${1:#:condition}) {
+		${0}
+	}
+
+snippet do_while
+alias do
+	do {
+		${0}
+	} while (${1:#:condition});
+
+snippet function
+alias fn
+abbr Type func() {}
+	${1:#:retType} ${2:#:name}(${3:#:arglist...})
+	{
+		${0}
+	}
+
+snippet struct
+abbr struct {}
+	struct ${1:#:name}
+	{
+		${0}
+	};
+
+snippet struct_appdata
+alias appdata
+	struct ${1:appdata}
+	{
+		float4 vertex : POSITION;
+		float2 uv : TEXCOORD0;
+		${0}
+	};
+
+snippet struct_v2f
+alias v2f
+	struct ${1:v2f}
+	{
+		float4 vertex : SV_POSITION;
+		float2 uv : TEXCOORD0;
+		UNITY_FOG_COORDS(1)
+		// UNITY_VERTEX_INPUT_INSTANCE_ID  // For GPU instancing
+		${0}
+	};
+
+snippet vertex
+alias vert
+	${1:v2f} ${2:vert}(${3:appdata} ${4:v})
+	{
+		v2f ${5:o};
+
+		// For GPU instancing
+		// UNITY_SETUP_INSTANCE_ID($4);
+		// UNITY_TRANSFER_INSTANCE_ID($4, $5);
+
+		$5.vertex = UnityObjectToClipPos($4.vertex);
+		$5.uv = $4.uv;
+		UNITY_TRANSFER_FOG($5, $5.vertex);
+		${0}
+		return $4
+	}
+
+snippet geometry
+alias geom
+	[maxvertexcount(${1:#:maxVertexCount})]
+	void ${2:geom}(${3:triangle} ${4:v2g} ${5:gi}[${6:3}], inout ${7:TriangleStream}<${8:g2f}> ${9:outStream})
+	{
+		// outStream.RestartStrip();
+		${0}
+	}
+
+snippet fragment
+alias frag
+	${1:fixed4} ${2:frag}(${3:v2f} ${4:i}) : ${5:SV_Target}
+	{
+		// For GPU instancing
+		// UNITY_SETUP_INSTANCE_ID($4);
+
+		float4 ${6:col} = UNITY_SAMPLE_TEX2D(${7:_MainTex}, $4.uv) * ${8:_Color};
+		UNITY_APPLY_FOG($4.fogCoord, $6);
+
+		${0}
+	
+		return $6;
+	}
+
+snippet pragma_target
+options head
+abbr #pragma target ...
+	#pragma target ${1:3.0}${0}
+
+snippet pragma_require
+options head
+abbr #pragma require ...
+	#pragma require ${0}
+
+snippet pragma_only_renderers
+options head
+abbr #pragma only_renderers ...
+	#pragma only_renderers
+
+snippet pragma_fragmentoption
+options head
+abbr #pragma fragmentoption ...
+	#pragma fragmentoption ${1:ARB_precision_hint_fastest}${0}
+
+snippet pragma_vertex
+alias pragma_vert
+options head
+abbr #pragma vertex
+	#pragma vertex ${1:vert}${0}
+
+snippet pragma_geometry
+alias pragma_geom
+options head
+abbr #pragma geometry
+	#pragma geometry ${1:geom}${0}
+
+snippet pragma_fragment
+alias pragma_frag
+options head
+abbr #pragma fragment
+	#pragma fragment ${1:frag}${0}
+
+snippet pragma_multi_compile_fog
+alias pragma_mcfog multi_compile_fog
+options head
+abbr #pragma multi_compile_fog
+	#pragma multi_compile_fog
+
+snippet pragma_multi_compile
+alias pragma_mc multi_compile
+options head
+abbr #pragma multi_compile _ ...
+	#pragma multi_compile _ ${0}
+
+snippet pragma_multi_compile_vertex
+alias pragma_mcv multi_compile_vertex
+options head
+abbr #pragma multi_compile_vertex _ ...
+	#pragma multi_compile_vertex _ ${0}
+
+snippet pragma_multi_compile_fragment
+alias pragma_mcf multi_compile_fragment
+options head
+abbr #pragma multi_compile_fragment _ ...
+	#pragma multi_compile_fragment _ ${0}
+
+snippet pragma_multi_compile_local
+alias pragma_mcl multi_compile_local
+options head
+abbr #pragma multi_compile_local _ ...
+	#pragma multi_compile_local _ ${0}
+
+snippet pragma_multi_compile_local_vertex
+alias pragma_mclv multi_compile_local_vertex
+options head
+abbr #pragma multi_compile_local_vertex _ ...
+	#pragma multi_compile_local_vertex _ ${0}
+
+snippet pragma_multi_compile_local_fragment
+alias pragma_mclf multi_compile_local_fragment
+options head
+abbr #pragma multi_compile_local_fragment _ ...
+	#pragma multi_compile_local_fragment _ ${0}
+
+snippet pragma_shader_feature
+alias pragma_sf shader_feature
+options head
+abbr #pragma shader_feature _ ...
+	#pragma shader_feature _ ${0}
+
+snippet pragma_shader_feature_vertex
+alias pragma_sfv shader_feature_vertex
+options head
+abbr #pragma shader_feature_vertex _ ...
+	#pragma shader_feature_vertex _ ${0}
+
+snippet pragma_shader_feature_fragment
+alias pragma_sff shader_feature_fragment
+options head
+abbr #pragma shader_feature_fragment _ ...
+	#pragma shader_feature_fragment _ ${0}
+
+snippet pragma_shader_feature_local
+alias pragma_sfl shader_feature_local
+options head
+abbr #pragma shader_feature_local _ ...
+	#pragma shader_feature_local _ ${0}
+
+snippet pragma_shader_feature_local_vertex
+alias pragma_sflv shader_feature_local_vertex
+options head
+abbr #pragma shader_feature_local_vertex _ ...
+	#pragma shader_feature_local_vertex _ ${0}
+
+snippet pragma_shader_feature_local_fragment
+alias pragma_sflf shader_feature_local_fragment
+options head
+abbr #pragma shader_feature_local_fragment _ ...
+	#pragma shader_feature_local_fragment _ ${0}
+
+snippet #include
+options head
+alias include inc
+	#include "${0}"
+
+snippet inc_guard
+abbr #ifndef ... #define ... #endif
+options head
+	#ifndef ${1:`toupper(substitute(fnamemodify(expand('%'), ':t'), '\W', '_', 'g'))`}
+	#define $1
+
+	${0}
+
+	#endif  // $1
+
+snippet #if
+options head
+abbr #if ... #endif
+	#if ${1:#:CONDITION}
+	${0}
+	#endif  // $1
+
+snippet #ifdef
+alias ifdef
+options head
+abbr #ifdef ... #endif
+	#ifdef ${1:#:SYMBOL}
+	${0}
+	#endif  // $1
+
+snippet #ifndef
+alias ifndef
+options head
+abbr #ifndef ... #endif
+	#ifndef ${1:#:SYMBOL}
+	${0}
+	#endif  // $1
+
+snippet UNITY_INSTANCING_BUFFER_START
+alias INSTANCING_BUFFER_START
+abbr UNITY_INSTANCING_BUFFER_START() ... UNITY_INSTANCING_BUFFER_END()
+	UNITY_INSTANCING_BUFFER_START(${1:Props})
+	// UNITY_DEFINE_INSTANCED_PROP(float, _Cutoff)  // Example
+	${0}
+	UNITY_INSTANCING_BUFFER_END($1)
