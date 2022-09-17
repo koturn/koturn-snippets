@@ -650,3 +650,178 @@ abbr UNITY_INSTANCING_BUFFER_START() ... UNITY_INSTANCING_BUFFER_END()
 	// UNITY_DEFINE_INSTANCED_PROP(float, _Cutoff)  // Example
 	${0}
 	UNITY_INSTANCING_BUFFER_END($1)
+
+snippet impl_fmodglsl
+alias fmodglsl
+abbr float fmodglsl(float rgb) { return x - y * floor(x / y); }
+	/*!
+	 * @brief Returns the remainder of x divided by y with the same sign as y.
+	 *
+	 * @param [in] x  Vector or scalar numerator.
+	 * @param [in] y  Vector or scalar denominator.
+	 * @return Remainder of x / y with the same sign as y.
+	 */
+	inline ${1:float} fmodglsl($1 x, $1 y)
+	{
+		return x - y * floor(x / y);
+	}
+	${0}
+
+snippet impl_fmodhlsl
+alias fmodhlsl
+abbr float fmodhlsl(float rgb) { return x - y * trunc(x / y); }
+	/*!
+	 * @brief Returns the remainder of x divided by y with the same sign as x.
+	 *
+	 * @param [in] x  Vector or scalar numerator.
+	 * @param [in] y  Vector or scalar denominator.
+	 * @return Remainder of x / y with the same sign as x.
+	 */
+	inline ${2:float} fmodhlsl($2 x, $2 y)
+	{
+		return x - y * trunc(x / y);
+	}
+	${0}
+
+snippet impl_rgb2hsv
+alias rgb2hsv
+abbr float3 rgb2hsv(float3 rgb) { ... }
+	/*!
+	 * @brief Convert from RGB to HSV.
+	 *
+	 * @param [in] rgb  Three-dimensional vector of RGB.
+	 * @return Three-dimensional vector of HSV.
+	 */
+	inline float3 rgb2hsv(float3 rgb)
+	{
+		static const float4 k = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+		static const float e = 1.0e-10;
+
+		const float4 p = rgb.g < rgb.b ? float4(rgb.bg, k.wz) : float4(rgb.gb, k.xy);
+		const float4 q = rgb.r < p.x ? float4(p.xyw, rgb.r) : float4(rgb.r, p.yzx);
+		const float d = q.x - min(q.w, q.y);
+		return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+	}
+	${0}
+
+snippet impl_hsv2rgb
+alias hsv2rgb
+abbr float3 hsv2rgb(float3 hsv) { ... }
+	/*!
+	 * @brief Convert from HSV to RGB.
+	 *
+	 * @param [in] hsv  Three-dimensional vector of HSV.
+	 * @return Three-dimensional vector of RGB.
+	 */
+	inline float3 hsv2rgb(float3 hsv)
+	{
+		static const float4 k = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+
+		const float3 p = abs(frac(hsv.xxx + k.xyz) * 6.0 - k.www);
+		return hsv.z * lerp(k.xxx, saturate(p - k.xxx), hsv.y);
+	}
+	${0}
+
+snippet impl_rotate2D
+alias rotate2D
+abbr float2 rotate2D(float2 v, float2 pivot, float angle) { ... }
+	/*!
+	 * @brief Get 2D-rotation matrix.
+	 *
+	 * @param [in] angle  Angle of rotation.
+	 * @return 2D-rotation matrix.
+	 */
+	inline float2x2 rotate2DMat(float angle)
+	{
+		float s, c;
+		sincos(angle, s, c);
+		return float2x2(c, -s, s, c);
+	}
+
+	/*!
+	 * @brief Rotate on 2D plane
+	 *
+	 * @param [in] v  Target vector
+	 * @param [in] angle  Angle of rotation.
+	 * @return Rotated vector.
+	 */
+	inline float2 rotate2D(float2 v, float angle)
+	{
+		return mul(rotate2DMat(angle), v);
+	}
+
+	/*!
+	 * @brief Rotate on 2D plane
+	 *
+	 * @param [in] v  Target vector
+	 * @param [in] pivot  Pivot of rotation.
+	 * @param [in] angle  Angle of rotation.
+	 * @return Rotated vector.
+	 */
+	inline float2 rotate2D(float2 v, float2 pivot, float angle)
+	{
+		return rotate2D(v - pivot, angle) + pivot;
+	}
+	${0}
+
+snippet impl_pmod
+alias pmod
+abbr float2 pmod(float2 p, float angle, float r) { ... }
+	/*!
+	 * @brief Polar Mod (Fold Rotate) Function.
+	 *
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] angle  Value of atan2(p.x, p.y).
+	 * @param [in] r  Number of divisions.
+	 * @return 2D-coordinate of polar mod.
+	 */
+	float2 pmod(float2 p, float angle, float r)
+	{
+		const float a = angle + UNITY_PI / r;
+		const float n = UNITY_TWO_PI / r;
+		return rotate2D(p, -floor(a / n) * n);
+	}
+
+	/*!
+	 * @brief Polar Mod (Fold Rotate) Function.
+	 *
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] angle  Value of atan2(p.x, p.y).
+	 * @param [in] r  Number of divisions.
+	 * @param [in] pIndex  Index of rotate position.
+	 * @return 2D-coordinate of polar mod.
+	 */
+	float2 pmod(float2 p, float angle, float r, out float pIndex)
+	{
+		const float a = angle + UNITY_PI / r;
+		const float n = UNITY_TWO_PI / r;
+		pIndex = floor(a / n);
+		return rotate2D(p, -pIndex * n);
+	}
+
+	/*!
+	 * @brief Polar Mod (Fold Rotate) Function.
+	 *
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] r  Number of divisions.
+	 * @return 2D-coordinate of polar mod.
+	 */
+	float2 pmod(float2 p, float r)
+	{
+		return pmod(p, atan2(p.x, p.y), r);
+	}
+
+	/*!
+	 * @brief Get index of Polar Mod (Fold Rotate).
+	 *
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] r  Number of divisions.
+	 * @return Index of Polar Mod.
+	 */
+	float getPmodIndex(float2 p, float r)
+	{
+		const float a = atan2(p.y, p.x) + UNITY_PI / r;
+		const float n = UNITY_TWO_PI / r;
+		return floor(a / n);
+	}
+	${0}
