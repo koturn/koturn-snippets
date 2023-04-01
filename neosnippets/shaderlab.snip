@@ -651,6 +651,106 @@ abbr UNITY_INSTANCING_BUFFER_START() ... UNITY_INSTANCING_BUFFER_END()
 	${0}
 	UNITY_INSTANCING_BUFFER_END($1)
 
+snippet get_scale
+abbr const float3 scale = float3(length(unity_ObjectToWorld._m00_m10_m20, ...))
+	const ${1:float3} ${2:scale} = $1(
+		length(unity_ObjectToWorld._m00_m10_m20),
+		length(unity_ObjectToWorld._m01_m11_m21),
+		length(unity_ObjectToWorld._m02_m12_m22)
+	);
+
+
+snippet impl_rand
+alias rand
+abbr float rand(float x, float y)
+	/*!
+	 * @brief Returns a random value between 0.0 and 1.0.
+	 * @param [in] x  First seed value vector used for generation.
+	 * @param [in] y  Second seed value vector used for generation.
+	 * @return Pseudo-random number value between 0.0 and 1.0.
+	 */
+	${1:float} rand($1 x, $1 y)
+	{
+		return frac(sin(x * 12.9898 + y * 78.233) * 43758.5453);
+	}
+
+	/*!
+	 * @brief Returns a random value between p and q.
+	 * @param [in] x  First seed value vector used for generation.
+	 * @param [in] y  Second seed value vector used for generation.
+	 * @param [in] p  Minimum output value.
+	 * @param [in] q  Maximum output value.
+	 * @return Pseudo-random number value between p and q.
+	 */
+	$1 rand($1 x, $1 y, $1 p, $1 q)
+	{
+		return lerp(p, q, rand(x, y));
+	}
+	${0}
+
+
+snippet impl_rand2
+alias rand2
+abbr float rand2(float2 co)
+	/*!
+	 * @brief Returns a pseudo-random number value based on input co that is between 0.0 and 1.0.
+	 * @param [in] co  Seed value vector used for generation.
+	 * @return Pseudo-random number value between 0.0 and 1.0.
+	 */
+	${1:float} rand(${2:float2} co)
+	{
+		return frac(sin(x * 12.9898 + y * 78.233) * 43758.5453);
+	}
+
+	/*!
+	 * @brief Returns a pseudo-random number value based on input co that is between p and q.
+	 * @param [in] co  Seed value vector used for generation.
+	 * @param [in] p  Minimum output value.
+	 * @param [in] q  Maximum output value.
+	 * @return Pseudo-random number value between p and q.
+	 */
+	${1:float} rand(${2:float2} co, $1 p, $1 q)
+	{
+		return lerp(p, q, rand(x, y));
+	}
+	${0}
+
+
+snippet impl_remap
+alias remap
+abbr float remap(float x, float a, float b, float p, float q)
+	/*!
+	 * @brief Returns a value between 0.0 and 1.0 based on the linear interpolation
+	 * of the value of input x between a and b.
+	 *
+	 * @param [in] x  Input value.
+	 * @param [in] a  Minimum value for input interpolation.
+	 * @param [in] b  Maximum value for input interpolation.
+	 * @return Linear interpolated value of x.
+	 */
+	${1:float} remap01($1 x, $1 a, $1 b)
+	{
+		return (x - a) / (b - a);
+	}
+
+	/*!
+	 * @brief Returns a value between p and q based on the linear interpolation
+	 * of the value of input x between a and b.
+	 *
+	 * @param [in] x  Input value.
+	 * @param [in] a  Minimum value for input interpolation.
+	 * @param [in] b  Maximum value for input interpolation.
+	 * @param [in] p  Minimum value for output interpolation.
+	 * @param [in] q  Maximum value for output interpolation.
+	 * @return Linear interpolated value of x.
+	 */
+	$1 remap($1 x, $1 a, $1 b, $1 p, $1 q)
+	{
+		return lerp(p, q, remap01(x, a, b));
+	}
+	${0}
+
+
 snippet impl_fmodglsl
 alias fmodglsl
 abbr float fmodglsl(float rgb) { return x - y * floor(x / y); }
@@ -661,11 +761,12 @@ abbr float fmodglsl(float rgb) { return x - y * floor(x / y); }
 	 * @param [in] y  Vector or scalar denominator.
 	 * @return Remainder of x / y with the same sign as y.
 	 */
-	inline ${1:float} fmodglsl($1 x, $1 y)
+	${1:float} fmodglsl($1 x, $1 y)
 	{
 		return x - y * floor(x / y);
 	}
 	${0}
+
 
 snippet impl_fmodhlsl
 alias fmodhlsl
@@ -677,11 +778,90 @@ abbr float fmodhlsl(float rgb) { return x - y * trunc(x / y); }
 	 * @param [in] y  Vector or scalar denominator.
 	 * @return Remainder of x / y with the same sign as x.
 	 */
-	inline ${2:float} fmodhlsl($2 x, $2 y)
+	${2:float} fmodhlsl($2 x, $2 y)
 	{
 		return x - y * trunc(x / y);
 	}
 	${0}
+
+
+snippet impl_atri
+alias atri
+abbr float acosFast(float x) { ... } float asinFast(float x) { ... } ...
+	/*!
+	 * @brief Fast acos().
+	 * @param [in] x  The first argument of acos().
+	 * @return Approximate value of acos().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	${1:float} acosFast($1 x)
+	{
+	#if 0
+		const $1 res = sqrt(1.0 - abs(x)) * UNITY_HALF_PI;
+	#else
+		const $1 ox = abs(x);
+		const $1 res = (-0.156583 * ox + UNITY_HALF_PI) * sqrt(1.0 - ox);
+	#endif
+
+		return x >= 0.0 ? res : (UNITY_PI - res);
+	}
+
+	/*!
+	 * @brief Fast asin().
+	 * @param [in] x  The first argument of asin().
+	 * @return Approximate value of asin().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	$1 asinFast($1 x)
+	{
+		return UNITY_HALF_PI - acosFast(x);
+	}
+
+	/*!
+	 * @brief Calculate positive value of atan().
+	 * @param [in] x  The first argument of atan().
+	 * @return Approximate positive value of atan().
+	 */
+	$1 atanPos($1 x)
+	{
+		const $1 t0 = x < 1.0 ? x : rcp(x);
+	#if 1
+		const $1 poly = (-0.269408 * t0 + 1.05863) * t0;
+	#else
+		const $1 t1 = t0 * t0;
+		$1 poly = 0.0872929;
+		poly = -0.301895 + poly * t1;
+		poly = 1.0 + poly * t1;
+		poly *= t0;
+	#endif
+
+		return x < 1.0 ? poly : (UNITY_HALF_PI - poly);
+	}
+
+	/*!
+	 * @brief Fast atan().
+	 * @param [in] x  The first argument of atan().
+	 * @return Approximate value of atan().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	$1 atanFast($1 x)
+	{
+		const float t0 = atanPos(abs(x));
+		return x < 0.0 ? -t0 : t0;
+	}
+
+	/*!
+	 * @brief Fast atan2().
+	 * @param [in] x  The first argument of atan2().
+	 * @param [in] y  The second argument of atan2().
+	 * @return Approximate value of atan().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	float atan2Fast(float x, float y)
+	{
+		return atanFast(x / y) + UNITY_PI * (y < 0.0) * (x < 0.0 ? -1.0 : 1.0);
+	}
+
 
 snippet impl_rgb2hsv
 alias rgb2hsv
@@ -692,17 +872,35 @@ abbr float3 rgb2hsv(float3 rgb) { ... }
 	 * @param [in] rgb  Three-dimensional vector of RGB.
 	 * @return Three-dimensional vector of HSV.
 	 */
-	inline float3 rgb2hsv(float3 rgb)
+	float3 rgb2hsv(float3 rgb)
 	{
 		static const float4 k = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
 		static const float e = 1.0e-10;
 
+	#if 1
+		// Optimized version.
+		const bool b1 = rgb.g < rgb.b;
+		float4 p = float4(b1 ? rgb.bg : rgb.gb, b1 ? k.wz : k.xy);
+
+		const bool b2 = rgb.r < p.x;
+		p.xyz = b2 ? p.xyw : p.yzx;
+		const float4 q = b2 ? float4(p.xyz, rgb.r) : float4(rgb.r, p.xyz);
+
+		const float d = q.x - min(q.w, q.y);
+		const float2 hs = float2(q.w - q.y, d) / float2(6.0 * d + e, q.x + e);
+
+		return float3(abs(q.z + hs.x), hs.y, q.x);
+	#else
+		// Original version.
 		const float4 p = rgb.g < rgb.b ? float4(rgb.bg, k.wz) : float4(rgb.gb, k.xy);
 		const float4 q = rgb.r < p.x ? float4(p.xyw, rgb.r) : float4(rgb.r, p.yzx);
 		const float d = q.x - min(q.w, q.y);
+
 		return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+	#endif
 	}
 	${0}
+
 
 snippet impl_hsv2rgb
 alias hsv2rgb
@@ -713,7 +911,7 @@ abbr float3 hsv2rgb(float3 hsv) { ... }
 	 * @param [in] hsv  Three-dimensional vector of HSV.
 	 * @return Three-dimensional vector of RGB.
 	 */
-	inline float3 hsv2rgb(float3 hsv)
+	float3 hsv2rgb(float3 hsv)
 	{
 		static const float4 k = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
 
@@ -722,47 +920,140 @@ abbr float3 hsv2rgb(float3 hsv) { ... }
 	}
 	${0}
 
+
 snippet impl_rotate2D
 alias rotate2D
 abbr float2 rotate2D(float2 v, float2 pivot, float angle) { ... }
 	/*!
-	 * @brief Get 2D-rotation matrix.
+	 * @brief Rotate on 2D plane
 	 *
-	 * @param [in] angle  Angle of rotation.
-	 * @return 2D-rotation matrix.
+	 * @param [in] pos  Position.
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
 	 */
-	inline float2x2 rotate2DMat(float angle)
+	float2 rotate2D(float2 pos, float angle)
 	{
 		float s, c;
-		sincos(angle, s, c);
-		return float2x2(c, -s, s, c);
+		sincos(angle, /* out */ s, /* out */ c);
+		return float2(
+			pos.x * c - pos.y * s,
+			pos.x * s + pos.y * c);
 	}
 
 	/*!
 	 * @brief Rotate on 2D plane
 	 *
-	 * @param [in] v  Target vector
-	 * @param [in] angle  Angle of rotation.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] angle  Rotation angle.
 	 * @return Rotated vector.
 	 */
-	inline float2 rotate2D(float2 v, float angle)
+	float2 rotate2D(float2 pos, float2 pivot, float angle)
 	{
-		return mul(rotate2DMat(angle), v);
-	}
-
-	/*!
-	 * @brief Rotate on 2D plane
-	 *
-	 * @param [in] v  Target vector
-	 * @param [in] pivot  Pivot of rotation.
-	 * @param [in] angle  Angle of rotation.
-	 * @return Rotated vector.
-	 */
-	inline float2 rotate2D(float2 v, float2 pivot, float angle)
-	{
-		return rotate2D(v - pivot, angle) + pivot;
+		return rotate2D(pos - pivot, angle) + pivot;
 	}
 	${0}
+
+
+snippet impl_rotate3D
+alias rotate3D
+abbr float3 rotate3D(float3 pos, float3 pivot, float3 angles) { ... }
+	/*!
+	 * @brief Rotate around Z-axis, Y-axis and X-axis.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] angles  Rotation angles of XYZ.
+	 * @return Rotated position.
+	 */
+	float3 rotate3D(float3 pos, float3 angles)
+	{
+		float3 s3, c3;
+		sincos(angles, /* out */ s3, /* out */ c3);
+
+		pos.xy = float2(
+			pos.x * c3.z - pos.y * s3.z,
+			pos.x * s3.z + pos.y * c3.z);
+		pos.zx = float2(
+			pos.z * c3.y - pos.x * s3.y,
+			pos.z * s3.y + pos.x * c3.y);
+		pos.yz = float2(
+			pos.y * c3.x - pos.z * s3.x,
+			pos.y * s3.x + pos.z * c3.x);
+
+		return pos;
+	}
+
+	/*!
+	 * @brief Rotate around Z-axis, Y-axis and X-axis.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] angles  Rotation angles of XYZ.
+	 * @return Rotated position.
+	 * @see rotate3D(float3, float3, float3)
+	 */
+	float3 rotate3D(float3 pos, float3 angles)
+	{
+		return rotate3D(pos - pivot, angle) + pivot;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] axis  Rotation axis vector.
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 */
+	float3 rotate3D(float3 pos, float3 axis, float angle)
+	{
+		float s, c;
+		sincos(angle, /* out */ s, /* out */ c);
+
+		return pos * c + axis * ((1.0 - c) * dot(pos, axis)) + cross(pos, axis) * s;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] axis  Rotation axis vector.
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 * @see rotate3D(float3, float3, float)
+	 */
+	float3 rotate3D(float3 pos, float3 pivot, float3 axis, float angle)
+	{
+		return rotate3D(pos - pivot, axis, angle) + pivot;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] axis  Rotation axis vector (must be normalized).
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 */
+	float3 rotate3D(float3 pos, float3 axis, float angle)
+	{
+		float s, c;
+		sincos(angle, /* out */ s, /* out */ c);
+		return pos * c + axis * (1.0 - c) * dot(pos, axis) + cross(pos, axis) * s;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] axis  Rotation axis vector (must be normalized).
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 * @see rotate3D(float3, float3, float)
+	 */
+	float3 rotate3D(float3 pos, float3 pivot, float3 axis, float angle)
+	{
+		return rotate3D(pos - pivot, axis, angle) + pivot;
+	}
+	${0}
+
 
 snippet impl_pmod
 alias pmod
