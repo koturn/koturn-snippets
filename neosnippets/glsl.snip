@@ -1,0 +1,630 @@
+snippet if
+abbr if () {}
+	UNITY_FLATTEN
+	if (${1:#:condition}) {
+		${0}
+	}
+
+snippet elseif
+alias elif elsif
+abbr else if () {}
+	else if (${1:#:condition}) {
+		${0}
+	}
+
+snippet else
+abbr else {}
+	UNITY_FLATTEN
+	else {
+		${0}
+	}
+
+snippet switch
+abbr switch () {}
+	switch (${1:#:var}) {
+		case ${2:#:val}:
+			${0}
+			break;
+	}
+
+snippet case
+abbr case: break;
+	case ${1:#:val}:
+		${0}
+		break;
+
+snippet default
+abbr default: break;
+	default:
+		${0}
+		break;
+
+snippet for
+abbr for () {}
+	UNITY_UNROLL
+	for (${1:int} ${2:i} = ${3:0}; $2 < ${4}; $2++) {
+		${0}
+	}
+
+snippet while
+abbr while () {}
+	while (${1:#:condition}) {
+		${0}
+	}
+
+snippet do_while
+alias do
+	do {
+		${0}
+	} while (${1:#:condition});
+
+snippet function
+alias fn
+abbr Type func() {}
+	${1:#:retType} ${2:#:name}(${3:#:arglist...})
+	{
+		${0}
+	}
+
+snippet struct
+abbr struct {}
+	struct ${1:#:name}
+	{
+		${0}
+	};
+
+snippet #version 300 es
+option head
+alias version
+	#version ${1:300 es}${0}
+
+snippet #include
+options head
+alias include inc
+	#include "${0}"
+
+snippet inc_guard
+abbr #ifndef ... #define ... #endif
+options head
+	#ifndef ${1:`toupper(substitute(fnamemodify(expand('%'), ':t'), '\W', '_', 'g'))`}
+	#define $1
+
+	${0}
+
+	#endif  // $1
+
+snippet #if
+options head
+abbr #if ... #endif
+	#if ${1:#:CONDITION}
+	${0}
+	#endif  // $1
+
+snippet #ifdef
+alias ifdef
+options head
+abbr #ifdef ... #endif
+	#ifdef ${1:#:SYMBOL}
+	${0}
+	#endif  // $1
+
+snippet #ifndef
+alias ifndef
+options head
+abbr #ifndef ... #endif
+	#ifndef ${1:#:SYMBOL}
+	${0}
+	#endif  // $1
+
+snippet impl_mad
+alias mad
+abbr float mad(float a, float b, float c) { ... }
+	${1:float} mad($1 a, $1 b, $1 c)
+	{
+		return a * b + c;
+	}
+	${0}
+
+snippet impl_rcp
+alias rcp
+abbr float rcp(float x) { ... }
+	${1:float} rcp($1 x)
+	{
+		return 1.0 / x;
+	}
+	${0}
+
+snippet impl_lerp
+alias lerp
+abbr float lerp(float a, float b, float x) { ... }
+	${1:float} lerp($1 a, $1 b, $1 x)
+	{
+		return mix(a, b, x);
+	}
+	${0}
+
+snippet impl_saturate
+alias lerp
+abbr float satrate(float x) { ... }
+	${1:float} saturate($1 x)
+	{
+		return clamp(x, 0.0, 1.0);
+	}
+	${0}
+
+snippet impl_rsqrt
+alias lerp
+abbr float rsqrt(float x) { ... }
+	${1:float} rsqrt($1 x)
+	{
+		return 1.0 / sqrt(x);
+	}
+	${0}
+
+snippet impl_sincos
+alias lerp
+abbr void sincos(float x, out float s, out float c) { ... }
+	void sincos(${1:float} x, out $1 s, out $1 c)
+	{
+		s = sin(x);
+		c = cos(x);
+	}
+	${0}
+
+snippet impl_rand
+alias rand
+abbr float rand(float x, float y)
+	/*!
+	 * @brief Returns a random value between 0.0 and 1.0.
+	 * @param [in] x  First seed value vector used for generation.
+	 * @param [in] y  Second seed value vector used for generation.
+	 * @return Pseudo-random number value between 0.0 and 1.0.
+	 */
+	${1:float} rand($1 x, $1 y)
+	{
+		return fract(sin(x * 12.9898 + y * 78.233) * 43758.5453);
+	}
+
+	/*!
+	 * @brief Returns a random value between p and q.
+	 * @param [in] x  First seed value vector used for generation.
+	 * @param [in] y  Second seed value vector used for generation.
+	 * @param [in] p  Minimum output value.
+	 * @param [in] q  Maximum output value.
+	 * @return Pseudo-random number value between p and q.
+	 */
+	$1 rand($1 x, $1 y, $1 p, $1 q)
+	{
+		return mix(p, q, rand(x, y));
+	}
+	${0}
+
+
+snippet impl_rand2
+alias rand2
+abbr float rand2(vec2 co)
+	/*!
+	 * @brief Returns a pseudo-random number value based on input co that is between 0.0 and 1.0.
+	 * @param [in] co  Seed value vector used for generation.
+	 * @return Pseudo-random number value between 0.0 and 1.0.
+	 */
+	${1:float} rand(${2:vec2} co)
+	{
+		return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+	}
+
+	/*!
+	 * @brief Returns a pseudo-random number value based on input co that is between p and q.
+	 * @param [in] co  Seed value vector used for generation.
+	 * @param [in] p  Minimum output value.
+	 * @param [in] q  Maximum output value.
+	 * @return Pseudo-random number value between p and q.
+	 */
+	${1:float} rand(${2:vec2} co, $1 p, $1 q)
+	{
+		return mix(p, q, rand(co));
+	}
+	${0}
+
+
+snippet impl_remap
+alias remap
+abbr float remap(float x, float a, float b, float p, float q)
+	/*!
+	 * @brief Returns a value between 0.0 and 1.0 based on the linear interpolation
+	 * of the value of input x between a and b.
+	 *
+	 * @param [in] x  Input value.
+	 * @param [in] a  Minimum value for input interpolation.
+	 * @param [in] b  Maximum value for input interpolation.
+	 * @return Linear interpolated value of x.
+	 */
+	${1:float} remap01($1 x, $1 a, $1 b)
+	{
+		return (x - a) / (b - a);
+	}
+
+	/*!
+	 * @brief Returns a value between p and q based on the linear interpolation
+	 * of the value of input x between a and b.
+	 *
+	 * @param [in] x  Input value.
+	 * @param [in] a  Minimum value for input interpolation.
+	 * @param [in] b  Maximum value for input interpolation.
+	 * @param [in] p  Minimum value for output interpolation.
+	 * @param [in] q  Maximum value for output interpolation.
+	 * @return Linear interpolated value of x.
+	 */
+	$1 remap($1 x, $1 a, $1 b, $1 p, $1 q)
+	{
+		return mix(p, q, remap01(x, a, b));
+	}
+	${0}
+
+
+snippet impl_fmodglsl
+alias fmodglsl
+abbr float fmodglsl(float rgb) { return x - y * floor(x / y); }
+	/*!
+	 * @brief Returns the remainder of x divided by y with the same sign as y.
+	 * @param [in] x  Vector or scalar numerator.
+	 * @param [in] y  Vector or scalar denominator.
+	 * @return Remainder of x / y with the same sign as y.
+	 */
+	${1:float} fmodglsl($1 x, $1 y)
+	{
+		return x - y * floor(x / y);
+	}
+	${0}
+
+
+snippet impl_fmodhlsl
+alias fmodhlsl
+abbr float fmodhlsl(float rgb) { return x - y * trunc(x / y); }
+	/*!
+	 * @brief Returns the remainder of x divided by y with the same sign as x.
+	 * @param [in] x  Vector or scalar numerator.
+	 * @param [in] y  Vector or scalar denominator.
+	 * @return Remainder of x / y with the same sign as x.
+	 */
+	${2:float} fmodhlsl($2 x, $2 y)
+	{
+		return x - y * trunc(x / y);
+	}
+	${0}
+
+
+snippet impl_atri
+alias atri
+abbr float acosFast(float x) { ... } float asinFast(float x) { ... } ...
+	/*!
+	 * @brief Fast acos().
+	 * @param [in] x  The first argument of acos().
+	 * @return Approximate value of acos().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	${1:float} acosFast($1 x)
+	{
+		const float kPi = acos(-1.0);
+
+	#if 0
+		$1 res = sqrt(1.0 - abs(x)) * (kPi * 0.5);
+	#else
+		$1 ox = abs(x);
+		$1 res = (-0.156583 * ox + kPi * 0.5) * sqrt(1.0 - ox);
+	#endif
+
+		return x >= 0.0 ? res : (kPi - res);
+	}
+
+	/*!
+	 * @brief Fast asin().
+	 * @param [in] x  The first argument of asin().
+	 * @return Approximate value of asin().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	$1 asinFast($1 x)
+	{
+		return acos(-1.0) * 0.5 - acosFast(x);
+	}
+
+	/*!
+	 * @brief Calculate positive value of atan().
+	 * @param [in] x  The first argument of atan().
+	 * @return Approximate positive value of atan().
+	 */
+	$1 atanPos($1 x)
+	{
+		$1 t0 = x < 1.0 ? x : 1.0 / x;
+	#if 1
+		$1 poly = (-0.269408 * t0 + 1.05863) * t0;
+	#else
+		$1 t1 = t0 * t0;
+		$1 poly = 0.0872929;
+		poly = -0.301895 + poly * t1;
+		poly = 1.0 + poly * t1;
+		poly *= t0;
+	#endif
+
+		return x < 1.0 ? poly : (acos(-1.0) * 0.5 - poly);
+	}
+
+	/*!
+	 * @brief Fast atan().
+	 * @param [in] x  The first argument of atan().
+	 * @return Approximate value of atan().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	$1 atanFast($1 x)
+	{
+		float t0 = atanPos(abs(x));
+		return x < 0.0 ? -t0 : t0;
+	}
+
+	/*!
+	 * @brief Fast atan2().
+	 * @param [in] x  The first argument of atan2().
+	 * @param [in] y  The second argument of atan2().
+	 * @return Approximate value of atan().
+	 * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+	 */
+	float atan2Fast(float x, float y)
+	{
+		return atanFast(x / y) + acos(-1.0) * (y < 0.0 ? 1.0 : 0.0) * (x < 0.0 ? -1.0 : 1.0);
+	}
+	${0}
+
+
+snippet impl_rgb2hsv
+alias rgb2hsv
+abbr vec3 rgb2hsv(vec3 rgb) { ... }
+	/*!
+	 * @brief Convert from RGB to HSV.
+	 * @param [in] rgb  Three-dimensional vector of RGB.
+	 * @return Three-dimensional vector of HSV.
+	 */
+	vec3 rgb2hsv(vec3 rgb)
+	{
+		const vec4 k = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+		const float e = 1.0e-10;
+
+	#if 1
+		// Optimized version.
+		bool b1 = rgb.g < rgb.b;
+		vec4 p = vec4(b1 ? rgb.bg : rgb.gb, b1 ? k.wz : k.xy);
+
+		bool b2 = rgb.r < p.x;
+		p.xyz = b2 ? p.xyw : p.yzx;
+		vec4 q = b2 ? vec4(p.xyz, rgb.r) : vec4(rgb.r, p.xyz);
+
+		float d = q.x - min(q.w, q.y);
+		vec2 hs = vec2(q.w - q.y, d) / vec2(6.0 * d + e, q.x + e);
+
+		return vec3(abs(q.z + hs.x), hs.y, q.x);
+	#else
+		// Original version.
+		vec4 p = rgb.g < rgb.b ? vec4(rgb.bg, k.wz) : vec4(rgb.gb, k.xy);
+		vec4 q = rgb.r < p.x ? vec4(p.xyw, rgb.r) : vec4(rgb.r, p.yzx);
+		float d = q.x - min(q.w, q.y);
+
+		return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+	#endif
+	}
+	${0}
+
+
+snippet impl_hsv2rgb
+alias hsv2rgb
+abbr vec3 hsv2rgb(vec3 hsv) { ... }
+	/*!
+	 * @brief Convert from HSV to RGB.
+	 * @param [in] hsv  Three-dimensional vector of HSV.
+	 * @return Three-dimensional vector of RGB.
+	 */
+	vec3 hsv2rgb(vec3 hsv)
+	{
+		const vec4 k = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+
+		vec3 p = abs(mod(hsv.xxx + k.xyz, 1.0) * 6.0 - k.www);
+		return hsv.z * mix(k.xxx, clamp(p - k.xxx, 0.0, 1.0), hsv.y);
+	}
+	${0}
+
+
+snippet impl_rotate2D
+alias rotate2D
+abbr vec2 rotate2D(vec2 v, vec2 pivot, float angle) { ... }
+	/*!
+	 * @brief Rotate on 2D plane
+	 * @param [in] pos  Position.
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 */
+	vec2 rotate2D(vec2 pos, float angle)
+	{
+		float s = sin(angle);
+		float c = cos(angle);
+
+		return vec2(
+			pos.x * c - pos.y * s,
+			pos.x * s + pos.y * c);
+	}
+
+	/*!
+	 * @brief Rotate on 2D plane
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated vector.
+	 */
+	vec2 rotate2D(vec2 pos, vec2 pivot, float angle)
+	{
+		return rotate2D(pos - pivot, angle) + pivot;
+	}
+	${0}
+
+
+snippet impl_rotate3D
+alias rotate3D
+abbr vec3 rotate3D(vec3 pos, vec3 pivot, vec3 angles) { ... }
+	/*!
+	 * @brief Rotate around Z-axis, Y-axis and X-axis.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] angles  Rotation angles of XYZ.
+	 * @return Rotated position.
+	 */
+	vec3 rotate3D(vec3 pos, vec3 angles)
+	{
+		vec3 s3 = sin(angles);
+		vec3 c3 = cos(angles):
+
+		pos.xy = vec2(
+			pos.x * c3.z - pos.y * s3.z,
+			pos.x * s3.z + pos.y * c3.z);
+		pos.zx = vec2(
+			pos.z * c3.y - pos.x * s3.y,
+			pos.z * s3.y + pos.x * c3.y);
+		pos.yz = vec2(
+			pos.y * c3.x - pos.z * s3.x,
+			pos.y * s3.x + pos.z * c3.x);
+
+		return pos;
+	}
+
+	/*!
+	 * @brief Rotate around Z-axis, Y-axis and X-axis.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] angles  Rotation angles of XYZ.
+	 * @return Rotated position.
+	 * @see rotate3D(vec3, vec3, vec3)
+	 */
+	vec3 rotate3D(vec3 pos, vec3 angles)
+	{
+		return rotate3D(pos - pivot, angle) + pivot;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] axis  Rotation axis vector.
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 */
+	vec3 rotate3D(vec3 pos, vec3 axis, float angle)
+	{
+		float s = sin(angle);
+		float c = cos(angle);
+
+		return pos * c + axis * ((1.0 - c) * dot(pos, axis)) + cross(pos, axis) * s;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] axis  Rotation axis vector.
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 * @see rotate3D(vec3, vec3, float)
+	 */
+	vec3 rotate3D(vec3 pos, vec3 pivot, vec3 axis, float angle)
+	{
+		return rotate3D(pos - pivot, axis, angle) + pivot;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] axis  Rotation axis vector (must be normalized).
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 */
+	vec3 rotate3D(vec3 pos, vec3 axis, float angle)
+	{
+		float s = sin(angle);
+		float c = cos(angle);
+
+		return pos * c + axis * (1.0 - c) * dot(pos, axis) + cross(pos, axis) * s;
+	}
+
+	/*!
+	 * @brief Rotate around specified axis vector using Rodrigues' rotation formula.
+	 * @param [in] pos  Position.
+	 * @param [in] pivot  Rotation pivot.
+	 * @param [in] axis  Rotation axis vector (must be normalized).
+	 * @param [in] angle  Rotation angle.
+	 * @return Rotated position.
+	 * @see rotate3D(vec3, vec3, float)
+	 */
+	vec3 rotate3D(vec3 pos, vec3 pivot, vec3 axis, float angle)
+	{
+		return rotate3D(pos - pivot, axis, angle) + pivot;
+	}
+	${0}
+
+
+snippet impl_pmod
+alias pmod
+abbr vec2 pmod(vec2 p, float angle, float r) { ... }
+	/*!
+	 * @brief Polar Mod (Fold Rotate) Function.
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] angle  Value of atan2(p.x, p.y).
+	 * @param [in] r  Number of divisions.
+	 * @return 2D-coordinate of polar mod.
+	 */
+	vec2 pmod(vec2 p, float angle, float r)
+	{
+		const float kPi = acos(-1.0);
+
+		float a = angle + kPi / r;
+		float n = kPi * 2.0 / r;
+		return rotate2D(p, -floor(a / n) * n);
+	}
+
+	/*!
+	 * @brief Polar Mod (Fold Rotate) Function.
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] angle  Value of atan2(p.x, p.y).
+	 * @param [in] r  Number of divisions.
+	 * @param [in] pIndex  Index of rotate position.
+	 * @return 2D-coordinate of polar mod.
+	 */
+	vec2 pmod(vec2 p, float angle, float r, out float pIndex)
+	{
+		const float kPi = acos(-1.0);
+
+		float a = angle + kPi / r;
+		float n = kPi * 2.0 / r;
+		pIndex = floor(a / n);
+		return rotate2D(p, -pIndex * n);
+	}
+
+	/*!
+	 * @brief Polar Mod (Fold Rotate) Function.
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] r  Number of divisions.
+	 * @return 2D-coordinate of polar mod.
+	 */
+	vec2 pmod(vec2 p, float r)
+	{
+		return pmod(p, atan(p.x, p.y), r);
+	}
+
+	/*!
+	 * @brief Get index of Polar Mod (Fold Rotate).
+	 * @param [in] p  2D-coordinate.
+	 * @param [in] r  Number of divisions.
+	 * @return Index of Polar Mod.
+	 */
+	float getPmodIndex(vec2 p, float r)
+	{
+		const float kPi = acos(-1.0);
+
+		float a = atan(p.y, p.x) + kPi / r;
+		float n = kPi * 2.0 / r;
+		return floor(a / n);
+	}
+	${0}
