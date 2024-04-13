@@ -5,6 +5,7 @@ delete main
 delete p
 delete try
 delete static_assert
+delete include_math
 
 snippet main
   int
@@ -13,59 +14,6 @@ snippet main
     ${0};
     return EXIT_SUCCESS;
   }
-
-snippet DllMain
-  #if defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
-  #  if defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
-  BOOL APIENTRY
-  DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved);
-  #  endif  /* defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__) */
-  static void
-  ${1:constructor}();
-
-  static void
-  ${2:destructor}();
-
-  BOOL APIENTRY
-  DllMain(HMODULE /* hModule */, DWORD ul_reason_for_call, LPVOID /* lpReserved */)
-  {
-    switch (ul_reason_for_call) {
-      case DLL_PROCESS_ATTACH:
-        $1();
-        break;
-      case DLL_THREAD_ATTACH:
-        break;
-      case DLL_THREAD_DETACH:
-        break;
-      case DLL_PROCESS_DETACH:
-        $2();
-        break;
-    }
-    return TRUE;
-  }
-  #elif defined(__GNUC__)
-  __attribute__((constructor))
-  static void
-  $1();
-
-  __attribute__((destructor))
-  static void
-  $2();
-  #endif  /* defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__) */
-
-  static void
-  $1()
-  {
-
-  }
-
-  static void
-  $2()
-  {
-
-  }
-
-  ${0}
 
 snippet cout
   std::cout << ${0} << std::endl;
@@ -2241,40 +2189,6 @@ alias zcomb
     ${0};
   })
 
-snippet include
-snippet inc
-  #include <${0}>
-
-snippet include_local
-snippet incl
-  #include "${0}"
-
-snippet include_math
-  #ifdef _MSC_VER
-  #  define _USE_MATH_DEFINES
-  #endif
-  #include <cmath>
-
-snippet include_guard
-alias inc_guard
-  #ifndef ${1:#:NAME}
-  #define $1
-
-  ${0}
-
-  #endif  // $1
-
-snippet extern_c
-  #ifdef __cplusplus
-  extern "C" {
-  #endif  // __cplusplus
-
-  ${0}
-
-  #ifdef __cplusplus
-  }
-  #endif  // __cplusplus
-
 snippet constant
   static constexpr ${1:int} ${2:#:varname} = ${3:#:value}
 
@@ -2295,40 +2209,12 @@ snippet FOR
     ${0}
   }
 
-snippet def_dllexport
-  #if defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
-  #  define ${1:#:NAME}_API_IMPORT __declspec(dllimport)
-  #  define $1_API_EXPORT __declspec(dllexport)
-  #  define $1_API_LOCAL
-  #elif defined(__GNUC__) && __GNUC__ >= 4
-  #  define $1_API_IMPORT __attribute__((visibility("default")))
-  #  define $1_API_EXPORT __attribute__((visibility("default")))
-  #  define $1_API_LOCAL  __attribute__((visibility("hidden")))
-  #else
-  #  define $1_API_IMPORT
-  #  define $1_API_EXPORT
-  #  define $1_API_LOCAL
-  #endif  /* defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__) */
-
-  #ifdef $1_DLL
-  #  ifdef $1_EXPORTS
-  #    define $1_API $1_API_EXPORT
-  #  else
-  #    define $1_API $1_API_IMPORT
-  #  endif  /* $1_EXPORTS */
-  #  define $1_LOCAL $1_API_LOCAL
-  #else
-  #  define $1_API
-  #  define $1_LOCAL
-  #endif  /* $1_DLL */
-
-  ${0}
-
-  #undef $1_API_IMPORT
-  #undef $1_API_EXPORT
-  #undef $1_API_LOCAL
-  #undef $1_API
-  #undef $1_LOCAL
+snippet include_math
+alias inc_math
+	#ifdef _MSC_VER
+	#  define _USE_MATH_DEFINES
+	#endif
+	#include <cmath>
 
 snippet def_LOOP
   #define LOOP(n)  for (decltype(n) __loop_tmp_var__ = 0; i < n; i++)
@@ -2446,16 +2332,6 @@ snippet if_cpp17
   ${0}
   #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
 
-snippet if_gcc
-  #ifdef __GNUC__
-  ${0}
-  #endif  // __GNUC__
-
-snippet if_msvc
-  #ifdef _MSC_VER
-  ${0}
-  #endif  // _MSC_VER
-
 snippet if_cppcli
   #if defined(_M_CEE) || defined(_MANAGED)
   ${0}
@@ -2559,142 +2435,6 @@ snippet polyfill_inline_var
   ${0}
 
   #undef $1_INLINE_VAR
-
-snippet def_likely_if
-  #if __cplusplus > 201703L \
-    || defined(_MSVC_LANG) && _MSVC_LANG > 201703L \
-    || defined(__has_cpp_attribute) && __has_cpp_attribute(likely)
-  #  define ${1:#:PREFIX}_LIKELY_IF(cond)  [[likely]] if (cond)
-  #elif defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
-  #  define $1_LIKELY_IF(cond)  if (__builtin_expect(!!(cond), 1))
-  #else
-  #  define $1_LIKELY_IF(cond)  if (cond)
-  #endif
-
-  ${0}
-
-  #undef $1_LIKELY_IF
-
-snippet def_unlikely_if
-  #if __cplusplus > 201703L \
-    || defined(_MSVC_LANG) && _MSVC_LANG > 201703L \
-    || defined(__has_cpp_attribute) && __has_cpp_attribute(unlikely)
-  #  define ${1:#:PREFIX}_UNLIKELY_IF(cond)  [[unlikely]] if (cond)
-  #elif defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
-  #  define $1_UNLIKELY_IF(cond)  if (__builtin_expect(!!(cond), 0))
-  #else
-  #  define $1_UNLIKELY_IF(cond)  if (cond)
-  #endif
-
-  ${0}
-
-  #undef $1_UNLIKELY_IF
-
-snippet def_printf_arg_check
-  #if defined(_MSC_VER) && _MSC_VER >= 1400
-  #  include <sal.h>
-  #  if _MSC_VER > 1400
-  #    define ${1:#:PREFIX}_MSVC_CHECK_PRINTF_FMTSTR(fmtarg) _Printf_format_string_ fmtarg
-  #  else
-  #    define $1_MSVC_CHECK_PRINTF_FMTSTR(fmtarg) __format_string fmtarg
-  #  endif  //  _MSC_VER > 1400
-  #else
-  #  define $1_MSVC_CHECK_PRINTF_FMTSTR(fmtarg) fmtarg
-  #endif  // defined(_MSC_VER) && _MSC_VER >= 1400
-
-  #ifdef __GNUC__
-  #  define $1_GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex) __attribute__((format(printf, index, vaIndex)))
-  #else
-  #  define $1_GNUC_CHECK_PRINTF_FMTSTR(index, vaIndex)
-  #endif  // __GNUC__
-
-  ${0}
-
-  #undef $1_MSVC_CHECK_PRINTF_FMTSTR
-  #undef $1_GNUC_CHECK_PRINTF_FMTSTR
-
-snippet def_scanf_arg_check
-  #if defined(_MSC_VER) && _MSC_VER >= 1400
-  #  include <sal.h>
-  #  if _MSC_VER > 1400
-  #    define ${1:#:PREFIX}_MSVC_CHECK_SCANF_FMTSTR(fmtarg) _Scanf_format_string_ fmtarg
-  #  else
-  #    define $1_MSVC_CHECK_SCANF_FMTSTR(fmtarg) __format_string fmtarg
-  #  endif  //  _MSC_VER > 1400
-  #else
-  #  define $1_MSVC_CHECK_SCANF_FMTSTR(fmtarg) fmtarg
-  #endif  // defined(_MSC_VER) && _MSC_VER >= 1400
-
-  #ifdef __GNUC__
-  #  define $1_GNUC_CHECK_SCANF_FMTSTR(index, vaIndex) __attribute__((format(scanf, index, vaIndex)))
-  #else
-  #  define $1_GNUC_CHECK_SCANF_FMTSTR(index, vaIndex)
-  #endif  // __GNUC__
-
-  ${0}
-
-  #undef $1_MSVC_CHECK_SCANF_FMTSTR
-  #undef $1_GNUC_CHECK_SCANF_FMTSTR
-
-snippet def_assume
-  #if defined(NDEBUG)
-  #  ifdef _MSC_VER
-  #    define ${1:#:PREFIX}_ASSUME(x)  __assume(x)
-  #  else
-  #    define $1_ASSUME(x)
-  #  endif  // _MSC_VER
-  #elif defined(assert)
-  #  define $1_ASSUME(x)  assert(x)
-  #else
-  #  define $1_ASSUME(x)
-  #endif  // defined(NDEBUG)
-
-  ${0}
-
-  #undef $1_ASSUME
-
-snippet supress_warnings_gcc
-  #if (defined(__GNUC__) && (__GNUC__ > 4 || __GNUC__ == 4 && __GNUC_MINOR__ >= 6))
-  #  define ${1:#:PREFIX}_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA 1
-  #endif
-
-  #ifdef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
-  #  pragma GCC diagnostic push
-  #  pragma GCC diagnostic ignored "-Weffc++"
-  #  ${0}
-  #endif  // $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
-
-  #ifdef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
-  #  pragma GCC diagnostic pop
-  #endif  // $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
-
-
-  #ifdef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
-  #  undef $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
-  #endif  // $1_AVAILABLE_GCC_DIAGNOSTIC_PRAGMA
-
-snippet supress_warnings_msvc
-  #ifdef _MSC_VER
-  #  pragma warning(push)
-  #  pragma warning(disable: 4505)
-  #endif  // _MSC_VER
-
-  ${0}
-
-  #ifdef _MSC_VER
-  #  pragma warning(pop)
-  #endif  // _MSC_VER
-
-
-snippet pragma_comment_lib
-  #pragma comment(lib, ${0})
-
-snippet toggle_comment
-  //*
-  ${0}
-  /*/
-
-  //*/
 
 snippet simd_loop
   constexpr auto ${1:stride} = static_cast<int>(sizeof(${2:#:__m128i}));
