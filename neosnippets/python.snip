@@ -1,76 +1,76 @@
 snippet shebang
-  #!/usr/bin/env python
-  # -*- coding: utf-8 -*-
+	#!/usr/bin/env python
+	# -*- coding: utf-8 -*-
 
-  ${0}
+	${0}
 
 snippet main
-  def main():
-      ${0}
+	def main():
+		${0}
 
-  if __name__ == '__main__':
-      main()
+	if __name__ == '__main__':
+		main()
 
 snippet fn
-  def ${1:#:name}(${2:#:args}):
-      ${0}
+	def ${1:#:name}(${2:#:args}):
+		${0}
 
 snippet getter
-  @property
-  def ${1:#:name}(self):
-      return self.${2:__$1}
+	@property
+	def ${1:#:name}(self):
+		return self.${2:__$1}
 
-  ${0}
+	${0}
 
 snippet setter
-  @$1.setter
-  def ${1:#:name}(self, ${2:$1}):
-      self.${3:__$1} = $2
+	@$1.setter
+	def ${1:#:name}(self, ${2:$1}):
+		self.${3:__$1} = $2
 
-  ${0}
+	${0}
 
 snippet deleter
-  @$1.deleter
-  def ${1:#:name}(self):
-      self.${2:__$1} = ${3:None}
+	@$1.deleter
+	def ${1:#:name}(self):
+		self.${2:__$1} = ${3:None}
 
-  ${0}
+	${0}
 
 snippet condexpr
-  ${1:#:true_value} if ${2:#:cond} else ${3:#:false_value}
+	${1:#:true_value} if ${2:#:cond} else ${3:#:false_value}
 
 snippet print_nonl
-  print(${0}, end='')
+	print(${0}, end='')
 
 snippet print_error
-  print(${0}, file=sys.stderr)
+	print(${0}, file=sys.stderr)
 
 snippet print_error_nonl
-  print(${0}, end='', file=sys.stderr)
+	print(${0}, end='', file=sys.stderr)
 
 snippet lambda
-  lambda ${1:#:args...}: ${2:#:pred}
+	lambda ${1:#:args...}: ${2:#:pred}
 
 snippet map
-  map(${1:lambda e\: ${2\:e\}}, ${3:#:list})
+	map(${1:lambda e\: ${2\:e\}}, ${3:#:list})
 
 snippet filter
-  filter(${1:lambda e\: ${2\:e\}}, ${3:#:list})
+	filter(${1:lambda e\: ${2\:e\}}, ${3:#:list})
 
 snippet join
-  ${1:#:separator}.join(${2:#:list})
+	${1:#:separator}.join(${2:#:list})
 
 snippet listcomp
-  [${0:#:pred} for ${1:e} in ${2:#:collection}]
+	[${0:#:pred} for ${1:e} in ${2:#:collection}]
 
 snippet tuplecomp
-  tuple(${0:#:pred} for ${1:e} in ${2:#:collection})
+	tuple(${0:#:pred} for ${1:e} in ${2:#:collection})
 
 snippet gencomp
-  (${0:#:pred} for ${1:e} in ${2:#:collection})
+	(${0:#:pred} for ${1:e} in ${2:#:collection})
 
 snippet setcomp
-  {${0:#:pred} for ${1:e} in ${2:#:collection}}
+	{${0:#:pred} for ${1:e} in ${2:#:collection}}
 
 snippet dictcomp
-  {${3:#:key}: ${0:#:value} for ${1:e} in ${2:#:collection}}
+	{${3:#:key}: ${0:#:value} for ${1:e} in ${2:#:collection}}

@@ -1,122 +1,122 @@
 snippet set
-  (set ${1:#:symbol} ${2:#:value})
+	(set ${1:#:symbol} ${2:#:value})
 
 snippet setq
-  (setq ${1:#:name} ${2:#:value})
+	(setq ${1:#:name} ${2:#:value})
 
 snippet setf
-  (setf ${1:#:name} ${2:#:value})
+	(setf ${1:#:name} ${2:#:value})
 
 snippet let
-  (let (${1:#:bind-list (foo 1) (bar 2)})
-    ${0:TARGET})
+	(let (${1:#:bind-list (foo 1) (bar 2)})
+		${0:TARGET})
 
 snippet let*
-  (let* (${1:#:bind-list (foo 1) (bar foo)})
-    ${0:TARGET})
+	(let* (${1:#:bind-list (foo 1) (bar foo)})
+		${0:TARGET})
 
 snippet defun
 alias fn define-function define
-  (defun ${1:#:name} (${2:#:args...})
-    "${3:#:docstring}"
-    ${0:TARGET})
+	(defun ${1:#:name} (${2:#:args...})
+		"${3:#:docstring}"
+		${0:TARGET})
 
 snippet lambda
-  (lambda (${1:#:args...})
-    ${0:TARGET})
+	(lambda (${1:#:args...})
+		${0:TARGET})
 
 snippet defmacro
-  (defmacro ${1:#:macro-name} (${2:#:args...})
-    \`(${0:TARGET}))
+	(defmacro ${1:#:macro-name} (${2:#:args...})
+		\`(${0:TARGET}))
 
 snippet print
-  (print ${1:#:object} ${2:#:t})
+	(print ${1:#:object} ${2:#:t})
 
 snippet prin1
-  (prin1 ${1:#:object} ${2:#:t})
+	(prin1 ${1:#:object} ${2:#:t})
 
 snippet princ
-  (princ ${1:#:object} ${2:#:t})
+	(princ ${1:#:object} ${2:#:t})
 
 snippet format
 alias printf
-  (format ${1:t} "${2:#:ctrl-seq}~%" ${3:#:args...})
+	(format ${1:t} "${2:#:ctrl-seq}~%" ${3:#:args...})
 
 snippet dotimes
-  (dotimes (${1:i} ${2:#:n})
-    ${0:TARGET})
+	(dotimes (${1:i} ${2:#:n})
+		${0:TARGET})
 
 snippet prog1
-  (prog1 ${0:TARGET})
+	(prog1 ${0:TARGET})
 
 snippet prog2
-  (prog2 ${0:TARGET})
+	(prog2 ${0:TARGET})
 
 snippet progn
 alias begin
-  (progn ${0:TARGET})
+	(progn ${0:TARGET})
 
 snippet dolist
-  (dolist (${1:e} ${2:#:list})
-    ${0:TARGET})
+	(dolist (${1:e} ${2:#:list})
+		${0:TARGET})
 
 snippet loop-for
-  (loop for ${1:i} ${2:from} ${3:0}${4: ${5:to\} ${6:\#:to-n\}${7: by ${8:1\\}\}} do
-        ${0:TARGET})
+	(loop for ${1:i} ${2:from} ${3:0}${4: ${5:to\} ${6:\#:to-n\}${7: by ${8:1\\}\}} do
+				${0:TARGET})
 
 snippet loop-for-from
-  (loop for ${1:i} ${2:from} ${3:0} do
-        ${0:TARGET})
+	(loop for ${1:i} ${2:from} ${3:0} do
+				${0:TARGET})
 
 snippet loop-for-from-to
-  (loop for ${1:i} ${2:from} ${3:0} ${4:to} ${5:#:to-n} do
-        ${0:TARGET})
+	(loop for ${1:i} ${2:from} ${3:0} ${4:to} ${5:#:to-n} do
+				${0:TARGET})
 
 snippet loop-for-from-to-by
-  (loop for ${1:i} ${2:from} ${3:0} ${4:to} ${5:#:to-n} by ${6:1} do
-        ${0:TARGET})
+	(loop for ${1:i} ${2:from} ${3:0} ${4:to} ${5:#:to-n} by ${6:1} do
+				${0:TARGET})
 
 snippet loop-for-in
-  (loop for ${1:e} in ${2:#:list} do
-        ${0:TARGET})
+	(loop for ${1:e} in ${2:#:list} do
+				${0:TARGET})
 
 snippet loop-repeat-for
-  (loop repeat ${1:#:n}
-        for ${2:i} = ${3:0} then ${4:(incf $1)} do
-        ${0:TARGET})
+	(loop repeat ${1:#:n}
+				for ${2:i} = ${3:0} then ${4:(incf $1)} do
+				${0:TARGET})
 
 snippet if
-  (if ${1:#:cond}
-    ${2:#:true-form})
+	(if ${1:#:cond}
+		${2:#:true-form})
 
 snippet if-else
-  (if ${1:#:cond}
-    ${2:#:true-form}
-    ${3:#:false-form})
+	(if ${1:#:cond}
+		${2:#:true-form}
+		${3:#:false-form})
 
 snippet cond
-  (cond
-    (${1:#:cond1}
-      ${2:#:cond1-form})
-    (${3:#:cond2}
-      ${4:#:cond2-form})
-    (t
-      ${5:#:default-form}))
+	(cond
+		(${1:#:cond1}
+			${2:#:cond1-form})
+		(${3:#:cond2}
+			${4:#:cond2-form})
+		(t
+			${5:#:default-form}))
 
 snippet case
-  (case ${1:#:obj}
-    (${2:#:case1}
-      ${3:#:case1-form})
-    (${3:otherwise}
-      ${4:#:otherwise-form}))
+	(case ${1:#:obj}
+		(${2:#:case1}
+			${3:#:case1-form})
+		(${3:otherwise}
+			${4:#:otherwise-form}))
 
 snippet declaim-optimize
 alias optimize
-  (declaim (optimize (debug ${1:0}) (safety ${2:0}) (space ${3:0}) (speed ${4:3})))
+	(declaim (optimize (debug ${1:0}) (safety ${2:0}) (space ${3:0}) (speed ${4:3})))
 
 snippet declaim-inline
 alias inline
-  (declaim (inline ${1:#:function-name}))
+	(declaim (inline ${1:#:function-name}))
 
 snippet declare-optimize
-  (declare (optimize (debug ${1:0}) (safety ${2:0}) (space ${3:0}) (speed ${4:3})))
+	(declare (optimize (debug ${1:0}) (safety ${2:0}) (space ${3:0}) (speed ${4:3})))

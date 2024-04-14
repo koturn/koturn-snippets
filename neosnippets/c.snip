@@ -68,80 +68,80 @@ alias inc_math
 
 snippet define_TRUE
 abbr #define TRUE
-  #ifndef TRUE
-  #  define TRUE
-  #endif
+	#ifndef TRUE
+	#  define TRUE
+	#endif
 
 snippet define_FALSE
 abbr #define FALSE
-  #ifndef FALSE
-  #  define FALSE
-  #endif
+	#ifndef FALSE
+	#  define FALSE
+	#endif
 
 snippet define_LENGTH
 abbr #define LENGTH
-  #define LENGTH(${1:array})  (sizeof($1) / sizeof(($1)[0]))
+	#define LENGTH(${1:array})  (sizeof($1) / sizeof(($1)[0]))
 
 snippet define_sleep
 abbr #define sleep
-  #if defined(WIN16) || defined(_WIN16) || defined(__WIN16) || defined(__WIN16__)   \
-    || defined(WIN32) || defined(_WIN32) || defined(__WIN32) || defined(__WIN32__)  \
-    || defined(WIN64) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__)
-  #  define sleep(${1:sec})  Sleep(($1) * 1000)
-  #endif
+	#if defined(WIN16) || defined(_WIN16) || defined(__WIN16) || defined(__WIN16__)   \
+		|| defined(WIN32) || defined(_WIN32) || defined(__WIN32) || defined(__WIN32__)  \
+		|| defined(WIN64) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__)
+	#  define sleep(${1:sec})  Sleep(($1) * 1000)
+	#endif
 
 snippet define_inline
 abbr #define inline
-  #ifndef __cplusplus
-  #  if defined(_MSC_VER)
-  #    define inline      __inline
-  #    define __inline__  __inline
-  #  elif !defined(__GNUC__) && __STDC_VERSION__ < 199901L
-  #    define inline
-  #    define __inline
-  #  endif
-  #endif
+	#ifndef __cplusplus
+	#  if defined(_MSC_VER)
+	#    define inline      __inline
+	#    define __inline__  __inline
+	#  elif !defined(__GNUC__) && __STDC_VERSION__ < 199901L
+	#    define inline
+	#    define __inline
+	#  endif
+	#endif
 
 snippet define_restrict
 abbr #define restrict
-  #if _MSC_VER >= 1400
-  #  define restrict      __restrict
-  #  define __restrict__  __restrict
-  #elif __cplusplus
-  #  define restrict      __restrict
-  #elif !defined(__STDC_VERSION__) || __STDC_VERSION__ < 199901L
-  #  if defined(__GNUC__)
-  #    define restrict    __restrict
-  #  else
-  #    define restrict
-  #    define __restrict
-  #    define __restrict__
-  #  endif
-  #endif
+	#if _MSC_VER >= 1400
+	#  define restrict      __restrict
+	#  define __restrict__  __restrict
+	#elif __cplusplus
+	#  define restrict      __restrict
+	#elif !defined(__STDC_VERSION__) || __STDC_VERSION__ < 199901L
+	#  if defined(__GNUC__)
+	#    define restrict    __restrict
+	#  else
+	#    define restrict
+	#    define __restrict
+	#    define __restrict__
+	#  endif
+	#endif
 
 snippet memset
 abbr memset(ptr, value, n) <string.h>
-  memset(${1:#:ptr}, ${2:#:value}, ${3:#:n})
+	memset(${1:#:ptr}, ${2:#:value}, ${3:#:n})
 
 snippet memcpy
 abbr memcpy(to, from, n) <string.h>
-  memcpy(${1:#:to}, ${2:#:from}, ${3:#:n})
+	memcpy(${1:#:to}, ${2:#:from}, ${3:#:n})
 
 snippet memmove
 abbr memmove(to, from, n) <string.h>
-  memmove(${1:#:to}, ${2:#:from}, ${3:#:n})
+	memmove(${1:#:to}, ${2:#:from}, ${3:#:n})
 
 snippet malloc
 abbr (T *) malloc(n * sizeof(T)) <string.h>
-  (${1:unsigned char} *) malloc(${2:#:n} * sizeof($1))
+	(${1:unsigned char} *) malloc(${2:#:n} * sizeof($1))
 
 snippet calloc
 abbr (T *) calloc(n, sizeof(T)) <string.h>
-  (${1:unsigned char} *) calloc(${2:#:n}, sizeof($1))
+	(${1:unsigned char} *) calloc(${2:#:n}, sizeof($1))
 
 snippet realloc
 abbr (T *) realloc(n, sizeof(T)) <string.h>
-  (${1:unsigned char} *) realloc(${2:#:n}, sizeof($1))
+	(${1:unsigned char} *) realloc(${2:#:n}, sizeof($1))
 
 snippet extern_c
 	#ifdef __cplusplus

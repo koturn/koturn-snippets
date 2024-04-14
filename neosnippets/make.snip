@@ -1,140 +1,140 @@
 snippet ifeq
 options head
-  ifeq ${1:#:cond}
-    ${0:TARGET}
-  else
-  endif
+	ifeq ${1:#:cond}
+		${0:TARGET}
+	else
+	endif
 
 snippet ifneq
 options head
-  ifneq ${1:#:cond}
-    ${0:TARGET}
-  else
-  endif
+	ifneq ${1:#:cond}
+		${0:TARGET}
+	else
+	endif
 
 snippet ifneq2
 options head
-  ifneq ${1:#:cond}
-    ${2:TARGET}
-    ${3:else \\n ${4:TARGET\}}
-  endif
+	ifneq ${1:#:cond}
+		${2:TARGET}
+		${3:else \\n ${4:TARGET\}}
+	endif
 
 snippet define
-  define
-    ${0:TARGET}
-  endef
+	define
+		${0:TARGET}
+	endef
 
 snippet addprefix
-  $(addprefix ${1:#:prefix},${2:#:words...})
+	$(addprefix ${1:#:prefix},${2:#:words...})
 
 snippet addsuffix
-  $(addsuffix ${1:#:suffix},${2:#:words...})
+	$(addsuffix ${1:#:suffix},${2:#:words...})
 
 snippet filter
-  $(filter ${1:#:pattern},${2:#:words...})
+	$(filter ${1:#:pattern},${2:#:words...})
 
 snippet filter-out
-  $(filter-out ${1:#:pattern},${2:#:words...})
+	$(filter-out ${1:#:pattern},${2:#:words...})
 
 snippet subst
-  $(subst ${1:#:prev-word},${2:#:after-word},${3:#:string})
+	$(subst ${1:#:prev-word},${2:#:after-word},${3:#:string})
 
 snippet patsubst
-  $(patsubst ${1:#:prev-pattern},${2:#:after-pattern},${3:#:string})
+	$(patsubst ${1:#:prev-pattern},${2:#:after-pattern},${3:#:string})
 
 snippet word
-  $(word ${1:#:N},${2:#:words...})
+	$(word ${1:#:N},${2:#:words...})
 
 snippet wordlist
-  $(wordlist ${1:#:start-index},${2:#:end-index},${3:#:words...})
+	$(wordlist ${1:#:start-index},${2:#:end-index},${3:#:words...})
 
 snippet firstword
-  $(firstword ${1:#:words...})
+	$(firstword ${1:#:words...})
 
 snippet lastword
-  $(lastword ${1:#:words...})
+	$(lastword ${1:#:words...})
 
 snippet words
-  $(words ${3:#:words...})
+	$(words ${3:#:words...})
 
 snippet findstring
-  ${findstring ${1:#:substr},${2:#:text}}
+	${findstring ${1:#:substr},${2:#:text}}
 
 snippet sort
-  $(sort ${1:#:words...})
+	$(sort ${1:#:words...})
 
 snippet strip
-  $(strip ${1:#:string})
+	$(strip ${1:#:string})
 
 snippet abspath
-  $(abspath ${1:#:paths...})
+	$(abspath ${1:#:paths...})
 
 snippet realpath
-  $(realpath ${1:#:paths...})
+	$(realpath ${1:#:paths...})
 
 snippet basename
-  $(basename ${1:#:filenames...})
+	$(basename ${1:#:filenames...})
 
 snippet dir
-  $(dir ${1:#:filepaths...})
+	$(dir ${1:#:filepaths...})
 
 snippet notdir
-  $(notdir ${1:#:filepaths...})
+	$(notdir ${1:#:filepaths...})
 
 snippet join
-  $(join ${1:#:words1...},${2:#:words2...})
+	$(join ${1:#:words1...},${2:#:words2...})
 
 snippet suffix
-  $(suffix ${1:#:paths})
+	$(suffix ${1:#:paths})
 
 snippet wildcard
-  $(wildcard ${1:#:pattern})
+	$(wildcard ${1:#:pattern})
 
 snippet if
-  $(if ${1:#:cond},${2:#:true-value},${3:false-value})
+	$(if ${1:#:cond},${2:#:true-value},${3:false-value})
 
 snippet and
-  $(and ${1:#:cond1},${2:#:cond2}${3:#:,cond3,cond4...})
+	$(and ${1:#:cond1},${2:#:cond2}${3:#:,cond3,cond4...})
 
 snippet or
-  $(or ${1:#:cond1},${2:#:cond2}${3:#:,cond3,cond4...})
+	$(or ${1:#:cond1},${2:#:cond2}${3:#:,cond3,cond4...})
 
 snippet warning
-  $(warning ${1:#:text})
+	$(warning ${1:#:text})
 
 snippet error
-  $(error ${1:#:text})
+	$(error ${1:#:text})
 
 snippet info
-  $(info ${1:#:text})
+	$(info ${1:#:text})
 
 snippet call
-  $(call ${1:#:var},${2:#:param1,param2,...})
+	$(call ${1:#:var},${2:#:param1,param2,...})
 
 snippet eval
-  $(eval ${1:#:text})
+	$(eval ${1:#:text})
 
 snippet flavor
-  $(flavor ${1:#:var})
+	$(flavor ${1:#:var})
 
 snippet foreach
-  $(foreach ${1:#:each-var},${2:#:words},${3:#:predicate})
+	$(foreach ${1:#:each-var},${2:#:words},${3:#:predicate})
 
 snippet origin
-  $(origin ${1:#:var})
+	$(origin ${1:#:var})
 
 snippet shell
-  $(shell ${1:#:cmd})
+	$(shell ${1:#:cmd})
 
 snippet value
-  $(value ${1:#:var})
+	$(value ${1:#:var})
 
 snippet file
-  $(file ${1:#:op > or >>} ${2:#:filename},${3:#:text})
+	$(file ${1:#:op > or >>} ${2:#:filename},${3:#:text})
 
 snippet guile
-  $(guile ${1:#:scheme-s-expr})
+	$(guile ${1:#:scheme-s-expr})
 
 snippet libs
-  ${1:#:LIBNAME}_INCS := ${2}
-  ${1:#:LIBNAME}_LDLIBS := ${2}
+	${1:#:LIBNAME}_INCS := ${2}
+	${1:#:LIBNAME}_LDLIBS := ${2}

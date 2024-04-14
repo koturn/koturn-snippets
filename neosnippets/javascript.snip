@@ -1,104 +1,104 @@
 snippet iife_toplevel
-  ;(function(global) {
-    'use strict';
-    ${0}
-  })((this || 0).self || typeof global === 'object' && global || this);
+	;(function(global) {
+		'use strict';
+		${0}
+	})((this || 0).self || typeof global === 'object' && global || this);
 
 delete iife
 snippet iife
-  (function() {
-    ${0}
-  })();
+	(function() {
+		${0}
+	})();
 
 snippet strict
-  'use strict';
+	'use strict';
 
 snippet fn
-  function() {
-    ${0}
-  }
+	function() {
+		${0}
+	}
 
 snippet fn2
-  function ${1:#:name}() {
-    ${0}
-  }
+	function ${1:#:name}() {
+		${0}
+	}
 
 snippet class_es5
-  (function(moduleDef) {
-    'use strict';
+	(function(moduleDef) {
+		'use strict';
 
-    if (typeof bootstrap === "function") {  // Montage Require
-      bootstrap("promise", moduleDef);
-    } else if (typeof exports === "object" && typeof module === "object") {  // NodeJS or CommonJS
-      module.exports = moduleDef();
-    } else if (typeof define === "function" && define.amd) {  // RequireJS
-      define(moduleDef);
-    } else if (typeof ses !== "undefined") {  // SES (Secure EcmaScript)
-      if (!ses.ok()) {
-        return;
-      } else {
-        ses.make$1 = moduleDef;
-      }
-    } else if (typeof window !== "undefined" || typeof self !== "undefined") {  // <script>
-      (typeof window !== "undefined" && window || self).$1 = moduleDef();
-    } else {
-      var global = Function("return this")();
-      if (global.print) {  // SpiderMonkey or Rhino
-        global.$1 = moduleDef();
-      } else {
-        throw new Error("This environment was not anticipated by $1.js.");
-      }
-    }
-  })((function() {
-    'use strict';
+		if (typeof bootstrap === "function") {  // Montage Require
+			bootstrap("promise", moduleDef);
+		} else if (typeof exports === "object" && typeof module === "object") {  // NodeJS or CommonJS
+			module.exports = moduleDef();
+		} else if (typeof define === "function" && define.amd) {  // RequireJS
+			define(moduleDef);
+		} else if (typeof ses !== "undefined") {  // SES (Secure EcmaScript)
+			if (!ses.ok()) {
+				return;
+			} else {
+				ses.make$1 = moduleDef;
+			}
+		} else if (typeof window !== "undefined" || typeof self !== "undefined") {  // <script>
+			(typeof window !== "undefined" && window || self).$1 = moduleDef();
+		} else {
+			var global = Function("return this")();
+			if (global.print) {  // SpiderMonkey or Rhino
+				global.$1 = moduleDef();
+			} else {
+				throw new Error("This environment was not anticipated by $1.js.");
+			}
+		}
+	})((function() {
+		'use strict';
 
-    function ${1:#:ClassName}() {
-      ${0}
-    };
+		function ${1:#:ClassName}() {
+			${0}
+		};
 
-    return $1;
-  }));
+		return $1;
+	}));
 
 snippet class
-  class ${1:#:ClassName} {
-    constructor() {
-      ${0}
-    }
-  }  // class $1
+	class ${1:#:ClassName} {
+		constructor() {
+			${0}
+		}
+	}  // class $1
 
 delete prpto
 snippet prototype
 alias proto
-  ${1:#:ClassName}.prototype.${2:#:methodName} = function(${3:#:args...}) {
-    ${0}
-  };
+	${1:#:ClassName}.prototype.${2:#:methodName} = function(${3:#:args...}) {
+		${0}
+	};
 
 snippet log
-  console.log(${0});
+	console.log(${0});
 
 snippet getElementById()
 alias byid
-  document.getElementById(${0})
+	document.getElementById(${0})
 
 snippet getElementsByClass()
 alias byclass
-  document.getElementsByClass(${0})
+	document.getElementsByClass(${0})
 
 snippet addEventListener
-  ${1:#:dom}.addEventListener(${2:#:eventName}, (function(e) {
-    ${0}
-  }));
+	${1:#:dom}.addEventListener(${2:#:eventName}, (function(e) {
+		${0}
+	}));
 
 snippet default_arg
-  ${1:#:arg} = typeof $1 === 'undefined' ? 'hoge' : $1;
+	${1:#:arg} = typeof $1 === 'undefined' ? 'hoge' : $1;
 
 snippet setTimeout
-  var ${1:funcname} = setTimeout((function() {
-    ${0};
-    setTimeout($1, $2);
-  }, ${2:#:time}));
+	var ${1:funcname} = setTimeout((function() {
+		${0};
+		setTimeout($1, $2);
+	}, ${2:#:time}));
 
 snippet setInterval
-  setInterval((function() {
-    ${0}
-  }, ${1:#:time}));
+	setInterval((function() {
+		${0}
+	}, ${1:#:time}));

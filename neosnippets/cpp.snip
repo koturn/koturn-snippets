@@ -10,856 +10,856 @@ delete static_assert
 delete include_math
 
 snippet main
-  int
-  main(${1:int argc, const char* argv[]})
-  {
-    ${0};
-    return EXIT_SUCCESS;
-  }
+	int
+	main(${1:int argc, const char* argv[]})
+	{
+		${0};
+		return EXIT_SUCCESS;
+	}
 
 snippet cout
-  std::cout << ${0} << std::endl;
+	std::cout << ${0} << std::endl;
 
 snippet cout2
-  std::cout << ${0} << '\n';
+	std::cout << ${0} << '\n';
 
 snippet cout_all
-  if (!std::empty(${1})) {
-    std::copy(
-      std::cbegin($1),
-      std::prev(std::cend($1)),
-      std::ostream_iterator<const decltype($1)::value_type&>{${2:std\:\:cout}, ${3:" "}});
-    $2 << *std::crbegin($1) << "\n";
-  }
-  ${0}
+	if (!std::empty(${1})) {
+		std::copy(
+			std::cbegin($1),
+			std::prev(std::cend($1)),
+			std::ostream_iterator<const decltype($1)::value_type&>{${2:std\:\:cout}, ${3:" "}});
+		$2 << *std::crbegin($1) << "\n";
+	}
+	${0}
 
 snippet cout_all14
-  if (!${1}.empty()) {
-    std::copy(
-      std::cbegin($1),
-      std::prev(std::cend($1)),
-      std::ostream_iterator<const decltype($1)::value_type&>{${2:std\:\:cout}, ${3:" "}});
-    $2 << *std::crbegin($1) << "\n";
-  }
-  ${0}
+	if (!${1}.empty()) {
+		std::copy(
+			std::cbegin($1),
+			std::prev(std::cend($1)),
+			std::ostream_iterator<const decltype($1)::value_type&>{${2:std\:\:cout}, ${3:" "}});
+		$2 << *std::crbegin($1) << "\n";
+	}
+	${0}
 
 snippet put
-  std::cout.put(${0})
+	std::cout.put(${0})
 
 snippet cerr
-  std::cerr << ${0} << std::endl;
+	std::cerr << ${0} << std::endl;
 
 snippet clog
-  std::clog << ${0} << std::endl;
+	std::clog << ${0} << std::endl;
 
 snippet cin
-  std::cin >> ${0};
+	std::cin >> ${0};
 
 snippet cinn
-  std::cin >> `join(split(input('Variables> '), ' '), ' >> ')`;
-  ${0}
+	std::cin >> `join(split(input('Variables> '), ' '), ' >> ')`;
+	${0}
 
 snippet endl
-  std::cout << std::endl;
+	std::cout << std::endl;
 
 snippet flush
-  std::cout << std::flush;
+	std::cout << std::flush;
 snippet init_cppio
-  std::cin.tie(nullptr);
-  std::ios::sync_with_stdio(false);
-  ${0}
+	std::cin.tie(nullptr);
+	std::ios::sync_with_stdio(false);
+	${0}
 
 snippet precision
-  std::fixed << std::setprecision(${1}) << ${0}
+	std::fixed << std::setprecision(${1}) << ${0}
 
 snippet setfill
-  std::setw(${1:#:n}) << std::setfill(${2:'0'}) << ${0}
+	std::setw(${1:#:n}) << std::setfill(${2:'0'}) << ${0}
 
 snippet fstream
-  std::${1:fstream} ${2:fs}(${3:#:filename}${4:, std::ios::binary});
-  if (!$2.is_open()) {
-    ${5:std\:\:cerr << "Failed to open\: " << $3 << std\:\:endl;}
-  }
-  ${0}
+	std::${1:fstream} ${2:fs}(${3:#:filename}${4:, std::ios::binary});
+	if (!$2.is_open()) {
+		${5:std\:\:cerr << "Failed to open\: " << $3 << std\:\:endl;}
+	}
+	${0}
 
 snippet read_all
-  std::string ${1:text}{(std::istreambuf_iterator<char>{${2:#:stream}}), std::istreambuf_iterator<char>{}}
+	std::string ${1:text}{(std::istreambuf_iterator<char>{${2:#:stream}}), std::istreambuf_iterator<char>{}}
 
 snippet sleep
-  std::this_thread::sleep_for(std::chrono::${1:milliseconds}{${2:1000}});
+	std::this_thread::sleep_for(std::chrono::${1:milliseconds}{${2:1000}});
 
 snippet get_datetime
-  const auto ${2:start} = std::chrono::${1:high_resolution_clock}::now();
-  const auto ${3:tick} = std::chrono::$1::to_time_t($2);
-  const auto ${4:datetime} = std::localtime(&$3);
-  const auto ${5:d} = $2.time_since_epoch();
-  const auto ${6:ms} = (std::chrono::duration_cast<std::chrono::milliseconds>($5) - std::chrono::duration_cast<std::chrono::seconds>($5)).count();
-  // std::printf(
-  //   // "%04d/%02d/%02d %02d:%02d:%02d.%03lld\n"
-  //   "%04" PRId32 "/%02" PRId32 "/%02" PRId32 " %02" PRId32 ":%02" PRId32 ":%02" PRId32 ".%03" PRId64 ": %\n",  // <cinttypes>
-  //   datetime->tm_year + 1900,
-  //   datetime->tm_mon + 1,
-  //   datetime->tm_mday,
-  //   datetime->tm_hour,
-  //   datetime->tm_min,
-  //   datetime->tm_sec,
-  //   ms);
-  ${0}
+	const auto ${2:start} = std::chrono::${1:high_resolution_clock}::now();
+	const auto ${3:tick} = std::chrono::$1::to_time_t($2);
+	const auto ${4:datetime} = std::localtime(&$3);
+	const auto ${5:d} = $2.time_since_epoch();
+	const auto ${6:ms} = (std::chrono::duration_cast<std::chrono::milliseconds>($5) - std::chrono::duration_cast<std::chrono::seconds>($5)).count();
+	// std::printf(
+	//   // "%04d/%02d/%02d %02d:%02d:%02d.%03lld\n"
+	//   "%04" PRId32 "/%02" PRId32 "/%02" PRId32 " %02" PRId32 ":%02" PRId32 ":%02" PRId32 ".%03" PRId64 ": %\n",  // <cinttypes>
+	//   datetime->tm_year + 1900,
+	//   datetime->tm_mon + 1,
+	//   datetime->tm_mday,
+	//   datetime->tm_hour,
+	//   datetime->tm_min,
+	//   datetime->tm_sec,
+	//   ms);
+	${0}
 
 
 snippet toppop
-  ${1:#:Type} ${2:#:e} = ${3:#:queue}.top(); $3.pop();
+	${1:#:Type} ${2:#:e} = ${3:#:queue}.top(); $3.pop();
 
 snippet itrrange
-  std::begin(${1}), std::end($1)
+	std::begin(${1}), std::end($1)
 
 snippet static_assert
-  static_assert(${1:#:condition}, "${2:#:message}");
+	static_assert(${1:#:condition}, "${2:#:message}");
 
 snippet static_assert_false
-  static_assert([]{ return false; }(), "${2:#:message}");
+	static_assert([]{ return false; }(), "${2:#:message}");
 
 delete namespace
 snippet namespace
-  namespace ${1}
-  {
+	namespace ${1}
+	{
 
-  ${0}
+	${0}
 
-  }  // namespace $1
+	}  // namespace $1
 
 snippet class
-  class ${1:#:ClassName}
-  {
-    $1() noexcept${0}
-  };  // class $1
+	class ${1:#:ClassName}
+	{
+		$1() noexcept${0}
+	};  // class $1
 
 snippet crtp_base
-  template<typename ${1:T}>
-  class ${2:#:ClassName}
-  {
-    ${0}
-  };  // class $2
+	template<typename ${1:T}>
+	class ${2:#:ClassName}
+	{
+		${0}
+	};  // class $2
 
 snippet crtp_derived
-  class ${1:#:DerivedClassName}
-    : public ${2:#:BaseClassName}<$1>
-  {
-    friend class $2<$1>;
+	class ${1:#:DerivedClassName}
+		: public ${2:#:BaseClassName}<$1>
+	{
+		friend class $2<$1>;
 
-    ${0}
-  };  // class $1
+		${0}
+	};  // class $1
 
 snippet constructor
 alias ctor
-  ${1:#:ClassName}() noexcept ${0}
+	${1:#:ClassName}() noexcept ${0}
 
 snippet copy_constructor
 alias copy_ctor
-  ${1:#:ClassName}(const $1& ${2:that}) ${0}
+	${1:#:ClassName}(const $1& ${2:that}) ${0}
 
 snippet move_constructor
 alias move_ctor
-  ${1:#:ClassName}($1&& ${2:that}) noexcept ${0}
+	${1:#:ClassName}($1&& ${2:that}) noexcept ${0}
 
 snippet destructor
 alias dtor
-  ~${1:#:ClassName}() ${0}
+	~${1:#:ClassName}() ${0}
 
 snippet op_assign
-  ${1:#:ClassName}& operator=(const $1&) ${0};
+	${1:#:ClassName}& operator=(const $1&) ${0};
 
 snippet op_move_assign
-  ${1:#:ClassName}& operator=($1&&) noexcept ${0};
+	${1:#:ClassName}& operator=($1&&) noexcept ${0};
 
 snippet op_ostream
-  template<typename CharT, typename Traits>
-  friend std::basic_ostream<CharT, Traits>&
-  operator<<(std::basic_ostream<CharT, Traits>& ${1:os}, const ${2:#:ClassName}& ${3:this_})
-  {
-    return $1;
-  }
+	template<typename CharT, typename Traits>
+	friend std::basic_ostream<CharT, Traits>&
+	operator<<(std::basic_ostream<CharT, Traits>& ${1:os}, const ${2:#:ClassName}& ${3:this_})
+	{
+		return $1;
+	}
 
 snippet op_istream
-  template<typename CharT, typename Traits>
-  friend std::basic_istream<CharT, Traits>&
-  operator>>(std::basic_istream<CharT, Traits>& ${1:is}, ${2:#:ClassName}& ${3:this_})
-  {
-    return $1;
-  }
+	template<typename CharT, typename Traits>
+	friend std::basic_istream<CharT, Traits>&
+	operator>>(std::basic_istream<CharT, Traits>& ${1:is}, ${2:#:ClassName}& ${3:this_})
+	{
+		return $1;
+	}
 
 snippet numeric_limits
-  std::numeric_limits<${1:int}>::${2}()${0}
+	std::numeric_limits<${1:int}>::${2}()${0}
 
 snippet unique_ptr
 abbr std::unique_ptr<T> <memory>
-  std::unique_ptr<${1}> ${2}(new $1 ${0})
+	std::unique_ptr<${1}> ${2}(new $1 ${0})
 
 snippet shared_ptr
 abbr std::shared_ptr<T> <memory>
-  std::shared_ptr<${1}> ${2}(new $1 ${0})
+	std::shared_ptr<${1}> ${2}(new $1 ${0})
 
 snippet make_unique
 abbr std::make_unique<T>(...) <memory>
-  std::make_unique<${1}>(${0})
+	std::make_unique<${1}>(${0})
 
 snippet make_shared
 abbr std::make_shared<T>(...) <memory>
-  std::make_shared<${1}>(${0})
+	std::make_shared<${1}>(${0})
 
 snippet foreach_iterator
-  for (std::${1:vector}<${2}>::iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
-    ${0}
-  }
+	for (std::${1:vector}<${2}>::iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
+		${0}
+	}
 
 snippet string
 abbr std::string <string>
-  std::string ${0}
+	std::string ${0}
 
 snippet complex
 abbr std::complex<T> <complex>
-  std::complex<${1:double}> ${0}
+	std::complex<${1:double}> ${0}
 
 snippet array
 abbr std::array<T, N> <array>
-  std::array<${1:int}, ${2:#:N}> ${0}
+	std::array<${1:int}, ${2:#:N}> ${0}
 
 snippet vector
 abbr std::vector<T> <vector>
-  std::vector<${1:int}> ${0}
+	std::vector<${1:int}> ${0}
 
 snippet valarray
 abbr std::valarray<T> <valarray>
-  std::valarray<${1:int}> ${0}
+	std::valarray<${1:int}> ${0}
 
 snippet bitset
 abbr std::bitset<N> <bitset>
-  std::bitset<${1:8}> ${0}
+	std::bitset<${1:8}> ${0}
 
 snippet list
 abbr std::list<T> <list>
-  std::list<${1:int}> ${0}
+	std::list<${1:int}> ${0}
 
 snippet forward_list
 abbr std::forward_list<T> <forward_list>
-  std::forward_list<${1:int}> ${0}
+	std::forward_list<${1:int}> ${0}
 
 snippet deque
 abbr std::deque<T> <deque>
-  std::deque<${1:int}> ${0}
+	std::deque<${1:int}> ${0}
 
 snippet stack
 abbr std::stack<T> <stack>
-  std::stack<${1:int}> ${0}
+	std::stack<${1:int}> ${0}
 
 snippet queue
 abbr std::queue<T> <queue>
-  std::queue<${1:int}> ${0}
+	std::queue<${1:int}> ${0}
 
 snippet priority_queue
 abbr std::priority_queue<T> <queue>
-  std::priority_queue<${1:int}> ${0}
+	std::priority_queue<${1:int}> ${0}
 
 snippet priority_queue2
 abbr std::priority_queue<T> <queue>
-  auto ${1:f} = [](const $5& ${2:x}, const $5& ${3:y}){
-    return ${4:$2 > $3};
-  };
-  std::priority_queue<${5:int}, std::vector<$5>, decltype($1)> ${0}($1);
+	auto ${1:f} = [](const $5& ${2:x}, const $5& ${3:y}){
+		return ${4:$2 > $3};
+	};
+	std::priority_queue<${5:int}, std::vector<$5>, decltype($1)> ${0}($1);
 
 snippet map
 abbr std::map<K, V> <map>
-  std::map<${1:int}, ${2:int}> ${0}
+	std::map<${1:int}, ${2:int}> ${0}
 
 snippet unordered_map
 abbr std::unordered_map<K, V> <unordered_map>
-  std::unordered_map<${1:int}, ${2:int}> ${0}
+	std::unordered_map<${1:int}, ${2:int}> ${0}
 
 snippet multimap
 abbr std::multimap<K, V> <map>
-  std::multimap<${1:int}, ${2:int}> ${0}
+	std::multimap<${1:int}, ${2:int}> ${0}
 
 snippet unordered_multimap
 abbr std::unordered_multimap<K, V> <unordered_map>
-  std::unordered_multimap<${1:int}, ${2:int}> ${0}
+	std::unordered_multimap<${1:int}, ${2:int}> ${0}
 
 snippet set
 abbr std::set<T> <set>
-  std::set<${1:int}> ${0}
+	std::set<${1:int}> ${0}
 
 snippet unordered_set
 abbr std::unordered_set<T> <unordered_set>
-  std::unordered_set<${1:int}> ${0}
+	std::unordered_set<${1:int}> ${0}
 
 snippet multiset
 abbr std::multiset<T> <set>
-  std::multiset<${1:int}> ${0}
+	std::multiset<${1:int}> ${0}
 
 snippet unordered_multiset
 abbr std::unordered_multiset<T> <unordered_set>
-  std::unordered_multiset<${1:int}> ${0}
+	std::unordered_multiset<${1:int}> ${0}
 
 snippet pair
 abbr std::pair<T1, T2> <utility>
-  std::pair<${1:int}, ${2:int}> ${0}
+	std::pair<${1:int}, ${2:int}> ${0}
 
 snippet initializer_list
 abbr std::initializer_list<T> <initializer_list>
-  std::initializer_list<${1:int}> ${0}
+	std::initializer_list<${1:int}> ${0}
 
 snippet array2d
 abbr std::array<std::array<T, W>, H> <array>
-  std::array<std::array<${1:int}, ${3:#:W}>, ${2:#:H}> ${0}
+	std::array<std::array<${1:int}, ${3:#:W}>, ${2:#:H}> ${0}
 
 snippet vector2d
 abbr std::vector<std::vector<T> > <vector>
-  std::vector<std::vector<${1:int}> > ${2:#:varname}(${3:#:height}, std::vector<$1>(${4:#:width}))
+	std::vector<std::vector<${1:int}> > ${2:#:varname}(${3:#:height}, std::vector<$1>(${4:#:width}))
 
 snippet valarray2d
 abbr std::vector<std::valarray<T> > <valarray>
-  std::vector<std::valarray<${1:int}> > ${2:#:varname}(${3:#:height}, std::valarray<$1>(${4:#:width}))
+	std::vector<std::valarray<${1:int}> > ${2:#:varname}(${3:#:height}, std::valarray<$1>(${4:#:width}))
 
 snippet random
-  std::${1:mt19937} ${2:rnd}{std::random_device{}()}
+	std::${1:mt19937} ${2:rnd}{std::random_device{}()}
 
 snippet forward
-  std::forward<${2:decltype($1)}>(${1})
+	std::forward<${2:decltype($1)}>(${1})
 
 snippet thread
-  std::thread ${1:#:name}{[${2:&}]{
-    ${0}
-  }};
+	std::thread ${1:#:name}{[${2:&}]{
+		${0}
+	}};
 
 snippet async
-  auto ${1:#:name} = std::async(std::launch::${2:async}, [${3:&}]{
-    ${0}
-  });
+	auto ${1:#:name} = std::async(std::launch::${2:async}, [${3:&}]{
+		${0}
+	});
 
 snippet join
-  std::ostringstream ${1:oss};
-  if (!std::empty(${2})) {
-    std::copy(std::cbegin($2), std::prev(std::cend($2)), std::ostream_iterator<const decltype($2)::value_type&>($1, ${3:","}));
-    $1 << *std::crbegin($2);
-  }
-  ${0}
+	std::ostringstream ${1:oss};
+	if (!std::empty(${2})) {
+		std::copy(std::cbegin($2), std::prev(std::cend($2)), std::ostream_iterator<const decltype($2)::value_type&>($1, ${3:","}));
+		$1 << *std::crbegin($2);
+	}
+	${0}
 
 snippet join14
-  std::ostringstream ${1:oss};
-  if (!${2}.empty()) {
-    std::copy(std::cbegin($2), std::prev(std::cend($2)), std::ostream_iterator<const decltype($2)::value_type&>($1, ${3:","}));
-    $1 << *std::crbegin($2);
-  }
-  ${0}
+	std::ostringstream ${1:oss};
+	if (!${2}.empty()) {
+		std::copy(std::cbegin($2), std::prev(std::cend($2)), std::ostream_iterator<const decltype($2)::value_type&>($1, ${3:","}));
+		$1 << *std::crbegin($2);
+	}
+	${0}
 
 snippet join_to_string
-  std::empty(${1}) ? "" : std::accumulate(
-    std::next(std::cbegin($1)),
-    std::cend($1),
-    std::to_string($1[0]),
-    [](const std::string& ${2:acc}, const decltype($1)::value_type& ${3:e}) {
-      return $2 + std::string{${4:","}} + std::to_string($3);
-    })${0}
+	std::empty(${1}) ? "" : std::accumulate(
+		std::next(std::cbegin($1)),
+		std::cend($1),
+		std::to_string($1[0]),
+		[](const std::string& ${2:acc}, const decltype($1)::value_type& ${3:e}) {
+			return $2 + std::string{${4:","}} + std::to_string($3);
+		})${0}
 
 snippet join_to_string14
-  ${1}.empty() ? "" : std::accumulate(
-    std::next(std::cbegin($1)),
-    std::cend($1),
-    std::to_string($1[0]),
-    [](const std::string& ${2:acc}, const decltype($1)::value_type& ${3:e}) {
-      return $2 + std::string{${4:","}} + std::to_string($3);
-    })${0}
+	${1}.empty() ? "" : std::accumulate(
+		std::next(std::cbegin($1)),
+		std::cend($1),
+		std::to_string($1[0]),
+		[](const std::string& ${2:acc}, const decltype($1)::value_type& ${3:e}) {
+			return $2 + std::string{${4:","}} + std::to_string($3);
+		})${0}
 
 snippet split
-  std::vector<std::string> ${1:tokens};
-  std::string::size_type ${2:spos} = 0, ${3:epos}, ${4:delimlen} = sizeof(${5:","}) - 1;
-  while (($3 = ${6:#:string}.find_first_of(",", $2)) != std::string::npos) {
-    $1.emplace_back($6.substr($2, $3 - $2));
-    $2 = $3 + $4;
-  }
-  $1.emplace_back($6.substr($2));
-  ${0}
+	std::vector<std::string> ${1:tokens};
+	std::string::size_type ${2:spos} = 0, ${3:epos}, ${4:delimlen} = sizeof(${5:","}) - 1;
+	while (($3 = ${6:#:string}.find_first_of(",", $2)) != std::string::npos) {
+		$1.emplace_back($6.substr($2, $3 - $2));
+		$2 = $3 + $4;
+	}
+	$1.emplace_back($6.substr($2));
+	${0}
 
 snippet split_by_char
-  std::vector<std::string> ${1:tokens};
-  std::istringstream ${2:iss}{${3:#:string}};
-  for (std::string ${4:token}; std::getline($2, $4, ${5:','});) {
-    $1.push_back($4);
-  }
-  ${0}
+	std::vector<std::string> ${1:tokens};
+	std::istringstream ${2:iss}{${3:#:string}};
+	for (std::string ${4:token}; std::getline($2, $4, ${5:','});) {
+		$1.push_back($4);
+	}
+	${0}
 
 snippet regex
-  std::regex ${1:#:name}{"${2:#:pattern}"};
+	std::regex ${1:#:name}{"${2:#:pattern}"};
 
 snippet regex_match_loop
-  for (std::sregex_token_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}}, ${4:end}; $1 != $4; ++$1) {
-    ${0}
-  }
+	for (std::sregex_token_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}}, ${4:end}; $1 != $4; ++$1) {
+		${0}
+	}
 
 snippet regex_split_loop
-  for (std::sregex_token_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1}, ${4:end}; $1 != $4; ++$1) {
-    ${0}
-  }
+	for (std::sregex_token_iterator ${1:itr}{std::cbegin(${2:#:text}), std::cend($2), ${3:#:regex}, -1}, ${4:end}; $1 != $4; ++$1) {
+		${0}
+	}
 
 snippet regex_match_container
-  std::${1:vector}<std::string> ${2:#:name}{std::regex_token_iterator{std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}}, std::regex_token_iterator{}};
+	std::${1:vector}<std::string> ${2:#:name}{std::regex_token_iterator{std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}}, std::regex_token_iterator{}};
 
 snippet regex_split_container
-  std::${1:vector}<std::string> ${2:#:name}{std::regex_token_iterator{std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}, -1}, std::regex_token_iterator{}};
+	std::${1:vector}<std::string> ${2:#:name}{std::regex_token_iterator{std::cbegin(${3:#:text}), std::cend($3), ${4:#:regex}, -1}, std::regex_token_iterator{}};
 
 snippet regex_split_back_inserter
-  std::copy(
-    std::sregex_token_iterator{std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}},
-    std::sregex_token_iterator{},
-    std::back_inserter(${3}));
+	std::copy(
+		std::sregex_token_iterator{std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}},
+		std::sregex_token_iterator{},
+		std::back_inserter(${3}));
 
 snippet regex_match_back_inserter
-  std::copy(
-    std::sregex_token_iterator{std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}, -1},
-    std::sregex_token_iterator{},
-    std::back_inserter(${3}));
+	std::copy(
+		std::sregex_token_iterator{std::cbegin(${1:#:text}), std::cend($1), ${2:#:regex}, -1},
+		std::sregex_token_iterator{},
+		std::back_inserter(${3}));
 
 snippet regex_replace
-  std::regex_replace(${1:#:text}, std::regex("${2:#:pattern}"), "${3:#:after}");
+	std::regex_replace(${1:#:text}, std::regex("${2:#:pattern}"), "${3:#:after}");
 
 snippet fn
-  ${1:#:rettype}
-  ${2:#:fucname}()${3: noexcept}
-  {
-    ${0}
-  }
+	${1:#:rettype}
+	${2:#:fucname}()${3: noexcept}
+	{
+		${0}
+	}
 
 snippet fn_auto
-  auto
-  ${2:#:fucname}()${3: noexcept} -> ${1:#:rettype}
-  {
-    ${0}
-  }
+	auto
+	${2:#:fucname}()${3: noexcept} -> ${1:#:rettype}
+	{
+		${0}
+	}
 
 snippet for_stl
-  for (decltype(${1:#:container})::size_type ${2:i} = ${3:0}; $2 < ${4:$1.size()}; $2++) {
-    ${0}
-  }
+	for (decltype(${1:#:container})::size_type ${2:i} = ${3:0}; $2 < ${4:$1.size()}; $2++) {
+		${0}
+	}
 
 snippet foreach_const_iterator
-  for (std::${1:vector}<${2}>::const_iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
-    ${0}
-  }
+	for (std::${1:vector}<${2}>::const_iterator ${3:itr} = ${4}.begin(); $3 != $4.end(); ++$3) {
+		${0}
+	}
 
 snippet foreach_typeof
 abbr foreach_typeof (GNU only)
-  for (typeof(${1}.begin()) ${2:itr} = $1.begin(); $2 != $1.end(); ++$2) {
-    ${0}
-  }
+	for (typeof(${1}.begin()) ${2:itr} = $1.begin(); $2 != $1.end(); ++$2) {
+		${0}
+	}
 
 snippet forref
 alias rbf
-  for (auto&& ${1:e} : ${2:#:container}) {
-    ${0}
-  }
+	for (auto&& ${1:e} : ${2:#:container}) {
+		${0}
+	}
 
 snippet forref_c
 alias rbfc
-  for (const auto& ${1:e} : ${2:#:container}) {
-    ${0}
-  }
+	for (const auto& ${1:e} : ${2:#:container}) {
+		${0}
+	}
 
 snippet try
-  try {
-    ${0}
-  } catch (${1:const std::exception&} ${2:e}) {
-    ${3:std::cerr << $2.what() << std::endl;}
-  }
+	try {
+		${0}
+	} catch (${1:const std::exception&} ${2:e}) {
+		${3:std::cerr << $2.what() << std::endl;}
+	}
 
 snippet struct_function_object
 abbr Functional object
-  struct ${1}
-  {
-    ${2}
-    operator()(${3}) const
-    {
-      ${0}
-    }
-  };
+	struct ${1}
+	{
+		${2}
+		operator()(${3}) const
+		{
+			${0}
+		}
+	};
 
 snippet class_functional_object
 abbr Functional object
-  class ${1}
-  {
-  public:
-    ${2} operator()(${3}) const
-    {
-      ${0}
-    }
-  };
+	class ${1}
+	{
+	public:
+		${2} operator()(${3}) const
+		{
+			${0}
+		}
+	};
 
 snippet time_measurement
-  const auto ${1:start} = std::chrono::${2:high_resolution_clock}::now();
-  ${0};
-  const auto ${3:elapsed} = std::chrono::duration_cast<std::chrono::${4:milliseconds}>(std::chrono::$2::now() - $1).count();
+	const auto ${1:start} = std::chrono::${2:high_resolution_clock}::now();
+	${0};
+	const auto ${3:elapsed} = std::chrono::duration_cast<std::chrono::${4:milliseconds}>(std::chrono::$2::now() - $1).count();
 
 snippet duration_cast
 abbr std::chrono::duration_cast<T>() <chrono>
-  std::chrono::duration_cast<std::chrono::${1:milliseconds}>(${2})
+	std::chrono::duration_cast<std::chrono::${1:milliseconds}>(${2})
 
 snippet lock_guard
-  {
-    std::lock_guard<decltype($2)> ${1:lock}{${2:#:mutex}};
-    ${0}
-  }
+	{
+		std::lock_guard<decltype($2)> ${1:lock}{${2:#:mutex}};
+		${0}
+	}
 
 snippet lock_guard_adopt
-  {
-    std::lock_guard<decltype($2)> ${1:lock}{${2:#:mutex}, std::adopt_lock};
-    ${0}
-  }
+	{
+		std::lock_guard<decltype($2)> ${1:lock}{${2:#:mutex}, std::adopt_lock};
+		${0}
+	}
 
 snippet impl_meta
-  struct ${1:name}_impl
-  {
-    template<typename T>
-    static auto
-    check(${2}) -> decltype(${3}, std::true_type{});
+	struct ${1:name}_impl
+	{
+		template<typename T>
+		static auto
+		check(${2}) -> decltype(${3}, std::true_type{});
 
-    template<typename T>
-    static auto
-    check(...) -> std::false_type;
-  };  // struct $1_impl
+		template<typename T>
+		static auto
+		check(...) -> std::false_type;
+	};  // struct $1_impl
 
-  template<typename T>
-  class $1 :
-    public decltype($1_impl::check(std::declval<T>())){};
+	template<typename T>
+	class $1 :
+		public decltype($1_impl::check(std::declval<T>())){};
 
 snippet impl_type_metafunc_alias
-  #if __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
-  template<typename T>
-  using ${1:name}_t = typename $1<T>::type;
-  #endif  // __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
+	#if __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
+	template<typename T>
+	using ${1:name}_t = typename $1<T>::type;
+	#endif  // __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
 
 snippet impl_bool_metafunc_alias
-  #if __cplusplus >= 201703L \
-    || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
-    || defined(__cpp_inline_variables)
-  template<typename T>
-  inline constexpr bool ${1:name}_v = $1<T>::value;
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_inline_variables)
+	#if __cplusplus >= 201703L \
+		|| defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
+		|| defined(__cpp_inline_variables)
+	template<typename T>
+	inline constexpr bool ${1:name}_v = $1<T>::value;
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_inline_variables)
 
 snippet impl_always_false
-  template<typename... T>
-  struct always_false
-    : std::false_type
-  {};
+	template<typename... T>
+	struct always_false
+		: std::false_type
+	{};
 
-  #if __cplusplus >= 201703L \
-    || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
-    || defined(__cpp_inline_variables)
-  template<typename... T>
-  inline constexpr bool always_false_v = always_false<T...>::value;
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_inline_variables)
+	#if __cplusplus >= 201703L \
+		|| defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
+		|| defined(__cpp_inline_variables)
+	template<typename... T>
+	inline constexpr bool always_false_v = always_false<T...>::value;
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_inline_variables)
 
-  ${0}
+	${0}
 
 snippet impl_ScopedStopWatch
-  template<
-    typename Duration = std::chrono::milliseconds,
-    typename Clock = std::chrono::high_resolution_clock,
-    typename F = std::function<std::int64_t(Duration, Clock)>
-  >
-  class ${1:ScopedStopWatch} : F
-  {
-  public:
-    explicit $1(F&& f) noexcept
-      : F(std::forward<F>(f))
-      , m_start(Clock::now())
-    {}
+	template<
+		typename Duration = std::chrono::milliseconds,
+		typename Clock = std::chrono::high_resolution_clock,
+		typename F = std::function<std::int64_t(Duration, Clock)>
+	>
+	class ${1:ScopedStopWatch} : F
+	{
+	public:
+		explicit $1(F&& f) noexcept
+			: F(std::forward<F>(f))
+			, m_start(Clock::now())
+		{}
 
-    ~$1()
-    {
-      F::operator()(std::chrono::duration_cast<Duration>(Clock::now() - m_start).count());
-    }
+		~$1()
+		{
+			F::operator()(std::chrono::duration_cast<Duration>(Clock::now() - m_start).count());
+		}
 
-  private:
-    const typename Clock::time_point m_start;
-  };  // class $1
+	private:
+		const typename Clock::time_point m_start;
+	};  // class $1
 
-  namespace
-  {
-  template<
-    typename Duration = std::chrono::milliseconds,
-    typename Clock = std::chrono::high_resolution_clock,
-    typename F = std::function<std::int64_t(Duration, Clock)>
-  >
-  inline decltype(auto)
-  make$1(F&& f) noexcept
-  {
-    return $1<Duration, Clock, F>{std::forward<F>(f)};
-  }
-  }  // namespace
+	namespace
+	{
+	template<
+		typename Duration = std::chrono::milliseconds,
+		typename Clock = std::chrono::high_resolution_clock,
+		typename F = std::function<std::int64_t(Duration, Clock)>
+	>
+	inline decltype(auto)
+	make$1(F&& f) noexcept
+	{
+		return $1<Duration, Clock, F>{std::forward<F>(f)};
+	}
+	}  // namespace
 
-  ${0}
+	${0}
 
 
 snippet impl_finally
-  template<typename F>
-  class
-  #if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
-  [[nodiscard]]
-  #endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
-  ${1:Finally} final
-  {
-  private:
-  #if defined(__cplusplus) && __cplusplus >= 201703L \
-    || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
-    || defined(__cpp_lib_is_invocable)
-    static_assert(std::is_invocable_v<F>, "[$1] Finally function must be callable with no arguments.");
-  #else
-    struct is_invocable_impl
-    {
-      template<typename T, typename... Args>
-      static auto
-      check(T&& obj, Args&&... args) -> decltype(obj(std::forward<Args>(args)...), std::true_type{});
+	template<typename F>
+	class
+	#if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+	[[nodiscard]]
+	#endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+	${1:Finally} final
+	{
+	private:
+	#if defined(__cplusplus) && __cplusplus >= 201703L \
+		|| defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
+		|| defined(__cpp_lib_is_invocable)
+		static_assert(std::is_invocable_v<F>, "[$1] Finally function must be callable with no arguments.");
+	#else
+		struct is_invocable_impl
+		{
+			template<typename T, typename... Args>
+			static auto
+			check(T&& obj, Args&&... args) -> decltype(obj(std::forward<Args>(args)...), std::true_type{});
 
-      template<typename...>
-      static auto
-      check(...) -> std::false_type;
-    };  // struct is_invocable_impl
+			template<typename...>
+			static auto
+			check(...) -> std::false_type;
+		};  // struct is_invocable_impl
 
-    template<typename T, typename... Args>
-    class is_invocable
-      : public decltype(is_invocable_impl::check(std::declval<T>(), std::declval<Args>()...))
-    {};
+		template<typename T, typename... Args>
+		class is_invocable
+			: public decltype(is_invocable_impl::check(std::declval<T>(), std::declval<Args>()...))
+		{};
 
-    static_assert(is_invocable<F>::value, "[$1] Finally function must be callable with no arguments.");
-  #endif
+		static_assert(is_invocable<F>::value, "[$1] Finally function must be callable with no arguments.");
+	#endif
 
-  public:
-    explicit $1(F&& f)
-  #if defined(__cplusplus) && __cplusplus >= 201103L \
-    || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L \
-    || defined(_MSC_VER) && (_MSC_VER > 1800 || (_MSC_VER == 1800 && _MSC_FULL_VER == 180021114))
-      noexcept
-  #else
-      throw()
-  #endif
-      : f_{std::forward<F>(f)}
-    {}
+	public:
+		explicit $1(F&& f)
+	#if defined(__cplusplus) && __cplusplus >= 201103L \
+		|| defined(_MSVC_LANG) && _MSVC_LANG >= 201103L \
+		|| defined(_MSC_VER) && (_MSC_VER > 1800 || (_MSC_VER == 1800 && _MSC_FULL_VER == 180021114))
+			noexcept
+	#else
+			throw()
+	#endif
+			: f_{std::forward<F>(f)}
+		{}
 
-    ~$1()
-    {
-      f_();
-    }
+		~$1()
+		{
+			f_();
+		}
 
-    $1(const $1&) = delete;
-    $1& operator=(const $1&) = delete;
+		$1(const $1&) = delete;
+		$1& operator=(const $1&) = delete;
 
-  #if defined(_MSC_VER) && _MSC_VER == 1800
-    $1($1&& other) throw()
-      : f_{std::move(other.f_)}
-    {}
+	#if defined(_MSC_VER) && _MSC_VER == 1800
+		$1($1&& other) throw()
+			: f_{std::move(other.f_)}
+		{}
 
-    $1&
-    operator=($1&& rhs) throw()
-    {
-      f_ = std::move(rhs.f_);
-      return *this;
-    }
-  #else
-    $1($1&&) = default;
-    $1& operator=($1&&) = default;
-  #endif  // defined(_MSC_VER) && _MSC_VER == 1800
+		$1&
+		operator=($1&& rhs) throw()
+		{
+			f_ = std::move(rhs.f_);
+			return *this;
+		}
+	#else
+		$1($1&&) = default;
+		$1& operator=($1&&) = default;
+	#endif  // defined(_MSC_VER) && _MSC_VER == 1800
 
-  template<typename... Args>
-  static void*
-  operator new(std::size_t, Args&&...) = delete;
+	template<typename... Args>
+	static void*
+	operator new(std::size_t, Args&&...) = delete;
 
-  template<typename... Args>
-  static void
-  operator delete(void*, Args&&...) = delete;
+	template<typename... Args>
+	static void
+	operator delete(void*, Args&&...) = delete;
 
-  private:
-    const F f_;
-  };  // class $1
+	private:
+		const F f_;
+	};  // class $1
 
-  namespace
-  {
-  template<typename F>
-  #if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
-  #  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
-  __attribute__((warn_unused_result))
-  #  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
-  _Check_return_
-  #  endif
-  #endif
-  inline $1<F>
-  make$1(F&& f)
-  #if defined(__cplusplus) && __cplusplus >= 201103 \
-    || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L \
-    || defined(_MSC_VER) && (_MSC_VER > 1800 || (_MSC_VER == 1800 && _MSC_FULL_VER == 180021114))
-    noexcept
-  #else
-    throw()
-  #endif
-  {
-    return $1<F>{std::forward<F>(f)};
-  }
-  }  // namespace
+	namespace
+	{
+	template<typename F>
+	#if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
+	#  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+	__attribute__((warn_unused_result))
+	#  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
+	_Check_return_
+	#  endif
+	#endif
+	inline $1<F>
+	make$1(F&& f)
+	#if defined(__cplusplus) && __cplusplus >= 201103 \
+		|| defined(_MSVC_LANG) && _MSVC_LANG >= 201103L \
+		|| defined(_MSC_VER) && (_MSC_VER > 1800 || (_MSC_VER == 1800 && _MSC_FULL_VER == 180021114))
+		noexcept
+	#else
+		throw()
+	#endif
+	{
+		return $1<F>{std::forward<F>(f)};
+	}
+	}  // namespace
 
-  ${0}
+	${0}
 
 
 snippet impl_fixpoint
-  template<typename F>
-  class
-  #if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
-  [[nodiscard]]
-  #endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
-  ${1:FixPoint} final : private F
-  {
-  public:
-    explicit constexpr $1(F&& f) noexcept
-      : F{std::forward<F>(f)}
-    {}
+	template<typename F>
+	class
+	#if defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+	[[nodiscard]]
+	#endif  // defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+	${1:FixPoint} final : private F
+	{
+	public:
+		explicit constexpr $1(F&& f) noexcept
+			: F{std::forward<F>(f)}
+		{}
 
-    template<typename... Args>
-    constexpr decltype(auto)
-    operator()(Args&&... args) const
-  #if !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
-      noexcept(noexcept(F::operator()(std::declval<FixPoint>(), std::declval<Args>()...)))
-  #endif  // !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
-    {
-      return F::operator()(*this, std::forward<Args>(args)...);
-    }
-  };  // class $1
+		template<typename... Args>
+		constexpr decltype(auto)
+		operator()(Args&&... args) const
+	#if !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
+			noexcept(noexcept(F::operator()(std::declval<FixPoint>(), std::declval<Args>()...)))
+	#endif  // !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
+		{
+			return F::operator()(*this, std::forward<Args>(args)...);
+		}
+	};  // class $1
 
-  namespace
-  {
-  template<typename F>
-  #if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
-  #  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
-  __attribute__((warn_unused_result))
-  #  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
-  _Check_return_
-  #  endif
-  #endif
-  inline constexpr decltype(auto)
-  fix(F&& f) noexcept
-  {
-    return $1<F>{std::forward<F>(f)};
-  }
-  }  // namespace
+	namespace
+	{
+	template<typename F>
+	#if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
+	#  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+	__attribute__((warn_unused_result))
+	#  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
+	_Check_return_
+	#  endif
+	#endif
+	inline constexpr decltype(auto)
+	fix(F&& f) noexcept
+	{
+		return $1<F>{std::forward<F>(f)};
+	}
+	}  // namespace
 
-  ${0}
+	${0}
 
 
 snippet impl_fixpoint_many
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
-  template<typename... Fs>
-  #else
-  template<typename F>
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
-  class
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
-    || defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
-  [[nodiscard]]
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
-  ${1:FixPoint} final : private Fs...
-  #else
-  $1 final : private F
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
-  {
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
-    using Fs::operator()...;
-  #else
-    using F::operator();
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+	#if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+	template<typename... Fs>
+	#else
+	template<typename F>
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+	class
+	#if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L \
+		|| defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+	[[nodiscard]]
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__has_cpp_attribute) && __has_cpp_attribute(nodiscard)
+	#if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+	${1:FixPoint} final : private Fs...
+	#else
+	$1 final : private F
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+	{
+	#if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+		using Fs::operator()...;
+	#else
+		using F::operator();
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
 
-  public:
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
-    explicit constexpr $1(Fs&&... fs) noexcept
-      : Fs{std::forward<Fs>(fs)}...
-    {}
-  #else
-    explicit constexpr $1(F&& f) noexcept
-      : F{std::forward<F>(f)}
-    {}
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+	public:
+	#if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
+		explicit constexpr $1(Fs&&... fs) noexcept
+			: Fs{std::forward<Fs>(fs)}...
+		{}
+	#else
+		explicit constexpr $1(F&& f) noexcept
+			: F{std::forward<F>(f)}
+		{}
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L || defined(__cpp_variadic_using)
 
-    template<typename... Args>
-    constexpr decltype(auto)
-    operator()(Args&&... args) const
-  #if !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
-      noexcept(noexcept(operator()(std::declval<FixPoint>(), std::declval<Args>()...)))
-  #endif  // !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
-    {
-      return operator()(*this, std::forward<Args>(args)...);
-    }
-  };  // class $1
+		template<typename... Args>
+		constexpr decltype(auto)
+		operator()(Args&&... args) const
+	#if !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
+			noexcept(noexcept(operator()(std::declval<FixPoint>(), std::declval<Args>()...)))
+	#endif  // !defined(__GNUC__) || defined(__clang__) || __GNUC__ >= 9
+		{
+			return operator()(*this, std::forward<Args>(args)...);
+		}
+	};  // class $1
 
-  namespace
-  {
-  template<typename... Fs>
-  #if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
-  #  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
-  __attribute__((warn_unused_result))
-  #  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
-  _Check_return_
-  #  endif
-  #endif
-  inline constexpr decltype(auto)
-  fix(Fs&&... fs) noexcept
-  {
-    return $1<Fs...>{std::forward<Fs>(fs)...};
-  }
-  }  // namespace
+	namespace
+	{
+	template<typename... Fs>
+	#if !defined(__has_cpp_attribute) || !__has_cpp_attribute(nodiscard)
+	#  if defined(__GNUC__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ >= 4)
+	__attribute__((warn_unused_result))
+	#  elif defined(_MSC_VER) && _MSC_VER >= 1700 && defined(_Check_return_)
+	_Check_return_
+	#  endif
+	#endif
+	inline constexpr decltype(auto)
+	fix(Fs&&... fs) noexcept
+	{
+		return $1<Fs...>{std::forward<Fs>(fs)...};
+	}
+	}  // namespace
 
-  ${0}
+	${0}
 
 
 snippet ycombinator
 alias ycomb
-  [](auto f) {
-    return [=](auto&&... args) {
-      return f(f, std::forward<decltype(args)>(args)...);
-    };
-  }([${1:&}](auto ${2:f}, ${3:#:args...}) {
-    ${0}
-  })
+	[](auto f) {
+		return [=](auto&&... args) {
+			return f(f, std::forward<decltype(args)>(args)...);
+		};
+	}([${1:&}](auto ${2:f}, ${3:#:args...}) {
+		${0}
+	})
 
 snippet zcombinator
 alias zcomb
-  [](auto f) {
-    return [=](auto g) {
-      return [=](auto&&... args) {
-        return f(g(g), std::forward<decltype(args)>(args)...);
-      };
-    }([=](auto g) {
-      return [=](auto&&... args) {
-        return f(g(g), std::forward<decltype(args)>(args)...);
-      };
-    });
-  }([${1:&}](auto ${2:f}, ${3:#:args...}) {
-    ${0};
-  })
+	[](auto f) {
+		return [=](auto g) {
+			return [=](auto&&... args) {
+				return f(g(g), std::forward<decltype(args)>(args)...);
+			};
+		}([=](auto g) {
+			return [=](auto&&... args) {
+				return f(g(g), std::forward<decltype(args)>(args)...);
+			};
+		});
+	}([${1:&}](auto ${2:f}, ${3:#:args...}) {
+		${0};
+	})
 
 snippet constant
-  static constexpr ${1:int} ${2:#:varname} = ${3:#:value}
+	static constexpr ${1:int} ${2:#:varname} = ${3:#:value}
 
 snippet LOOP
 alias loop
-  LOOP (${2:#:n}) {
-    ${0}
-  }
+	LOOP (${2:#:n}) {
+		${0}
+	}
 
 snippet REP
 alias rep
-  REP (${1:i}, ${2:#:n}) {
-    ${0}
-  }
+	REP (${1:i}, ${2:#:n}) {
+		${0}
+	}
 
 snippet FOR
-  FOR (${1:i}, ${2:#:from}, ${3:#:to}) {
-    ${0}
-  }
+	FOR (${1:i}, ${2:#:from}, ${3:#:to}) {
+		${0}
+	}
 
 snippet include_math
 alias inc_math
@@ -869,246 +869,246 @@ alias inc_math
 	#include <cmath>
 
 snippet def_LOOP
-  #define LOOP(n)  for (decltype(n) __loop_tmp_var__ = 0; i < n; i++)
+	#define LOOP(n)  for (decltype(n) __loop_tmp_var__ = 0; i < n; i++)
 
 snippet def_REP
-  #define REP(i, n)  for (decltype(n) i = 0; i < (n); i++)
+	#define REP(i, n)  for (decltype(n) i = 0; i < (n); i++)
 
 snippet def_FOR
-  #define FOR(i, from, to)  for (decltype(from) i = (from); i < (to); i++)
+	#define FOR(i, from, to)  for (decltype(from) i = (from); i < (to); i++)
 
 snippet def_CLEAR
-  #define CLEAR(array)  std::memset((array), 0, sizeof(array))
+	#define CLEAR(array)  std::memset((array), 0, sizeof(array))
 
 snippet def_FILL
-  #define FILL(array, val)  std::fill_n(array, LENGTH(array), val)
+	#define FILL(array, val)  std::fill_n(array, LENGTH(array), val)
 
 snippet def_enum
-  #if __cplusplus >= 201103L
-  enum class ${1:className}
-  {
-    ${2:enumValues}
-  };  // enum class $1
-  #else
-  class $1
-  {
-  public:
-    enum $1Enum
-    {
-      $2
-    };
-    $1()
-    {}
+	#if __cplusplus >= 201103L
+	enum class ${1:className}
+	{
+		${2:enumValues}
+	};  // enum class $1
+	#else
+	class $1
+	{
+	public:
+		enum $1Enum
+		{
+			$2
+		};
+		$1()
+		{}
 
-    $1($1Enum value) :
-      value(value)
-    {}
+		$1($1Enum value) :
+			value(value)
+		{}
 
-    operator $1Enum() const throw()
-    {
-      return value;
-    }
-  private:
-    $1Enum value;
-  };  // class $1
-  #endif  // __cplusplus >= 201103L
+		operator $1Enum() const throw()
+		{
+			return value;
+		}
+	private:
+		$1Enum value;
+	};  // class $1
+	#endif  // __cplusplus >= 201103L
 
 snippet def_debug_macros
-  #ifdef _MSC_VER
-  #  ifndef _DEBUG
-  #    define _DEBUG
-  #  endif
-  #  define _CRTDBG_MAP_ALLOC
-  #else
-  #  define _FORTIFY_SOURCE 2
-  #  define _GLIBCXX_DEBUG
-  #endif
+	#ifdef _MSC_VER
+	#  ifndef _DEBUG
+	#    define _DEBUG
+	#  endif
+	#  define _CRTDBG_MAP_ALLOC
+	#else
+	#  define _FORTIFY_SOURCE 2
+	#  define _GLIBCXX_DEBUG
+	#endif
 
 snippet def_INF
-  static constexpr ${1:int} INF = 0x3f3f3f3f;
+	static constexpr ${1:int} INF = 0x3f3f3f3f;
 
 snippet def_EPS
-  static constexpr double EPS = 1.0e-${1:9};
+	static constexpr double EPS = 1.0e-${1:9};
 
 snippet def_M_PI
-  #ifndef M_PI
-  static const double M_PI = std::acos(0.0) * 2.0;
-  #endif
+	#ifndef M_PI
+	static const double M_PI = std::acos(0.0) * 2.0;
+	#endif
 
 snippet def_M_PI2
-  #ifndef M_PI
-  static const double M_PI = std::atan(1.0) * 4.0;
-  #endif
+	#ifndef M_PI
+	static const double M_PI = std::atan(1.0) * 4.0;
+	#endif
 
 snippet def_M_PI3
-  #ifndef M_PI
-  static constexpr double M_PI = 3.14159265358979323846;
-  #endif
+	#ifndef M_PI
+	static constexpr double M_PI = 3.14159265358979323846;
+	#endif
 
 snippet def_DUMP
-  #define DUMP(x)  (std::cout << #x " = " << x << std::endl)
+	#define DUMP(x)  (std::cout << #x " = " << x << std::endl)
 
 snippet impl_LENGTH
 abbr #define LENGTH
-  namespace
-  {
-  template<typename ${1:T}, std::size_t ${2:kSize}>
-  inline std::size_t
-  LENGTH(const $1 (&)[$2])
-  {
-    return $2;
-  }
+	namespace
+	{
+	template<typename ${1:T}, std::size_t ${2:kSize}>
+	inline std::size_t
+	LENGTH(const $1 (&)[$2])
+	{
+		return $2;
+	}
 
-  #if __cplusplus >= 201103L
-  template<typename $1, std::size_t $2>
-  inline constexpr typename std::array<$1, $2>::size_type
-  LENGTH(const std::array<$1, $2>& ${3:array}) noexcept
-  {
-    return $3.size();
-  }
-  #endif // __cplusplus >= 201103L
-  }  // namespace
+	#if __cplusplus >= 201103L
+	template<typename $1, std::size_t $2>
+	inline constexpr typename std::array<$1, $2>::size_type
+	LENGTH(const std::array<$1, $2>& ${3:array}) noexcept
+	{
+		return $3.size();
+	}
+	#endif // __cplusplus >= 201103L
+	}  // namespace
 
 snippet if_cpp11
-  #if __cplusplus >= 201103L || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L
-  ${0}
-  #endif  // __cplusplus >= 201103L || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L
+	#if __cplusplus >= 201103L || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L
+	${0}
+	#endif  // __cplusplus >= 201103L || defined(_MSVC_LANG) && _MSVC_LANG >= 201103L
 
 snippet if_cpp14
-  #if __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
-  ${0}
-  #endif  // __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
+	#if __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
+	${0}
+	#endif  // __cplusplus >= 201402L || defined(_MSVC_LANG) && _MSVC_LANG >= 201402L
 
 snippet if_cpp17
-  #if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
-  ${0}
-  #endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+	#if __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
+	${0}
+	#endif  // __cplusplus >= 201703L || defined(_MSVC_LANG) && _MSVC_LANG >= 201703L
 
 snippet if_cppcli
-  #if defined(_M_CEE) || defined(_MANAGED)
-  ${0}
-  #endif  // defined(_M_CEE) || defined(_MANAGED)
+	#if defined(_M_CEE) || defined(_MANAGED)
+	${0}
+	#endif  // defined(_M_CEE) || defined(_MANAGED)
 
 snippet polyfill_likely
-  #if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
-  #  define ${1:#:PREFIX}_LIKELY(cond)  __builtin_expect(!!(cond), 1)
-  #else
-  #  define $1_LIKELY(cond)  (cond)
-  #endif
+	#if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
+	#  define ${1:#:PREFIX}_LIKELY(cond)  __builtin_expect(!!(cond), 1)
+	#else
+	#  define $1_LIKELY(cond)  (cond)
+	#endif
 
-  ${0}
+	${0}
 
-  #undef $1_LIKELY
+	#undef $1_LIKELY
 
 snippet polyfill_unlikely
-  #if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
-  #  define ${1:#:PREFIX}_UNLIKELY(cond)  __builtin_expect(!!(cond), 0)
-  #else
-  #  define $1_UNLIKELY(cond)  (cond)
-  #endif
+	#if defined(__GNUC__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ >= 96)
+	#  define ${1:#:PREFIX}_UNLIKELY(cond)  __builtin_expect(!!(cond), 0)
+	#else
+	#  define $1_UNLIKELY(cond)  (cond)
+	#endif
 
-  ${0}
+	${0}
 
-  #undef $1_UNLIKELY
+	#undef $1_UNLIKELY
 
 snippet polyfill_constexpr_cpp11
-  #if __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
-  #  define ${1:#:PREFIX}_CONSTEXPR11 constexpr
-  #else
-  #  define $1_CONSTEXPR11
-  #endif  //  __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
+	#if __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
+	#  define ${1:#:PREFIX}_CONSTEXPR11 constexpr
+	#else
+	#  define $1_CONSTEXPR11
+	#endif  //  __cplusplus >= 201103L || defined(_MSC_VER) && _MSC_VER > 1800
 
-  ${0}
+	${0}
 
-  #undef $1_CONSTEXPR11
+	#undef $1_CONSTEXPR11
 
 snippet polyfill_constexpr_cpp14
-  #if __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
-  #  define ${1:#:PREFIX}_CONSTEXPR14 constexpr
-  #else
-  #  define $1_CONSTEXPR14
-  #endif  //  __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
+	#if __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
+	#  define ${1:#:PREFIX}_CONSTEXPR14 constexpr
+	#else
+	#  define $1_CONSTEXPR14
+	#endif  //  __cplusplus >= 201402L || defined(_MSC_VER) && _MSC_VER > 1900
 
-  ${0}
+	${0}
 
-  #undef $1_CONSTEXPR14
+	#undef $1_CONSTEXPR14
 
 snippet polyfill_override
-  #if __cplusplus >= 201103L \
-    || defined(_MSC_VER) && _MSC_VER >= 1500
-  #  define ${1:#:NAME}_OVERRIDE  override
-  #else
-  #  define $1_OVERRIDE
-  #endif
+	#if __cplusplus >= 201103L \
+		|| defined(_MSC_VER) && _MSC_VER >= 1500
+	#  define ${1:#:NAME}_OVERRIDE  override
+	#else
+	#  define $1_OVERRIDE
+	#endif
 
-  ${0}
+	${0}
 
-  #undef $1_OVERRIDE
+	#undef $1_OVERRIDE
 
 snippet polyfill_nullptr
-  #if __cplusplus >= 201103L \
-    || defined(_MSC_VER) && _MSC_VER >= 1600
-  #  define ${1:#:NAME}_NULLPTR  nullptr
-  #else
-  #  define $1_NULLPTR  NULL
-  #endif
+	#if __cplusplus >= 201103L \
+		|| defined(_MSC_VER) && _MSC_VER >= 1600
+	#  define ${1:#:NAME}_NULLPTR  nullptr
+	#else
+	#  define $1_NULLPTR  NULL
+	#endif
 
-  ${0}
+	${0}
 
-  #undef $1_NULLPTR
+	#undef $1_NULLPTR
 
 snippet polyfill_noexcept
-  #if __cplusplus >= 201103L \
-    || defined(_MSC_VER) && (_MSC_VER > 1800 || _MSC_VER == 1800 && _MSC_FULL_VER == 180021114)
-  #  define ${1:#:NAME}_NOEXCEPT  noexcept
-  #else
-  #  define $1_NOEXCEPT  throw()
-  #endif
+	#if __cplusplus >= 201103L \
+		|| defined(_MSC_VER) && (_MSC_VER > 1800 || _MSC_VER == 1800 && _MSC_FULL_VER == 180021114)
+	#  define ${1:#:NAME}_NOEXCEPT  noexcept
+	#else
+	#  define $1_NOEXCEPT  throw()
+	#endif
 
-  ${0}
+	${0}
 
-  #undef $1_NOEXCEPT
+	#undef $1_NOEXCEPT
 
 snippet polyfill_inline_var
-  #if __cplusplus > 201703L \
-    || defined(_MSVC_LANG) && _MSVC_LANG > 201703L \
-    || defined(__cpp_inline_variables)
-  #  define ${1:#:NAME}_INLINE_VAR  inline
-  #elif defined(_MSC_VER)
-  #  define $1_INLINE_VAR  __declspec(selectany) extern
-  #elif defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
-  #  define $1_INLINE_VAR  __attribute__((selectany)) extern
-  #else defined(__GNUC__)
-  #  define $1_INLINE_VAR  __attribute__((weak)) extern
-  #else
-  #  define $1_INLINE_VAR  static
-  #endif
+	#if __cplusplus > 201703L \
+		|| defined(_MSVC_LANG) && _MSVC_LANG > 201703L \
+		|| defined(__cpp_inline_variables)
+	#  define ${1:#:NAME}_INLINE_VAR  inline
+	#elif defined(_MSC_VER)
+	#  define $1_INLINE_VAR  __declspec(selectany) extern
+	#elif defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
+	#  define $1_INLINE_VAR  __attribute__((selectany)) extern
+	#else defined(__GNUC__)
+	#  define $1_INLINE_VAR  __attribute__((weak)) extern
+	#else
+	#  define $1_INLINE_VAR  static
+	#endif
 
-  ${0}
+	${0}
 
-  #undef $1_INLINE_VAR
+	#undef $1_INLINE_VAR
 
 snippet simd_loop
-  constexpr auto ${1:stride} = static_cast<int>(sizeof(${2:#:__m128i}));
+	constexpr auto ${1:stride} = static_cast<int>(sizeof(${2:#:__m128i}));
 
-  for (int ${3:i} = 0, ${4:im} = ${5:size} - $1; $3 <= $4; $3 += $1) {
-    // SIMD Process
-  }
+	for (int ${3:i} = 0, ${4:im} = ${5:size} - $1; $3 <= $4; $3 += $1) {
+		// SIMD Process
+	}
 
-  const auto ${6:remSize} = $5 % $1;
-  if (remSize == 0) {
-    return;
-  }
+	const auto ${6:remSize} = $5 % $1;
+	if (remSize == 0) {
+		return;
+	}
 
-  const auto ${7:offset} = $5 - $6;
-  for (int $3 = $7; $3 < $5; $3++) {
-    // Non-SIMD Process
-  }
+	const auto ${7:offset} = $5 - $6;
+	for (int $3 = $7; $3 < $5; $3++) {
+		// Non-SIMD Process
+	}
 
 snippet connect
 abbr Qt
-  connect(${1:#:sender_ptr}, SIGNAL(${2:#:signal}), ${3:#:reciever_ptr}, SLOT(${4:#:slot}))
+	connect(${1:#:sender_ptr}, SIGNAL(${2:#:signal}), ${3:#:reciever_ptr}, SLOT(${4:#:slot}))
 
 snippet connect_lambda
 abbr Qt
-  connect(${1:#:sender_ptr}, ${2:&std\:\:remove_pointer<decltype($1)>\:\:type\:\:${3\:\#\:signal\}}, [${4:#:capture}]${5:(${6:#:args\})}{ ${0} })
+	connect(${1:#:sender_ptr}, ${2:&std\:\:remove_pointer<decltype($1)>\:\:type\:\:${3\:\#\:signal\}}, [${4:#:capture}]${5:(${6:#:args\})}{ ${0} })
