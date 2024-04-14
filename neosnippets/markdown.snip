@@ -1,0 +1,176 @@
+delete heading
+delete link
+delete linkid
+delete linkurl
+delete linkurlemail
+delete linkurltitle
+delete emphasis1
+delete emphasis2
+delete strong1
+delete strong2
+delete code
+delete codeblock
+delete blockquote
+
+snippet h1
+alias heading
+abbr #
+options head
+	# ${0}
+
+snippet h2
+abbr ##
+options head
+	## ${0}
+
+snippet h3
+abbr ###
+options head
+	### ${0}
+
+snippet h4
+abbr ####
+options head
+	#### ${0}
+
+snippet h5
+abbr #####
+options head
+	##### ${0}
+
+snippet h6
+abbr ######
+options head
+	###### ${0}
+
+snippet link
+abbr [text](url "title")
+options word
+	[${1:#:text}](${2:#:url} "${3:#:title}")${0}
+
+snippet linkid
+abbr [text](#id "title")
+options word
+	[${1:#:text}](#${2:#:id} "${3:#:title}")${0}
+
+snippet linkurl
+alias linkurltitle
+abbr [text](https:// "title")
+options word
+	[${1:#:text}](https://${2:#:url} "${3:#:title}")${0}
+
+snippet linkemail
+abbr [link](email "title")
+options word
+	[${1:#:text}](mailto:${2:#:email} "${3:#:title}")${0}
+
+snippet img
+abbr ![alt](url "title")
+options word
+	![${1:#:alttext}](${2:#:imgurl} "${3:#:title}")${0}
+
+snippet imglink
+alias linkimg
+abbr [![alt](imgurl)](linkurl "title")
+options word
+	[![${1:#:alttext}](${2:#:imgurl})${0}](${3:#:url} "${4:#:title}")
+
+snippet em
+alias em1 emphasis1
+abbr *emphasis*
+options word
+	*${0}*
+
+snippet em2
+alias emphasis2
+abbr _emphasis_
+options word
+	_${0}_
+
+snippet strong
+alias strong1
+abbr **strong**
+options word
+	**${0}**
+
+snippet strong2
+abbr __strong__
+options word
+	__${0}__
+
+snippet del
+abbr s strike
+options word
+	~${0}~
+
+snippet hr
+abbr ---
+options head
+	---
+	${0}
+
+snippet code
+abbr `...`
+options word
+	\`${0}\`
+
+snippet codeblock
+abbr ``` ... ```
+options head
+	\`\`\`${1:#:lang}${2:\:${3:\#:caption\}}
+	${0}
+	\`\`\`
+
+snippet details
+abbr <details></details>
+	<details>
+	<summary>${1}</summary>
+	${0}
+	</details>
+
+snippet github-note
+alias gh-note note
+abbr > [!NOTE]
+	> [!NOTE]
+	> ${0}
+
+snippet github-tip
+alias gh-tip tip
+abbr > [!TIP]
+	> [!TIP]
+	> ${0}
+
+snippet github-important
+alias gh-important important
+abbr > [!IMPORTANT]
+	> [!IMPORTANT]
+	> ${0}
+
+snippet github-warning
+alias gh-warning warning
+abbr > [!WARNING]
+	> [!WARNING]
+	> ${0}
+
+snippet github-caution
+alias gh-caution caution
+abbr > [!CAUTION]
+	> [!CAUTION]
+	> ${0}
+
+snippet eq-inline
+abbr $...$
+	\$${0}\$
+
+snippet eq-display
+alias eq-block
+abbr $$ ... $$
+	\$\$
+	${0}
+	\$\$
+
+snippet eq-begin
+abbr \\begin{equation} ... \\end{equation}
+	\\\\begin{equation}
+	${0}
+	\\\\end{equation}
