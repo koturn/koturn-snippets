@@ -1,3 +1,5 @@
+delete fopen
+
 snippet DllMain
 	#if defined(_MSC_VER) || defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
 	#  if defined(__CYGWIN__) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)
@@ -131,17 +133,86 @@ snippet memmove
 abbr memmove(to, from, n) <string.h>
 	memmove(${1:#:to}, ${2:#:from}, ${3:#:n})
 
+snippet strncpy
+abbr strncpy(dest, source, size)
+	strncpy(${1:#:dest}, ${2:#:source}, ${3:#:size});
+	$1[$3] = '\0';
+
+snippet snprintf
+abbr snprintf(desc, dest_size, format, ...)
+	${1:#:n} = snprintf(${2:#:dest}, ${3:#:dest_size}, "${4:#:format}", ${5:#:format args...});
+	if ((size_t)$1 >= $3) {
+		fprintf(stderr, "Format result was truncated because of insufficient buffer size. buffer size=[%zu], required size=[%d]\n", dest_size, n + 1);
+	}
+
+	${0}
+
+snippet vsnprintf
+abbr vsnprintf(desc, dest_size, format, args)
+	${1:#:n} = vsnprintf(${2:#:dest}, ${3:#:dest_size}, "${4:#:format}", ${5:#:args});
+	if ((size_t)$1 >= $3) {
+		fprintf(stderr, "Format result was truncated because of insufficient buffer size. buffer size=[%zu], required size=[%d]\n", dest_size, n + 1);
+	}
+
+	${0}
+
+snippet fopen
+abbr fopen(filepath, mode)
+	${1:fp} = fopen(${2:#:filepath}, "${3:r}");
+	if (fp == NULL) {
+		fprintf(stderr, "Failed to open file [%s] errno=[%d][%s]\n", $2, errno, strerror(errno));
+		exit(1);
+	}
+
+	${0}
+
+	fclose($1);
+
 snippet malloc
 abbr (T *) malloc(n * sizeof(T)) <string.h>
-	(${1:unsigned char} *) malloc(${2:#:n} * sizeof($1))
+	${1:#:ptr} = (${2:unsigned char} *) malloc(${3:#:n} * sizeof($2));
+	if ($1 == NULL) {
+		fprintf(stderr, "Failed to allocate memory with malloc [%zu]. errno=[%d][%s]\n", $3 * sizeof($2), errno, strerror(errno));
+		exit(1);
+	}
+
+	${0}
+
+	free($1);
 
 snippet calloc
 abbr (T *) calloc(n, sizeof(T)) <string.h>
-	(${1:unsigned char} *) calloc(${2:#:n}, sizeof($1))
+	${1:#:ptr} = (${2:unsigned char} *) calloc(${3:#:n}, sizeof($2))
+	if ($1 == NULL) {
+		fprintf(stderr, "Failed to allocate memory with calloc [%zu]. errno=[%d][%s]\n", $3 * sizeof($2), errno, strerror(errno));
+		exit(1);
+	}
+
+	${0}
+
+	free($1);
 
 snippet realloc
 abbr (T *) realloc(n, sizeof(T)) <string.h>
-	(${1:unsigned char} *) realloc(${2:#:n}, sizeof($1))
+	${1:#:tmpptr} = (${2:unsigned char} *) realloc(${3:#:oldptr}, ${4:#:n} * sizeof($2))
+	if ($1 == NULL) {
+		free($3);
+		fprintf(stderr, "Failed to allocate memory with realloc [%zu]. errno=[%d][%s]\n", $4 * sizeof($2), errno, strerror(errno));
+		exit(1);
+	}
+	$3 = $1;
+
+	${0}
+
+snippet va_list
+abbr va_list args; va_start(args); va_end(args)
+	va_list ${1:args};
+	va_start($1, ${2:#:argument before vaargs});
+
+	// va_args(args, type);
+	${0}
+
+	va_end($1);
 
 snippet extern_c
 	#ifdef __cplusplus
@@ -253,6 +324,107 @@ snippet def_scanf_arg_check
 
 	#undef $1_MSVC_SCANF_FMT
 	#undef $1_ATTR_SCANF_FMT
+
+snippet def_gnuc_prereq
+	#if defined(__GNUC__) && defined(__GNUC_MINOR__)
+	#  define ${1:#:PREFIX}_GNUC_PREREQ(major, minor)  ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((major) << 16) + (minor))
+	#else
+	#  define $1_GNUC_PREREQ(major, minor)  0
+	#endif  /* defined(__GNUC__) && defined(__GNUC_MINOR__) */
+
+	${0}
+
+	#undef $1
+
+snippet def_attr_noreturn
+alias def_noreturn
+	#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+	#  define ${1:#:PREFIX}_ATTR_NORETURN  _Noreturn
+	#elif defined(_MSC_VER)
+	#  define $1_ATTR_NORETURN  __declspec(noreturn)
+	#elif defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ == 8)
+	#  define $1_ATTR_NORETURN  __attribute__((noreturn))
+	#else
+	#  define $1_ATTR_NORETURN
+	#endif  /* defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L */
+
+	${0}
+
+	#undef $1_ATTR_NORETURN
+
+snippet def_attr_malloc
+alias def_malloc
+	#if defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ == 96)
+	#  define ${1:#:PREFIX}_ATTR_MALLOC  __attribute__((malloc))
+	#else
+	#  define $1_ATTR_MALLOC
+	#endif  /* defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ == 96) */
+
+	${0}
+
+	#undef $1_ATTR_MALLOC
+
+snippet def_attr_const
+alias def_const
+	#if defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ == 5)
+	#  define ${1:#:PREFIX}_ATTR_CONST  __attribute__((const))
+	#else
+	#  define $1_ATTR_CONST
+	#endif  /* defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ == 5) */
+
+	${0}
+
+	#undef $1_ATTR_CONST
+
+snippet def_attr_pure
+alias def_pure
+	#if defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ == 96)
+	#  define ${1:#:PREFIX}_ATTR_PURE  __attribute__((malloc))
+	#else
+	#  define $1_ATTR_PURE
+	#endif  /* defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 2 || __GNUC__ == 2 && __GNUC_MINOR__ == 96) */
+
+	${0}
+
+	#undef $1_ATTR_PURE
+
+snippet def_attr_nonnull
+alias def_nonnull
+	#if defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ == 3)
+	#  define ${1:#:PREFIX}_ATTR_NONNULL_ALL  __attribute__((nonnull))
+	#  define $1_ATTR_NONNULL(params)  __attribute__((nonnull params))
+	#else
+	#  define $1_ATTR_NONNULL_ALL
+	#  define $1_ATTR_NONNULL(params)
+	#endif  /* defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ == 3) */
+
+	${0}
+
+	#undef $1_ATTR_NONNULL_ALL
+
+snippet def_attr_returns_nonnull
+alias def_returns_nonnull
+	#if defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 4 || __GNUC__ == 4 && __GNUC_MINOR__ == 9)
+	#  define ${1:#:PREFIX}_ATTR_RETURNS_NONNULL_ALL  __attribute__((returns_nonnull))
+	#else
+	#  define $1_ATTR_RETURNS_NONNULL_ALL
+	#endif  /* defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 4 || __GNUC__ == 4 && __GNUC_MINOR__ == 9) */
+
+	${0}
+
+	#undef $1_ATTR_RETURNS_NONNULL_ALL
+
+snippet def_attr_wur
+alias def_wur
+	#if defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ == 4)
+	#  define ${1:#:PREFIX}_ATTR_WUR  __attribute__((warn_unused_result))
+	#else
+	#  define $1_ATTR_WUR
+	#endif  /* defined(__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ > 3 || __GNUC__ == 3 && __GNUC_MINOR__ == 4) */
+
+	${0}
+
+	#undef $1_ATTR_WUR
 
 snippet def_likely_if
 	#if __cplusplus > 201703L \
